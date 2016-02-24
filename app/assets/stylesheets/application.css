@@ -13,3 +13,38 @@
  *= require_tree .
  *= require_self
  */
+.center {
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  margin-top: -200px;
+  margin-left: -225px;
+  height: 500px;
+  padding: 30px;
+  padding-top: 5%;
+  width: 450px;
+  text-align: center;
+  background-color: rgba(255,255,255,0.95);
+  display: inline-block;
+  border-radius: 2px;
+}
+
+.daform {
+  background-color: #804000;
+  padding-left: 60px;
+  padding-right: 60px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.two {
+  background-color: #ff6600;
+  padding-left: 48px;
+  padding-right: 48px;
+  padding-bottom: 40px;
+}
+
+.here {
+  background-color: yellow;
+  padding-left: 690px;
+}

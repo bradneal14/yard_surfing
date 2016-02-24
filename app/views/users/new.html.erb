@@ -1,0 +1,36 @@
+<h1>Sign Up</h1>
+
+<div class="center">
+  <form action="<%= users_url %>" method="post" class="daform">
+    <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+
+    <label>
+      First Name:
+      <input type="text" name="user[fname]" value="">
+    </label>
+
+    <br>
+
+    <label>
+      Last Name:
+      <input type="text" name="user[lname]" value="">
+    </label>
+
+    <br>
+
+    <label>
+      Email:
+      <input type="email" name="user[email]" value="">
+    </label>
+
+    <br>
+
+    <label>
+      Password:
+      <input type="password" name="user[password]" value="">
+    </label>
+
+    <input type="submit" value="Sign Up">
+
+  </form>
+</div>
