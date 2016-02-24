@@ -11,7 +11,10 @@ and React.js. FresherNote allows users to: -->
 
 YardSurfing is a web application inspired by CouchSurfing built using Ruby on
 Rails and React.js. YardSurfing allows users to:
-
+- [ ] Signin/Signout users
+- [ ] Users should be able to add yards
+- [ ] Users should be able to book yards
+- [ ] Users should be able to leave feedback (reviews)
 
 
 <!-- This is a Markdown checklist. Use it to keep track of your

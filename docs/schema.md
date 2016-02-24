@@ -4,11 +4,11 @@
 column name     | data type | details
 ----------------|-----------|-----------------------
 id              | integer   | not null, primary key
-username        | string    | not null, indexed, unique
+email           | string    | not null, indexed, unique
 password_digest | string    | not null
 session_token   | string    | not null, indexed, unique
 
-## profile
+## profiles
 column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
@@ -75,20 +75,9 @@ id          | integer   | not null, primary key
 user_id     | integer   | not null, foreign key (references users), indexed
 pic_url     | string    | not null
 
-## about me
-column name        | data type | details
--------------------|-----------|-----------------------
-id                 | integer   | not null, primary key
-profile_id         | integer   | not null, foreign key (references profile), indexed
-interests          | text      | not null, default: 0
-movies_tv          | text      |
-books              | text      |
-music              | text      |
-amazing_fact       | text      |
-countries_visited  | text      |
-countries_lived    | text      |
 
-## overview
+
+## profile_info
 column name        | data type | details
 -------------------|-----------|-----------------------
 id                 | integer   | not null, primary key
@@ -99,6 +88,13 @@ sex                | string    |
 education          | string    |
 occupation         | string    |
 hometown           | string    |
+interests          | text      | not null, default: 0
+movies_tv          | text      |
+books              | text      |
+music              | text      |
+amazing_fact       | text      |
+countries_visited  | text      |
+countries_lived    | text      |
 
 ## Messages
 column name | data type | details
