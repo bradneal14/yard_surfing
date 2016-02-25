@@ -1,1 +1,1 @@
-json.array! @yards, :lat, :lng, :title, :user_id, :location
+json.array! @yards, :lng, :lat, :title, :user_id, :location

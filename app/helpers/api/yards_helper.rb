@@ -1,0 +1,2 @@
+module Api::YardsHelper
+end
