@@ -26,6 +26,8 @@ class User < ActiveRecord::Base
 
   attr_reader :password
 
+  has_many :yards
+
   after_initialize :ensure_session_token
 
   def reset_token!

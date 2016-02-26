@@ -15,7 +15,15 @@ YardStore.__onDispatch = function(payload){
       resetYards(payload.yards);
       YardStore.__emitChange();
       break;
+    case YardConstants.NEW_YARD:
+      addYard(payload.yard);
+      YardStore.__emitChange();
+      break;
   }
+};
+
+var addYard = function(yard){
+  _yards.push(yard);
 };
 
 var resetYards = function(yards){
