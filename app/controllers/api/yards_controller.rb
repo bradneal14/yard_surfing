@@ -10,6 +10,10 @@ class Api::YardsController < ApplicationController
     render json: yard
   end
 
+  def show
+    @yard = Yard.find(params[:id])
+  end
+
   private
 
   def yard_params

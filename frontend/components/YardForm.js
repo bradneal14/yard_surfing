@@ -6,13 +6,11 @@ var YardForm = React.createClass({
   getInitialState: function(){
    return {
      description: "",
-     title: "TESTING2"
    };
  },
   handleSubmit: function(event){
     event.preventDefault();
     var yard = Object.assign({}, this.state);
-    console.log(yard)
     ApiUtil.createYard(yard);
   },
   handleCancel: function(event) {
@@ -27,6 +25,9 @@ var YardForm = React.createClass({
       <div className="center">
         <h2>CREATE A NEW PROPERTY</h2>
         <form onSubmit={this.handleSubmit}>
+          <label>Title</label>
+          <input type="text" valueLink={this.linkState('title')}/>
+          <br/>
           <label>Lat:</label>
           <input type="text" valueLink={this.linkState('lat')}/>
           <br/>

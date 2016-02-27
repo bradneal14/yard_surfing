@@ -49,7 +49,7 @@ var Map = React.createClass({
       var marker = new google.maps.Marker({
         position: coords,
         map: this.map,
-        title: "Not a shot"
+        amimation: google.maps.Animation.DROP
       });
       marker.setMap(this.map);
       _markers.push(marker);
@@ -58,7 +58,7 @@ var Map = React.createClass({
   },
   render: function(){
     return (
-      <div className="map" ref="map">
+      <div className="map col-md-6" ref="map">
       </div>
     )
   }

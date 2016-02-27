@@ -12,35 +12,5 @@
  *
  *= require_tree .
  *= require_self
+ *= require bootstrap
  */
-.center {
-  top: 50%;
-  left: 50%;
-  position: absolute;
-  margin-top: -200px;
-  margin-left: -225px;
-  height: 500px;
-  padding: 30px;
-  padding-top: 5%;
-  width: 450px;
-  text-align: left;
-  background-color: rgba(255,255,255,0.95);
-  display: inline-block;
-  border-radius: 2px;
-};
-
-.errors {
-  top: 40%;
-  left: 50%;
-  position: absolute;
-  margin-top: -200px;
-  margin-left: -225px;
-  height: 500px;
-  padding: 30px;
-  padding-top: 5%;
-  width: 450px;
-  text-align: left;
-  background-color: rgba(255,255,255,0.95);
-  display: inline-block;
-  border-radius: 2px;
-};

@@ -6,11 +6,11 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.create!(fname: "Connor", lname: "Jones", email: "cjones@gmail.com", password: "password")
-User.create!(fname: "John", lname: "Rupp", email: "jrupp@gmail.com", password: "password")
-User.create!(fname: "Geoff", lname: "Marks", email: "gmarks@gmail.com", password: "password")
-User.create!(fname: "Steve", lname: "Harris", email: "sharris@gmail.com", password: "password")
-
+User.create!(fname: "Mike", lname: "Jordan", email: "mjordan", password: "password")
+User.create!(fname: "Buzz", lname: "Lightyear", email: "blightyear", password: "password")
+User.create!(fname: "Jim", lname: "Weiss", email: "jweiss", password: "password")
+User.create!(fname: "Dave", lname: "Neal", email: "dneal", password: "password")
+User.create!(fname: "Bradley", lname: "Neal", email: "admin", password: "password")
 
 Yard.create!(title: "West", description: "Golden Gate Park", lng: -122.487989, lat: 37.769556, user_id: 2)
 Yard.create!(title: "South", description: "Delores Park", lng: -122.427406, lat: 37.760383, user_id: 3)

@@ -20,7 +20,20 @@ ApiUtil = {
         ApiActions.newYard(data);
       }
     });
-  }
+  },
+  fetchSingleYard: function(id){
+    $.ajax({
+      url: 'api/yards/' + id,
+      type: "GET",
+      success: function(data){
+        ApiActions.receiveSingleYard(data);
+      }
+    })
+  },
+
+
+
+
   // createYard: function(data){
   //   $.post('api/yards', { yard: data }, function(yard) {
   //     ApiActions.receiveAll([yard]);
