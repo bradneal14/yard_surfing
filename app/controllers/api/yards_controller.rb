@@ -5,7 +5,6 @@ class Api::YardsController < ApplicationController
   end
 
   def create
-
     yard = current_user.yards.create!(yard_params)
     render json: yard
   end
@@ -14,10 +13,19 @@ class Api::YardsController < ApplicationController
     @yard = Yard.find(params[:id])
   end
 
+  def destroy
+    yard = Yard.find(params[:id])
+    yard.destroy!
+    render json: yard
+  end
+
   private
 
   def yard_params
-    params.require(:yard).permit(:lat, :lng, :description, :title)
+    params.require(:yard).permit(
+    :lat, :lng, :description, :title,
+    :max_guest_num, :location, :water_status, :fire_status,
+    :shower_status, :toilet_status)
   end
 
 

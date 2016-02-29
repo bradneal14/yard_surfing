@@ -12,6 +12,7 @@ ApiUtil = {
     });
   },
   createYard: function(yard){
+    console.log("made it to util")
     $.ajax({
       url: 'api/yards',
       type: 'POST',
@@ -30,6 +31,15 @@ ApiUtil = {
       }
     })
   },
+  removeYard: function(id){
+    $.ajax({
+      url: 'api/yards/' + id,
+      type: "DELETE",
+      success: function(data){
+        ApiActions.removeYard(data);
+      }
+    })
+  }
 
 
 

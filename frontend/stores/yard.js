@@ -27,11 +27,20 @@ YardStore.__onDispatch = function(payload){
       YardStore.resetYard(payload.yard);
       YardStore.__emitChange();
       break;
+    case YardConstants.REMOVE_YARD:
+    console.log("made it to the right place in the store")
+      YardStore.removeYard(payload.yard);
+      YardStore.__emitChange();
+      break;
   }
 };
 
 YardStore.resetYard = function(yard){
   _yards[yard.id] = yard;
+};
+
+YardStore.removeYard = function(yard){
+  delete _yards[yard.id];
 };
 
 YardStore.find = function(id){
@@ -43,6 +52,7 @@ YardStore.addYard = function(yard){
 };
 
 YardStore.resetYards = function(yards){
+  _yards = {};
   yards.forEach(function(yard){
     _yards[yard.id] = yard;
   });

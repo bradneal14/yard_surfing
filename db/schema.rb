@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160225221731) do
+ActiveRecord::Schema.define(version: 20160228040448) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20160225221731) do
     t.boolean  "water_status"
     t.boolean  "fire_status"
     t.boolean  "toilet_status"
+    t.boolean  "shower_status"
   end
 
   add_index "yards", ["user_id"], name: "index_yards_on_user_id", using: :btree

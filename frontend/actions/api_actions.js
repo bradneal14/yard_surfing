@@ -13,6 +13,10 @@ var ApiActions = {
   receiveSingleYard: function(data){
     var payload = {actionType: YardConstants.SINGLE_YARD_RECEIVED, yard: data};
     AppDispatcher.dispatch(payload);
+  },
+  removeYard: function(data){
+    var payload = {actionType: YardConstants.REMOVE_YARD, yard: data};
+    AppDispatcher.dispatch(payload);
   }
 };
 

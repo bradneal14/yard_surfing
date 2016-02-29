@@ -48,49 +48,18 @@
 	var ReactDOM = __webpack_require__(158);
 	var YardStore = __webpack_require__(159);
 	var ApiUtil = __webpack_require__(182);
-	var YardIndex = __webpack_require__(252);
+	var YardIndex = __webpack_require__(184);
 	var Search = __webpack_require__(243);
 	var YardForm = __webpack_require__(245);
 	var YardDetail = __webpack_require__(250);
 	var hashHistory = __webpack_require__(186).hashHistory;
+	var App = __webpack_require__(251);
+	var userDetail = __webpack_require__(254);
 	
 	var ReactRouter = __webpack_require__(186);
 	var Router = ReactRouter.Router;
 	var Route = ReactRouter.Route;
 	var IndexRoute = ReactRouter.IndexRoute;
-	
-	var Hello = React.createClass({
-	  displayName: 'Hello',
-	
-	  render: function () {
-	    return React.createElement(
-	      'div',
-	      null,
-	      'Hello'
-	    );
-	  }
-	});
-	
-	var App = React.createClass({
-	  displayName: 'App',
-	
-	  render: function () {
-	    return React.createElement(
-	      'div',
-	      null,
-	      React.createElement(
-	        'header',
-	        null,
-	        React.createElement(
-	          'h1',
-	          null,
-	          'Yard BnB'
-	        )
-	      ),
-	      this.props.children
-	    );
-	  }
-	});
 	
 	var routes = React.createElement(
 	  Router,
@@ -101,7 +70,8 @@
 	    React.createElement(IndexRoute, { component: Search })
 	  ),
 	  React.createElement(Route, { path: '/yards/new', component: YardForm }),
-	  React.createElement(Route, { path: '/yard/:yardId', component: YardDetail })
+	  React.createElement(Route, { path: '/yard/:yardId', component: YardDetail }),
+	  React.createElement(Route, { path: '/users/:userId', component: userDetail })
 	);
 	
 	document.addEventListener('DOMContentLoaded', function () {
@@ -19742,11 +19712,20 @@
 	      YardStore.resetYard(payload.yard);
 	      YardStore.__emitChange();
 	      break;
+	    case YardConstants.REMOVE_YARD:
+	      console.log("made it to the right place in the store");
+	      YardStore.removeYard(payload.yard);
+	      YardStore.__emitChange();
+	      break;
 	  }
 	};
 	
 	YardStore.resetYard = function (yard) {
 	  _yards[yard.id] = yard;
+	};
+	
+	YardStore.removeYard = function (yard) {
+	  delete _yards[yard.id];
 	};
 	
 	YardStore.find = function (id) {
@@ -19758,6 +19737,7 @@
 	};
 	
 	YardStore.resetYards = function (yards) {
+	  _yards = {};
 	  yards.forEach(function (yard) {
 	    _yards[yard.id] = yard;
 	  });
@@ -26534,7 +26514,8 @@
 	var YardConstants = {
 	  YARDS_RECEIVED: "YARDS_RECEIVED",
 	  NEW_YARD: "NEW_YARD",
-	  SINGLE_YARD_RECEIVED: "SINGLE_YARD_RECEIVED"
+	  SINGLE_YARD_RECEIVED: "SINGLE_YARD_RECEIVED",
+	  REMOVE_YARD: "REMOVE_YARD"
 	};
 	
 	module.exports = YardConstants;
@@ -26557,6 +26538,7 @@
 	    });
 	  },
 	  createYard: function (yard) {
+	    console.log("made it to util");
 	    $.ajax({
 	      url: 'api/yards',
 	      type: 'POST',
@@ -26574,15 +26556,24 @@
 	        ApiActions.receiveSingleYard(data);
 	      }
 	    });
+	  },
+	  removeYard: function (id) {
+	    $.ajax({
+	      url: 'api/yards/' + id,
+	      type: "DELETE",
+	      success: function (data) {
+	        ApiActions.removeYard(data);
+	      }
+	    });
 	  }
 	
+	  // createYard: function(data){
+	  //   $.post('api/yards', { yard: data }, function(yard) {
+	  //     ApiActions.receiveAll([yard]);
+	  //   });
+	  // }
 	};
 	
-	// createYard: function(data){
-	//   $.post('api/yards', { yard: data }, function(yard) {
-	//     ApiActions.receiveAll([yard]);
-	//   });
-	// }
 	module.exports = ApiUtil;
 
 /***/ },
@@ -26604,13 +26595,81 @@
 	  receiveSingleYard: function (data) {
 	    var payload = { actionType: YardConstants.SINGLE_YARD_RECEIVED, yard: data };
 	    AppDispatcher.dispatch(payload);
+	  },
+	  removeYard: function (data) {
+	    var payload = { actionType: YardConstants.REMOVE_YARD, yard: data };
+	    AppDispatcher.dispatch(payload);
 	  }
 	};
 	
 	module.exports = ApiActions;
 
 /***/ },
-/* 184 */,
+/* 184 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var YardStore = __webpack_require__(159);
+	var ApiUtil = __webpack_require__(182);
+	var YardIndexItem = __webpack_require__(185);
+	var History = __webpack_require__(186).History;
+	
+	var YardIndex = React.createClass({
+	  displayName: 'YardIndex',
+	
+	  mixins: [History],
+	  getInitialState: function () {
+	    return { yards: YardStore.all() };
+	  },
+	  componentDidMount: function () {
+	    YardStore.addListener(this._onChange);
+	  },
+	  _onChange: function () {
+	    this.setState({ yards: YardStore.all() });
+	  },
+	  componentWillUnmout: function () {
+	    YardStore.removeListener(this._onChange);
+	  },
+	  handleNewYard: function (event) {
+	    event.preventDefault();
+	    this.navigateToNewYard();
+	  },
+	  navigateToNewYard: function () {
+	    this.history.push("yards/new");
+	  },
+	
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      { className: 'col-md-6 col-sm-6 col-lg-7' },
+	      React.createElement(
+	        'ul',
+	        { className: 'list-group' },
+	        this.state.yards.map(function (yard) {
+	          return React.createElement(YardIndexItem, { yard: yard, key: yard.id });
+	        }),
+	        React.createElement(
+	          'div',
+	          { className: 'col-md-3' },
+	          React.createElement(
+	            'div',
+	            { className: '' },
+	            React.createElement(
+	              'button',
+	              { onClick: this.handleNewYard, className: 'btn btn-success top-buffer' },
+	              'New Yard'
+	            )
+	          )
+	        )
+	      )
+	    );
+	  }
+	
+	});
+	
+	module.exports = YardIndex;
+
+/***/ },
 /* 185 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -26622,19 +26681,25 @@
 	
 	  mixins: [History],
 	  showDetail: function () {
-	    console.log(this.props);
 	    this.history.push("yard/" + this.props.yard.id);
 	  },
 	  render: function () {
 	    return React.createElement(
 	      'li',
-	      { onClick: this.showDetail, className: 'list-group-item' },
+	      { onClick: this.showDetail, className: 'list-group-item col-xs-6' },
 	      React.createElement(
 	        'p',
 	        null,
 	        this.props.yard.title,
 	        ' : ',
 	        this.props.yard.description
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        this.props.yard.lat,
+	        ' : ',
+	        this.props.yard.lng
 	      )
 	    );
 	  }
@@ -31673,7 +31738,7 @@
 
 	var React = __webpack_require__(1);
 	var Map = __webpack_require__(244);
-	var YardIndex = __webpack_require__(252);
+	var YardsIndex = __webpack_require__(184);
 	
 	var Search = React.createClass({
 	  displayName: 'Search',
@@ -31681,14 +31746,14 @@
 	  render: function () {
 	    return React.createElement(
 	      'div',
-	      { className: 'col-md-12' },
+	      { className: 'col-xs-12 tan-bg-fill' },
 	      React.createElement(
 	        'p',
 	        null,
 	        'Here we are in search'
 	      ),
 	      React.createElement(Map, null),
-	      React.createElement(YardIndex, null)
+	      React.createElement(YardsIndex, null)
 	    );
 	  }
 	});
@@ -31710,13 +31775,35 @@
 	
 	  componentDidMount: function () {
 	    YardStore.addListener(this._onChange);
+	
+	    var styles = [{
+	      stylers: [{ hue: "#b35b4f" }, { saturation: 500 }]
+	    }, {
+	      featureType: "road",
+	      elementType: "geometry",
+	      stylers: [{ lightness: 50 }, { visibility: "simplified" }]
+	    }, {
+	      featureType: "road",
+	      elementType: "labels",
+	      stylers: [{ visibility: "off" }]
+	    }];
+	
+	    var styledMap = new google.maps.StyledMapType(styles, { name: "Styled Map" });
+	
 	    var mapDOMNode = this.refs.map;
 	    var mapOptions = {
 	      center: { lat: 37.7758, lng: -122.435 },
-	      zoom: 12
+	      zoom: 12,
+	      mapTypeControlOptions: {
+	        mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
+	      }
 	    };
 	
 	    this.map = new google.maps.Map(mapDOMNode, mapOptions);
+	
+	    this.map.mapTypes.set('map_style', styledMap);
+	
+	    this.map.setMapTypeId('map_style');
 	
 	    this.map.addListener('idle', function () {
 	      var latLngBounds = this.getBounds();
@@ -31726,7 +31813,6 @@
 	        northEast: { lat: northEast.lat(), lng: northEast.lng() },
 	        southWest: { lat: southWest.lat(), lng: southWest.lng() }
 	      };
-	
 	      ApiUtil.fetchYards(bounds);
 	    });
 	  },
@@ -31749,16 +31835,27 @@
 	
 	    latLngAry.forEach(function (coords) {
 	      var marker = new google.maps.Marker({
-	        position: coords,
-	        map: this.map,
-	        amimation: google.maps.Animation.DROP
+	        position: coords
 	      });
+	
 	      marker.setMap(this.map);
+	      // marker.setAnimation(google.maps.Animation.DROP);
+	      marker.setIcon({ url: "http://www2.psd100.com/ppp/2013/11/0501/Map-marker-icon-1105213652.png" });
+	
+	      // marker.addListener('click', function() {
+	      //   if (infoWindow) {
+	      //     infoWindow.close();
+	      //   }
+	      //   var infoWindow = new google.maps.InfoWindow({
+	      //     content: "ehy"
+	      //   });
+	      //   infoWindow.open(this.map, marker);
+	      // });
 	      _markers.push(marker);
 	    }.bind(this));
 	  },
 	  render: function () {
-	    return React.createElement('div', { className: 'map col-md-6', ref: 'map' });
+	    return React.createElement('div', { className: 'map col-md-6 col-lg-5', ref: 'map' });
 	  }
 	});
 	
@@ -31770,6 +31867,7 @@
 
 	var React = __webpack_require__(1);
 	var LinkedStateMixin = __webpack_require__(246);
+	var NavBar = __webpack_require__(252);
 	
 	var YardForm = React.createClass({
 	  displayName: 'YardForm',
@@ -31784,6 +31882,7 @@
 	    event.preventDefault();
 	    var yard = Object.assign({}, this.state);
 	    ApiUtil.createYard(yard);
+	    this.navigateToSearch();
 	  },
 	  handleCancel: function (event) {
 	    event.preventDefault();
@@ -31795,49 +31894,143 @@
 	  render: function () {
 	    return React.createElement(
 	      'div',
-	      { className: 'center' },
+	      null,
+	      React.createElement(NavBar, null),
 	      React.createElement(
-	        'h2',
-	        null,
-	        'CREATE A NEW PROPERTY'
-	      ),
-	      React.createElement(
-	        'form',
-	        { onSubmit: this.handleSubmit },
+	        'div',
+	        { className: 'container-fluid' },
 	        React.createElement(
-	          'label',
-	          null,
-	          'Title'
+	          'h2',
+	          { className: 'text-center' },
+	          'List Your Yard'
 	        ),
-	        React.createElement('input', { type: 'text', valueLink: this.linkState('title') }),
+	        React.createElement(
+	          'h4',
+	          { className: 'text-center' },
+	          'YardSurfing allows you offer up your yard for those looking to crash'
+	        ),
 	        React.createElement('br', null),
 	        React.createElement(
-	          'label',
+	          'section',
 	          null,
-	          'Lat:'
-	        ),
-	        React.createElement('input', { type: 'text', valueLink: this.linkState('lat') }),
-	        React.createElement('br', null),
-	        React.createElement(
-	          'label',
-	          null,
-	          'Lng:'
-	        ),
-	        React.createElement('input', { type: 'text', valueLink: this.linkState('lng') }),
-	        React.createElement('br', null),
-	        React.createElement(
-	          'label',
-	          null,
-	          'Description:'
-	        ),
-	        React.createElement('input', { type: 'text', valueLink: this.linkState('description') }),
-	        React.createElement('br', null),
-	        React.createElement('input', { type: 'submit', value: 'Create Yard' })
-	      ),
-	      React.createElement(
-	        'button',
-	        { onClick: this.handleCancel },
-	        'Cancel'
+	          React.createElement(
+	            'form',
+	            { onSubmit: this.handleSubmit, className: 'form-group', className: 'grey-bg-fill col-xs-12' },
+	            React.createElement(
+	              'div',
+	              { className: 'col-xs-4' },
+	              React.createElement(
+	                'label',
+	                null,
+	                'Title'
+	              ),
+	              React.createElement('input', { type: 'text', valueLink: this.linkState('title'), className: 'form-control', placeholder: 'Name your yard' }),
+	              React.createElement('br', null),
+	              React.createElement(
+	                'label',
+	                null,
+	                'Address:'
+	              ),
+	              React.createElement('input', { type: 'text', valueLink: this.linkState('location'), className: 'form-control', placeholder: 'Where is it?' }),
+	              React.createElement('br', null),
+	              React.createElement(
+	                'label',
+	                null,
+	                'Lat:'
+	              ),
+	              React.createElement('input', { type: 'text', valueLink: this.linkState('lat'), className: 'form-control' }),
+	              React.createElement('br', null),
+	              React.createElement(
+	                'label',
+	                null,
+	                'Lng:'
+	              ),
+	              React.createElement('input', { type: 'text', valueLink: this.linkState('lng'), className: 'form-control' }),
+	              React.createElement('br', null),
+	              React.createElement(
+	                'label',
+	                null,
+	                'Description:'
+	              ),
+	              React.createElement('textarea', { valueLink: this.linkState('description'), className: 'form-control', placeholder: 'Tell us about it' }),
+	              React.createElement('br', null),
+	              React.createElement(
+	                'label',
+	                null,
+	                'Max Guests:'
+	              ),
+	              React.createElement(
+	                'select',
+	                { valueLink: this.linkState('max_guest_num'), className: 'form-control' },
+	                React.createElement(
+	                  'option',
+	                  null,
+	                  '1'
+	                ),
+	                React.createElement(
+	                  'option',
+	                  null,
+	                  '2'
+	                ),
+	                React.createElement(
+	                  'option',
+	                  null,
+	                  '3'
+	                ),
+	                React.createElement(
+	                  'option',
+	                  null,
+	                  '4+'
+	                )
+	              ),
+	              React.createElement('br', null)
+	            ),
+	            React.createElement(
+	              'div',
+	              { className: 'col-sm-6' },
+	              React.createElement(
+	                'label',
+	                null,
+	                React.createElement('span', { className: 'glyphicon glyphicon-tint' }),
+	                ' Water:'
+	              ),
+	              React.createElement('input', { type: 'checkbox', valueLink: this.linkState('water_status'), className: '' }),
+	              React.createElement('br', null),
+	              React.createElement(
+	                'label',
+	                null,
+	                React.createElement('span', { className: 'glyphicon glyphicon-fire' }),
+	                ' Fire: '
+	              ),
+	              React.createElement('input', { type: 'checkbox', valueLink: this.linkState('fire_status'), className: '' }),
+	              React.createElement('br', null),
+	              React.createElement(
+	                'label',
+	                null,
+	                'Toilet:'
+	              ),
+	              React.createElement('input', { type: 'checkbox', valueLink: this.linkState('toilet_status'), className: '' }),
+	              React.createElement('br', null),
+	              React.createElement(
+	                'label',
+	                null,
+	                'Shower:'
+	              ),
+	              React.createElement('input', { type: 'checkbox', valueLink: this.linkState('shower_status'), className: '' }),
+	              React.createElement('br', null),
+	              React.createElement(
+	                'div',
+	                { className: 'text-center col-xs-12' },
+	                React.createElement('input', { className: 'btn btn-success', type: 'submit', value: 'Create Yard' }),
+	                React.createElement(
+	                  'button',
+	                  { className: 'btn btn-danger left-buffer', onClick: this.handleCancel },
+	                  'Cancel'
+	                )
+	              )
+	            )
+	          )
+	        )
 	      )
 	    );
 	  }
@@ -32082,10 +32275,14 @@
 	var React = __webpack_require__(1);
 	var YardStore = __webpack_require__(159);
 	var ApiUtil = __webpack_require__(182);
+	var NavBar = __webpack_require__(252);
+	var History = __webpack_require__(186).History;
+	var Map = __webpack_require__(244);
 	
 	var yardDetail = React.createClass({
 	  displayName: 'yardDetail',
 	
+	  mixins: [History],
 	
 	  _onChange: function () {
 	    this.setState({ yard: YardStore.find(this.props.params.yardId) });
@@ -32104,18 +32301,26 @@
 	  componentWillUnmout: function () {
 	    YardStore.yardListener.remove();
 	  },
+	  removeYard: function () {
+	    ApiUtil.removeYard(this.state.yard.id);
+	    this.navigateHome();
+	  },
+	  navigateHome: function () {
+	    this.history.push("/");
+	  },
 	  render: function () {
 	    if (!this.state.yard) {
-	      console.log(this.state);
 	      return React.createElement(
 	        'div',
 	        null,
-	        'loading'
+	        'loading..'
 	      );
 	    }
 	    return React.createElement(
 	      'div',
 	      null,
+	      React.createElement(NavBar, null),
+	      React.createElement(Map, null),
 	      React.createElement(
 	        'div',
 	        { className: 'yard-detail-pane' },
@@ -32136,8 +32341,38 @@
 	            'p',
 	            null,
 	            this.state.yard.description
+	          ),
+	          React.createElement(
+	            'p',
+	            null,
+	            'its under this line'
+	          ),
+	          React.createElement(
+	            'p',
+	            null,
+	            this.state.yard.fire_status
+	          ),
+	          React.createElement(
+	            'p',
+	            null,
+	            'its over this line'
+	          ),
+	          React.createElement(
+	            'p',
+	            null,
+	            this.state.yard.lat
+	          ),
+	          React.createElement(
+	            'p',
+	            null,
+	            this.state.yard.lng
 	          )
 	        )
+	      ),
+	      React.createElement(
+	        'button',
+	        { onClick: this.removeYard, className: 'btn btn-success top-buffer' },
+	        'Delete Yard'
 	      ),
 	      this.props.children
 	    );
@@ -32147,74 +32382,158 @@
 	module.exports = yardDetail;
 
 /***/ },
-/* 251 */,
+/* 251 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var NavBar = __webpack_require__(252);
+	var Landing = __webpack_require__(253);
+	
+	var App = React.createClass({
+	  displayName: "App",
+	
+	  render: function () {
+	    return React.createElement(
+	      "div",
+	      null,
+	      React.createElement(Landing, null),
+	      this.props.children
+	    );
+	  }
+	});
+	
+	module.exports = App;
+
+/***/ },
 /* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var YardStore = __webpack_require__(159);
-	var ApiUtil = __webpack_require__(182);
-	var YardIndexItem = __webpack_require__(185);
 	var History = __webpack_require__(186).History;
 	
-	var YardIndex = React.createClass({
-	  displayName: 'YardIndex',
+	var NavBar = React.createClass({
+	  displayName: 'NavBar',
 	
 	  mixins: [History],
-	  getInitialState: function () {
-	    return { yards: YardStore.all() };
+	  navigateHome: function () {
+	    this.history.push("/");
 	  },
-	  componentDidMount: function () {
-	    ApiUtil.fetchYards();
-	    //TODO pass bounds as argument to fetchYards for a more efficient map
-	    YardStore.addListener(this._onChange);
+	  navigateToProfileShow: function () {
+	    console.log(this.state);
+	    this.history.push("users/" + 3);
 	  },
-	  _onChange: function () {
-	    this.setState({ yards: YardStore.all() });
-	  },
-	  componentWillUnmout: function () {
-	    YardStore.removeListener(this._onChange);
-	  },
-	  handleNewYard: function (event) {
-	    event.preventDefault();
-	    this.navigateToNewYard();
-	  },
-	  navigateToNewYard: function () {
-	    console.log(this.history);
-	    console.log("props");
-	    this.history.push("yards/new");
-	  },
-	
 	  render: function () {
 	    return React.createElement(
-	      'div',
-	      { className: 'col-md-6' },
+	      'nav',
+	      { className: 'navbar-default navbar-fixed-top red-bg-fill' },
 	      React.createElement(
-	        'ul',
-	        { className: 'list-group' },
-	        this.state.yards.map(function (yard) {
-	          return React.createElement(YardIndexItem, { yard: yard, key: yard.id });
-	        }),
+	        'div',
+	        { className: 'container-fluid row' },
 	        React.createElement(
 	          'div',
-	          { className: 'col-md-3' },
+	          { className: 'nav-header' },
 	          React.createElement(
-	            'div',
-	            { className: 'row' },
+	            'a',
+	            { className: 'navbar-brand', onClick: this.navigateHome },
+	            'YS'
+	          )
+	        ),
+	        React.createElement(
+	          'ul',
+	          { className: 'nav navbar-nav' },
+	          React.createElement(
+	            'li',
+	            null,
 	            React.createElement(
-	              'button',
-	              { onClick: this.handleNewYard, className: 'top-buffer' },
-	              'New Yard'
+	              'a',
+	              null,
+	              'Search'
+	            )
+	          ),
+	          React.createElement(
+	            'li',
+	            null,
+	            React.createElement(
+	              'a',
+	              null,
+	              'My Properties'
+	            )
+	          ),
+	          React.createElement(
+	            'li',
+	            null,
+	            React.createElement(
+	              'a',
+	              { onClick: this.navigateToProfileShow },
+	              'My Profile '
+	            )
+	          ),
+	          React.createElement(
+	            'li',
+	            { className: 'navbar-right' },
+	            React.createElement(
+	              'a',
+	              null,
+	              'Logout'
 	            )
 	          )
 	        )
 	      )
 	    );
 	  }
-	
 	});
 	
-	module.exports = YardIndex;
+	module.exports = NavBar;
+
+/***/ },
+/* 253 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var NavBar = __webpack_require__(252);
+	
+	var Landing = React.createClass({
+	  displayName: 'Landing',
+	
+	
+	  render: function () {
+	    return React.createElement(NavBar, null);
+	  }
+	});
+	
+	window.Landing = Landing;
+	module.exports = Landing;
+
+/***/ },
+/* 254 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var NavBar = __webpack_require__(252);
+	
+	var UserDetail = React.createClass({
+	  displayName: "UserDetail",
+	
+	  render: function () {
+	    return React.createElement(
+	      "div",
+	      null,
+	      React.createElement(NavBar, null),
+	      React.createElement(
+	        "div",
+	        null,
+	        "This is a users show page Yay!"
+	      ),
+	      React.createElement(
+	        "p",
+	        null,
+	        "Your name is ____"
+	      )
+	    );
+	  }
+	});
+	
+	module.exports = UserDetail;
 
 /***/ }
 /******/ ]);

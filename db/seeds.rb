@@ -17,3 +17,7 @@ Yard.create!(title: "South", description: "Delores Park", lng: -122.427406, lat:
 Yard.create!(title: "North", description: "Hyde st. Pier", lng: -122.421307, lat: 37.809131, user_id: 4)
 Yard.create!(title: "East", description: "App Academy", lng: -122.394049, lat: 37.791118, user_id: 3)
 Yard.create!(title: "Central", description: "Filmore Auditorium", lng: -122.433150, lat: 37.784145, user_id: 1)
+Yard.create!(title: "Not Pictured", description: "Other Side of the world", lng: 122.433150, lat: 37.784145, user_id: 1)
+Yard.create!(title: "Downtown", description: "Downtown", lng: -122.468147, lat: 37.746101, user_id: 1)
+Yard.create!(title: "Delete me", description: "Delete Me", lng: -122.458167, lat: 37.746101, user_id: 1)
+Yard.create!(title: "Delete me also", description: "delete me also!", lng: -122.478157, lat: 37.746101, user_id: 1)

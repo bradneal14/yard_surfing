@@ -11,8 +11,6 @@ var YardIndex = React.createClass({
     return {yards: YardStore.all() }
   },
   componentDidMount: function(){
-    ApiUtil.fetchYards();
-    //TODO pass bounds as argument to fetchYards for a more efficient map
     YardStore.addListener(this._onChange);
   },
   _onChange: function(){
@@ -26,21 +24,19 @@ var YardIndex = React.createClass({
     this.navigateToNewYard();
   },
   navigateToNewYard: function() {
-    console.log(this.history)
-    console.log("props")
     this.history.push("yards/new");
   },
 
   render: function(){
     return (
-      <div className="col-md-6">
+      <div className="col-md-6 col-sm-6 col-lg-7">
         <ul className="list-group">
           {this.state.yards.map(function(yard){
             return <YardIndexItem yard={yard} key={yard.id}/>
           })}
         <div className="col-md-3">
-          <div className="row">
-            <button onClick={this.handleNewYard} className="top-buffer">New Yard</button>
+          <div className="">
+            <button onClick={this.handleNewYard} className="btn btn-success top-buffer">New Yard</button>
           </div>
         </div>
         </ul>

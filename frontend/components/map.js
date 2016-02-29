@@ -7,25 +7,57 @@ var Map = React.createClass({
 
   componentDidMount: function(){
     YardStore.addListener(this._onChange);
+
+    var styles = [
+      {
+        stylers: [
+          { hue: "#b35b4f" },
+          { saturation: 500 }
+        ]
+      },{
+        featureType: "road",
+        elementType: "geometry",
+        stylers: [
+          { lightness: 50 },
+          { visibility: "simplified" }
+        ]
+      },{
+        featureType: "road",
+        elementType: "labels",
+        stylers: [
+          { visibility: "off" }
+        ]
+      }
+    ];
+
+    var styledMap = new google.maps.StyledMapType(styles,
+    {name: "Styled Map"});
+
      var mapDOMNode = this.refs.map;
      var mapOptions = {
        center: {lat: 37.7758, lng: -122.435},
-       zoom: 12
+       zoom: 12,
+       mapTypeControlOptions: {
+         mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
+       }
      };
 
-   this.map = new google.maps.Map(mapDOMNode, mapOptions);
+     this.map = new google.maps.Map(mapDOMNode, mapOptions);
 
-   this.map.addListener('idle', function(){
-     var latLngBounds = this.getBounds();
-     var southWest = latLngBounds.getSouthWest();
-     var northEast = latLngBounds.getNorthEast();
-     var bounds = {
-       northEast: {lat: northEast.lat(), lng: northEast.lng()},
-       southWest: {lat: southWest.lat(), lng: southWest.lng()}
-     }
+     this.map.mapTypes.set('map_style', styledMap);
 
-     ApiUtil.fetchYards(bounds);
-   });
+     this.map.setMapTypeId('map_style');
+
+     this.map.addListener('idle', function(){
+       var latLngBounds = this.getBounds();
+       var southWest = latLngBounds.getSouthWest();
+       var northEast = latLngBounds.getNorthEast();
+       var bounds = {
+         northEast: {lat: northEast.lat(), lng: northEast.lng()},
+         southWest: {lat: southWest.lat(), lng: southWest.lng()}
+       }
+       ApiUtil.fetchYards(bounds);
+     });
 
   },
 
@@ -45,20 +77,34 @@ var Map = React.createClass({
       latLngAry.push({lng: el.lng, lat: el.lat});
     });
 
+
+
     latLngAry.forEach(function(coords){
       var marker = new google.maps.Marker({
         position: coords,
-        map: this.map,
-        amimation: google.maps.Animation.DROP
       });
+
+
+
       marker.setMap(this.map);
+      // marker.setAnimation(google.maps.Animation.DROP);
+      marker.setIcon({url: "http://www2.psd100.com/ppp/2013/11/0501/Map-marker-icon-1105213652.png"} );
+
+      // marker.addListener('click', function() {
+      //   if (infoWindow) {
+      //     infoWindow.close();
+      //   }
+      //   var infoWindow = new google.maps.InfoWindow({
+      //     content: "ehy"
+      //   });
+      //   infoWindow.open(this.map, marker);
+      // });
       _markers.push(marker);
     }.bind(this));
-
   },
   render: function(){
     return (
-      <div className="map col-md-6" ref="map">
+      <div className="map col-md-6 col-lg-5" ref="map">
       </div>
     )
   }

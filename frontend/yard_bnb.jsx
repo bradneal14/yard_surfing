@@ -7,37 +7,24 @@ var Search = require('./components/search');
 var YardForm = require('./components/YardForm');
 var YardDetail = require('./components/yardDetail');
 var hashHistory = require('react-router').hashHistory;
+var App = require('./components/app');
+var userDetail = require('./components/userDetail');
 
 var ReactRouter = require('react-router');
 var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
 var IndexRoute = ReactRouter.IndexRoute;
 
-var Hello = React.createClass({
-  render: function(){
-    return <div>Hello</div>;
-  }
-});
 
-var App = React.createClass({
-    render: function(){
-      return (
-          <div>
-            <header><h1>Yard BnB</h1></header>
-              {this.props.children}
-          </div>
-      );
-    }
-  });
-
-  var routes = (
-    <Router history={hashHistory}>
-     <Route path="/" component={App}>
-       <IndexRoute component={Search}></IndexRoute>
-     </Route>
-     <Route path="/yards/new" component={YardForm}></Route>
-     <Route path="/yard/:yardId" component={YardDetail}></Route>
-   </Router>
+var routes = (
+  <Router history={hashHistory}>
+   <Route path="/" component={App}>
+     <IndexRoute component={Search}></IndexRoute>
+   </Route>
+   <Route path="/yards/new" component={YardForm}></Route>
+   <Route path="/yard/:yardId" component={YardDetail}></Route>
+   <Route path="/users/:userId" component={userDetail}></Route>
+ </Router>
  );
 
  document.addEventListener('DOMContentLoaded', function () {

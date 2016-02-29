@@ -1,3 +1,68 @@
 .top-buffer {
   margin-top: 15px;
 }
+
+.left-buffer {
+  margin-left: 15px;
+}
+
+
+
+.shower-image{
+  height: 17px;
+  width: 10px;
+  background-image: asset-data-url("noun_116378_cc.svg");
+  position: relative;
+  bottom: 0%;
+  padding-left: 13px;
+}
+
+.tan-bg-fill {
+  background-color: #F1E8C1
+}
+
+.red-bg-fill{
+  background-color: #B35B4F
+}
+
+.black-bg-fill{
+  background-color: #2C2C2E
+}
+
+.grey-bg-fill{
+  background-color: #A2AA9D
+}
+
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+color: #2C2C2E;  /*Sets the text hover color on navbar*/
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active >
+a:hover, .navbar-default .navbar-nav > .active > a:focus {
+color: #B35B4F; /*BACKGROUND color for active*/
+background-color: #030033;
+}
+
+.navbar-default {
+background-color: #B35B4F;
+border-color: #030033;
+}
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+color: #262626;
+text-decoration: none;
+background-color: #66CCFF;  /*change color of links in drop down here*/
+}
+
+.nav > li > a:hover,
+.nav > li > a:focus {
+text-decoration: none;
+background-color: silver; /*Change rollover cell color here*/
+}
+
+
+.navbar-default .navbar-nav > li > a {
+color: #A2AA9D; /*Change active text color here*/
+}
