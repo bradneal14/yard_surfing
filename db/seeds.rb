@@ -6,11 +6,11 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+User.create!(fname: "Bradley", lname: "Neal", email: "admin", password: "password")
 User.create!(fname: "Mike", lname: "Jordan", email: "mjordan", password: "password")
 User.create!(fname: "Buzz", lname: "Lightyear", email: "blightyear", password: "password")
 User.create!(fname: "Jim", lname: "Weiss", email: "jweiss", password: "password")
 User.create!(fname: "Dave", lname: "Neal", email: "dneal", password: "password")
-User.create!(fname: "Bradley", lname: "Neal", email: "admin", password: "password")
 
 Yard.create!(title: "West", description: "Golden Gate Park", lng: -122.487989, lat: 37.769556, user_id: 2)
 Yard.create!(title: "South", description: "Delores Park", lng: -122.427406, lat: 37.760383, user_id: 3)
@@ -19,5 +19,5 @@ Yard.create!(title: "East", description: "App Academy", lng: -122.394049, lat: 3
 Yard.create!(title: "Central", description: "Filmore Auditorium", lng: -122.433150, lat: 37.784145, user_id: 1)
 Yard.create!(title: "Not Pictured", description: "Other Side of the world", lng: 122.433150, lat: 37.784145, user_id: 1)
 Yard.create!(title: "Downtown", description: "Downtown", lng: -122.468147, lat: 37.746101, user_id: 1)
-Yard.create!(title: "Delete me", description: "Delete Me", lng: -122.458167, lat: 37.746101, user_id: 1)
+Yard.create!(title: "Delete me", description: "Delete Me", lng: -122.458167, lat: 37.746101, user_id: 2)
 Yard.create!(title: "Delete me also", description: "delete me also!", lng: -122.478157, lat: 37.746101, user_id: 1)

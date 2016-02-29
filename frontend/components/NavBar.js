@@ -1,14 +1,27 @@
 var React = require('react');
 var History = require('react-router').History;
+var UserStore = require('../stores/currentUser');
 
 var NavBar = React.createClass({
   mixins: [History],
+  _onChange: function(){
+    this.setState({user: UserStore.currentUser() })
+  },
+  getInitialState: function(){
+    return {user: UserStore.currentUser() };
+  },
+  componentDidMount: function(){
+    this.userListener = UserStore.addListener(this._onChange);
+    ApiUtil.fetchCurrentUser();
+  },
+  componentWillUnmout: function(){
+    UserStore.userListener.remove();
+  },
   navigateHome: function(){
     this.history.push("/")
   },
   navigateToProfileShow: function(){
-    console.log(this.state)
-    this.history.push("users/" + 3)
+    this.history.push("users/" + this.state.user.id)
   },
   render: function(){
     return (

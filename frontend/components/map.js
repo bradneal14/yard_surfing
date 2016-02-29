@@ -12,7 +12,7 @@ var Map = React.createClass({
       {
         stylers: [
           { hue: "#b35b4f" },
-          { saturation: 500 }
+          { saturation: 1000 }
         ]
       },{
         featureType: "road",

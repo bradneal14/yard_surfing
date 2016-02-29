@@ -4,15 +4,16 @@ var ApiUtil = require('../util/api_util');
 var NavBar = require('./NavBar');
 var History = require('react-router').History;
 var Map = require('./map');
+var UserStore = require("../stores/currentUser");
 
 var yardDetail = React.createClass({
   mixins: [History],
 
   _onChange: function(){
-    this.setState({yard: YardStore.find(this.props.params.yardId)});
+    this.setState({yard: YardStore.find(this.props.params.yardId), user: UserStore.currentUser() });
   },
   getInitialState: function(){
-    return {yard: YardStore.find(this.props.params.yardId)};
+    return {yard: YardStore.find(this.props.params.yardId), user: UserStore.currentUser() };
   },
   componentWillReceiveProps: function(newProps){
     ApiUtil.fetchSingleYard(newProps.params.yardId);
@@ -20,10 +21,13 @@ var yardDetail = React.createClass({
   componentDidMount: function(){
     this.yardListener = YardStore.addListener(this._onChange);
     ApiUtil.fetchSingleYard(this.props.params.yardId);
+    this.userListener = UserStore.addListener(this._onChange);
+    ApiUtil.fetchCurrentUser();
     // ApiUtil.fetchSingleYard(parseInt(newProps.params.yardId));
   },
   componentWillUnmout: function(){
     YardStore.yardListener.remove();
+    UserStore.userListener.remove();
   },
   removeYard: function() {
     ApiUtil.removeYard(this.state.yard.id);
@@ -33,26 +37,26 @@ var yardDetail = React.createClass({
     this.history.push("/");
   },
   render: function(){
-    if (!this.state.yard){
+    if (!this.state.yard || !this.state.user){
       return (<div>loading..</div>)
     }
     return(
       <div>
-        <NavBar></NavBar>
-        <Map></Map>
-        <div className="yard-detail-pane">
-          <div className="detail">
-            <p>The back of the carter: detail</p>
-            <p>{this.state.yard.title}</p>
-            <p>{this.state.yard.description}</p>
+        <NavBar className="col-lg-6"></NavBar>
+        <Map className="col-xs-5"></Map>
+        <div className="col-md-3 col-lg-3">
+          <div className="text-center">
+            <p>The back of the carter: Yard Detail for {this.state.yard.title}</p>
+            <p>Title: {this.state.yard.title}</p>
+            <p>Description: {this.state.yard.description}</p>
             <p>its under this line</p>
-            <p>{this.state.yard.fire_status}</p>
+            <p>User's Name: {this.state.user.fname}</p>
             <p>its over this line</p>
-            <p>{this.state.yard.lat}</p>
-            <p>{this.state.yard.lng}</p>
+            <p>Lat: {this.state.yard.lat}</p>
+            <p>Long: {this.state.yard.lng}</p>
+            <button onClick={this.removeYard} className="btn btn-success top-buffer">Delete Yard</button>
           </div>
         </div>
-        <button onClick={this.removeYard} className="btn btn-success top-buffer">Delete Yard</button>
 
         {this.props.children}
 

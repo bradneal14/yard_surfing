@@ -1,5 +1,6 @@
 var AppDispatcher = require('../dispatcher/dispatcher');
 var YardConstants = require('../constants/yard_constants');
+var UserConstants = require("../constants/user_constants");
 
 var ApiActions = {
   receiveAll: function(data){
@@ -16,6 +17,10 @@ var ApiActions = {
   },
   removeYard: function(data){
     var payload = {actionType: YardConstants.REMOVE_YARD, yard: data};
+    AppDispatcher.dispatch(payload);
+  },
+  currentUser: function(data){
+    var payload = {actionType: UserConstants.CURRENT_USER, user: data};
     AppDispatcher.dispatch(payload);
   }
 };

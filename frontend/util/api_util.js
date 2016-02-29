@@ -39,6 +39,15 @@ ApiUtil = {
         ApiActions.removeYard(data);
       }
     })
+  },
+  fetchCurrentUser: function(){
+    $.ajax({
+      url: 'api/users',
+      type: "GET",
+      success: function(data){
+        ApiActions.currentUser(data);
+      }
+    })
   }
 
 

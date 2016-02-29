@@ -1,11 +1,11 @@
 class Api::UsersController < ApplicationController
 
   def show
-    @user = User.find(params[:id])
+    @user = current_user
   end
 
   def index
-    @users = User.all
+    @user = current_user
   end
 
 
