@@ -11,8 +11,6 @@ class Booking < ActiveRecord::Base
   validate :start_date_before_end_date
   validate :requested_period_available
 
-  end
-
 
   private
 
