@@ -59,15 +59,15 @@ ApiUtil = {
       }
     })
   },
-  createBooking: function({
-    $.ajax({
-      url:
-      type:
-      success: function(data){
-        ApiActions.createBooking(data);
-      }
-    })
-  })
+  // createBooking: function({
+  //   $.ajax({
+  //     url:
+  //     type:
+  //     success: function(data){
+  //       ApiActions.createBooking(data);
+  //     }
+  //   })
+  // })
 
 
 
