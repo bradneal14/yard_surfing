@@ -3,6 +3,8 @@ var YardStore = require('../stores/yard');
 var ApiUtil = require('../util/api_util');
 var YardIndexItem = require('./YardIndexItem')
 var History = require('react-router').History;
+var UserStore = require('../stores/currentUser');
+
 
 
 var YardIndex = React.createClass({
@@ -30,7 +32,7 @@ var YardIndex = React.createClass({
 
   render: function(){
     return (
-      <div className="col-md-6 col-sm-6 col-lg-7">
+      <div className="col-md-7 col-sm-7 col-lg-7">
         <ul className="list-group">
           {this.state.yards.map(function(yard){
             return <YardIndexItem yard={yard} key={yard.id}/>

@@ -47,14 +47,14 @@
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(158);
 	var YardStore = __webpack_require__(159);
-	var ApiUtil = __webpack_require__(182);
+	var ApiUtil = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./util/api_util\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 	var YardIndex = __webpack_require__(185);
-	var Search = __webpack_require__(244);
-	var YardForm = __webpack_require__(246);
+	var Search = __webpack_require__(246);
+	var YardForm = __webpack_require__(247);
 	var YardDetail = __webpack_require__(253);
 	var hashHistory = __webpack_require__(187).hashHistory;
-	var App = __webpack_require__(254);
-	var userDetail = __webpack_require__(256);
+	var App = __webpack_require__(255);
+	var userDetail = __webpack_require__(257);
 	
 	var ReactRouter = __webpack_require__(187);
 	var Router = ReactRouter.Router;
@@ -26533,114 +26533,8 @@
 	module.exports = YardConstants;
 
 /***/ },
-/* 182 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var ApiActions = __webpack_require__(183);
-	
-	ApiUtil = {
-	  fetchYards: function (bounds) {
-	    $.ajax({
-	      url: 'api/yards',
-	      type: 'GET',
-	      data: { bounds },
-	      success: function (data) {
-	        console.log(data);
-	        ApiActions.receiveAll(data);
-	      }
-	    });
-	  },
-	  createYard: function (yard) {
-	    console.log("made it to util");
-	    $.ajax({
-	      url: 'api/yards',
-	      type: 'POST',
-	      data: { yard: yard },
-	      success: function (data) {
-	        ApiActions.newYard(data);
-	      }
-	    });
-	  },
-	  fetchSingleYard: function (id) {
-	    $.ajax({
-	      url: 'api/yards/' + id,
-	      type: "GET",
-	      success: function (data) {
-	        ApiActions.receiveSingleYard(data);
-	      }
-	    });
-	  },
-	  removeYard: function (id) {
-	    $.ajax({
-	      url: 'api/yards/' + id,
-	      type: "DELETE",
-	      success: function (data) {
-	        ApiActions.removeYard(data);
-	      }
-	    });
-	  },
-	  fetchCurrentUser: function () {
-	    $.ajax({
-	      url: 'api/current_user',
-	      type: "GET",
-	      success: function (data) {
-	        ApiActions.currentUser(data);
-	      }
-	    });
-	  },
-	  logoutUser: function () {
-	    $.ajax({
-	      url: "session",
-	      type: "DELETE",
-	      success: function (data) {
-	        window.location.href = "/";
-	      }
-	    });
-	  }
-	
-	  // createYard: function(data){
-	  //   $.post('api/yards', { yard: data }, function(yard) {
-	  //     ApiActions.receiveAll([yard]);
-	  //   });
-	  // }
-	};
-	
-	module.exports = ApiUtil;
-
-/***/ },
-/* 183 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var AppDispatcher = __webpack_require__(178);
-	var YardConstants = __webpack_require__(181);
-	var UserConstants = __webpack_require__(184);
-	
-	var ApiActions = {
-	  receiveAll: function (data) {
-	    var payload = { actionType: YardConstants.YARDS_RECEIVED, yards: data };
-	    AppDispatcher.dispatch(payload);
-	  },
-	  newYard: function (data) {
-	    var payload = { actionType: YardConstants.NEW_YARD, yard: data };
-	    AppDispatcher.dispatch(payload);
-	  },
-	  receiveSingleYard: function (data) {
-	    var payload = { actionType: YardConstants.SINGLE_YARD_RECEIVED, yard: data };
-	    AppDispatcher.dispatch(payload);
-	  },
-	  removeYard: function (data) {
-	    var payload = { actionType: YardConstants.REMOVE_YARD, yard: data };
-	    AppDispatcher.dispatch(payload);
-	  },
-	  currentUser: function (data) {
-	    var payload = { actionType: UserConstants.CURRENT_USER, user: data };
-	    AppDispatcher.dispatch(payload);
-	  }
-	};
-	
-	module.exports = ApiActions;
-
-/***/ },
+/* 182 */,
+/* 183 */,
 /* 184 */
 /***/ function(module, exports) {
 
@@ -26656,9 +26550,10 @@
 
 	var React = __webpack_require__(1);
 	var YardStore = __webpack_require__(159);
-	var ApiUtil = __webpack_require__(182);
+	var ApiUtil = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../util/api_util\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 	var YardIndexItem = __webpack_require__(186);
 	var History = __webpack_require__(187).History;
+	var UserStore = __webpack_require__(245);
 	
 	var YardIndex = React.createClass({
 	  displayName: 'YardIndex',
@@ -26688,7 +26583,7 @@
 	  render: function () {
 	    return React.createElement(
 	      'div',
-	      { className: 'col-md-6 col-sm-6 col-lg-7' },
+	      { className: 'col-md-7 col-sm-7 col-lg-7' },
 	      React.createElement(
 	        'ul',
 	        { className: 'list-group' },
@@ -26722,7 +26617,7 @@
 
 	var React = __webpack_require__(1);
 	var History = __webpack_require__(187).History;
-	var Map = __webpack_require__(245);
+	var Map = __webpack_require__(244);
 	
 	var YardIndexItem = React.createClass({
 	  displayName: 'YardIndexItem',
@@ -31785,49 +31680,8 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var Map = __webpack_require__(245);
-	var YardsIndex = __webpack_require__(185);
 	var YardStore = __webpack_require__(159);
-	
-	var Search = React.createClass({
-	  displayName: 'Search',
-	
-	  // getInitialState: function(){
-	  //   return {yards: YardStore.all() }
-	  // },
-	  // componentDidMount: function(){
-	  //   this.yardListener = YardStore.addListener(this._onChange);
-	  // },
-	  // componentWillUnmout: function(){
-	  //   YardStore.yardListener.remove();
-	  // },
-	  // _onChange: function(){
-	  //   this.setState({yards: YardStore.all() })
-	  // },
-	  render: function () {
-	    return React.createElement(
-	      'div',
-	      { className: 'col-xs-12 tan-bg-fill' },
-	      React.createElement(
-	        'p',
-	        null,
-	        'Here we are in search'
-	      ),
-	      React.createElement(Map, null),
-	      React.createElement(YardsIndex, null)
-	    );
-	  }
-	});
-	
-	module.exports = Search;
-
-/***/ },
-/* 245 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	var YardStore = __webpack_require__(159);
-	var ApiUtil = __webpack_require__(182);
+	var ApiUtil = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../util/api_util\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 	
 	var _markers = [];
 	var Map = React.createClass({
@@ -31837,19 +31691,33 @@
 	    console.log("map mounted");
 	    this.yardListener = YardStore.addListener(this._onChange);
 	    // UserStore.addListener(this._onChange);
-	    var styles = [{
-	      stylers: [{ hue: "#b35b4f" }, { saturation: 1000 }]
-	    }, {
-	      featureType: "road",
-	      elementType: "geometry",
-	      stylers: [{ lightness: 50 }, { visibility: "simplified" }]
-	    }, {
-	      featureType: "road",
-	      elementType: "labels",
-	      stylers: [{ visibility: "off" }]
-	    }];
 	
-	    var styledMap = new google.maps.StyledMapType(styles, { name: "Styled Map" });
+	    //the lines below here enable the special colors for the map:
+	    // var styles = [
+	    //   {
+	    //     stylers: [
+	    //       { hue: "#b35b4f" },
+	    //       { saturation: 1000 }
+	    //     ]
+	    //   },{
+	    //     featureType: "road",
+	    //     elementType: "geometry",
+	    //     stylers: [
+	    //       { lightness: 50 },
+	    //       { visibility: "simplified" }
+	    //     ]
+	    //   },{
+	    //     featureType: "road",
+	    //     elementType: "labels",
+	    //     stylers: [
+	    //       { visibility: "off" }
+	    //     ]
+	    //   }
+	    // ];
+	    //
+	    // var styledMap = new google.maps.StyledMapType(styles,
+	    // {name: "Styled Map"});
+	    //Special color lines above:
 	
 	    var mapDOMNode = this.refs.map;
 	    var mapOptions = {
@@ -31870,9 +31738,9 @@
 	
 	    this.map = new google.maps.Map(mapDOMNode, mapOptions);
 	
-	    this.map.mapTypes.set('map_style', styledMap);
-	
-	    this.map.setMapTypeId('map_style');
+	    //Below are the other two lines for map color styling
+	    //  this.map.mapTypes.set('map_style', styledMap);
+	    //  this.map.setMapTypeId('map_style');
 	
 	    this.map.addListener('idle', function () {
 	      var latLngBounds = this.getBounds();
@@ -31931,19 +31799,95 @@
 	    }.bind(this));
 	  },
 	  render: function () {
-	    return React.createElement('div', { className: 'map col-md-6 col-lg-5', ref: 'map' });
+	    return React.createElement('div', { className: 'map col-xs-5 col-lg-5 ', ref: 'map' });
 	  }
 	});
 	
 	module.exports = Map;
 
 /***/ },
+/* 245 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Store = __webpack_require__(160).Store;
+	var AppDispatcher = __webpack_require__(178);
+	var UserConstants = __webpack_require__(184);
+	
+	var _user = [];
+	
+	var UserStore = new Store(AppDispatcher);
+	
+	UserStore.__onDispatch = function (payload) {
+	  switch (payload.actionType) {
+	    case UserConstants.CURRENT_USER:
+	      UserStore.receiveCurrentUser(payload.user);
+	      UserStore.__emitChange();
+	      break;
+	  }
+	};
+	
+	UserStore.receiveCurrentUser = function (user) {
+	  _user = [user];
+	};
+	
+	UserStore.fetchCurrentUser = function () {
+	  if (_user.length === 0) {
+	    ApiUtil.fetchCurrentUser();
+	  }
+	}, UserStore.currentUser = function () {
+	  return _user[0];
+	};
+	
+	module.exports = UserStore;
+
+/***/ },
 /* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var LinkedStateMixin = __webpack_require__(247);
-	var NavBar = __webpack_require__(251);
+	var Map = __webpack_require__(244);
+	var YardsIndex = __webpack_require__(185);
+	var YardStore = __webpack_require__(159);
+	
+	var Search = React.createClass({
+	  displayName: 'Search',
+	
+	  // getInitialState: function(){
+	  //   return {yards: YardStore.all() }
+	  // },
+	  // componentDidMount: function(){
+	  //   this.yardListener = YardStore.addListener(this._onChange);
+	  // },
+	  // componentWillUnmout: function(){
+	  //   YardStore.yardListener.remove();
+	  // },
+	  // _onChange: function(){
+	  //   this.setState({yards: YardStore.all() })
+	  // },
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      { className: 'col-xs-12 tan-bg-fill' },
+	      React.createElement(
+	        'p',
+	        null,
+	        'Here we are in search'
+	      ),
+	      React.createElement(Map, null),
+	      React.createElement(YardsIndex, null)
+	    );
+	  }
+	});
+	
+	module.exports = Search;
+
+/***/ },
+/* 247 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var LinkedStateMixin = __webpack_require__(248);
+	var NavBar = __webpack_require__(252);
 	
 	var YardForm = React.createClass({
 	  displayName: 'YardForm',
@@ -32115,13 +32059,13 @@
 	module.exports = YardForm;
 
 /***/ },
-/* 247 */
+/* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(248);
+	module.exports = __webpack_require__(249);
 
 /***/ },
-/* 248 */
+/* 249 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -32138,8 +32082,8 @@
 	
 	'use strict';
 	
-	var ReactLink = __webpack_require__(249);
-	var ReactStateSetters = __webpack_require__(250);
+	var ReactLink = __webpack_require__(250);
+	var ReactStateSetters = __webpack_require__(251);
 	
 	/**
 	 * A simple mixin around ReactLink.forState().
@@ -32162,7 +32106,7 @@
 	module.exports = LinkedStateMixin;
 
 /***/ },
-/* 249 */
+/* 250 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -32236,7 +32180,7 @@
 	module.exports = ReactLink;
 
 /***/ },
-/* 250 */
+/* 251 */
 /***/ function(module, exports) {
 
 	/**
@@ -32345,12 +32289,12 @@
 	module.exports = ReactStateSetters;
 
 /***/ },
-/* 251 */
+/* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
 	var History = __webpack_require__(187).History;
-	var UserStore = __webpack_require__(252);
+	var UserStore = __webpack_require__(245);
 	
 	var NavBar = React.createClass({
 	  displayName: 'NavBar',
@@ -32386,10 +32330,10 @@
 	      { className: 'navbar-default navbar-fixed-top red-bg-fill' },
 	      React.createElement(
 	        'div',
-	        { className: 'container-fluid row' },
+	        { className: 'container row' },
 	        React.createElement(
 	          'div',
-	          { className: 'nav-header' },
+	          { className: 'nav-header navbar-justified' },
 	          React.createElement(
 	            'a',
 	            { className: 'navbar-brand', onClick: this.navigateHome },
@@ -32428,7 +32372,7 @@
 	          ),
 	          React.createElement(
 	            'li',
-	            { className: 'navbar-right' },
+	            { className: 'nav navbar-nav navbar-right' },
 	            React.createElement(
 	              'a',
 	              { onClick: this.logoutUser },
@@ -32444,53 +32388,17 @@
 	module.exports = NavBar;
 
 /***/ },
-/* 252 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var Store = __webpack_require__(160).Store;
-	var AppDispatcher = __webpack_require__(178);
-	var UserConstants = __webpack_require__(184);
-	
-	var _user = [];
-	
-	var UserStore = new Store(AppDispatcher);
-	
-	UserStore.__onDispatch = function (payload) {
-	  switch (payload.actionType) {
-	    case UserConstants.CURRENT_USER:
-	      UserStore.receiveCurrentUser(payload.user);
-	      UserStore.__emitChange();
-	      break;
-	  }
-	};
-	
-	UserStore.receiveCurrentUser = function (user) {
-	  // _user = [];
-	  _user = [user];
-	  console.log("reveived current user", _user);
-	};
-	
-	UserStore.fetchCurrentUser = function () {
-	  if (_user.length === 0) {
-	    ApiUtil.fetchCurrentUser();
-	  }
-	}, UserStore.currentUser = function () {
-	  return _user[0];
-	};
-	
-	module.exports = UserStore;
-
-/***/ },
 /* 253 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
 	var YardStore = __webpack_require__(159);
-	var ApiUtil = __webpack_require__(182);
-	var NavBar = __webpack_require__(251);
+	var ApiUtil = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../util/api_util\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var NavBar = __webpack_require__(252);
 	var History = __webpack_require__(187).History;
-	var Map = __webpack_require__(245);
-	var UserStore = __webpack_require__(252);
+	var Map = __webpack_require__(244);
+	var UserStore = __webpack_require__(245);
+	var BookingReqBox = __webpack_require__(254);
 	
 	var yardDetail = React.createClass({
 	  displayName: 'yardDetail',
@@ -32501,6 +32409,7 @@
 	    this.setState({ yard: YardStore.find(this.props.params.yardId), user: UserStore.currentUser() });
 	  },
 	  getInitialState: function () {
+	    UserStore.fetchCurrentUser();
 	    return { yard: YardStore.find(this.props.params.yardId), user: UserStore.currentUser() };
 	  },
 	  componentWillReceiveProps: function (newProps) {
@@ -32516,15 +32425,11 @@
 	    this.yardListener.remove();
 	    // UserStore.userListener.remove();
 	  },
-	  removeYard: function () {
-	    ApiUtil.removeYard(this.state.yard.id);
-	    this.navigateHome();
-	  },
 	  navigateHome: function () {
 	    this.history.push("/");
 	  },
 	  render: function () {
-	    if (!this.state.yard || !this.state.user) {
+	    if (!this.state.user && !this.state.yard) {
 	      console.log(this.state);
 	      return React.createElement(
 	        'div',
@@ -32535,18 +32440,18 @@
 	    return React.createElement(
 	      'div',
 	      null,
-	      React.createElement(NavBar, { className: 'col-lg-6' }),
-	      React.createElement(Map, { yard: this.props.params.yardId, className: 'col-xs-5' }),
+	      React.createElement(NavBar, { className: 'col-sm-12' }),
+	      React.createElement(Map, { yard: this.props.params.yardId }),
 	      React.createElement(
 	        'div',
 	        { className: 'col-md-3 col-lg-3' },
 	        React.createElement(
 	          'div',
-	          { className: 'text-center' },
+	          { className: '' },
 	          React.createElement(
 	            'p',
 	            null,
-	            'The back of the carter: Yard Detail for ',
+	            'The back of the carter: Yard Detail forr ',
 	            this.state.yard.title
 	          ),
 	          React.createElement(
@@ -32564,8 +32469,8 @@
 	          React.createElement(
 	            'p',
 	            null,
-	            'User\'s Name: ',
-	            this.state.user.fname
+	            'Owner\'s Name: ',
+	            this.state.yard.user_id
 	          ),
 	          React.createElement(
 	            'p',
@@ -32581,16 +32486,12 @@
 	          ),
 	          React.createElement(
 	            'button',
-	            { onClick: this.removeYard, className: 'btn btn-success top-buffer' },
-	            'Delete Yard'
-	          ),
-	          React.createElement(
-	            'buton',
 	            { onClick: this.navigateHome, className: 'btn btn-success  top-buffer left-buffer' },
 	            'Back to all'
 	          )
 	        )
 	      ),
+	      React.createElement(BookingReqBox, null),
 	      this.props.children
 	    );
 	  }
@@ -32603,8 +32504,152 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var NavBar = __webpack_require__(251);
-	var Landing = __webpack_require__(255);
+	var LinkedStateMixin = __webpack_require__(248);
+	
+	var BookingReqBox = React.createClass({
+	  displayName: "BookingReqBox",
+	
+	  mixins: [LinkedStateMixin],
+	  getInitialState: function () {
+	    return {
+	      description: ""
+	    };
+	  },
+	  handleSubmit: function (event) {
+	    event.preventDefault();
+	    console.log("Handling Submit");
+	  },
+	  render: function () {
+	    return React.createElement(
+	      "div",
+	      { className: "col-md-3" },
+	      React.createElement(
+	        "form",
+	        { onSubmit: this.handleSubmit },
+	        React.createElement(
+	          "label",
+	          null,
+	          "Start: "
+	        ),
+	        React.createElement("input", {
+	          type: "text",
+	          valueLink: this.linkState('start_date'),
+	          className: "" }),
+	        React.createElement("br", null),
+	        React.createElement(
+	          "label",
+	          null,
+	          "End: "
+	        ),
+	        React.createElement("input", {
+	          type: "text",
+	          valueLink: this.linkState('end_date'),
+	          className: "" }),
+	        React.createElement("br", null),
+	        React.createElement(
+	          "label",
+	          null,
+	          "Num Guests: "
+	        ),
+	        React.createElement("input", {
+	          type: "text",
+	          valueLink: this.linkState('num_guests'),
+	          className: "" }),
+	        React.createElement("br", null),
+	        React.createElement(
+	          "label",
+	          null,
+	          "Requester id: "
+	        ),
+	        React.createElement("input", {
+	          type: "text",
+	          valueLink: this.linkState('requester_id'),
+	          className: "" }),
+	        React.createElement("br", null),
+	        React.createElement(
+	          "label",
+	          null,
+	          "yard id: "
+	        ),
+	        React.createElement("input", {
+	          type: "text",
+	          valueLink: this.linkState('yard_id'),
+	          className: "" }),
+	        React.createElement("br", null),
+	        React.createElement("input", { type: "submit", className: "btn btn-success", value: "Make Request" })
+	      )
+	    );
+	  }
+	});
+	
+	module.exports = BookingReqBox;
+	
+	{/*<div className="col-md-6">
+	   <div className="container">
+	     <div className='col-md-2'>
+	       <div className="form-group">
+	         <div className='input-group date' id='datetimepicker6'>
+	           <input type='text' className="form-control" />
+	           <span className="input-group-addon">
+	             <span className="glyphicon glyphicon-calendar"></span>
+	           </span>
+	         </div>
+	       </div>
+	     </div>
+	     <div className='col-md-2'>
+	       <div className="form-group">
+	         <div className='input-group date' id='datetimepicker7'>
+	           <input type='text' className="form-control" />
+	           <span className="input-group-addon">
+	             <span className="glyphicon glyphicon-calendar"></span>
+	           </span>
+	         </div>
+	       </div>
+	     </div>
+	   </div>
+	  </div>*/}
+	
+	{
+	  /*<br/>
+	  <form>
+	    <label>Start: </label>
+	    <input
+	      type="text"
+	      valueLink={this.linkState('start_date')}
+	      className=""/>
+	   </form>
+	  <label>End: </label>
+	  <input
+	  type="text"
+	  valueLink={this.linkState('end_date')}
+	  className=""/>
+	  <br/>
+	  <label>Num Guests: </label>
+	  <input
+	  type="text"
+	  valueLink={this.linkState('num_guests')}
+	  className=""/>
+	  <br/>
+	  <label>Requester id: </label>
+	  <input
+	  type="text"
+	  valueLink={this.linkState('requester_id')}
+	  className=""/>
+	  <br/>
+	  <label>yard id: </label>
+	  <input
+	  type="text"
+	  valueLink={this.linkState('yard_id')}
+	  className=""/>
+	  <br/>*/}
+
+/***/ },
+/* 255 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var NavBar = __webpack_require__(252);
+	var Landing = __webpack_require__(256);
 	
 	var App = React.createClass({
 	  displayName: "App",
@@ -32622,11 +32667,11 @@
 	module.exports = App;
 
 /***/ },
-/* 255 */
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var NavBar = __webpack_require__(251);
+	var NavBar = __webpack_require__(252);
 	
 	var Landing = React.createClass({
 	  displayName: 'Landing',
@@ -32641,15 +32686,15 @@
 	module.exports = Landing;
 
 /***/ },
-/* 256 */
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var NavBar = __webpack_require__(251);
-	var UserStore = __webpack_require__(252);
-	var ApiUtil = __webpack_require__(182);
+	var NavBar = __webpack_require__(252);
+	var UserStore = __webpack_require__(245);
+	var ApiUtil = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../util/api_util\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 	var History = __webpack_require__(187).History;
-	var YardListItem = __webpack_require__(257);
+	var YardListItem = __webpack_require__(258);
 	var YardStore = __webpack_require__(159);
 	
 	var UserDetail = React.createClass({
@@ -32730,12 +32775,12 @@
 	module.exports = UserDetail;
 
 /***/ },
-/* 257 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
 	var History = __webpack_require__(187).History;
-	var UserStore = __webpack_require__(252);
+	var UserStore = __webpack_require__(245);
 	var YardStore = __webpack_require__(159);
 	
 	var YardListItem = React.createClass({

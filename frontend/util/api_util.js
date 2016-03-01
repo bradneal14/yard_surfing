@@ -58,7 +58,16 @@ ApiUtil = {
         window.location.href = "/";
       }
     })
-  }
+  },
+  createBooking: function({
+    $.ajax({
+      url:
+      type:
+      success: function(data){
+        ApiActions.createBooking(data);
+      }
+    })
+  })
 
 
 

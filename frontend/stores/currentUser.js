@@ -17,9 +17,7 @@ UserStore.__onDispatch = function(payload){
 };
 
 UserStore.receiveCurrentUser = function(user){
-  // _user = [];
   _user = [user];
-  console.log("reveived current user", _user);
 }
 
 UserStore.fetchCurrentUser = function(){

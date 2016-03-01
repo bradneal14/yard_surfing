@@ -8,30 +8,33 @@ var Map = React.createClass({
     console.log("map mounted");
     this.yardListener = YardStore.addListener(this._onChange);
     // UserStore.addListener(this._onChange);
-    var styles = [
-      {
-        stylers: [
-          { hue: "#b35b4f" },
-          { saturation: 1000 }
-        ]
-      },{
-        featureType: "road",
-        elementType: "geometry",
-        stylers: [
-          { lightness: 50 },
-          { visibility: "simplified" }
-        ]
-      },{
-        featureType: "road",
-        elementType: "labels",
-        stylers: [
-          { visibility: "off" }
-        ]
-      }
-    ];
 
-    var styledMap = new google.maps.StyledMapType(styles,
-    {name: "Styled Map"});
+    //the lines below here enable the special colors for the map:
+    // var styles = [
+    //   {
+    //     stylers: [
+    //       { hue: "#b35b4f" },
+    //       { saturation: 1000 }
+    //     ]
+    //   },{
+    //     featureType: "road",
+    //     elementType: "geometry",
+    //     stylers: [
+    //       { lightness: 50 },
+    //       { visibility: "simplified" }
+    //     ]
+    //   },{
+    //     featureType: "road",
+    //     elementType: "labels",
+    //     stylers: [
+    //       { visibility: "off" }
+    //     ]
+    //   }
+    // ];
+    //
+    // var styledMap = new google.maps.StyledMapType(styles,
+    // {name: "Styled Map"});
+    //Special color lines above:
 
      var mapDOMNode = this.refs.map;
      var mapOptions = {
@@ -52,9 +55,9 @@ var Map = React.createClass({
 
      this.map = new google.maps.Map(mapDOMNode, mapOptions);
 
-     this.map.mapTypes.set('map_style', styledMap);
-
-     this.map.setMapTypeId('map_style');
+    //Below are the other two lines for map color styling
+    //  this.map.mapTypes.set('map_style', styledMap);
+    //  this.map.setMapTypeId('map_style');
 
      this.map.addListener('idle', function(){
        var latLngBounds = this.getBounds();
@@ -120,7 +123,7 @@ var Map = React.createClass({
   },
   render: function(){
     return (
-      <div className="map col-md-6 col-lg-5" ref="map">
+      <div className="map col-xs-5 col-lg-5 " ref="map">
       </div>
     )
   }

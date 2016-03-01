@@ -31,9 +31,9 @@ var NavBar = React.createClass({
   render: function(){
     return (
       <nav className="navbar-default navbar-fixed-top red-bg-fill">
-        <div className="container-fluid row">
+        <div className="container row">
 
-          <div className="nav-header">
+          <div className="nav-header navbar-justified">
             <a className="navbar-brand" onClick={this.navigateHome}>
               YS
             </a>
@@ -43,7 +43,7 @@ var NavBar = React.createClass({
             <li><a>Search</a></li>
             <li><a>My Properties</a></li>
             <li><a onClick={this.navigateToProfileShow}>My Profile </a></li>
-            <li className="navbar-right"><a onClick={this.logoutUser}>Logout</a></li>
+            <li className="nav navbar-nav navbar-right"><a onClick={this.logoutUser}>Logout</a></li>
           </ul>
         </div>
       </nav>

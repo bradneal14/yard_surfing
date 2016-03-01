@@ -5,6 +5,7 @@ var NavBar = require('./NavBar');
 var History = require('react-router').History;
 var Map = require('./map');
 var UserStore = require("../stores/currentUser");
+var BookingReqBox = require("./bookingReqBox");
 
 var yardDetail = React.createClass({
   mixins: [History],
@@ -13,6 +14,7 @@ var yardDetail = React.createClass({
     this.setState({yard: YardStore.find(this.props.params.yardId), user: UserStore.currentUser() });
   },
   getInitialState: function(){
+    UserStore.fetchCurrentUser();
     return {yard: YardStore.find(this.props.params.yardId), user: UserStore.currentUser() };
   },
   componentWillReceiveProps: function(newProps){
@@ -28,35 +30,30 @@ var yardDetail = React.createClass({
     this.yardListener.remove();
     // UserStore.userListener.remove();
   },
-  removeYard: function() {
-    ApiUtil.removeYard(this.state.yard.id);
-    this.navigateHome();
-  },
   navigateHome: function(){
     this.history.push("/");
   },
   render: function(){
-    if (!this.state.yard || !this.state.user){
+    if (!this.state.user && !this.state.yard){
       console.log(this.state)
       return (<div>loading....</div>)
     }
     return(
       <div>
-        <NavBar className="col-lg-6"></NavBar>
-        <Map yard={this.props.params.yardId} className="col-xs-5"></Map>
+        <NavBar className="col-sm-12"></NavBar>
+        <Map yard={this.props.params.yardId}></Map>
         <div className="col-md-3 col-lg-3">
-          <div className="text-center">
-            <p>The back of the carter: Yard Detail for {this.state.yard.title}</p>
+          <div className="">
+            <p>The back of the carter: Yard Detail forr {this.state.yard.title}</p>
             <p>Title: {this.state.yard.title}</p>
             <p>Description: {this.state.yard.description}</p>
-            <p>User's Name: {this.state.user.fname}</p>
+            <p>Owner's Name: {this.state.yard.user_id}</p>
             <p>Lat: {this.state.yard.lat}</p>
             <p>Long: {this.state.yard.lng}</p>
-            <button onClick={this.removeYard} className="btn btn-success top-buffer">Delete Yard</button>
-            <buton onClick={this.navigateHome} className="btn btn-success  top-buffer left-buffer">Back to all</buton>
+            <button onClick={this.navigateHome} className="btn btn-success  top-buffer left-buffer">Back to all</button>
           </div>
         </div>
-
+        <BookingReqBox></BookingReqBox>
         {this.props.children}
 
       </div>

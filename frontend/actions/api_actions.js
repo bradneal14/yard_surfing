@@ -22,6 +22,10 @@ var ApiActions = {
   currentUser: function(data){
     var payload = {actionType: UserConstants.CURRENT_USER, user: data};
     AppDispatcher.dispatch(payload);
+  },
+  createBooking: function(data){
+    var payload = {actionType: BookingConstants.NEW_BOOKING, booking: data}
+    AppDispatcher.dispatch(payload);
   }
 };
 
