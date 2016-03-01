@@ -35,13 +35,14 @@ YardStore.__onDispatch = function(payload){
 };
 
 YardStore.findById = function(userId) {
+  // console.log("yards", _yards)
   var matchedYards = [];
   Object.keys(_yards).forEach(function(key){
     if (_yards[key].user_id === userId){
       matchedYards.push(_yards[key]);
     }
   })
-  console.log("matched yards:", userId,  matchedYards);
+  // console.log("matched yards:", userId,  matchedYards);
   return matchedYards;
 }
 
@@ -50,6 +51,7 @@ YardStore.resetYard = function(yard){
 };
 
 YardStore.removeYard = function(yard){
+  // console.log("in store, deleting", yard, yard.id)
   delete _yards[yard.id];
 };
 

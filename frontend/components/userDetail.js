@@ -8,14 +8,21 @@ var YardStore = require('../stores/yard');
 
 var UserDetail = React.createClass({
   mixins: [History],
+
   _onChange: function(){
     var currentUser = UserStore.currentUser();
+    this.fetchAfterDelete();
+    console.log("one");
     console.log("on change userdetail", currentUser)
     this.setState({yards: currentUser.yards, user: currentUser});
   },
   _onDelete: function(){
     console.log("user detail on delete")
     this.setState({yards: YardStore.findById(this.state.user.id)});
+  },
+  fetchAfterDelete: function(){
+    var bounds = {northEast: {lat: 84.9 , lng: 180 }, southWest: {lat: -85, lng: -180 }};
+    ApiUtil.fetchYards(bounds);
   },
   getInitialState: function(){
     console.log("initial state userdetail")

@@ -20,7 +20,7 @@ var YardListItem = React.createClass({
   render: function(){
     return(
       <div className="col-md-4 row">
-        <li onClick={this.showDetail} yard={this.props.yard} className="list-group-item">
+        <li onClick={this.showDetail} className="list-group-item">
           <p>{this.props.yard.title} : {this.props.yard.description}
           </p>
         </li>
