@@ -59,15 +59,16 @@ ApiUtil = {
       }
     })
   },
-  // createBooking: function({
-  //   $.ajax({
-  //     url:
-  //     type:
-  //     success: function(data){
-  //       ApiActions.createBooking(data);
-  //     }
-  //   })
-  // })
+  createBooking: function(booking){
+    $.ajax({
+      url: "api/bookings",
+      type: "POST",
+      data: {booking: booking},
+      success: function(data){
+        ApiActions.createBooking(data);
+      }
+    })
+  }
 
 
 

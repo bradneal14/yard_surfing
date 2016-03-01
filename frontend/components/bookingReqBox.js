@@ -1,16 +1,25 @@
 var React = require("react");
 var LinkedStateMixin = require('react-addons-linked-state-mixin');
+var History = require("react-router").History;
+var ApiUtil = require("../util/api_util");
+
 
 var BookingReqBox = React.createClass({
-  mixins: [LinkedStateMixin],
+  mixins: [LinkedStateMixin, History],
   getInitialState: function(){
     return {
-      description: "",
+      start_date: "",
     };
    },
   handleSubmit: function(event){
     event.preventDefault();
-    console.log("Handling Submit");
+    var booking = Object.assign({}, this.state);
+    ApiUtil.createBooking(booking);
+    // console.log(booking)
+    this.navigateToSearch();
+  },
+  navigateToSearch: function(){
+    this.history.push("/");
   },
   render: function(){
     return(

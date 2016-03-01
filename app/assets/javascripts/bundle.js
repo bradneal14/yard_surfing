@@ -26596,24 +26596,25 @@
 	        window.location.href = "/";
 	      }
 	    });
+	  },
+	  createBooking: function (booking) {
+	    $.ajax({
+	      url: "api/bookings",
+	      type: "POST",
+	      data: { booking: booking },
+	      success: function (data) {
+	        ApiActions.createBooking(data);
+	      }
+	    });
 	  }
+	
+	  // createYard: function(data){
+	  //   $.post('api/yards', { yard: data }, function(yard) {
+	  //     ApiActions.receiveAll([yard]);
+	  //   });
+	  // }
 	};
 	
-	// createBooking: function({
-	//   $.ajax({
-	//     url:
-	//     type:
-	//     success: function(data){
-	//       ApiActions.createBooking(data);
-	//     }
-	//   })
-	// })
-	
-	// createYard: function(data){
-	//   $.post('api/yards', { yard: data }, function(yard) {
-	//     ApiActions.receiveAll([yard]);
-	//   });
-	// }
 	module.exports = ApiUtil;
 
 /***/ },
@@ -32624,19 +32625,27 @@
 
 	var React = __webpack_require__(1);
 	var LinkedStateMixin = __webpack_require__(248);
+	var History = __webpack_require__(187).History;
+	var ApiUtil = __webpack_require__(182);
 	
 	var BookingReqBox = React.createClass({
 	  displayName: "BookingReqBox",
 	
-	  mixins: [LinkedStateMixin],
+	  mixins: [LinkedStateMixin, History],
 	  getInitialState: function () {
 	    return {
-	      description: ""
+	      start_date: ""
 	    };
 	  },
 	  handleSubmit: function (event) {
 	    event.preventDefault();
-	    console.log("Handling Submit");
+	    var booking = Object.assign({}, this.state);
+	    ApiUtil.createBooking(booking);
+	    // console.log(booking)
+	    this.navigateToSearch();
+	  },
+	  navigateToSearch: function () {
+	    this.history.push("/");
 	  },
 	  render: function () {
 	    return React.createElement(

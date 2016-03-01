@@ -11,6 +11,7 @@ BookingStore.__onDispatch = function(payload){
     case BookingConstants.ADD_BOOKING:
       BookingStore.receiveNewBooking(payload.booking);
       BookingStore.__emitChange();
+      console.log("made it through the store");
       break;
   }
 }
