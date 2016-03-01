@@ -11,13 +11,14 @@ var YardIndex = React.createClass({
     return {yards: YardStore.all() }
   },
   componentDidMount: function(){
-    YardStore.addListener(this._onChange);
+    this.yardListener = YardStore.addListener(this._onChange);
   },
   _onChange: function(){
     this.setState( { yards: YardStore.all() } );
   },
-  componentWillUnmout: function(){
-    YardStore.removeListener(this._onChange);
+  componentWillUnmount: function(){
+    console.log("yard index unmounting")
+    this.yardListener.remove();
   },
   handleNewYard: function(event){
     event.preventDefault();

@@ -19713,11 +19713,21 @@
 	      YardStore.__emitChange();
 	      break;
 	    case YardConstants.REMOVE_YARD:
-	      console.log("made it to the right place in the store");
 	      YardStore.removeYard(payload.yard);
 	      YardStore.__emitChange();
 	      break;
 	  }
+	};
+	
+	YardStore.findById = function (userId) {
+	  var matchedYards = [];
+	  Object.keys(_yards).forEach(function (key) {
+	    if (_yards[key].user_id === userId) {
+	      matchedYards.push(_yards[key]);
+	    }
+	  });
+	  console.log("matched yards:", userId, matchedYards);
+	  return matchedYards;
 	};
 	
 	YardStore.resetYard = function (yard) {
@@ -26533,6 +26543,7 @@
 	      type: 'GET',
 	      data: { bounds },
 	      success: function (data) {
+	        console.log(data);
 	        ApiActions.receiveAll(data);
 	      }
 	    });
@@ -26568,10 +26579,19 @@
 	  },
 	  fetchCurrentUser: function () {
 	    $.ajax({
-	      url: 'api/users',
+	      url: 'api/current_user',
 	      type: "GET",
 	      success: function (data) {
 	        ApiActions.currentUser(data);
+	      }
+	    });
+	  },
+	  logoutUser: function () {
+	    $.ajax({
+	      url: "session",
+	      type: "DELETE",
+	      success: function (data) {
+	        window.location.href = "/";
 	      }
 	    });
 	  }
@@ -26646,13 +26666,14 @@
 	    return { yards: YardStore.all() };
 	  },
 	  componentDidMount: function () {
-	    YardStore.addListener(this._onChange);
+	    this.yardListener = YardStore.addListener(this._onChange);
 	  },
 	  _onChange: function () {
 	    this.setState({ yards: YardStore.all() });
 	  },
-	  componentWillUnmout: function () {
-	    YardStore.removeListener(this._onChange);
+	  componentWillUnmount: function () {
+	    console.log("yard index unmounting");
+	    this.yardListener.remove();
 	  },
 	  handleNewYard: function (event) {
 	    event.preventDefault();
@@ -26699,6 +26720,7 @@
 
 	var React = __webpack_require__(1);
 	var History = __webpack_require__(187).History;
+	var Map = __webpack_require__(245);
 	
 	var YardIndexItem = React.createClass({
 	  displayName: 'YardIndexItem',
@@ -26710,7 +26732,7 @@
 	  render: function () {
 	    return React.createElement(
 	      'li',
-	      { onClick: this.showDetail, className: 'list-group-item col-xs-6' },
+	      { onClick: this.showDetail, id: "yard-" + this.props.yard.id, className: 'list-group-item col-xs-6' },
 	      React.createElement(
 	        'p',
 	        null,
@@ -31763,10 +31785,23 @@
 	var React = __webpack_require__(1);
 	var Map = __webpack_require__(245);
 	var YardsIndex = __webpack_require__(185);
+	var YardStore = __webpack_require__(159);
 	
 	var Search = React.createClass({
 	  displayName: 'Search',
 	
+	  // getInitialState: function(){
+	  //   return {yards: YardStore.all() }
+	  // },
+	  // componentDidMount: function(){
+	  //   this.yardListener = YardStore.addListener(this._onChange);
+	  // },
+	  // componentWillUnmout: function(){
+	  //   YardStore.yardListener.remove();
+	  // },
+	  // _onChange: function(){
+	  //   this.setState({yards: YardStore.all() })
+	  // },
 	  render: function () {
 	    return React.createElement(
 	      'div',
@@ -31796,10 +31831,10 @@
 	var Map = React.createClass({
 	  displayName: 'Map',
 	
-	
 	  componentDidMount: function () {
-	    YardStore.addListener(this._onChange);
-	
+	    console.log("map mounted");
+	    this.yardListener = YardStore.addListener(this._onChange);
+	    // UserStore.addListener(this._onChange);
 	    var styles = [{
 	      stylers: [{ hue: "#b35b4f" }, { saturation: 1000 }]
 	    }, {
@@ -31823,6 +31858,14 @@
 	      }
 	    };
 	
+	    if (this.props.yard) {
+	      var currentYard = YardStore.find(this.props.yard);
+	      var newLat = currentYard.lat;
+	      var newLng = currentYard.lng;
+	      mapOptions['center'] = { lat: newLat, lng: newLng };
+	      mapOptions['zoom'] = 15;
+	    }
+	
 	    this.map = new google.maps.Map(mapDOMNode, mapOptions);
 	
 	    this.map.mapTypes.set('map_style', styledMap);
@@ -31842,13 +31885,19 @@
 	  },
 	
 	  _onChange: function () {
+	    console.log("some kinda change in map");
+	    console.log(YardStore.all());
 	    this.placeMarks();
 	  },
-	
+	  componentWillUnmount: function () {
+	    console.log("map will unmount");
+	    this.yardListener.remove();
+	  },
 	  placeMarks: function () {
-	    _markers.forEach(function (marker) {
-	      marker.setMap(null);
-	    });
+	    // _markers.forEach(function(marker){
+	    //   console.log("placing mark")
+	    //   marker.setMap(null);
+	    // });
 	    _markers = [];
 	
 	    var latLngAry = [];
@@ -32313,15 +32362,20 @@
 	  componentDidMount: function () {
 	    this.userListener = UserStore.addListener(this._onChange);
 	    ApiUtil.fetchCurrentUser();
+	    // this.yardListener = YardStore.addListener(this._onChange);
+	    // ApiUtil.fetchYards();
 	  },
-	  componentWillUnmout: function () {
-	    UserStore.userListener.remove();
+	  componentWillUnmount: function () {
+	    this.userListener.remove();
 	  },
 	  navigateHome: function () {
 	    this.history.push("/");
 	  },
 	  navigateToProfileShow: function () {
 	    this.history.push("users/" + this.state.user.id);
+	  },
+	  logoutUser: function () {
+	    ApiUtil.logoutUser();
 	  },
 	  render: function () {
 	    return React.createElement(
@@ -32374,7 +32428,7 @@
 	            { className: 'navbar-right' },
 	            React.createElement(
 	              'a',
-	              null,
+	              { onClick: this.logoutUser },
 	              'Logout'
 	            )
 	          )
@@ -32401,8 +32455,6 @@
 	UserStore.__onDispatch = function (payload) {
 	  switch (payload.actionType) {
 	    case UserConstants.CURRENT_USER:
-	      console.log("if you see this you are close");
-	      console.log(payload.user);
 	      UserStore.receiveCurrentUser(payload.user);
 	      UserStore.__emitChange();
 	      break;
@@ -32410,11 +32462,16 @@
 	};
 	
 	UserStore.receiveCurrentUser = function (user) {
-	  _user = [];
-	  _user.push(user);
+	  // _user = [];
+	  _user = [user];
+	  console.log("reveived current user", _user);
 	};
 	
-	UserStore.currentUser = function () {
+	UserStore.fetchCurrentUser = function () {
+	  if (_user.length === 0) {
+	    ApiUtil.fetchCurrentUser();
+	  }
+	}, UserStore.currentUser = function () {
 	  return _user[0];
 	};
 	
@@ -32449,13 +32506,12 @@
 	  componentDidMount: function () {
 	    this.yardListener = YardStore.addListener(this._onChange);
 	    ApiUtil.fetchSingleYard(this.props.params.yardId);
-	    this.userListener = UserStore.addListener(this._onChange);
-	    ApiUtil.fetchCurrentUser();
+	    // this.userListener = UserStore.addListener(this._onChange);
 	    // ApiUtil.fetchSingleYard(parseInt(newProps.params.yardId));
 	  },
-	  componentWillUnmout: function () {
-	    YardStore.yardListener.remove();
-	    UserStore.userListener.remove();
+	  componentWillUnmount: function () {
+	    this.yardListener.remove();
+	    // UserStore.userListener.remove();
 	  },
 	  removeYard: function () {
 	    ApiUtil.removeYard(this.state.yard.id);
@@ -32466,17 +32522,18 @@
 	  },
 	  render: function () {
 	    if (!this.state.yard || !this.state.user) {
+	      console.log(this.state);
 	      return React.createElement(
 	        'div',
 	        null,
-	        'loading..'
+	        'loading....'
 	      );
 	    }
 	    return React.createElement(
 	      'div',
 	      null,
 	      React.createElement(NavBar, { className: 'col-lg-6' }),
-	      React.createElement(Map, { className: 'col-xs-5' }),
+	      React.createElement(Map, { yard: this.props.params.yardId, className: 'col-xs-5' }),
 	      React.createElement(
 	        'div',
 	        { className: 'col-md-3 col-lg-3' },
@@ -32504,18 +32561,8 @@
 	          React.createElement(
 	            'p',
 	            null,
-	            'its under this line'
-	          ),
-	          React.createElement(
-	            'p',
-	            null,
 	            'User\'s Name: ',
 	            this.state.user.fname
-	          ),
-	          React.createElement(
-	            'p',
-	            null,
-	            'its over this line'
 	          ),
 	          React.createElement(
 	            'p',
@@ -32533,6 +32580,11 @@
 	            'button',
 	            { onClick: this.removeYard, className: 'btn btn-success top-buffer' },
 	            'Delete Yard'
+	          ),
+	          React.createElement(
+	            'buton',
+	            { onClick: this.navigateHome, className: 'btn btn-success  top-buffer left-buffer' },
+	            'Back to all'
 	          )
 	        )
 	      ),
@@ -32595,33 +32647,40 @@
 	var ApiUtil = __webpack_require__(182);
 	var History = __webpack_require__(187).History;
 	var YardListItem = __webpack_require__(257);
+	var YardStore = __webpack_require__(159);
 	
 	var UserDetail = React.createClass({
 	  displayName: "UserDetail",
 	
 	  mixins: [History],
 	  _onChange: function () {
-	    this.setState({ user: UserStore.currentUser() });
+	    var currentUser = UserStore.currentUser();
+	    console.log("on change userdetail", currentUser);
+	    this.setState({ yards: currentUser.yards, user: currentUser });
+	  },
+	  _onDelete: function () {
+	    console.log("user detail on delete");
+	    this.setState({ yards: YardStore.findById(this.state.user.id) });
 	  },
 	  getInitialState: function () {
-	    return { user: UserStore.currentUser() };
+	    console.log("initial state userdetail");
+	    UserStore.fetchCurrentUser();
+	    return { user: {}, yards: [] };
 	  },
 	  componentDidMount: function () {
 	    this.userListener = UserStore.addListener(this._onChange);
-	    ApiUtil.fetchCurrentUser();
-	    console.log(this.state);
+	    // ApiUtil.fetchCurrentUser();
+	    this.yardListener = YardStore.addListener(this._onDelete);
+	    // ApiUtil.fetchYards();
 	  },
-	  componentWillUnmout: function () {
-	    UserStore.userListener.remove();
+	  // componentWillReceiveProps: function(newProps){
+	  //   ApiUtil.fetchCurrentUser();
+	  // },
+	  componentWillUnmount: function () {
+	    this.userListener.remove();
+	    this.yardListener.remove();
 	  },
 	  render: function () {
-	    if (!this.state.user) {
-	      return React.createElement(
-	        "div",
-	        null,
-	        "Loading.."
-	      );
-	    }
 	    return React.createElement(
 	      "div",
 	      null,
@@ -32649,7 +32708,8 @@
 	        "ul",
 	        null,
 	        "Your yards are : ",
-	        this.state.user.yards.map(function (yard) {
+	        React.createElement("br", null),
+	        this.state.yards.map(function (yard) {
 	          return React.createElement(YardListItem, { yard: yard, key: yard.id });
 	        })
 	      )
@@ -32665,24 +32725,43 @@
 
 	var React = __webpack_require__(1);
 	var History = __webpack_require__(187).History;
+	var UserStore = __webpack_require__(252);
+	var YardStore = __webpack_require__(159);
 	
 	var YardListItem = React.createClass({
 	  displayName: 'YardListItem',
 	
 	  mixins: [History],
 	  showDetail: function () {
+	    // ApiUtil.fetchYards();
 	    this.history.push("yard/" + this.props.yard.id);
+	  },
+	  removeYard: function (event) {
+	    event.preventDefault();
+	    ApiUtil.removeYard(this.props.yard.id);
+	    this.history.push("users/" + this.state.user.id);
+	    //added all this user state stuff in order to redirect back to user show page
+	    //after deleting a yard. there must be an easier way to delete immediately
 	  },
 	  render: function () {
 	    return React.createElement(
-	      'li',
-	      { onClick: this.showDetail, className: 'list-group-item' },
+	      'div',
+	      { className: 'col-md-4 row' },
 	      React.createElement(
-	        'p',
-	        null,
-	        this.props.yard.title,
-	        ' : ',
-	        this.props.yard.description
+	        'li',
+	        { onClick: this.showDetail, yard: this.props.yard, className: 'list-group-item' },
+	        React.createElement(
+	          'p',
+	          null,
+	          this.props.yard.title,
+	          ' : ',
+	          this.props.yard.description
+	        )
+	      ),
+	      React.createElement(
+	        'button',
+	        { onClick: this.removeYard, className: 'btn btn-success left-buffer' },
+	        'Delete Yard'
 	      )
 	    );
 	  }

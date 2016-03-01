@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
     resources :yards, only: [:create, :index, :show, :destroy]
     resources :users, only: [:index, :show]
+    get 'current_user', to: "users#get_current_user"
   end
 
 end

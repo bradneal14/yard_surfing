@@ -4,10 +4,10 @@ var ApiUtil = require('../util/api_util');
 
 var _markers = [];
 var Map = React.createClass({
-
   componentDidMount: function(){
-    YardStore.addListener(this._onChange);
-
+    console.log("map mounted");
+    this.yardListener = YardStore.addListener(this._onChange);
+    // UserStore.addListener(this._onChange);
     var styles = [
       {
         stylers: [
@@ -42,6 +42,14 @@ var Map = React.createClass({
        }
      };
 
+     if (this.props.yard){
+       var currentYard = YardStore.find(this.props.yard)
+       var newLat = currentYard.lat
+       var newLng = currentYard.lng
+       mapOptions['center'] = {lat: newLat, lng: newLng};
+       mapOptions['zoom'] = 15;
+     }
+
      this.map = new google.maps.Map(mapDOMNode, mapOptions);
 
      this.map.mapTypes.set('map_style', styledMap);
@@ -57,18 +65,25 @@ var Map = React.createClass({
          southWest: {lat: southWest.lat(), lng: southWest.lng()}
        }
        ApiUtil.fetchYards(bounds);
+
      });
 
   },
 
   _onChange: function(){
+    console.log("some kinda change in map");
+    console.log(YardStore.all());
     this.placeMarks();
   },
-
+  componentWillUnmount: function(){
+    console.log("map will unmount");
+    this.yardListener.remove();
+  },
   placeMarks: function(){
-    _markers.forEach(function(marker){
-      marker.setMap(null);
-    });
+    // _markers.forEach(function(marker){
+    //   console.log("placing mark")
+    //   marker.setMap(null);
+    // });
     _markers = [];
 
     var latLngAry = [];

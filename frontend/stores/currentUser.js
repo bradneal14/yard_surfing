@@ -10,8 +10,6 @@ var UserStore = new Store(AppDispatcher);
 UserStore.__onDispatch = function(payload){
   switch(payload.actionType){
     case UserConstants.CURRENT_USER:
-      console.log("if you see this you are close")
-      console.log(payload.user)
       UserStore.receiveCurrentUser(payload.user);
       UserStore.__emitChange();
       break;
@@ -19,9 +17,16 @@ UserStore.__onDispatch = function(payload){
 };
 
 UserStore.receiveCurrentUser = function(user){
-  _user = [];
-  _user.push(user);
+  // _user = [];
+  _user = [user];
+  console.log("reveived current user", _user);
 }
+
+UserStore.fetchCurrentUser = function(){
+  if (_user.length === 0){
+    ApiUtil.fetchCurrentUser();
+  }
+},
 
 UserStore.currentUser = function(){
   return _user[0];

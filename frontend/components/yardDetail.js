@@ -21,13 +21,12 @@ var yardDetail = React.createClass({
   componentDidMount: function(){
     this.yardListener = YardStore.addListener(this._onChange);
     ApiUtil.fetchSingleYard(this.props.params.yardId);
-    this.userListener = UserStore.addListener(this._onChange);
-    ApiUtil.fetchCurrentUser();
+    // this.userListener = UserStore.addListener(this._onChange);
     // ApiUtil.fetchSingleYard(parseInt(newProps.params.yardId));
   },
-  componentWillUnmout: function(){
-    YardStore.yardListener.remove();
-    UserStore.userListener.remove();
+  componentWillUnmount: function(){
+    this.yardListener.remove();
+    // UserStore.userListener.remove();
   },
   removeYard: function() {
     ApiUtil.removeYard(this.state.yard.id);
@@ -38,23 +37,23 @@ var yardDetail = React.createClass({
   },
   render: function(){
     if (!this.state.yard || !this.state.user){
-      return (<div>loading..</div>)
+      console.log(this.state)
+      return (<div>loading....</div>)
     }
     return(
       <div>
         <NavBar className="col-lg-6"></NavBar>
-        <Map className="col-xs-5"></Map>
+        <Map yard={this.props.params.yardId} className="col-xs-5"></Map>
         <div className="col-md-3 col-lg-3">
           <div className="text-center">
             <p>The back of the carter: Yard Detail for {this.state.yard.title}</p>
             <p>Title: {this.state.yard.title}</p>
             <p>Description: {this.state.yard.description}</p>
-            <p>its under this line</p>
             <p>User's Name: {this.state.user.fname}</p>
-            <p>its over this line</p>
             <p>Lat: {this.state.yard.lat}</p>
             <p>Long: {this.state.yard.lng}</p>
             <button onClick={this.removeYard} className="btn btn-success top-buffer">Delete Yard</button>
+            <buton onClick={this.navigateHome} className="btn btn-success  top-buffer left-buffer">Back to all</buton>
           </div>
         </div>
 

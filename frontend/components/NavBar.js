@@ -13,15 +13,20 @@ var NavBar = React.createClass({
   componentDidMount: function(){
     this.userListener = UserStore.addListener(this._onChange);
     ApiUtil.fetchCurrentUser();
+    // this.yardListener = YardStore.addListener(this._onChange);
+    // ApiUtil.fetchYards();
   },
-  componentWillUnmout: function(){
-    UserStore.userListener.remove();
+  componentWillUnmount: function(){
+    this.userListener.remove();
   },
   navigateHome: function(){
     this.history.push("/")
   },
   navigateToProfileShow: function(){
     this.history.push("users/" + this.state.user.id)
+  },
+  logoutUser: function(){
+    ApiUtil.logoutUser();
   },
   render: function(){
     return (
@@ -38,7 +43,7 @@ var NavBar = React.createClass({
             <li><a>Search</a></li>
             <li><a>My Properties</a></li>
             <li><a onClick={this.navigateToProfileShow}>My Profile </a></li>
-            <li className="navbar-right"><a>Logout</a></li>
+            <li className="navbar-right"><a onClick={this.logoutUser}>Logout</a></li>
           </ul>
         </div>
       </nav>

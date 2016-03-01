@@ -7,6 +7,7 @@ ApiUtil = {
       type: 'GET',
       data: {bounds},
       success: function(data){
+        console.log(data);
         ApiActions.receiveAll(data);
       }
     });
@@ -42,10 +43,19 @@ ApiUtil = {
   },
   fetchCurrentUser: function(){
     $.ajax({
-      url: 'api/users',
+      url: 'api/current_user',
       type: "GET",
       success: function(data){
         ApiActions.currentUser(data);
+      }
+    })
+  },
+  logoutUser: function(){
+    $.ajax({
+      url: "session",
+      type: "DELETE",
+      success: function(data){
+        window.location.href = "/";
       }
     })
   }

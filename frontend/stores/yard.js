@@ -6,7 +6,7 @@ var _yards = {};
 var YardStore = new Store(AppDispatcher);
 
 YardStore.all = function() {
-   var all_yards = [];
+  var all_yards = [];
   for (var key in _yards){
     all_yards.push(_yards[key]);
   };
@@ -28,12 +28,22 @@ YardStore.__onDispatch = function(payload){
       YardStore.__emitChange();
       break;
     case YardConstants.REMOVE_YARD:
-    console.log("made it to the right place in the store")
       YardStore.removeYard(payload.yard);
       YardStore.__emitChange();
       break;
   }
 };
+
+YardStore.findById = function(userId) {
+  var matchedYards = [];
+  Object.keys(_yards).forEach(function(key){
+    if (_yards[key].user_id === userId){
+      matchedYards.push(_yards[key]);
+    }
+  })
+  console.log("matched yards:", userId,  matchedYards);
+  return matchedYards;
+}
 
 YardStore.resetYard = function(yard){
   _yards[yard.id] = yard;
