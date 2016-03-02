@@ -47,9 +47,6 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bootstrap-glyphicons (0.0.1)
-      railties (>= 3.0)
-      sass (>= 3.2)
     builder (3.2.2)
     byebug (8.2.2)
     coderay (1.1.0)
@@ -171,7 +168,6 @@ DEPENDENCIES
   bcrypt
   better_errors
   binding_of_caller
-  bootstrap-glyphicons
   byebug
   coffee-rails (~> 4.1.0)
   jbuilder (~> 2.0)
