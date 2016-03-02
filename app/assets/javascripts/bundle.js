@@ -31930,7 +31930,7 @@
 	
 	      marker.setMap(this.map);
 	      // marker.setAnimation(google.maps.Animation.DROP);
-	      marker.setIcon({ url: "http://www2.psd100.com/ppp/2013/11/0501/Map-marker-icon-1105213652.png" });
+	      marker.setIcon({ url: "/assets/black_marker_icon.png" });
 	
 	      // marker.addListener('click', function() {
 	      //   if (infoWindow) {
