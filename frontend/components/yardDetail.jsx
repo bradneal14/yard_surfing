@@ -4,7 +4,7 @@ var ApiUtil = require('../util/api_util');
 var NavBar = require('./NavBar');
 var History = require('react-router').History;
 var Map = require('./map');
-var UserStore = require("../stores/currentUser");
+var UserStore = require('../stores/currentUser');
 var BookingReqBox = require("./bookingReqBox");
 
 var yardDetail = React.createClass({

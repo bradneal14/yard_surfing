@@ -1,7 +1,7 @@
 var React = require('react');
 var Map = require('./map');
 var YardsIndex = require('./YardsIndex');
-var YardStore = require("../stores/yard");
+var YardStore = require('../stores/yard');
 
 var Search = React.createClass({
   // getInitialState: function(){
