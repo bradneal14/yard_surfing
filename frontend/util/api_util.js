@@ -59,13 +59,14 @@ ApiUtil = {
       }
     })
   },
-  createBooking: function(booking){
+  createBooking: function(booking, callback){
     $.ajax({
       url: "api/bookings",
       type: "POST",
       data: {booking: booking},
       success: function(data){
         ApiActions.createBooking(data);
+        callback();
       },
       error: function(data){
         ApiActions.handleErrors(data);

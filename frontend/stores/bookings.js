@@ -23,8 +23,8 @@ BookingStore.__onDispatch = function(payload){
 };
 
 BookingStore.receiveErrors= function(errors){
-  _error = [];
-  _errors.push(errors)
+  _errors = [];
+  _errors = errors.responseJSON.errors;
 };
 
 BookingStore.allErrors = function(){
@@ -32,6 +32,7 @@ BookingStore.allErrors = function(){
 };
 
 BookingStore.receiveNewBooking = function(booking){
+  _errors = [];
   _bookings[booking.id] = booking;
 };
 

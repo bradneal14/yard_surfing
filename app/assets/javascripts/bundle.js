@@ -26597,13 +26597,14 @@
 	      }
 	    });
 	  },
-	  createBooking: function (booking) {
+	  createBooking: function (booking, callback) {
 	    $.ajax({
 	      url: "api/bookings",
 	      type: "POST",
 	      data: { booking: booking },
 	      success: function (data) {
 	        ApiActions.createBooking(data);
+	        callback();
 	      },
 	      error: function (data) {
 	        ApiActions.handleErrors(data);
@@ -32649,29 +32650,35 @@
 	  },
 	  _onChange: function () {
 	    var errors = BookingStore.allErrors();
-	    errors_founds = errors[0].responseText;
-	    console.log("ERRORS", errors[0].responseText);
+	    console.log("ERRORS", errors);
 	    this.setState({ errors: errors });
 	  },
 	  getInitialState: function () {
 	    var yard = this.props.yard;
 	    var user = this.props.user.id;
 	    return {
-	      start_date: "", yard_id: yard, requester_id: user, errors: []
+	      start_date: "", yard_id: yard, requester_id: user, errors: [], success: false
 	    };
 	  },
 	  handleSubmit: function (event) {
 	    event.preventDefault();
 	    var booking = Object.assign({}, this.state);
-	    console.log("booking", booking);
-	    ApiUtil.createBooking(booking);
+	    ApiUtil.createBooking(booking, this.setButtonState);
 	    // this.navigateToSearch();
 	  },
 	  navigateToSearch: function () {
 	    this.history.push("/");
 	  },
 	  buttonToggle: function (event) {},
+	  setButtonState: function () {
+	    this.setState({ success: true });
+	  },
 	  render: function () {
+	    if (this.state.success) {
+	      var button = React.createElement("input", { type: "submit", className: "btn btn-success", value: "Your Request Has Been Sent" });
+	    } else {
+	      var button = React.createElement("input", { type: "submit", className: "btn btn-danger", value: "Make Request", onClick: this.buttonToggle });
+	    }
 	    return React.createElement(
 	      "div",
 	      { className: "col-md-3" },
@@ -32709,12 +32716,20 @@
 	          className: "" }),
 	        React.createElement("br", null),
 	        React.createElement("br", null),
-	        React.createElement("input", { type: "submit", className: "btn btn-success", value: "Make Request", onClick: this.buttonToggle })
+	        button
 	      ),
 	      React.createElement(
 	        "div",
 	        null,
-	        this.state.errors
+	        React.createElement("br", null),
+	        this.state.errors.map(function (error) {
+	          return React.createElement(
+	            "p",
+	            null,
+	            "* ",
+	            error
+	          );
+	        })
 	      )
 	    );
 	  }
@@ -33003,8 +33018,8 @@
 	};
 	
 	BookingStore.receiveErrors = function (errors) {
-	  _error = [];
-	  _errors.push(errors);
+	  _errors = [];
+	  _errors = errors.responseJSON.errors;
 	};
 	
 	BookingStore.allErrors = function () {
@@ -33012,6 +33027,7 @@
 	};
 	
 	BookingStore.receiveNewBooking = function (booking) {
+	  _errors = [];
 	  _bookings[booking.id] = booking;
 	};
 	
