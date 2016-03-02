@@ -53,7 +53,7 @@
 	var YardForm = __webpack_require__(247);
 	var YardDetail = __webpack_require__(253);
 	var hashHistory = __webpack_require__(187).hashHistory;
-	var App = __webpack_require__(255);
+	var App = __webpack_require__(262);
 	var userDetail = __webpack_require__(257);
 	
 	var ReactRouter = __webpack_require__(187);
@@ -32741,29 +32741,7 @@
 	module.exports = BookingReqBox;
 
 /***/ },
-/* 255 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	var NavBar = __webpack_require__(252);
-	var Landing = __webpack_require__(256);
-	
-	var App = React.createClass({
-	  displayName: "App",
-	
-	  render: function () {
-	    return React.createElement(
-	      "div",
-	      null,
-	      React.createElement(Landing, null),
-	      this.props.children
-	    );
-	  }
-	});
-	
-	module.exports = App;
-
-/***/ },
+/* 255 */,
 /* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -32978,6 +32956,29 @@
 	});
 	
 	module.exports = YardListItem;
+
+/***/ },
+/* 262 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var NavBar = __webpack_require__(252);
+	var Landing = __webpack_require__(256);
+	
+	var App = React.createClass({
+	  displayName: "App",
+	
+	  render: function () {
+	    return React.createElement(
+	      "div",
+	      null,
+	      React.createElement(Landing, null),
+	      this.props.children
+	    );
+	  }
+	});
+	
+	module.exports = App;
 
 /***/ }
 /******/ ]);

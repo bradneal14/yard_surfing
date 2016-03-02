@@ -7,7 +7,7 @@ var Search = require('./components/search');
 var YardForm = require('./components/YardForm');
 var YardDetail = require('./components/yardDetail');
 var hashHistory = require('react-router').hashHistory;
-var App = require('./components/app');
+var App = require('./components/App');
 var userDetail = require('./components/userDetail');
 
 var ReactRouter = require('react-router');
@@ -28,5 +28,5 @@ var routes = (
  );
 
  document.addEventListener('DOMContentLoaded', function () {
-   ReactDOM.render(routes, document.getElementById("root"))
+   ReactDOM.render(routes, document.getElementById("root"));
  });
