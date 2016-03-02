@@ -21,7 +21,7 @@ var YardListItem = React.createClass({
     return(
       <div className="col-sm-3 row">
         <li onClick={this.showDetail} className="list-group-item">
-          <p>{this.props.yard.title} : {this.props.yard.description} : {this.props.yard.max_guest_num}
+          <p>{this.props.yard.title} : {this.props.yard.description}
           </p>
         </li>
         <button onClick={this.removeYard} className="btn btn-success left-buffer">Delete Yard</button>
