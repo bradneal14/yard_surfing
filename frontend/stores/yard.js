@@ -9,7 +9,7 @@ YardStore.all = function() {
   var all_yards = [];
   for (var key in _yards){
     all_yards.push(_yards[key]);
-  };
+  }
   return all_yards;
 };
 
@@ -41,10 +41,10 @@ YardStore.findById = function(userId) {
     if (_yards[key].user_id === userId){
       matchedYards.push(_yards[key]);
     }
-  })
+  });
   // console.log("matched yards:", userId,  matchedYards);
   return matchedYards;
-}
+};
 
 YardStore.resetYard = function(yard){
   _yards[yard.id] = yard;

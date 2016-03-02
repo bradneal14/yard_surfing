@@ -23,7 +23,7 @@ var Search = React.createClass({
         <Map></Map>
         <YardsIndex></YardsIndex>
       </div>
-    )
+    );
   }
 });
 

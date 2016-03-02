@@ -1,11 +1,12 @@
 var React = require('react');
 var History = require('react-router').History;
 var UserStore = require('../stores/currentUser');
+var ApiUtil = require('../util/api_util');
 
 var NavBar = React.createClass({
   mixins: [History],
   _onChange: function(){
-    this.setState({user: UserStore.currentUser() })
+    this.setState({user: UserStore.currentUser() });
   },
   getInitialState: function(){
     return {user: UserStore.currentUser() };
@@ -20,10 +21,10 @@ var NavBar = React.createClass({
     this.userListener.remove();
   },
   navigateHome: function(){
-    this.history.push("/")
+    this.history.push("/");
   },
   navigateToProfileShow: function(){
-    this.history.push("users/" + this.state.user.id)
+    this.history.push("users/" + this.state.user.id);
   },
   logoutUser: function(){
     ApiUtil.logoutUser();
@@ -47,7 +48,7 @@ var NavBar = React.createClass({
           </ul>
         </div>
       </nav>
-    )
+    );
   }
 });
 

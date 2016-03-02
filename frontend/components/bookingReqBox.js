@@ -15,8 +15,8 @@ var BookingReqBox = React.createClass({
   },
   _onChange: function(){
     var errors = BookingStore.allErrors();
-    console.log("ERRORS", errors)
-    this.setState({errors: errors})
+    console.log("ERRORS", errors);
+    this.setState({errors: errors});
   },
   getInitialState: function(){
     var yard = this.props.yard;
@@ -77,71 +77,8 @@ var BookingReqBox = React.createClass({
             })}
         </div>
       </div>
-    )
+    );
   }
 });
 
 module.exports = BookingReqBox;
-
-
-{/*<div className="col-md-6">
-  <div className="container">
-    <div className='col-md-2'>
-      <div className="form-group">
-        <div className='input-group date' id='datetimepicker6'>
-          <input type='text' className="form-control" />
-          <span className="input-group-addon">
-            <span className="glyphicon glyphicon-calendar"></span>
-          </span>
-        </div>
-      </div>
-    </div>
-    <div className='col-md-2'>
-      <div className="form-group">
-        <div className='input-group date' id='datetimepicker7'>
-          <input type='text' className="form-control" />
-          <span className="input-group-addon">
-            <span className="glyphicon glyphicon-calendar"></span>
-          </span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>*/}
-
-
-
-{
-  /*<br/>
-  <form>
-    <label>Start: </label>
-    <input
-      type="text"
-      valueLink={this.linkState('start_date')}
-      className=""/>
-
-  </form>
-<label>End: </label>
-<input
-  type="text"
-  valueLink={this.linkState('end_date')}
-  className=""/>
-<br/>
-<label>Num Guests: </label>
-<input
-  type="text"
-  valueLink={this.linkState('num_guests')}
-  className=""/>
-<br/>
-<label>Requester id: </label>
-<input
-  type="text"
-  valueLink={this.linkState('requester_id')}
-  className=""/>
-<br/>
-<label>yard id: </label>
-<input
-  type="text"
-  valueLink={this.linkState('yard_id')}
-  className=""/>
-<br/>*/}

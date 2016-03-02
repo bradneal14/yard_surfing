@@ -1,6 +1,7 @@
 var Store = require('flux/utils').Store;
 var AppDispatcher = require('../dispatcher/dispatcher');
 var UserConstants = require('../constants/user_constants');
+var ApiUtil = require('../util/api_util');
 
 
 var _user = [];
@@ -18,7 +19,7 @@ UserStore.__onDispatch = function(payload){
 
 UserStore.receiveCurrentUser = function(user){
   _user = [user];
-}
+};
 
 UserStore.fetchCurrentUser = function(){
   if (_user.length === 0){
@@ -28,6 +29,6 @@ UserStore.fetchCurrentUser = function(){
 
 UserStore.currentUser = function(){
   return _user[0];
-}
+};
 
 module.exports = UserStore;

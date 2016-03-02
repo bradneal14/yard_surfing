@@ -2,6 +2,7 @@ var React = require('react');
 var History = require('react-router').History;
 var UserStore = require('../stores/currentUser');
 var YardStore = require('../stores/yard');
+var ApiUtil = require('../util/api_util');
 
 
 var YardListItem = React.createClass({
@@ -26,7 +27,7 @@ var YardListItem = React.createClass({
         </li>
         <button onClick={this.removeYard} className="btn btn-success left-buffer">Delete Yard</button>
       </div>
-    )
+    );
   }
 });
 

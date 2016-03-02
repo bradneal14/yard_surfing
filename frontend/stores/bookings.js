@@ -1,6 +1,6 @@
 var Store = require('flux/utils').Store;
 var AppDispatcher = require('../dispatcher/dispatcher');
-var BookingConstants = require('../constants/booking_constants')
+var BookingConstants = require('../constants/booking_constants');
 
 var _bookings = {};
 var _errors = [];
@@ -15,7 +15,7 @@ BookingStore.__onDispatch = function(payload){
       console.log("made it through the store");
       break;
     case BookingConstants.RENDER_ERROR:
-      console.log(payload.errors)
+      console.log(payload.errors);
       BookingStore.receiveErrors(payload.errors);
       BookingStore.__emitChange();
       break;

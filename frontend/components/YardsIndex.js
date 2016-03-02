@@ -10,7 +10,7 @@ var UserStore = require('../stores/currentUser');
 var YardIndex = React.createClass({
   mixins: [History],
   getInitialState: function() {
-    return {yards: YardStore.all() }
+    return {yards: YardStore.all() };
   },
   componentDidMount: function(){
     this.yardListener = YardStore.addListener(this._onChange);
@@ -19,7 +19,7 @@ var YardIndex = React.createClass({
     this.setState( { yards: YardStore.all() } );
   },
   componentWillUnmount: function(){
-    console.log("yard index unmounting")
+    console.log("yard index unmounting");
     this.yardListener.remove();
   },
   handleNewYard: function(event){
@@ -35,7 +35,7 @@ var YardIndex = React.createClass({
       <div className="col-md-7 col-sm-7 col-lg-7">
         <ul className="list-group">
           {this.state.yards.map(function(yard){
-            return <YardIndexItem yard={yard} key={yard.id}/>
+            return <YardIndexItem yard={yard} key={yard.id}/>;
           })}
         <div className="col-md-3">
           <div className="">
@@ -44,7 +44,7 @@ var YardIndex = React.createClass({
         </div>
         </ul>
       </div>
-    )
+    );
   }
 
 });

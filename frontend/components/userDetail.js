@@ -13,11 +13,11 @@ var UserDetail = React.createClass({
     var currentUser = UserStore.currentUser();
     this.fetchAfterDelete();
     console.log("one");
-    console.log("on change userdetail", currentUser)
+    console.log("on change userdetail", currentUser);
     this.setState({yards: currentUser.yards, user: currentUser});
   },
   _onDelete: function(){
-    console.log("user detail on delete")
+    console.log("user detail on delete");
     this.setState({yards: YardStore.findById(this.state.user.id)});
   },
   fetchAfterDelete: function(){
@@ -25,7 +25,7 @@ var UserDetail = React.createClass({
     ApiUtil.fetchYards(bounds);
   },
   getInitialState: function(){
-    console.log("initial state userdetail")
+    console.log("initial state userdetail");
     UserStore.fetchCurrentUser();
     return {user: {}, yards: [] };
   },
@@ -51,12 +51,12 @@ var UserDetail = React.createClass({
         <p>Your name is {this.state.user.fname} {this.state.user.lname}</p>
 
         <ul>Your yards are : <br></br>{this.state.yards.map(function(yard){
-          return <YardListItem yard={yard} key={yard.id}></YardListItem>
+          return <YardListItem yard={yard} key={yard.id}></YardListItem>;
           })}
           </ul>
 
       </div>
-    )
+    );
   }
 });
 

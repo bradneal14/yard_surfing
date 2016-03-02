@@ -46,9 +46,9 @@ var Map = React.createClass({
      };
 
      if (this.props.yard){
-       var currentYard = YardStore.find(this.props.yard)
-       var newLat = currentYard.lat
-       var newLng = currentYard.lng
+       var currentYard = YardStore.find(this.props.yard);
+       var newLat = currentYard.lat;
+       var newLng = currentYard.lng;
        mapOptions['center'] = {lat: newLat, lng: newLng};
        mapOptions['zoom'] = 15;
      }
@@ -66,8 +66,8 @@ var Map = React.createClass({
        var bounds = {
          northEast: {lat: northEast.lat(), lng: northEast.lng()},
          southWest: {lat: southWest.lat(), lng: southWest.lng()}
-       }
-       console.log(bounds)
+       };
+       console.log(bounds);
        ApiUtil.fetchYards(bounds);
 
      });
@@ -125,7 +125,7 @@ var Map = React.createClass({
     return (
       <div className="map col-xs-5 col-lg-5 " ref="map">
       </div>
-    )
+    );
   }
 });
 

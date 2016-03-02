@@ -25,11 +25,11 @@ var ApiActions = {
     AppDispatcher.dispatch(payload);
   },
   createBooking: function(data){
-    var payload = {actionType: BookingConstants.ADD_BOOKING, booking: data}
+    var payload = {actionType: BookingConstants.ADD_BOOKING, booking: data};
     AppDispatcher.dispatch(payload);
   },
   handleErrors: function(data){
-    var payload = {actionType: BookingConstants.RENDER_ERROR, errors: data}
+    var payload = {actionType: BookingConstants.RENDER_ERROR, errors: data};
     AppDispatcher.dispatch(payload);
   }
 };

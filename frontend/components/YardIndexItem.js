@@ -14,7 +14,7 @@ var YardIndexItem = React.createClass({
         <p>{this.props.yard.title} : {this.props.yard.description}</p>
         <p>{this.props.yard.lat} : {this.props.yard.lng}</p>
       </li>
-    )
+    );
   }
 });
 

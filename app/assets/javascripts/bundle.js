@@ -19694,7 +19694,7 @@
 	  var all_yards = [];
 	  for (var key in _yards) {
 	    all_yards.push(_yards[key]);
-	  };
+	  }
 	  return all_yards;
 	};
 	
@@ -31941,6 +31941,7 @@
 	var Store = __webpack_require__(160).Store;
 	var AppDispatcher = __webpack_require__(178);
 	var UserConstants = __webpack_require__(184);
+	var ApiUtil = __webpack_require__(182);
 	
 	var _user = [];
 	
@@ -32017,6 +32018,7 @@
 	var React = __webpack_require__(1);
 	var LinkedStateMixin = __webpack_require__(248);
 	var NavBar = __webpack_require__(252);
+	var ApiUtil = __webpack_require__(182);
 	
 	var YardForm = React.createClass({
 	  displayName: 'YardForm',
@@ -32424,6 +32426,7 @@
 	var React = __webpack_require__(1);
 	var History = __webpack_require__(187).History;
 	var UserStore = __webpack_require__(245);
+	var ApiUtil = __webpack_require__(182);
 	
 	var NavBar = React.createClass({
 	  displayName: 'NavBar',
@@ -32736,65 +32739,6 @@
 	});
 	
 	module.exports = BookingReqBox;
-	
-	{/*<div className="col-md-6">
-	   <div className="container">
-	     <div className='col-md-2'>
-	       <div className="form-group">
-	         <div className='input-group date' id='datetimepicker6'>
-	           <input type='text' className="form-control" />
-	           <span className="input-group-addon">
-	             <span className="glyphicon glyphicon-calendar"></span>
-	           </span>
-	         </div>
-	       </div>
-	     </div>
-	     <div className='col-md-2'>
-	       <div className="form-group">
-	         <div className='input-group date' id='datetimepicker7'>
-	           <input type='text' className="form-control" />
-	           <span className="input-group-addon">
-	             <span className="glyphicon glyphicon-calendar"></span>
-	           </span>
-	         </div>
-	       </div>
-	     </div>
-	   </div>
-	  </div>*/}
-	
-	{
-	  /*<br/>
-	  <form>
-	    <label>Start: </label>
-	    <input
-	      type="text"
-	      valueLink={this.linkState('start_date')}
-	      className=""/>
-	   </form>
-	  <label>End: </label>
-	  <input
-	  type="text"
-	  valueLink={this.linkState('end_date')}
-	  className=""/>
-	  <br/>
-	  <label>Num Guests: </label>
-	  <input
-	  type="text"
-	  valueLink={this.linkState('num_guests')}
-	  className=""/>
-	  <br/>
-	  <label>Requester id: </label>
-	  <input
-	  type="text"
-	  valueLink={this.linkState('requester_id')}
-	  className=""/>
-	  <br/>
-	  <label>yard id: </label>
-	  <input
-	  type="text"
-	  valueLink={this.linkState('yard_id')}
-	  className=""/>
-	  <br/>*/}
 
 /***/ },
 /* 255 */
@@ -32935,6 +32879,7 @@
 	var History = __webpack_require__(187).History;
 	var UserStore = __webpack_require__(245);
 	var YardStore = __webpack_require__(159);
+	var ApiUtil = __webpack_require__(182);
 	
 	var YardListItem = React.createClass({
 	  displayName: 'YardListItem',

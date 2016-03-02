@@ -35,8 +35,8 @@ var yardDetail = React.createClass({
   },
   render: function(){
     if (!this.state.user && !this.state.yard){
-      console.log(this.state)
-      return (<div>loading....</div>)
+      console.log(this.state);
+      return (<div>loading....</div>);
     }
     return(
       <div>
@@ -57,7 +57,7 @@ var yardDetail = React.createClass({
         {this.props.children}
 
       </div>
-    )
+    );
   }
 });
 
