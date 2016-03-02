@@ -1,7 +1,7 @@
 var React = require('react');
 var YardStore = require('../stores/yard');
 var ApiUtil = require('../util/api_util');
-var YardIndexItem = require('./YardIndexItem')
+var YardIndexItem = require('./YardIndexItem');
 var History = require('react-router').History;
 var UserStore = require('../stores/currentUser');
 

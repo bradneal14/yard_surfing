@@ -15,8 +15,6 @@
  *= require bootstrap
  */
 
- @import 'bootstrap/glyphicons';
-
 .center {
   background-color: orange;
 }

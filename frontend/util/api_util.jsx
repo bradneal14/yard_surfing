@@ -1,11 +1,11 @@
 var ApiActions = require('../actions/api_actions');
 
-ApiUtil = {
+var ApiUtil = {
   fetchYards: function(bounds){
     $.ajax({
       url: 'api/yards',
       type: 'GET',
-      data: {bounds},
+      data: {bounds: bounds},
       success: function(data){
         console.log(data);
         ApiActions.receiveAll(data);
@@ -13,7 +13,7 @@ ApiUtil = {
     });
   },
   createYard: function(yard){
-    console.log("made it to util")
+    console.log("made it to util");
     $.ajax({
       url: 'api/yards',
       type: 'POST',
@@ -30,7 +30,7 @@ ApiUtil = {
       success: function(data){
         ApiActions.receiveSingleYard(data);
       }
-    })
+    });
   },
   removeYard: function(id){
     $.ajax({
@@ -39,7 +39,7 @@ ApiUtil = {
       success: function(data){
         ApiActions.removeYard(data);
       }
-    })
+    });
   },
   fetchCurrentUser: function(){
     $.ajax({
@@ -48,7 +48,7 @@ ApiUtil = {
       success: function(data){
         ApiActions.currentUser(data);
       }
-    })
+    });
   },
   logoutUser: function(){
     $.ajax({
@@ -57,7 +57,7 @@ ApiUtil = {
       success: function(data){
         window.location.href = "/";
       }
-    })
+    });
   },
   createBooking: function(booking, callback){
     $.ajax({
@@ -71,7 +71,7 @@ ApiUtil = {
       error: function(data){
         ApiActions.handleErrors(data);
       }
-    })
+    });
   }
 
 
