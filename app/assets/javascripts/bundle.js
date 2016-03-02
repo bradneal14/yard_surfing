@@ -32791,7 +32791,7 @@
 	var UserStore = __webpack_require__(245);
 	var ApiUtil = __webpack_require__(182);
 	var History = __webpack_require__(187).History;
-	var YardListItem = __webpack_require__(258);
+	var YardListItem = __webpack_require__(261);
 	var YardStore = __webpack_require__(159);
 	
 	var UserDetail = React.createClass({
@@ -32872,57 +32872,7 @@
 	module.exports = UserDetail;
 
 /***/ },
-/* 258 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	var History = __webpack_require__(187).History;
-	var UserStore = __webpack_require__(245);
-	var YardStore = __webpack_require__(159);
-	var ApiUtil = __webpack_require__(182);
-	
-	var YardListItem = React.createClass({
-	  displayName: 'YardListItem',
-	
-	  mixins: [History],
-	  showDetail: function () {
-	    // ApiUtil.fetchYards();
-	    this.history.push("yard/" + this.props.yard.id);
-	  },
-	  removeYard: function (event) {
-	    event.preventDefault();
-	    ApiUtil.removeYard(this.props.yard.id);
-	    this.history.push("users/" + this.state.user.id);
-	    //added all this user state stuff in order to redirect back to user show page
-	    //after deleting a yard. there must be an easier way to delete immediately
-	  },
-	  render: function () {
-	    return React.createElement(
-	      'div',
-	      { className: 'col-sm-3 row' },
-	      React.createElement(
-	        'li',
-	        { onClick: this.showDetail, className: 'list-group-item' },
-	        React.createElement(
-	          'p',
-	          null,
-	          this.props.yard.title,
-	          ' : ',
-	          this.props.yard.description
-	        )
-	      ),
-	      React.createElement(
-	        'button',
-	        { onClick: this.removeYard, className: 'btn btn-success left-buffer' },
-	        'Delete Yard'
-	      )
-	    );
-	  }
-	});
-	
-	module.exports = YardListItem;
-
-/***/ },
+/* 258 */,
 /* 259 */
 /***/ function(module, exports) {
 
@@ -32977,6 +32927,57 @@
 	};
 	
 	module.exports = BookingStore;
+
+/***/ },
+/* 261 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var History = __webpack_require__(187).History;
+	var UserStore = __webpack_require__(245);
+	var YardStore = __webpack_require__(159);
+	var ApiUtil = __webpack_require__(182);
+	
+	var YardListItem = React.createClass({
+	  displayName: 'YardListItem',
+	
+	  mixins: [History],
+	  showDetail: function () {
+	    // ApiUtil.fetchYards();
+	    this.history.push("yard/" + this.props.yard.id);
+	  },
+	  removeYard: function (event) {
+	    event.preventDefault();
+	    ApiUtil.removeYard(this.props.yard.id);
+	    this.history.push("users/" + this.state.user.id);
+	    //added all this user state stuff in order to redirect back to user show page
+	    //after deleting a yard. there must be an easier way to delete immediately
+	  },
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      { className: 'col-sm-3 row' },
+	      React.createElement(
+	        'li',
+	        { onClick: this.showDetail, className: 'list-group-item' },
+	        React.createElement(
+	          'p',
+	          null,
+	          this.props.yard.title,
+	          ' : ',
+	          this.props.yard.description
+	        )
+	      ),
+	      React.createElement(
+	        'button',
+	        { onClick: this.removeYard, className: 'btn btn-success left-buffer' },
+	        'Delete Yard'
+	      )
+	    );
+	  }
+	});
+	
+	module.exports = YardListItem;
 
 /***/ }
 /******/ ]);

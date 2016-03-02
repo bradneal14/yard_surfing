@@ -3,7 +3,7 @@ var NavBar = require("./NavBar");
 var UserStore = require("../stores/currentUser");
 var ApiUtil = require("../util/api_util");
 var History = require("react-router").History;
-var YardListItem = require('./YardListItem');
+var YardListItem = require('./yardListItem');
 var YardStore = require('../stores/yard');
 
 var UserDetail = React.createClass({
