@@ -19,7 +19,7 @@ var YardListItem = React.createClass({
   },
   render: function(){
     return(
-      <div className="col-md-3 row">
+      <div className="col-sm-3 row">
         <li onClick={this.showDetail} className="list-group-item">
           <p>{this.props.yard.title} : {this.props.yard.description}
           </p>

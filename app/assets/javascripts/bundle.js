@@ -32939,7 +32939,7 @@
 	  render: function () {
 	    return React.createElement(
 	      'div',
-	      { className: 'col-md-3 row' },
+	      { className: 'col-sm-3 row' },
 	      React.createElement(
 	        'li',
 	        { onClick: this.showDetail, className: 'list-group-item' },
