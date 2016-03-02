@@ -19691,11 +19691,11 @@
 	var YardStore = new Store(AppDispatcher);
 	
 	YardStore.all = function () {
-	  var all_yards = [];
+	  var allYards = [];
 	  for (var key in _yards) {
-	    all_yards.push(_yards[key]);
+	    allYards.push(_yards[key]);
 	  }
-	  return all_yards;
+	  return allYards;
 	};
 	
 	YardStore.__onDispatch = function (payload) {
