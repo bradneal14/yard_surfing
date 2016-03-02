@@ -2,15 +2,29 @@ var React = require("react");
 var LinkedStateMixin = require('react-addons-linked-state-mixin');
 var History = require("react-router").History;
 var ApiUtil = require("../util/api_util");
+var BookingStore = require("../stores/bookings");
 
 
 var BookingReqBox = React.createClass({
   mixins: [LinkedStateMixin, History],
+  componentDidMount: function(){
+    this.bookingListener = BookingStore.addListener(this._onChange);
+  },
+  componentWillUnmount: function(){
+    this.bookingListener.remove();
+  },
+  _onChange: function(){
+    var errors = BookingStore.allErrors();
+    errors_founds = errors[0].responseText;
+    console.log("ERRORS", errors[0].responseText);
+    this.setState({errors: errors})
+
+  },
   getInitialState: function(){
     var yard = this.props.yard;
     var user = this.props.user.id;
     return {
-      start_date: "", yard_id: yard, requester_id: user
+      start_date: "", yard_id: yard, requester_id: user, errors: []
     };
    },
   handleSubmit: function(event){
@@ -18,7 +32,7 @@ var BookingReqBox = React.createClass({
     var booking = Object.assign({}, this.state);
     console.log("booking", booking)
     ApiUtil.createBooking(booking);
-    this.navigateToSearch();
+    // this.navigateToSearch();
   },
   navigateToSearch: function(){
     this.history.push("/");
@@ -32,13 +46,13 @@ var BookingReqBox = React.createClass({
         <form onSubmit={this.handleSubmit}>
           <label>Start: </label>
           <input
-            type="text"
+            type="date"
             valueLink={this.linkState('start_date')}
             className=""/>
           <br/>
           <label>End: </label>
           <input
-            type="text"
+            type="date"
             valueLink={this.linkState('end_date')}
             className=""/>
           <br/>
@@ -51,6 +65,9 @@ var BookingReqBox = React.createClass({
           <br/>
           <input type="submit" className="btn btn-success" value="Make Request" onClick={this.buttonToggle}/>
         </form>
+        <div>
+          {this.state.errors}
+        </div>
       </div>
     )
   }

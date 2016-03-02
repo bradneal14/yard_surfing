@@ -66,6 +66,9 @@ ApiUtil = {
       data: {booking: booking},
       success: function(data){
         ApiActions.createBooking(data);
+      },
+      error: function(data){
+        ApiActions.handleErrors(data);
       }
     })
   }

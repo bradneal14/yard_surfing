@@ -26604,6 +26604,9 @@
 	      data: { booking: booking },
 	      success: function (data) {
 	        ApiActions.createBooking(data);
+	      },
+	      error: function (data) {
+	        ApiActions.handleErrors(data);
 	      }
 	    });
 	  }
@@ -26624,6 +26627,7 @@
 	var AppDispatcher = __webpack_require__(178);
 	var YardConstants = __webpack_require__(181);
 	var UserConstants = __webpack_require__(184);
+	var BookingConstants = __webpack_require__(259);
 	
 	var ApiActions = {
 	  receiveAll: function (data) {
@@ -26648,6 +26652,10 @@
 	  },
 	  createBooking: function (data) {
 	    var payload = { actionType: BookingConstants.ADD_BOOKING, booking: data };
+	    AppDispatcher.dispatch(payload);
+	  },
+	  handleErrors: function (data) {
+	    var payload = { actionType: BookingConstants.RENDER_ERROR, errors: data };
 	    AppDispatcher.dispatch(payload);
 	  }
 	};
@@ -32627,16 +32635,29 @@
 	var LinkedStateMixin = __webpack_require__(248);
 	var History = __webpack_require__(187).History;
 	var ApiUtil = __webpack_require__(182);
+	var BookingStore = __webpack_require__(260);
 	
 	var BookingReqBox = React.createClass({
 	  displayName: "BookingReqBox",
 	
 	  mixins: [LinkedStateMixin, History],
+	  componentDidMount: function () {
+	    this.bookingListener = BookingStore.addListener(this._onChange);
+	  },
+	  componentWillUnmount: function () {
+	    this.bookingListener.remove();
+	  },
+	  _onChange: function () {
+	    var errors = BookingStore.allErrors();
+	    errors_founds = errors[0].responseText;
+	    console.log("ERRORS", errors[0].responseText);
+	    this.setState({ errors: errors });
+	  },
 	  getInitialState: function () {
 	    var yard = this.props.yard;
 	    var user = this.props.user.id;
 	    return {
-	      start_date: "", yard_id: yard, requester_id: user
+	      start_date: "", yard_id: yard, requester_id: user, errors: []
 	    };
 	  },
 	  handleSubmit: function (event) {
@@ -32644,7 +32665,7 @@
 	    var booking = Object.assign({}, this.state);
 	    console.log("booking", booking);
 	    ApiUtil.createBooking(booking);
-	    this.navigateToSearch();
+	    // this.navigateToSearch();
 	  },
 	  navigateToSearch: function () {
 	    this.history.push("/");
@@ -32663,7 +32684,7 @@
 	          "Start: "
 	        ),
 	        React.createElement("input", {
-	          type: "text",
+	          type: "date",
 	          valueLink: this.linkState('start_date'),
 	          className: "" }),
 	        React.createElement("br", null),
@@ -32673,7 +32694,7 @@
 	          "End: "
 	        ),
 	        React.createElement("input", {
-	          type: "text",
+	          type: "date",
 	          valueLink: this.linkState('end_date'),
 	          className: "" }),
 	        React.createElement("br", null),
@@ -32689,6 +32710,11 @@
 	        React.createElement("br", null),
 	        React.createElement("br", null),
 	        React.createElement("input", { type: "submit", className: "btn btn-success", value: "Make Request", onClick: this.buttonToggle })
+	      ),
+	      React.createElement(
+	        "div",
+	        null,
+	        this.state.errors
 	      )
 	    );
 	  }
@@ -32913,7 +32939,7 @@
 	  render: function () {
 	    return React.createElement(
 	      'div',
-	      { className: 'col-md-4 row' },
+	      { className: 'col-md-3 row' },
 	      React.createElement(
 	        'li',
 	        { onClick: this.showDetail, className: 'list-group-item' },
@@ -32935,6 +32961,61 @@
 	});
 	
 	module.exports = YardListItem;
+
+/***/ },
+/* 259 */
+/***/ function(module, exports) {
+
+	var BookingConstants = {
+	  ADD_BOOKING: "RECIEVED_NEW_BOOKING",
+	  DELETE_BOOKING: "DELETE_BOOKING",
+	  RENDER_ERROR: "RENDER_ERROR"
+	};
+	
+	module.exports = BookingConstants;
+
+/***/ },
+/* 260 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Store = __webpack_require__(160).Store;
+	var AppDispatcher = __webpack_require__(178);
+	var BookingConstants = __webpack_require__(259);
+	
+	var _bookings = {};
+	var _errors = [];
+	
+	var BookingStore = new Store(AppDispatcher);
+	
+	BookingStore.__onDispatch = function (payload) {
+	  switch (payload.actionType) {
+	    case BookingConstants.ADD_BOOKING:
+	      BookingStore.receiveNewBooking(payload.booking);
+	      BookingStore.__emitChange();
+	      console.log("made it through the store");
+	      break;
+	    case BookingConstants.RENDER_ERROR:
+	      console.log(payload.errors);
+	      BookingStore.receiveErrors(payload.errors);
+	      BookingStore.__emitChange();
+	      break;
+	  }
+	};
+	
+	BookingStore.receiveErrors = function (errors) {
+	  _error = [];
+	  _errors.push(errors);
+	};
+	
+	BookingStore.allErrors = function () {
+	  return _errors.slice();
+	};
+	
+	BookingStore.receiveNewBooking = function (booking) {
+	  _bookings[booking.id] = booking;
+	};
+	
+	module.exports = BookingStore;
 
 /***/ }
 /******/ ]);

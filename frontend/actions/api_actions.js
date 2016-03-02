@@ -1,6 +1,7 @@
 var AppDispatcher = require('../dispatcher/dispatcher');
 var YardConstants = require('../constants/yard_constants');
 var UserConstants = require("../constants/user_constants");
+var BookingConstants = require('../constants/booking_constants');
 
 var ApiActions = {
   receiveAll: function(data){
@@ -25,6 +26,10 @@ var ApiActions = {
   },
   createBooking: function(data){
     var payload = {actionType: BookingConstants.ADD_BOOKING, booking: data}
+    AppDispatcher.dispatch(payload);
+  },
+  handleErrors: function(data){
+    var payload = {actionType: BookingConstants.RENDER_ERROR, errors: data}
     AppDispatcher.dispatch(payload);
   }
 };

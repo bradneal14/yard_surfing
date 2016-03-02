@@ -27,8 +27,15 @@ class User < ActiveRecord::Base
   attr_reader :password
 
   has_many :yards
-  
-  has_many :bookings
+
+  has_many :bookings,
+    foreign_key: :requester_id,
+    primary_key: :id,
+    class_name: "Booking"
+
+  has_many :host_bookings,
+    through: :yards,
+    source: :bookings
 
   after_initialize :ensure_session_token
 
