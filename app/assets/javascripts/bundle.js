@@ -26767,9 +26767,15 @@
 	    this.history.push("yard/" + this.props.yard.id);
 	  },
 	  render: function () {
+	    if (this.props.yard.yard_photos) {
+	      var photo = React.createElement('img', { src: this.props.yard.yard_photos[0].yard_pic_url });
+	    } else {
+	      var photo = "";
+	    }
 	    return React.createElement(
 	      'li',
-	      { onClick: this.showDetail, id: "yard-" + this.props.yard.id, className: 'list-group-item col-xs-6' },
+	      { onClick: this.showDetail, id: "yard-" + this.props.yard.id, className: 'list-group-item col-lg-4' },
+	      photo,
 	      React.createElement(
 	        'p',
 	        null,
