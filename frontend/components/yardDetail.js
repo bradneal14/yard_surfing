@@ -47,13 +47,13 @@ var yardDetail = React.createClass({
             <p>The back of the carter: Yard Detail forr {this.state.yard.title}</p>
             <p>Title: {this.state.yard.title}</p>
             <p>Description: {this.state.yard.description}</p>
-            <p>Owner's Name: {this.state.yard.user_id}</p>
+            <p>Owner's Name: {this.state.user.fname}</p>
             <p>Lat: {this.state.yard.lat}</p>
             <p>Long: {this.state.yard.lng}</p>
             <button onClick={this.navigateHome} className="btn btn-success  top-buffer left-buffer">Back to all</button>
           </div>
         </div>
-        <BookingReqBox></BookingReqBox>
+        <BookingReqBox yard={this.state.yard.id} user={this.state.user}></BookingReqBox>
         {this.props.children}
 
       </div>

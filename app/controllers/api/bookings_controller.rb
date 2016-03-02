@@ -1,10 +1,8 @@
-class BookingsController < ApplicationController
+class Api::BookingsController < ApplicationController
 
   def create
-    @booking = Booking.new(booking_params)
-    if @booking.save
-      render json: @booking
-    end
+    booking = current_user.bookings.create!(booking_params)
+    render json: booking
   end
 
   def show
@@ -14,6 +12,6 @@ class BookingsController < ApplicationController
   private
 
   def booking_params
-    params.require(:booking).permit(:message, :yard_id, :requester_id, :num_guests, :start_date, :end_date)
+    params.require(:booking).permit(:message, :num_guests, :start_date, :end_date)
   end
 end

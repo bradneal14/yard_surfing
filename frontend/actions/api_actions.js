@@ -24,7 +24,7 @@ var ApiActions = {
     AppDispatcher.dispatch(payload);
   },
   createBooking: function(data){
-    var payload = {actionType: BookingConstants.NEW_BOOKING, booking: data}
+    var payload = {actionType: BookingConstants.ADD_BOOKING, booking: data}
     AppDispatcher.dispatch(payload);
   }
 };

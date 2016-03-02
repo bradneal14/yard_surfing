@@ -26647,7 +26647,7 @@
 	    AppDispatcher.dispatch(payload);
 	  },
 	  createBooking: function (data) {
-	    var payload = { actionType: BookingConstants.NEW_BOOKING, booking: data };
+	    var payload = { actionType: BookingConstants.ADD_BOOKING, booking: data };
 	    AppDispatcher.dispatch(payload);
 	  }
 	};
@@ -32590,7 +32590,7 @@
 	            'p',
 	            null,
 	            'Owner\'s Name: ',
-	            this.state.yard.user_id
+	            this.state.user.fname
 	          ),
 	          React.createElement(
 	            'p',
@@ -32611,7 +32611,7 @@
 	          )
 	        )
 	      ),
-	      React.createElement(BookingReqBox, null),
+	      React.createElement(BookingReqBox, { yard: this.state.yard.id, user: this.state.user }),
 	      this.props.children
 	    );
 	  }
@@ -32633,20 +32633,23 @@
 	
 	  mixins: [LinkedStateMixin, History],
 	  getInitialState: function () {
+	    var yard = this.props.yard;
+	    var user = this.props.user.id;
 	    return {
-	      start_date: ""
+	      start_date: "", yard_id: yard, requester_id: user
 	    };
 	  },
 	  handleSubmit: function (event) {
 	    event.preventDefault();
 	    var booking = Object.assign({}, this.state);
+	    console.log("booking", booking);
 	    ApiUtil.createBooking(booking);
-	    // console.log(booking)
 	    this.navigateToSearch();
 	  },
 	  navigateToSearch: function () {
 	    this.history.push("/");
 	  },
+	  buttonToggle: function (event) {},
 	  render: function () {
 	    return React.createElement(
 	      "div",
@@ -32684,27 +32687,8 @@
 	          valueLink: this.linkState('num_guests'),
 	          className: "" }),
 	        React.createElement("br", null),
-	        React.createElement(
-	          "label",
-	          null,
-	          "Requester id: "
-	        ),
-	        React.createElement("input", {
-	          type: "text",
-	          valueLink: this.linkState('requester_id'),
-	          className: "" }),
 	        React.createElement("br", null),
-	        React.createElement(
-	          "label",
-	          null,
-	          "yard id: "
-	        ),
-	        React.createElement("input", {
-	          type: "text",
-	          valueLink: this.linkState('yard_id'),
-	          className: "" }),
-	        React.createElement("br", null),
-	        React.createElement("input", { type: "submit", className: "btn btn-success", value: "Make Request" })
+	        React.createElement("input", { type: "submit", className: "btn btn-success", value: "Make Request", onClick: this.buttonToggle })
 	      )
 	    );
 	  }

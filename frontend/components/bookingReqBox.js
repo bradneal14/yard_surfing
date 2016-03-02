@@ -7,19 +7,24 @@ var ApiUtil = require("../util/api_util");
 var BookingReqBox = React.createClass({
   mixins: [LinkedStateMixin, History],
   getInitialState: function(){
+    var yard = this.props.yard;
+    var user = this.props.user.id;
     return {
-      start_date: "",
+      start_date: "", yard_id: yard, requester_id: user
     };
    },
   handleSubmit: function(event){
     event.preventDefault();
     var booking = Object.assign({}, this.state);
+    console.log("booking", booking)
     ApiUtil.createBooking(booking);
-    // console.log(booking)
     this.navigateToSearch();
   },
   navigateToSearch: function(){
     this.history.push("/");
+  },
+  buttonToggle: function(event){
+
   },
   render: function(){
     return(
@@ -43,19 +48,8 @@ var BookingReqBox = React.createClass({
             valueLink={this.linkState('num_guests')}
             className=""/>
           <br/>
-          <label>Requester id: </label>
-          <input
-            type="text"
-            valueLink={this.linkState('requester_id')}
-            className=""/>
           <br/>
-          <label>yard id: </label>
-          <input
-            type="text"
-            valueLink={this.linkState('yard_id')}
-            className=""/>
-          <br/>
-          <input type="submit" className="btn btn-success" value="Make Request"/>
+          <input type="submit" className="btn btn-success" value="Make Request" onClick={this.buttonToggle}/>
         </form>
       </div>
     )

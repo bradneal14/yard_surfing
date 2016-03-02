@@ -18,6 +18,8 @@ class Yard < ActiveRecord::Base
 
   belongs_to :user
 
+  has_many :bookings
+
   def self.in_bounds(bounds)
     self.where("lat < ?", bounds[:northEast][:lat])
             .where("lat > ?", bounds[:southWest][:lat])
