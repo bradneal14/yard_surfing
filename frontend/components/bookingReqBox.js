@@ -19,10 +19,10 @@ var BookingReqBox = React.createClass({
     this.setState({errors: errors});
   },
   getInitialState: function(){
-    var yard = this.props.yard;
-    var user = this.props.user.id;
+    var yardId = this.props.yard.id;
+    var userId = this.props.user.id;
     return {
-      start_date: "", yard_id: yard, requester_id: user, errors: [], success: false
+      start_date: "", yard_id: yardId, requester_id: userId, errors: [], success: false
     };
    },
   handleSubmit: function(event){
@@ -42,39 +42,43 @@ var BookingReqBox = React.createClass({
   },
   render: function(){
     if (this.state.success){
-      var button = <input type="submit" className="btn btn-success" value="Your Request Has Been Sent"/>;
+      var button = <input type="submit" className="btn btn-success center-block" value="Your Request Has Been Sent"/>;
     } else {
-      var button = <input type="submit" className="btn btn-danger" value="Make Request" onClick={this.buttonToggle}/>;
+      var button = <input type="submit" className="btn btn-danger text-center" value="Make Request" onClick={this.buttonToggle}/>;
     }
     return(
-      <div className="col-md-3">
-        <form onSubmit={this.handleSubmit}>
-          <label>Start: </label>
-          <input
-            type="date"
-            valueLink={this.linkState('start_date')}
-            className=""/>
-          <br/>
-          <label>End: </label>
-          <input
-            type="date"
-            valueLink={this.linkState('end_date')}
-            className=""/>
-          <br/>
-          <label>Num Guests: </label>
-          <input
-            type="text"
-            valueLink={this.linkState('num_guests')}
-            className=""/>
-          <br/>
-          <br/>
-          {button}
-        </form>
-        <div>
-          <br/>
-            {this.state.errors.map(function(error){
-              return <p>* {error}</p>;
-            })}
+      <div className="panel panel-primary col-md-3">
+        <div className="panel-heading">
+          <text className="panel-title" >Want to crash at {this.props.yard.title}?</text>
+        </div>
+        <div className="panel-body">
+          <form onSubmit={this.handleSubmit}>
+            <label>Start: </label>
+            <input
+              type="date"
+              valueLink={this.linkState('start_date')}
+              className=""/>
+            <br/>
+            <label>End: </label>
+            <input
+              type="date"
+              valueLink={this.linkState('end_date')}
+              className=""/>
+            <br/>
+            <label>Num Guests: </label>
+            <input
+              type="text"
+              valueLink={this.linkState('num_guests')}
+              className=""/>
+            <br/>
+            <br/>
+            {button}
+          </form>
+          <div className="panel-footer">
+              {this.state.errors.map(function(error){
+                return <p>* {error}</p>;
+              })}
+          </div>
         </div>
       </div>
     );
@@ -82,3 +86,33 @@ var BookingReqBox = React.createClass({
 });
 
 module.exports = BookingReqBox;
+
+
+{/*<form onSubmit={this.handleSubmit}>
+  <label>Start: </label>
+  <input
+    type="date"
+    valueLink={this.linkState('start_date')}
+    className=""/>
+  <br/>
+  <label>End: </label>
+  <input
+    type="date"
+    valueLink={this.linkState('end_date')}
+    className=""/>
+  <br/>
+  <label>Num Guests: </label>
+  <input
+    type="text"
+    valueLink={this.linkState('num_guests')}
+    className=""/>
+  <br/>
+  <br/>
+  {button}
+</form>
+<div>
+  <br/>
+    {this.state.errors.map(function(error){
+      return <p>* {error}</p>;
+    })}
+</div>*/}

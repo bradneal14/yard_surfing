@@ -32623,7 +32623,7 @@
 	          )
 	        )
 	      ),
-	      React.createElement(BookingReqBox, { yard: this.state.yard.id, user: this.state.user }),
+	      React.createElement(BookingReqBox, { yard: this.state.yard, user: this.state.user }),
 	      this.props.children
 	    );
 	  }
@@ -32657,10 +32657,10 @@
 	    this.setState({ errors: errors });
 	  },
 	  getInitialState: function () {
-	    var yard = this.props.yard;
-	    var user = this.props.user.id;
+	    var yardId = this.props.yard.id;
+	    var userId = this.props.user.id;
 	    return {
-	      start_date: "", yard_id: yard, requester_id: user, errors: [], success: false
+	      start_date: "", yard_id: yardId, requester_id: userId, errors: [], success: false
 	    };
 	  },
 	  handleSubmit: function (event) {
@@ -32678,67 +32678,110 @@
 	  },
 	  render: function () {
 	    if (this.state.success) {
-	      var button = React.createElement("input", { type: "submit", className: "btn btn-success", value: "Your Request Has Been Sent" });
+	      var button = React.createElement("input", { type: "submit", className: "btn btn-success center-block", value: "Your Request Has Been Sent" });
 	    } else {
-	      var button = React.createElement("input", { type: "submit", className: "btn btn-danger", value: "Make Request", onClick: this.buttonToggle });
+	      var button = React.createElement("input", { type: "submit", className: "btn btn-danger text-center", value: "Make Request", onClick: this.buttonToggle });
 	    }
 	    return React.createElement(
 	      "div",
-	      { className: "col-md-3" },
+	      { className: "panel panel-primary col-md-3" },
 	      React.createElement(
-	        "form",
-	        { onSubmit: this.handleSubmit },
+	        "div",
+	        { className: "panel-heading" },
 	        React.createElement(
-	          "label",
-	          null,
-	          "Start: "
-	        ),
-	        React.createElement("input", {
-	          type: "date",
-	          valueLink: this.linkState('start_date'),
-	          className: "" }),
-	        React.createElement("br", null),
-	        React.createElement(
-	          "label",
-	          null,
-	          "End: "
-	        ),
-	        React.createElement("input", {
-	          type: "date",
-	          valueLink: this.linkState('end_date'),
-	          className: "" }),
-	        React.createElement("br", null),
-	        React.createElement(
-	          "label",
-	          null,
-	          "Num Guests: "
-	        ),
-	        React.createElement("input", {
-	          type: "text",
-	          valueLink: this.linkState('num_guests'),
-	          className: "" }),
-	        React.createElement("br", null),
-	        React.createElement("br", null),
-	        button
+	          "text",
+	          { className: "panel-title" },
+	          "Want to crash at ",
+	          this.props.yard.title,
+	          "?"
+	        )
 	      ),
 	      React.createElement(
 	        "div",
-	        null,
-	        React.createElement("br", null),
-	        this.state.errors.map(function (error) {
-	          return React.createElement(
-	            "p",
+	        { className: "panel-body" },
+	        React.createElement(
+	          "form",
+	          { onSubmit: this.handleSubmit },
+	          React.createElement(
+	            "label",
 	            null,
-	            "* ",
-	            error
-	          );
-	        })
+	            "Start: "
+	          ),
+	          React.createElement("input", {
+	            type: "date",
+	            valueLink: this.linkState('start_date'),
+	            className: "" }),
+	          React.createElement("br", null),
+	          React.createElement(
+	            "label",
+	            null,
+	            "End: "
+	          ),
+	          React.createElement("input", {
+	            type: "date",
+	            valueLink: this.linkState('end_date'),
+	            className: "" }),
+	          React.createElement("br", null),
+	          React.createElement(
+	            "label",
+	            null,
+	            "Num Guests: "
+	          ),
+	          React.createElement("input", {
+	            type: "text",
+	            valueLink: this.linkState('num_guests'),
+	            className: "" }),
+	          React.createElement("br", null),
+	          React.createElement("br", null),
+	          button
+	        ),
+	        React.createElement(
+	          "div",
+	          { className: "panel-footer" },
+	          this.state.errors.map(function (error) {
+	            return React.createElement(
+	              "p",
+	              null,
+	              "* ",
+	              error
+	            );
+	          })
+	        )
 	      )
 	    );
 	  }
 	});
 	
 	module.exports = BookingReqBox;
+	
+	{/*<form onSubmit={this.handleSubmit}>
+	   <label>Start: </label>
+	   <input
+	     type="date"
+	     valueLink={this.linkState('start_date')}
+	     className=""/>
+	   <br/>
+	   <label>End: </label>
+	   <input
+	     type="date"
+	     valueLink={this.linkState('end_date')}
+	     className=""/>
+	   <br/>
+	   <label>Num Guests: </label>
+	   <input
+	     type="text"
+	     valueLink={this.linkState('num_guests')}
+	     className=""/>
+	   <br/>
+	   <br/>
+	   {button}
+	  </form>
+	  <div>
+	   <br/>
+	     {this.state.errors.map(function(error){
+	       return <p>* {error}</p>;
+	     })}
+	  </div>*/}
 
 /***/ },
 /* 255 */,

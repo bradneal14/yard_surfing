@@ -53,7 +53,7 @@ var yardDetail = React.createClass({
             <button onClick={this.navigateHome} className="btn btn-success  top-buffer left-buffer">Back to all</button>
           </div>
         </div>
-        <BookingReqBox yard={this.state.yard.id} user={this.state.user}></BookingReqBox>
+        <BookingReqBox yard={this.state.yard} user={this.state.user}></BookingReqBox>
         {this.props.children}
 
       </div>
