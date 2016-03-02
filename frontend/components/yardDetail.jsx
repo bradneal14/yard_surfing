@@ -35,7 +35,6 @@ var yardDetail = React.createClass({
   },
   render: function(){
     if (!this.state.user && !this.state.yard){
-      console.log(this.state);
       return (<div>loading....</div>);
     }
     return(
@@ -55,6 +54,7 @@ var yardDetail = React.createClass({
         </div>
         <BookingReqBox yard={this.state.yard} user={this.state.user}></BookingReqBox>
         {this.props.children}
+        <img src={this.state.yard.yard_photos[0].yard_pic_url}></img>
 
       </div>
     );

@@ -20,6 +20,8 @@ class Yard < ActiveRecord::Base
 
   has_many :bookings
 
+  has_many :yard_photos
+
   def self.in_bounds(bounds)
     self.where("lat < ?", bounds[:northEast][:lat])
             .where("lat > ?", bounds[:southWest][:lat])

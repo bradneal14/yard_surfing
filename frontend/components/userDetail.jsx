@@ -49,7 +49,7 @@ var UserDetail = React.createClass({
         <div>This is a users show page Yay!</div>
         <p> Welcome to your page, {this.state.user.fname}</p>
         <p>Your name is {this.state.user.fname} {this.state.user.lname}</p>
-
+        <img src={this.state.user.main_pic_url}></img>
         <ul>Your yards are : <br></br>{this.state.yards.map(function(yard){
           return <YardListItem yard={yard} key={yard.id}></YardListItem>;
           })}

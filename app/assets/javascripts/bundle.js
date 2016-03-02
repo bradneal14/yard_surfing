@@ -32573,7 +32573,6 @@
 	  },
 	  render: function () {
 	    if (!this.state.user && !this.state.yard) {
-	      console.log(this.state);
 	      return React.createElement(
 	        'div',
 	        null,
@@ -32635,7 +32634,8 @@
 	        )
 	      ),
 	      React.createElement(BookingReqBox, { yard: this.state.yard, user: this.state.user }),
-	      this.props.children
+	      this.props.children,
+	      React.createElement('img', { src: this.state.yard.yard_photos[0].yard_pic_url })
 	    );
 	  }
 	});
@@ -32955,6 +32955,7 @@
 	        " ",
 	        this.state.user.lname
 	      ),
+	      React.createElement("img", { src: this.state.user.main_pic_url }),
 	      React.createElement(
 	        "ul",
 	        null,

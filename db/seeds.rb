@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.create!(fname: "Bradley", lname: "Neal", email: "admin", password: "password")
+User.create!(fname: "Bradley", lname: "Neal", email: "admin", password: "password", main_pic_url: "https://s-media-cache-ak0.pinimg.com/originals/48/3f/97/483f973455749cb3388a9a63a5899d2b.jpg")
 User.create!(fname: "Mike", lname: "Jordan", email: "mjordan", password: "password")
 User.create!(fname: "Buzz", lname: "Lightyear", email: "blightyear", password: "password")
 User.create!(fname: "Jim", lname: "Weiss", email: "jweiss", password: "password")
@@ -25,3 +25,5 @@ Yard.create!(title: "Delete me also", description: "delete me also!", lng: -122.
 Yard.create!(title: "Ho Chi Minh", description: "Hideout Hostel", lng: 106.691892, lat: 10.768099, user_id: 6)
 Yard.create!(title: "Phong Nha", description: "Easy Tiger Hostel", lng: 106.310667, lat: 17.610048, user_id: 6)
 Yard.create!(title: "Tempelhof", description: "Berlin Park", lng: 13.391921, lat: 52.472142, user_id: 6)
+
+YardPhoto.create!(yard_id: 1, yard_pic_url: "http://www.newyorker.com/wp-content/uploads/2014/03/470360231-580.jpg")
