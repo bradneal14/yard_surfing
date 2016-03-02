@@ -100,7 +100,7 @@ var Map = React.createClass({
 
     latLngAry.forEach(function(coords){
       var marker = new google.maps.Marker({
-        position: coords,
+        position: coords
       });
 
 
