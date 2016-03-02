@@ -32948,7 +32948,9 @@
 	          null,
 	          this.props.yard.title,
 	          ' : ',
-	          this.props.yard.description
+	          this.props.yard.description,
+	          ' : ',
+	          this.props.yard.max_guest_num
 	        )
 	      ),
 	      React.createElement(
