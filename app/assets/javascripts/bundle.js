@@ -32689,13 +32689,13 @@
 	  },
 	  render: function () {
 	    if (this.state.success) {
-	      var button = React.createElement("input", { type: "submit", className: "btn btn-success center-block", value: "Your Request Has Been Sent" });
+	      var button = React.createElement("input", { type: "submit", className: "btn btn-success request-form-submit", value: "Your Request Has Been Sent" });
 	    } else {
-	      var button = React.createElement("input", { type: "submit", className: "btn btn-danger text-center", value: "Make Request", onClick: this.buttonToggle });
+	      var button = React.createElement("input", { type: "submit", className: "btn btn-danger request-form-submit", value: "Make Request", onClick: this.buttonToggle });
 	    }
 	    return React.createElement(
 	      "div",
-	      { className: "panel panel-primary col-md-3" },
+	      { className: "panel panel-primary col-md-3 panel-no-border" },
 	      React.createElement(
 	        "div",
 	        { className: "panel-heading" },
@@ -32748,11 +32748,12 @@
 	        ),
 	        React.createElement(
 	          "div",
-	          { className: "panel-footer" },
+	          { className: "" },
+	          React.createElement("br", null),
 	          this.state.errors.map(function (error) {
 	            return React.createElement(
 	              "p",
-	              null,
+	              { className: "text-center" },
 	              "* ",
 	              error
 	            );

@@ -42,12 +42,12 @@ var BookingReqBox = React.createClass({
   },
   render: function(){
     if (this.state.success){
-      var button = <input type="submit" className="btn btn-success center-block" value="Your Request Has Been Sent"/>;
+      var button = <input type="submit" className="btn btn-success request-form-submit" value="Your Request Has Been Sent"/>;
     } else {
-      var button = <input type="submit" className="btn btn-danger text-center" value="Make Request" onClick={this.buttonToggle}/>;
+      var button = <input type="submit" className="btn btn-danger request-form-submit" value="Make Request" onClick={this.buttonToggle}/>;
     }
     return(
-      <div className="panel panel-primary col-md-3">
+      <div className="panel panel-primary col-md-3 panel-no-border">
         <div className="panel-heading">
           <text className="panel-title" >Want to crash at {this.props.yard.title}?</text>
         </div>
@@ -74,9 +74,10 @@ var BookingReqBox = React.createClass({
             <br/>
             {button}
           </form>
-          <div className="panel-footer">
+          <div className="">
+            <br/>
               {this.state.errors.map(function(error){
-                return <p>* {error}</p>;
+                return <p className="text-center">* {error}</p>;
               })}
           </div>
         </div>
