@@ -70,5 +70,4 @@ YardStore.resetYards = function(yards){
   });
 };
 
-window.YardStore = YardStore;
 module.exports = YardStore;

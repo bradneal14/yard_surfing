@@ -19755,7 +19755,6 @@
 	  });
 	};
 	
-	window.YardStore = YardStore;
 	module.exports = YardStore;
 
 /***/ },
