@@ -32702,7 +32702,7 @@
 	        React.createElement(
 	          "text",
 	          { className: "panel-title" },
-	          "Want to crashhh at ",
+	          "Want to crash at ",
 	          this.props.yard.title,
 	          "?"
 	        )

@@ -23,3 +23,4 @@ Yard.create!(title: "Downtown", description: "Downtown", lng: -122.468147, lat: 
 Yard.create!(title: "Delete me", description: "Delete Me", lng: -122.458167, lat: 37.746101, user_id: 2)
 Yard.create!(title: "Delete me also", description: "delete me also!", lng: -122.478157, lat: 37.746101, user_id: 1)
 Yard.create!(title: "Ho Chi Minh", description: "Hideout Hostel", lng: 106.691892, lat: 10.768099, user_id: 6)
+Yard.create!(title: "Phong Nha", description: "Easy Tiger Hostel", lng: 106.310667, lat: 17.610048, user_id: 6)
