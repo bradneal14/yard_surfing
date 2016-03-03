@@ -8,6 +8,7 @@ class Booking < ActiveRecord::Base
   belongs_to :yard
 
   validates :start_date, :end_date, :yard_id, :requester_id, :num_guests, presence: true
+  validates_numericality_of :num_guests, greater_than: 0
   validate :start_date_before_end_date
 
 

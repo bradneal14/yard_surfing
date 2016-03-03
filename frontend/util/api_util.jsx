@@ -60,6 +60,7 @@ var ApiUtil = {
     });
   },
   createBooking: function(booking, callback){
+    console.log("booking is being created");
     $.ajax({
       url: "api/bookings",
       type: "POST",

@@ -28,6 +28,7 @@ var BookingReqBox = React.createClass({
   handleSubmit: function(event){
     event.preventDefault();
     var booking = Object.assign({}, this.state);
+    console.log("CHECK HERE", booking.num_guests);
     ApiUtil.createBooking(booking, this.setButtonState);
     // this.navigateToSearch();
   },
@@ -35,13 +36,13 @@ var BookingReqBox = React.createClass({
     this.history.push("/");
   },
   buttonToggle: function(event){
-
+    console.log("STATE", this.state);
   },
   setButtonState: function(){
     this.setState({success: true});
   },
   render: function(){
-    if (this.state.success){
+    if (this.state.success && this.state.num_guests != "Select.."){
       var button = <input type="submit" className="btn btn-success request-form-submit" value="Your Request Has Been Sent"/>;
     } else {
       var button = <input type="submit" className="btn btn-danger request-form-submit" value="Make Request" onClick={this.buttonToggle}/>;
@@ -52,7 +53,7 @@ var BookingReqBox = React.createClass({
           <text className="panel-title" >Want to crash at {this.props.yard.title}?</text>
         </div>
         <div className="panel-body">
-          <form className="" onSubmit={this.handleSubmit}>
+          <form className="" onSubmit={this.handleSubmit} id="bookingReqForm">
             <label className="form-inline">Start:  </label>
             <input
               type="date"
@@ -68,11 +69,13 @@ var BookingReqBox = React.createClass({
             <br/>
             <br/>
             <label className="form-inline">Guests: </label>
-            <select valueLink={this.linkState('num_guests')} className="request-panel-selector form-inline float-right" type="number" min="1" max="5">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4+</option>
+            <input name="guest-selector" type="hidden" default="17"/>
+            <select required name="guest-selector" valueLink={this.linkState('num_guests')} className="request-panel-selector form-inline float-right" >
+              <option selected="selected" >Select..</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4+</option>
             </select>
             <br/>
             <br/>

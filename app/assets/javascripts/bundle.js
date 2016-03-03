@@ -26597,6 +26597,7 @@
 	    });
 	  },
 	  createBooking: function (booking, callback) {
+	    console.log("booking is being created");
 	    $.ajax({
 	      url: "api/bookings",
 	      type: "POST",
@@ -32689,18 +32690,21 @@
 	  handleSubmit: function (event) {
 	    event.preventDefault();
 	    var booking = Object.assign({}, this.state);
+	    console.log("CHECK HERE", booking.num_guests);
 	    ApiUtil.createBooking(booking, this.setButtonState);
 	    // this.navigateToSearch();
 	  },
 	  navigateToSearch: function () {
 	    this.history.push("/");
 	  },
-	  buttonToggle: function (event) {},
+	  buttonToggle: function (event) {
+	    console.log("STATE", this.state);
+	  },
 	  setButtonState: function () {
 	    this.setState({ success: true });
 	  },
 	  render: function () {
-	    if (this.state.success) {
+	    if (this.state.success && this.state.num_guests != "Select..") {
 	      var button = React.createElement("input", { type: "submit", className: "btn btn-success request-form-submit", value: "Your Request Has Been Sent" });
 	    } else {
 	      var button = React.createElement("input", { type: "submit", className: "btn btn-danger request-form-submit", value: "Make Request", onClick: this.buttonToggle });
@@ -32724,7 +32728,7 @@
 	        { className: "panel-body" },
 	        React.createElement(
 	          "form",
-	          { className: "", onSubmit: this.handleSubmit },
+	          { className: "", onSubmit: this.handleSubmit, id: "bookingReqForm" },
 	          React.createElement(
 	            "label",
 	            { className: "form-inline" },
@@ -32752,27 +32756,33 @@
 	            { className: "form-inline" },
 	            "Guests: "
 	          ),
+	          React.createElement("input", { name: "guest-selector", type: "hidden", "default": "17" }),
 	          React.createElement(
 	            "select",
-	            { valueLink: this.linkState('num_guests'), className: "request-panel-selector form-inline float-right", type: "number", min: "1", max: "5" },
+	            { required: true, name: "guest-selector", valueLink: this.linkState('num_guests'), className: "request-panel-selector form-inline float-right" },
 	            React.createElement(
 	              "option",
-	              null,
+	              { selected: "selected" },
+	              "Select.."
+	            ),
+	            React.createElement(
+	              "option",
+	              { value: "1" },
 	              "1"
 	            ),
 	            React.createElement(
 	              "option",
-	              null,
+	              { value: "2" },
 	              "2"
 	            ),
 	            React.createElement(
 	              "option",
-	              null,
+	              { value: "3" },
 	              "3"
 	            ),
 	            React.createElement(
 	              "option",
-	              null,
+	              { value: "4" },
 	              "4+"
 	            )
 	          ),
