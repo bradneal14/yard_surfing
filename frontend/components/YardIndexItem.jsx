@@ -1,7 +1,7 @@
 var React = require('react');
 var History = require('react-router').History;
 var Map = require("./map");
- 
+
 
 var YardIndexItem = React.createClass({
   mixins: [History],
@@ -15,7 +15,7 @@ var YardIndexItem = React.createClass({
       var photo = "";
     }
     return(
-      <li onClick={this.showDetail} id={"yard-" + this.props.yard.id} className="list-group-item col-lg-6">
+      <li onClick={this.showDetail} id={"yard-" + this.props.yard.id} className="list-group-item col-lg-6 index-image-holder">
         {photo}
         <p>{this.props.yard.title} : {this.props.yard.description}</p>
       </li>

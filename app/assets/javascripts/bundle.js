@@ -26727,6 +26727,7 @@
 	      React.createElement(
 	        'ul',
 	        { className: 'list-group' },
+	        React.createElement('br', null),
 	        this.state.yards.map(function (yard) {
 	          return React.createElement(YardIndexItem, { yard: yard, key: yard.id });
 	        }),
@@ -26774,7 +26775,7 @@
 	    }
 	    return React.createElement(
 	      'li',
-	      { onClick: this.showDetail, id: "yard-" + this.props.yard.id, className: 'list-group-item col-lg-6' },
+	      { onClick: this.showDetail, id: "yard-" + this.props.yard.id, className: 'list-group-item col-lg-6 index-image-holder' },
 	      photo,
 	      React.createElement(
 	        'p',
@@ -31938,7 +31939,7 @@
 	    }.bind(this));
 	  },
 	  render: function () {
-	    return React.createElement('div', { className: 'map col-xs-5 col-lg-5 ', ref: 'map' });
+	    return React.createElement('div', { className: 'map', ref: 'map' });
 	  }
 	});
 	
@@ -32011,7 +32012,7 @@
 	      React.createElement(
 	        'p',
 	        null,
-	        'Here we are in searchh'
+	        'Here we are in search'
 	      ),
 	      React.createElement(YardsIndex, null),
 	      React.createElement(Map, null)
@@ -32582,10 +32583,20 @@
 	      'div',
 	      null,
 	      React.createElement(NavBar, { className: 'col-sm-12' }),
-	      React.createElement(Map, { yard: this.props.params.yardId }),
+	      React.createElement('img', { src: this.state.yard.yard_photos[0].yard_pic_url, className: 'wide-jumbo' }),
 	      React.createElement(
 	        'div',
-	        { className: 'col-md-3 col-lg-3' },
+	        { className: 'pull-right col-sm-6' },
+	        React.createElement(BookingReqBox, { className: 'text-align-left', yard: this.state.yard, user: this.state.user }),
+	        React.createElement(
+	          'div',
+	          { className: 'pull-right text-align-left yard-show-page-map' },
+	          React.createElement(Map, { className: 'map-formatting', yard: this.props.params.yardId })
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: '' },
 	        React.createElement(
 	          'div',
 	          { className: '' },
@@ -32611,7 +32622,7 @@
 	            'p',
 	            null,
 	            'Owner\'s Name: ',
-	            this.state.user.fname
+	            this.state.yard.user_id
 	          ),
 	          React.createElement(
 	            'p',
@@ -32632,9 +32643,7 @@
 	          )
 	        )
 	      ),
-	      React.createElement(BookingReqBox, { yard: this.state.yard, user: this.state.user }),
-	      this.props.children,
-	      React.createElement('img', { src: this.state.yard.yard_photos[0].yard_pic_url })
+	      this.props.children
 	    );
 	  }
 	});
@@ -32714,13 +32723,13 @@
 	          { onSubmit: this.handleSubmit },
 	          React.createElement(
 	            "label",
-	            null,
+	            { className: "form-inline" },
 	            "Start: "
 	          ),
 	          React.createElement("input", {
 	            type: "date",
 	            valueLink: this.linkState('start_date'),
-	            className: "" }),
+	            className: "form-control form-inline" }),
 	          React.createElement("br", null),
 	          React.createElement(
 	            "label",
@@ -32730,17 +32739,43 @@
 	          React.createElement("input", {
 	            type: "date",
 	            valueLink: this.linkState('end_date'),
-	            className: "" }),
+	            className: "form-control" }),
 	          React.createElement("br", null),
 	          React.createElement(
 	            "label",
 	            null,
 	            "Num Guests: "
 	          ),
-	          React.createElement("input", {
-	            type: "text",
-	            valueLink: this.linkState('num_guests'),
-	            className: "" }),
+	          React.createElement("br", null),
+	          React.createElement(
+	            "select",
+	            { valueLink: this.linkState('num_guests'), className: "col-sm-3" },
+	            React.createElement(
+	              "option",
+	              null,
+	              "Select.."
+	            ),
+	            React.createElement(
+	              "option",
+	              null,
+	              "1"
+	            ),
+	            React.createElement(
+	              "option",
+	              null,
+	              "2"
+	            ),
+	            React.createElement(
+	              "option",
+	              null,
+	              "3"
+	            ),
+	            React.createElement(
+	              "option",
+	              null,
+	              "4+"
+	            )
+	          ),
 	          React.createElement("br", null),
 	          React.createElement("br", null),
 	          button

@@ -123,7 +123,7 @@ var Map = React.createClass({
   },
   render: function(){
     return (
-      <div className="map col-xs-5 col-lg-5 " ref="map">
+      <div className="map" ref="map">
       </div>
     );
   }

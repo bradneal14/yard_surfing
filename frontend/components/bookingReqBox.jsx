@@ -53,23 +53,27 @@ var BookingReqBox = React.createClass({
         </div>
         <div className="panel-body">
           <form onSubmit={this.handleSubmit}>
-            <label>Start: </label>
+            <label className="form-inline">Start: </label>
             <input
               type="date"
               valueLink={this.linkState('start_date')}
-              className=""/>
+              className="form-control form-inline"/>
             <br/>
             <label>End: </label>
             <input
               type="date"
               valueLink={this.linkState('end_date')}
-              className=""/>
+              className="form-control"/>
             <br/>
             <label>Num Guests: </label>
-            <input
-              type="text"
-              valueLink={this.linkState('num_guests')}
-              className=""/>
+            <br/>
+            <select valueLink={this.linkState('num_guests')} className="col-sm-3">
+              <option>Select..</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4+</option>
+            </select>
             <br/>
             <br/>
             {button}

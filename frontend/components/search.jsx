@@ -19,7 +19,7 @@ var Search = React.createClass({
   render: function(){
     return (
       <div className="col-xs-12">
-        <p>Here we are in searchh</p>
+        <p>Here we are in search</p>
         <YardsIndex></YardsIndex>
         <Map></Map>
       </div>

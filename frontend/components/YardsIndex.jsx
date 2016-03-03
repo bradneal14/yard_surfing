@@ -34,6 +34,7 @@ var YardIndex = React.createClass({
     return (
       <div className="col-md-7 col-sm-7 col-lg-7">
         <ul className="list-group">
+          <br></br>
           {this.state.yards.map(function(yard){
             return <YardIndexItem yard={yard} key={yard.id}/>;
           })}

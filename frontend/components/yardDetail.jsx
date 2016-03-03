@@ -40,22 +40,25 @@ var yardDetail = React.createClass({
     return(
       <div>
         <NavBar className="col-sm-12"></NavBar>
-        <Map yard={this.props.params.yardId}></Map>
-        <div className="col-md-3 col-lg-3">
+        <img src={this.state.yard.yard_photos[0].yard_pic_url} className="wide-jumbo"></img>
+        <div className="pull-right col-sm-6">
+          <BookingReqBox className="text-align-left" yard={this.state.yard} user={this.state.user}></BookingReqBox>
+          <div className="pull-right text-align-left yard-show-page-map">
+            <Map className="map-formatting" yard={this.props.params.yardId} ></Map>
+          </div>
+        </div>
+        <div className="">
           <div className="">
             <p>The back of the carter: Yard Detail forr {this.state.yard.title}</p>
             <p>Title: {this.state.yard.title}</p>
             <p>Description: {this.state.yard.description}</p>
-            <p>Owner's Name: {this.state.user.fname}</p>
+            <p>Owner's Name: {this.state.yard.user_id}</p>
             <p>Lat: {this.state.yard.lat}</p>
             <p>Long: {this.state.yard.lng}</p>
             <button onClick={this.navigateHome} className="btn btn-success  top-buffer left-buffer">Back to all</button>
           </div>
         </div>
-        <BookingReqBox yard={this.state.yard} user={this.state.user}></BookingReqBox>
         {this.props.children}
-        <img src={this.state.yard.yard_photos[0].yard_pic_url}></img>
-
       </div>
     );
   }
