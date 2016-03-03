@@ -1,7 +1,7 @@
 var React = require('react');
 var History = require('react-router').History;
 var Map = require("./map");
-
+ 
 
 var YardIndexItem = React.createClass({
   mixins: [History],
@@ -10,7 +10,7 @@ var YardIndexItem = React.createClass({
   },
   render: function(){
     if(this.props.yard.yard_photos){
-      var photo = <img className="img-thumbnail" src={this.props.yard.yard_photos[0].yard_pic_url}></img>;
+      var photo = <img className="img-thumbnail index-image" src={this.props.yard.yard_photos[0].yard_pic_url}></img>;
     } else {
       var photo = "";
     }

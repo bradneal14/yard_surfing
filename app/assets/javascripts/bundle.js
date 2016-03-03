@@ -26768,7 +26768,7 @@
 	  },
 	  render: function () {
 	    if (this.props.yard.yard_photos) {
-	      var photo = React.createElement('img', { className: 'img-thumbnail', src: this.props.yard.yard_photos[0].yard_pic_url });
+	      var photo = React.createElement('img', { className: 'img-thumbnail index-image', src: this.props.yard.yard_photos[0].yard_pic_url });
 	    } else {
 	      var photo = "";
 	    }
