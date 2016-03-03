@@ -7,24 +7,41 @@
 }
 .panel-no-border{
   padding: 0px !important;
-  margin-left: 300px;
-  margin-right: 500px;
   margin-top: -44px;
-  width: 50%;
+  width: 70%;
+  font-family: 'Quattrocento Sans', sans-serif;
+  margin-right: 150px;
+  float: right;
+}
+
+#map-formatting-yard-show{
+  float: right;
+  margin-left: 130px;
+}
+
+.request-panel-input {
+  display: inline;
+  width: 80%;
+  margin-left: 10px;
+}
+
+.request-panel-selector{
+  margin-left: 10px;
 }
 
 .yard-show-page-map{
-  margin-right: 30px;
-  padding-right: 50px;
+  margin: auto;
 }
 
 .wide-jumbo {
-  display: block;
-  width:100%;
-  max-height:500px;
-  box-sizing: border-box;
+  margin-top: -10px;
+  // display: block;
+  // width:100%;
+  height:500px;
+  // box-sizing: border-box;
   background-size:cover;
-  overflow: hidden;
+  // overflow: hidden;
+  background-position: center;
 }
 .index-image{
   max-height: 250px;

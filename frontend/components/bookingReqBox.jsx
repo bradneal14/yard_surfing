@@ -47,28 +47,28 @@ var BookingReqBox = React.createClass({
       var button = <input type="submit" className="btn btn-danger request-form-submit" value="Make Request" onClick={this.buttonToggle}/>;
     }
     return(
-      <div className="panel panel-primary col-md-3 panel-no-border">
+      <div className="panel panel-primary display-center panel-no-border">
         <div className="panel-heading">
           <text className="panel-title" >Want to crash at {this.props.yard.title}?</text>
         </div>
         <div className="panel-body">
-          <form onSubmit={this.handleSubmit}>
-            <label className="form-inline">Start: </label>
+          <form className="" onSubmit={this.handleSubmit}>
+            <label className="form-inline">Start:  </label>
             <input
               type="date"
               valueLink={this.linkState('start_date')}
-              className="form-control form-inline"/>
+              className="form-control request-panel-input"/>
+            <br/>
             <br/>
             <label>End: </label>
             <input
               type="date"
               valueLink={this.linkState('end_date')}
-              className="form-control"/>
+              className="form-control request-panel-input"/>
             <br/>
-            <label>Num Guests: </label>
             <br/>
-            <select valueLink={this.linkState('num_guests')} className="col-sm-3">
-              <option>Select..</option>
+            <label className="form-inline">Guests: </label>
+            <select valueLink={this.linkState('num_guests')} className="request-panel-selector form-inline float-right" type="number" min="1" max="5">
               <option>1</option>
               <option>2</option>
               <option>3</option>
@@ -78,7 +78,7 @@ var BookingReqBox = React.createClass({
             <br/>
             {button}
           </form>
-          <div className="">
+          <div className="text-danger">
             <br/>
               {this.state.errors.map(function(error){
                 return <p className="text-center">* {error}</p>;

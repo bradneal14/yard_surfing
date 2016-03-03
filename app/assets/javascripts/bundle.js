@@ -32579,19 +32579,23 @@
 	        'loading....'
 	      );
 	    }
+	    var photoDivStyle = {
+	      backgroundImage: 'url(' + this.state.yard.yard_photos[0].yard_pic_url + ')'
+	    };
 	    return React.createElement(
 	      'div',
 	      null,
 	      React.createElement(NavBar, { className: 'col-sm-12' }),
-	      React.createElement('img', { src: this.state.yard.yard_photos[0].yard_pic_url, className: 'wide-jumbo' }),
+	      React.createElement('div', { className: 'wide-jumbo', style: photoDivStyle }),
 	      React.createElement(
 	        'div',
-	        { className: 'pull-right col-sm-6' },
-	        React.createElement(BookingReqBox, { className: 'text-align-left', yard: this.state.yard, user: this.state.user }),
+	        { className: 'pull-right col-sm-5 col-xs-10 col-md-5 col-lg-5' },
+	        React.createElement(BookingReqBox, { className: '', yard: this.state.yard, user: this.state.user }),
 	        React.createElement(
 	          'div',
-	          { className: 'pull-right text-align-left yard-show-page-map' },
-	          React.createElement(Map, { className: 'map-formatting', yard: this.props.params.yardId })
+	          { className: '' },
+	          React.createElement('br', null),
+	          React.createElement(Map, { id: 'map-formatting-yard-show', yard: this.props.params.yardId })
 	        )
 	      ),
 	      React.createElement(
@@ -32703,7 +32707,7 @@
 	    }
 	    return React.createElement(
 	      "div",
-	      { className: "panel panel-primary col-md-3 panel-no-border" },
+	      { className: "panel panel-primary display-center panel-no-border" },
 	      React.createElement(
 	        "div",
 	        { className: "panel-heading" },
@@ -32720,16 +32724,17 @@
 	        { className: "panel-body" },
 	        React.createElement(
 	          "form",
-	          { onSubmit: this.handleSubmit },
+	          { className: "", onSubmit: this.handleSubmit },
 	          React.createElement(
 	            "label",
 	            { className: "form-inline" },
-	            "Start: "
+	            "Start:  "
 	          ),
 	          React.createElement("input", {
 	            type: "date",
 	            valueLink: this.linkState('start_date'),
-	            className: "form-control form-inline" }),
+	            className: "form-control request-panel-input" }),
+	          React.createElement("br", null),
 	          React.createElement("br", null),
 	          React.createElement(
 	            "label",
@@ -32739,22 +32744,17 @@
 	          React.createElement("input", {
 	            type: "date",
 	            valueLink: this.linkState('end_date'),
-	            className: "form-control" }),
+	            className: "form-control request-panel-input" }),
+	          React.createElement("br", null),
 	          React.createElement("br", null),
 	          React.createElement(
 	            "label",
-	            null,
-	            "Num Guests: "
+	            { className: "form-inline" },
+	            "Guests: "
 	          ),
-	          React.createElement("br", null),
 	          React.createElement(
 	            "select",
-	            { valueLink: this.linkState('num_guests'), className: "col-sm-3" },
-	            React.createElement(
-	              "option",
-	              null,
-	              "Select.."
-	            ),
+	            { valueLink: this.linkState('num_guests'), className: "request-panel-selector form-inline float-right", type: "number", min: "1", max: "5" },
 	            React.createElement(
 	              "option",
 	              null,
@@ -32782,7 +32782,7 @@
 	        ),
 	        React.createElement(
 	          "div",
-	          { className: "" },
+	          { className: "text-danger" },
 	          React.createElement("br", null),
 	          this.state.errors.map(function (error) {
 	            return React.createElement(

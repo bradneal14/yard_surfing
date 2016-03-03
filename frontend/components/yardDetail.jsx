@@ -37,14 +37,18 @@ var yardDetail = React.createClass({
     if (!this.state.user && !this.state.yard){
       return (<div>loading....</div>);
     }
+    var photoDivStyle = {
+      backgroundImage: 'url(' + this.state.yard.yard_photos[0].yard_pic_url + ')'
+    };
     return(
       <div>
         <NavBar className="col-sm-12"></NavBar>
-        <img src={this.state.yard.yard_photos[0].yard_pic_url} className="wide-jumbo"></img>
-        <div className="pull-right col-sm-6">
-          <BookingReqBox className="text-align-left" yard={this.state.yard} user={this.state.user}></BookingReqBox>
-          <div className="pull-right text-align-left yard-show-page-map">
-            <Map className="map-formatting" yard={this.props.params.yardId} ></Map>
+        <div className="wide-jumbo" style={photoDivStyle}/>
+        <div className="pull-right col-sm-5 col-xs-10 col-md-5 col-lg-5">
+          <BookingReqBox className="" yard={this.state.yard} user={this.state.user}></BookingReqBox>
+          <div className="">
+            <br/>
+            <Map id="map-formatting-yard-show" yard={this.props.params.yardId} ></Map>
           </div>
         </div>
         <div className="">
