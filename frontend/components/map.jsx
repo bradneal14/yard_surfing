@@ -107,7 +107,7 @@ var Map = React.createClass({
 
       marker.setMap(this.map);
       // marker.setAnimation(google.maps.Animation.DROP);
-      marker.setIcon({url: "/assets/black_marker_icon.png"} );
+      marker.setIcon({url: "/black_marker_icon.png"} );
 
       // marker.addListener('click', function() {
       //   if (infoWindow) {
