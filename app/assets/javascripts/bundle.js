@@ -31930,7 +31930,7 @@
 	
 	      marker.setMap(this.map);
 	      // marker.setAnimation(google.maps.Animation.DROP);
-	      marker.setIcon({ url: "/assets/black_marker_icon.png" });
+	      marker.setIcon({ url: "/assets/black_marker_icon-be6c6d8921ea89e31eca98bbb75e6094fa00289e884ee3c9fde04197db5204f3.png" });
 	
 	      // marker.addListener('click', function() {
 	      //   if (infoWindow) {
