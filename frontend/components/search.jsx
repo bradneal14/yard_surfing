@@ -18,10 +18,10 @@ var Search = React.createClass({
   // },
   render: function(){
     return (
-      <div className="col-xs-12 tan-bg-fill">
-        <p>Here we are in search</p>
-        <Map></Map>
+      <div className="col-xs-12">
+        <p>Here we are in searchh</p>
         <YardsIndex></YardsIndex>
+        <Map></Map>
       </div>
     );
   }

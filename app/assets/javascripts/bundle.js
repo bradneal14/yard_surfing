@@ -26768,13 +26768,13 @@
 	  },
 	  render: function () {
 	    if (this.props.yard.yard_photos) {
-	      var photo = React.createElement('img', { src: this.props.yard.yard_photos[0].yard_pic_url });
+	      var photo = React.createElement('img', { className: 'img-thumbnail', src: this.props.yard.yard_photos[0].yard_pic_url });
 	    } else {
 	      var photo = "";
 	    }
 	    return React.createElement(
 	      'li',
-	      { onClick: this.showDetail, id: "yard-" + this.props.yard.id, className: 'list-group-item col-lg-4' },
+	      { onClick: this.showDetail, id: "yard-" + this.props.yard.id, className: 'list-group-item col-lg-6' },
 	      photo,
 	      React.createElement(
 	        'p',
@@ -26782,13 +26782,6 @@
 	        this.props.yard.title,
 	        ' : ',
 	        this.props.yard.description
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        this.props.yard.lat,
-	        ' : ',
-	        this.props.yard.lng
 	      )
 	    );
 	  }
@@ -31930,7 +31923,7 @@
 	
 	      marker.setMap(this.map);
 	      // marker.setAnimation(google.maps.Animation.DROP);
-	      marker.setIcon({ url: "/assets/black_marker_icon-be6c6d8921ea89e31eca98bbb75e6094fa00289e884ee3c9fde04197db5204f3.png" });
+	      marker.setIcon({ url: "/assets/black_marker_icon.png" });
 	
 	      // marker.addListener('click', function() {
 	      //   if (infoWindow) {
@@ -32014,14 +32007,14 @@
 	  render: function () {
 	    return React.createElement(
 	      'div',
-	      { className: 'col-xs-12 tan-bg-fill' },
+	      { className: 'col-xs-12' },
 	      React.createElement(
 	        'p',
 	        null,
-	        'Here we are in search'
+	        'Here we are in searchh'
 	      ),
-	      React.createElement(Map, null),
-	      React.createElement(YardsIndex, null)
+	      React.createElement(YardsIndex, null),
+	      React.createElement(Map, null)
 	    );
 	  }
 	});
