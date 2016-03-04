@@ -64,7 +64,7 @@
 	
 	var routes = React.createElement(
 	  Router,
-	  { history: hashHistory },
+	  { onUpdate: () => window.scrollTo(0, 0), history: hashHistory },
 	  React.createElement(
 	    Route,
 	    { path: '/', component: App },
