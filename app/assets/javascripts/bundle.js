@@ -32741,7 +32741,7 @@
 	          'Location, Location, Location..'
 	        ),
 	        React.createElement(
-	          'p',
+	          'h4',
 	          null,
 	          'Where will you be staying?'
 	        ),

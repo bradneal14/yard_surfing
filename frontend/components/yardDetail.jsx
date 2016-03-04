@@ -78,12 +78,12 @@ var yardDetail = React.createClass({
         {this.props.children}
         <div id="overlay">
           <h2>Location, Location, Location..</h2>
-          <p>Where will you be staying?</p>
+          <h4>Where will you be staying?</h4>
           <div className="theMap">
             <Map  yard={this.props.params.yardId}></Map>
           </div>
         </div>
-      
+
       </div>
     );
   }
