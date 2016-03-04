@@ -18,7 +18,7 @@ var IndexRoute = ReactRouter.IndexRoute;
 
 
 var routes = (
-  <Router onUpdate={() => window.scrollTo(0, 0)} history={hashHistory}>
+  <Router onUpdate={function(){window.scrollTo(0, 0)}} history={hashHistory}>
    <Route path="/" component={App}>
      <IndexRoute component={Search}></IndexRoute>
    </Route>
