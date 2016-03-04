@@ -32,7 +32,7 @@ var YardIndex = React.createClass({
 
   render: function(){
     return (
-      <div className="col-md-7 col-sm-7 col-lg-7">
+      <div className="">
         <ul className="list-group">
           <br></br>
           {this.state.yards.map(function(yard){

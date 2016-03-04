@@ -35,6 +35,7 @@ var UserDetail = React.createClass({
     this.userListener.remove();
   },
   componentWillReceiveProps: function(newProps){
+    UserStore.clearUserById();
     ApiUtil.fetchUserById(this.props.params.userId);
   },
   handleAddFriend: function(){
@@ -67,7 +68,6 @@ var UserDetail = React.createClass({
     }
     return (
       <div>
-        <NavBar></NavBar>
         <div>This is a users show page Yay!</div>
         <p> Welcome to the page of {this.state.user.fname} {this.state.user.lname}</p>
         <div className="profile-show-pic" style={profileImageShowDiv} />

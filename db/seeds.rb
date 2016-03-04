@@ -6,15 +6,15 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.create!(fname: "Bradley", lname: "Neal", email: "admin", password: "password", main_pic_url: "http://cityofjohnstown.ny.gov/wp-content/uploads/2013/02/no-profile-picture.jpg")
+User.create!(fname: "Bradley", lname: "Neal", email: "admin", password: "password", main_pic_url: "https://scontent.fsjc1-2.fna.fbcdn.net/hphotos-xfa1/t31.0-8/11539089_10152870304100738_943635186343598068_o.jpg")
 User.create!(fname: "Mike", lname: "Jordan", email: "mjordan", password: "password", main_pic_url: "http://4.kicksonfire.net/wp-content/uploads/2015/09/Michael-Jordan-Made-More-Money-On-Sneakers-Last-Year-Alone-Than-He-Did-His-Entire-NBA-Career.jpg?6ce6a3")
 User.create!(fname: "Buzz", lname: "Lightyear", email: "blightyear", password: "password", main_pic_url: "http://ecx.images-amazon.com/images/I/61OEzTAOczL._SL1000_.jpgS")
 User.create!(fname: "Louis", lname: "CK", email: "louisck", password: "password", main_pic_url: "http://media.salon.com/2012/11/louis_ck_slide.jpg")
-User.create!(fname: "Alex", lname: "Ovechkin", email: "aovechkin", password: "password", main_pic_url: "http://www.shanaplandebate.com/wp-content/uploads/2015/12/ovechkin-post.jpg")
+User.create!(fname: "Alex", lname: "Ovechkin", email: "aovechkin", password: "password", gender: "male")
 User.create!(fname: "Nora", lname: "Boerding", email: "nora", password: "password", main_pic_url: "https://softbulletindotcom.files.wordpress.com/2012/07/img_0907.jpg")
 
 Yard.create!(title: "West", description: "Golden Gate Park", lng: -122.487989, lat: 37.769556, user_id: 2)
-Yard.create!(title: "South", description: "Delores Park", lng: -122.427406, lat: 37.760383, user_id: 1)
+Yard.create!(title: "South", description: "Delores Park", lng: -122.427406, lat: 37.760383, user_id: 5)
 Yard.create!(title: "North", description: "Hyde st. Pier", lng: -122.421307, lat: 37.809131, user_id: 4)
 Yard.create!(title: "East", description: "App Academy", lng: -122.394049, lat: 37.791118, user_id: 1)
 Yard.create!(title: "Central", description: "Filmore Auditorium", lng: -122.433150, lat: 37.784145, user_id: 1)

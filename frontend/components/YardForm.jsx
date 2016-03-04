@@ -26,7 +26,6 @@ var YardForm = React.createClass({
   render: function(){
     return (
       <div>
-        <NavBar></NavBar>
         <div className="container-fluid">
           <h2 className="text-center">List Your Yard</h2>
           <h4 className="text-center">YardSurfing allows you offer up your yard for those looking to crash</h4>

@@ -26,6 +26,7 @@ var yardDetail = React.createClass({
     return {yard: YardStore.find(this.props.params.yardId), user: UserStore.currentUser(), owner: "harrison" };
   },
   componentWillReceiveProps: function(newProps){
+    UserStore.clearOwner();
     ApiUtil.fetchSingleYard(newProps.params.yardId);
   },
   componentDidMount: function(){
@@ -38,6 +39,7 @@ var yardDetail = React.createClass({
   componentWillUnmount: function(){
     this.yardListener.remove();
     this.userListener.remove();
+    UserStore.clearOwner();
   },
   navigateHome: function(){
     this.history.push("/");
@@ -50,15 +52,18 @@ var yardDetail = React.createClass({
     if (!this.state.user && !this.state.yard){
       return (<div>loading....</div>);
     }
-    var coverPhotoDivStyle = {
-      backgroundImage: 'url(' + this.state.yard.yard_photos[0].yard_pic_url + ')'
-    };
-    var userPhotoDivStyle = {
-      backgroundImage: 'url(' + this.state.owner.main_pic_url + ')'
-    };
+    if (this.state.yard.yard_photos.length !== 0){
+      var coverPhotoDivStyle = {
+        backgroundImage: 'url(' + this.state.yard.yard_photos[0].yard_pic_url + ')'
+      };
+    }
+    if (this.state.owner.main_pic_url){
+      var userPhotoDivStyle = {
+        backgroundImage: 'url(' + this.state.owner.main_pic_url + ')'
+      };
+    }
     return(
       <div>
-        <NavBar className="col-sm-12"></NavBar>
         <div className="wide-jumbo" style={coverPhotoDivStyle}/>
         <div className="pull-right col-sm-5 col-xs-10 col-md-5 col-lg-5">
           <BookingReqBox className="" yard={this.state.yard} user={this.state.user}></BookingReqBox>
@@ -79,11 +84,13 @@ var yardDetail = React.createClass({
         <div id="overlay">
           <h2>Location, Location, Location..</h2>
           <h4>Where will you be staying?</h4>
-          <div className="theMap">
-            <Map  yard={this.props.params.yardId}></Map>
+          <div className="map" id="yard-detail-map">
+            <Map id="yard-detail-map"  yard={this.props.params.yardId}></Map>
           </div>
         </div>
-
+        <div className="breaker">
+          <p>Hello</p>
+        </div>
       </div>
     );
   }

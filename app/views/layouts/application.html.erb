@@ -14,37 +14,17 @@
     var s = document.getElementsByTagName('script')[0];
     s.parentNode.insertBefore(wf, s);
   })(); </script>
-  
+
   <%= favicon_link_tag 'favicon.ico' %>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
+
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCp2wCq4a-qVXbHAIV3fsy6NZcnapHyqw" type="text/javascript"></script>
+
 </head>
-<body class="tan-bg-fill">
+<body
 
-<% if signed_in? %>
-  <%= current_user.email %>
-</br>
-  <%= link_to "Sign Out", session_url, method: :delete %>
-<% else %>
-  <%= link_to "Sign In", new_session_url %>
-  <%= link_to "Sign Up", new_user_url %>
-<% end %>
-
-<br>
-<div class="errors">
-  <% if flash[:errors] %>
-    <% flash[:errors].each do |el| %>
-    <% el.sub!("Fname ", '') %>
-    <% el.sub!("Lname ", '') %>
-    <% end %>
-    <%= flash[:errors].uniq.join("<br>").html_safe if flash[:errors] %>
-  <% end %>
-</div>
-<br>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCp2wCq4a-qVXbHAIV3fsy6NZcnapHyqw"
-type="text/javascript"></script>
 
 <%= yield %>
 

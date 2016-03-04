@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
   validates :password, length: {minimum: 6, allow_nil: true}
 
   attr_reader :password
+  before_save :default_pic
 
   has_many :yards
 
@@ -38,6 +39,18 @@ class User < ActiveRecord::Base
     source: :bookings
 
   after_initialize :ensure_session_token
+
+
+  def default_pic
+    if self.gender == "male"
+      self.main_pic_url ||= "https://s3.amazonaws.com/37assets/svn/1065-IMG_2529.jpg"
+    end
+    if self.gender == "female"
+      self.main_pic_url ||= "http://cdn.imgs.steps.dragoart.com/how-to-draw-an-anime-girl-step-5_1_000000071791_5.png"
+    else
+      self.main_pic_url ||= "http://d2c4zcito95dfk.cloudfront.net/assets/default_profile_image_large-e61b362fc14b3206204a64e603d7ad80.png"
+    end
+  end
 
   def reset_token!
     self.session_token = SecureRandom.urlsafe_base64

@@ -26,7 +26,7 @@ var ProfileEdit = React.createClass({
   },
   getInitialState: function(){
     console.log("initial state userdetail");
-    UserStore.fetchCurrentUser();
+    ApiUtil.fetchCurrentUser();
     return {user: {}, yards: [] };
   },
   componentDidMount: function(){
@@ -45,7 +45,6 @@ var ProfileEdit = React.createClass({
   render: function(){
     return (
       <div>
-        <NavBar></NavBar>
         <div>This is a users show page Yay!</div>
         <p> Welcome to your page, {this.state.user.fname}</p>
         <p>Your name is {this.state.user.fname} {this.state.user.lname}</p>

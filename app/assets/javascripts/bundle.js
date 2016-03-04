@@ -49,13 +49,14 @@
 	var YardStore = __webpack_require__(159);
 	var ApiUtil = __webpack_require__(182);
 	var YardIndex = __webpack_require__(186);
-	var Search = __webpack_require__(247);
+	var SearchIndex = __webpack_require__(262);
 	var YardForm = __webpack_require__(248);
 	var YardDetail = __webpack_require__(254);
 	var hashHistory = __webpack_require__(188).hashHistory;
 	var App = __webpack_require__(257);
 	var userDetail = __webpack_require__(259);
-	var profileEdit = __webpack_require__(261);
+	var profileEdit = __webpack_require__(260);
+	var Landing = __webpack_require__(258);
 	
 	var ReactRouter = __webpack_require__(188);
 	var Router = ReactRouter.Router;
@@ -70,12 +71,13 @@
 	  React.createElement(
 	    Route,
 	    { path: '/', component: App },
-	    React.createElement(IndexRoute, { component: Search })
-	  ),
-	  React.createElement(Route, { path: '/yards/new', component: YardForm }),
-	  React.createElement(Route, { path: '/yard/:yardId', component: YardDetail }),
-	  React.createElement(Route, { path: '/users/:userId', component: userDetail }),
-	  React.createElement(Route, { path: '/edit_profile', component: profileEdit })
+	    React.createElement(IndexRoute, { component: Landing }),
+	    React.createElement(Route, { path: '/search', component: SearchIndex }),
+	    React.createElement(Route, { path: '/yards/new', component: YardForm }),
+	    React.createElement(Route, { path: '/yard/:yardId', component: YardDetail }),
+	    React.createElement(Route, { path: '/users/:userId', component: userDetail }),
+	    React.createElement(Route, { path: '/edit_profile', component: profileEdit })
+	  )
 	);
 	
 	document.addEventListener('DOMContentLoaded', function () {
@@ -26756,7 +26758,7 @@
 	  render: function () {
 	    return React.createElement(
 	      'div',
-	      { className: 'col-md-7 col-sm-7 col-lg-7' },
+	      { className: '' },
 	      React.createElement(
 	        'ul',
 	        { className: 'list-group' },
@@ -26801,7 +26803,7 @@
 	    this.history.push("yard/" + this.props.yard.id);
 	  },
 	  render: function () {
-	    if (this.props.yard.yard_photos) {
+	    if (this.props.yard.yard_photos.length !== 0) {
 	      var photo = React.createElement('img', { className: 'img-thumbnail index-image', src: this.props.yard.yard_photos[0].yard_pic_url });
 	    } else {
 	      var photo = "";
@@ -31864,35 +31866,7 @@
 	    console.log("map mounted");
 	    this.yardListener = YardStore.addListener(this._onChange);
 	    // UserStore.addListener(this._onChange);
-	
-	    //the lines below here enable the special colors for the map:
-	    // var styles = [
-	    //   {
-	    //     stylers: [
-	    //       { hue: "#b35b4f" },
-	    //       { saturation: 1000 }
-	    //     ]
-	    //   },{
-	    //     featureType: "road",
-	    //     elementType: "geometry",
-	    //     stylers: [
-	    //       { lightness: 50 },
-	    //       { visibility: "simplified" }
-	    //     ]
-	    //   },{
-	    //     featureType: "road",
-	    //     elementType: "labels",
-	    //     stylers: [
-	    //       { visibility: "off" }
-	    //     ]
-	    //   }
-	    // ];
-	    //
-	    // var styledMap = new google.maps.StyledMapType(styles,
-	    // {name: "Styled Map"});
-	    //Special color lines above:
-	
-	    var mapDOMNode = this.refs.map;
+	    var mapDOMNode = document.getElementById("map_canvas");
 	    var mapOptions = {
 	      center: { lat: 37.7758, lng: -122.435 },
 	      zoom: 12,
@@ -31906,14 +31880,10 @@
 	      var newLat = currentYard.lat;
 	      var newLng = currentYard.lng;
 	      mapOptions['center'] = { lat: newLat, lng: newLng };
-	      mapOptions['zoom'] = 15;
+	      mapOptions['zoom'] = 16;
 	    }
 	
 	    this.map = new google.maps.Map(mapDOMNode, mapOptions);
-	
-	    //Below are the other two lines for map color styling
-	    //  this.map.mapTypes.set('map_style', styledMap);
-	    //  this.map.setMapTypeId('map_style');
 	
 	    this.map.addListener('idle', function () {
 	      var latLngBounds = this.getBounds();
@@ -31923,7 +31893,6 @@
 	        northEast: { lat: northEast.lat(), lng: northEast.lng() },
 	        southWest: { lat: southWest.lat(), lng: southWest.lng() }
 	      };
-	      console.log(bounds);
 	      ApiUtil.fetchYards(bounds);
 	    });
 	  },
@@ -31934,7 +31903,7 @@
 	    this.placeMarks();
 	  },
 	  componentWillUnmount: function () {
-	    console.log("map will unmount");
+	    console.log("map unmounting");
 	    this.yardListener.remove();
 	  },
 	  placeMarks: function () {
@@ -31972,7 +31941,7 @@
 	    }.bind(this));
 	  },
 	  render: function () {
-	    return React.createElement('div', { className: 'map', ref: 'map' });
+	    return React.createElement('div', { className: 'map search-map', ref: 'map', id: 'map_canvas' });
 	  }
 	});
 	
@@ -32010,6 +31979,14 @@
 	      UserStore.__emitChange();
 	      break;
 	  }
+	};
+	
+	UserStore.clearOwner = function () {
+	  _owner = [];
+	};
+	
+	UserStore.clearUserById = function () {
+	  _userById = [];
 	};
 	
 	UserStore.receiveYardOwner = function (user) {
@@ -32057,47 +32034,7 @@
 	module.exports = UserStore;
 
 /***/ },
-/* 247 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	var Map = __webpack_require__(245);
-	var YardsIndex = __webpack_require__(186);
-	var YardStore = __webpack_require__(159);
-	
-	var Search = React.createClass({
-	  displayName: 'Search',
-	
-	  // getInitialState: function(){
-	  //   return {yards: YardStore.all() }
-	  // },
-	  // componentDidMount: function(){
-	  //   this.yardListener = YardStore.addListener(this._onChange);
-	  // },
-	  // componentWillUnmout: function(){
-	  //   YardStore.yardListener.remove();
-	  // },
-	  // _onChange: function(){
-	  //   this.setState({yards: YardStore.all() })
-	  // },
-	  render: function () {
-	    return React.createElement(
-	      'div',
-	      { className: 'col-xs-12' },
-	      React.createElement(
-	        'p',
-	        null,
-	        'Here we are in search'
-	      ),
-	      React.createElement(YardsIndex, null),
-	      React.createElement(Map, null)
-	    );
-	  }
-	});
-	
-	module.exports = Search;
-
-/***/ },
+/* 247 */,
 /* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -32132,7 +32069,6 @@
 	    return React.createElement(
 	      'div',
 	      null,
-	      React.createElement(NavBar, null),
 	      React.createElement(
 	        'div',
 	        { className: 'container-fluid' },
@@ -32639,6 +32575,7 @@
 	    return { yard: YardStore.find(this.props.params.yardId), user: UserStore.currentUser(), owner: "harrison" };
 	  },
 	  componentWillReceiveProps: function (newProps) {
+	    UserStore.clearOwner();
 	    ApiUtil.fetchSingleYard(newProps.params.yardId);
 	  },
 	  componentDidMount: function () {
@@ -32651,6 +32588,7 @@
 	  componentWillUnmount: function () {
 	    this.yardListener.remove();
 	    this.userListener.remove();
+	    UserStore.clearOwner();
 	  },
 	  navigateHome: function () {
 	    this.history.push("/");
@@ -32667,16 +32605,19 @@
 	        'loading....'
 	      );
 	    }
-	    var coverPhotoDivStyle = {
-	      backgroundImage: 'url(' + this.state.yard.yard_photos[0].yard_pic_url + ')'
-	    };
-	    var userPhotoDivStyle = {
-	      backgroundImage: 'url(' + this.state.owner.main_pic_url + ')'
-	    };
+	    if (this.state.yard.yard_photos.length !== 0) {
+	      var coverPhotoDivStyle = {
+	        backgroundImage: 'url(' + this.state.yard.yard_photos[0].yard_pic_url + ')'
+	      };
+	    }
+	    if (this.state.owner.main_pic_url) {
+	      var userPhotoDivStyle = {
+	        backgroundImage: 'url(' + this.state.owner.main_pic_url + ')'
+	      };
+	    }
 	    return React.createElement(
 	      'div',
 	      null,
-	      React.createElement(NavBar, { className: 'col-sm-12' }),
 	      React.createElement('div', { className: 'wide-jumbo', style: coverPhotoDivStyle }),
 	      React.createElement(
 	        'div',
@@ -32749,8 +32690,17 @@
 	        ),
 	        React.createElement(
 	          'div',
-	          { className: 'theMap' },
-	          React.createElement(Map, { yard: this.props.params.yardId })
+	          { className: 'map', id: 'yard-detail-map' },
+	          React.createElement(Map, { id: 'yard-detail-map', yard: this.props.params.yardId })
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'breaker' },
+	        React.createElement(
+	          'p',
+	          null,
+	          'Hello'
 	        )
 	      )
 	    );
@@ -33002,7 +32952,7 @@
 	    return React.createElement(
 	      "div",
 	      null,
-	      React.createElement(Landing, null),
+	      React.createElement(NavBar, null),
 	      this.props.children
 	    );
 	  }
@@ -33016,13 +32966,26 @@
 
 	var React = __webpack_require__(1);
 	var NavBar = __webpack_require__(253);
+	var History = __webpack_require__(188).History;
 	
 	var Landing = React.createClass({
 	  displayName: 'Landing',
 	
-	
+	  mixins: [History],
+	  navigateToSearch: function () {
+	    this.history.push("/search");
+	  },
 	  render: function () {
-	    return React.createElement(NavBar, null);
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement('img', { src: 'http://cdn.usefulstuff.io/2015/10/Landing-A-Plane.jpg' }),
+	      React.createElement(
+	        'button',
+	        { className: 'btn btn-success', onClick: this.navigateToSearch },
+	        'Head to search'
+	      )
+	    );
 	  }
 	});
 	
@@ -33069,6 +33032,7 @@
 	    this.userListener.remove();
 	  },
 	  componentWillReceiveProps: function (newProps) {
+	    UserStore.clearUserById();
 	    ApiUtil.fetchUserById(this.props.params.userId);
 	  },
 	  handleAddFriend: function () {
@@ -33120,7 +33084,6 @@
 	    return React.createElement(
 	      "div",
 	      null,
-	      React.createElement(NavBar, null),
 	      React.createElement(
 	        "div",
 	        null,
@@ -33150,6 +33113,95 @@
 
 /***/ },
 /* 260 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var NavBar = __webpack_require__(253);
+	var UserStore = __webpack_require__(246);
+	var ApiUtil = __webpack_require__(182);
+	var History = __webpack_require__(188).History;
+	var YardListItem = __webpack_require__(261);
+	var YardStore = __webpack_require__(159);
+	
+	var ProfileEdit = React.createClass({
+	  displayName: "ProfileEdit",
+	
+	  mixins: [History],
+	
+	  _onChange: function () {
+	    var currentUser = UserStore.currentUser();
+	    this.fetchAfterDelete();
+	    console.log("one");
+	    console.log("on change userdetail", currentUser);
+	    this.setState({ yards: currentUser.yards, user: currentUser });
+	  },
+	  _onDelete: function () {
+	    console.log("user detail on delete");
+	    this.setState({ yards: YardStore.findById(this.state.user.id) });
+	  },
+	  fetchAfterDelete: function () {
+	    var bounds = { northEast: { lat: 84.9, lng: 180 }, southWest: { lat: -85, lng: -180 } };
+	    ApiUtil.fetchYards(bounds);
+	  },
+	  getInitialState: function () {
+	    console.log("initial state userdetail");
+	    ApiUtil.fetchCurrentUser();
+	    return { user: {}, yards: [] };
+	  },
+	  componentDidMount: function () {
+	    this.userListener = UserStore.addListener(this._onChange);
+	    // ApiUtil.fetchCurrentUser();
+	    this.yardListener = YardStore.addListener(this._onDelete);
+	    // ApiUtil.fetchYards();
+	  },
+	  // componentWillReceiveProps: function(newProps){
+	  //   ApiUtil.fetchCurrentUser();
+	  // },
+	  componentWillUnmount: function () {
+	    this.userListener.remove();
+	    this.yardListener.remove();
+	  },
+	  render: function () {
+	    return React.createElement(
+	      "div",
+	      null,
+	      React.createElement(
+	        "div",
+	        null,
+	        "This is a users show page Yay!"
+	      ),
+	      React.createElement(
+	        "p",
+	        null,
+	        " Welcome to your page, ",
+	        this.state.user.fname
+	      ),
+	      React.createElement(
+	        "p",
+	        null,
+	        "Your name is ",
+	        this.state.user.fname,
+	        " ",
+	        this.state.user.lname
+	      ),
+	      React.createElement("img", { src: this.state.user.main_pic_url, className: "profile-show-pic" }),
+	      React.createElement(
+	        "ul",
+	        null,
+	        "Your yards are : ",
+	        React.createElement("br", null),
+	        this.state.yards.map(function (yard) {
+	          return React.createElement(YardListItem, { yard: yard, key: yard.id });
+	        })
+	      )
+	    );
+	  }
+	});
+	
+	module.exports = ProfileEdit;
+
+/***/ },
+/* 261 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
@@ -33200,94 +33252,48 @@
 	module.exports = YardListItem;
 
 /***/ },
-/* 261 */
+/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var NavBar = __webpack_require__(253);
-	var UserStore = __webpack_require__(246);
-	var ApiUtil = __webpack_require__(182);
-	var History = __webpack_require__(188).History;
-	var YardListItem = __webpack_require__(260);
+	var Map = __webpack_require__(245);
+	var YardsIndex = __webpack_require__(186);
 	var YardStore = __webpack_require__(159);
 	
-	var ProfileEdit = React.createClass({
-	  displayName: "ProfileEdit",
+	var SearchIndex = React.createClass({
+	  displayName: 'SearchIndex',
 	
-	  mixins: [History],
-	
-	  _onChange: function () {
-	    var currentUser = UserStore.currentUser();
-	    this.fetchAfterDelete();
-	    console.log("one");
-	    console.log("on change userdetail", currentUser);
-	    this.setState({ yards: currentUser.yards, user: currentUser });
-	  },
-	  _onDelete: function () {
-	    console.log("user detail on delete");
-	    this.setState({ yards: YardStore.findById(this.state.user.id) });
-	  },
-	  fetchAfterDelete: function () {
-	    var bounds = { northEast: { lat: 84.9, lng: 180 }, southWest: { lat: -85, lng: -180 } };
-	    ApiUtil.fetchYards(bounds);
-	  },
-	  getInitialState: function () {
-	    console.log("initial state userdetail");
-	    UserStore.fetchCurrentUser();
-	    return { user: {}, yards: [] };
-	  },
-	  componentDidMount: function () {
-	    this.userListener = UserStore.addListener(this._onChange);
-	    // ApiUtil.fetchCurrentUser();
-	    this.yardListener = YardStore.addListener(this._onDelete);
-	    // ApiUtil.fetchYards();
-	  },
-	  // componentWillReceiveProps: function(newProps){
-	  //   ApiUtil.fetchCurrentUser();
+	  // getInitialState: function(){
+	  //   return {yards: YardStore.all() }
 	  // },
-	  componentWillUnmount: function () {
-	    this.userListener.remove();
-	    this.yardListener.remove();
-	  },
+	  // componentDidMount: function(){
+	  //   this.yardListener = YardStore.addListener(this._onChange);
+	  // },
+	  // componentWillUnmout: function(){
+	  //   YardStore.yardListener.remove();
+	  // },
+	  // _onChange: function(){
+	  //   this.setState({yards: YardStore.all() })
+	  // },
 	  render: function () {
 	    return React.createElement(
-	      "div",
-	      null,
-	      React.createElement(NavBar, null),
+	      'div',
+	      { className: 'container-fluid below-nav' },
 	      React.createElement(
-	        "div",
-	        null,
-	        "This is a users show page Yay!"
+	        'div',
+	        { className: 'col-md-7' },
+	        React.createElement(YardsIndex, null)
 	      ),
 	      React.createElement(
-	        "p",
-	        null,
-	        " Welcome to your page, ",
-	        this.state.user.fname
-	      ),
-	      React.createElement(
-	        "p",
-	        null,
-	        "Your name is ",
-	        this.state.user.fname,
-	        " ",
-	        this.state.user.lname
-	      ),
-	      React.createElement("img", { src: this.state.user.main_pic_url, className: "profile-show-pic" }),
-	      React.createElement(
-	        "ul",
-	        null,
-	        "Your yards are : ",
-	        React.createElement("br", null),
-	        this.state.yards.map(function (yard) {
-	          return React.createElement(YardListItem, { yard: yard, key: yard.id });
-	        })
+	        'div',
+	        { className: 'col-md-5 hidden-xs search-map canvas-for-search-index', id: 'map-canvas' },
+	        React.createElement(Map, null)
 	      )
 	    );
 	  }
 	});
 	
-	module.exports = ProfileEdit;
+	module.exports = SearchIndex;
 
 /***/ }
 /******/ ]);

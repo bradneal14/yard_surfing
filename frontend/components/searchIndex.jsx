@@ -3,7 +3,7 @@ var Map = require('./map');
 var YardsIndex = require('./YardsIndex');
 var YardStore = require('../stores/yard');
 
-var Search = React.createClass({
+var SearchIndex = React.createClass({
   // getInitialState: function(){
   //   return {yards: YardStore.all() }
   // },
@@ -18,13 +18,16 @@ var Search = React.createClass({
   // },
   render: function(){
     return (
-      <div className="col-xs-12">
-        <p>Here we are in search</p>
-        <YardsIndex></YardsIndex>
-        <Map></Map>
+      <div className="container-fluid below-nav">
+        <div className="col-md-7">
+          <YardsIndex></YardsIndex>
+        </div>
+        <div className="col-md-5 hidden-xs search-map canvas-for-search-index" id="map-canvas">
+          <Map></Map>
+        </div>
       </div>
     );
   }
 });
 
-module.exports = Search;
+module.exports = SearchIndex;

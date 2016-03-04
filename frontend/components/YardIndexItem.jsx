@@ -9,7 +9,7 @@ var YardIndexItem = React.createClass({
     this.history.push("yard/" + this.props.yard.id);
   },
   render: function(){
-    if(this.props.yard.yard_photos){
+    if(this.props.yard.yard_photos.length !== 0){
       var photo = <img className="img-thumbnail index-image" src={this.props.yard.yard_photos[0].yard_pic_url}></img>;
     } else {
       var photo = "";

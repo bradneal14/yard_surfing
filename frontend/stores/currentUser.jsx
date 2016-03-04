@@ -29,6 +29,15 @@ UserStore.__onDispatch = function(payload){
   }
 };
 
+
+UserStore.clearOwner = function(){
+  _owner = [];
+};
+
+UserStore.clearUserById = function(){
+  _userById = [];
+};
+
 UserStore.receiveYardOwner = function(user){
   _owner = [user];
 };
