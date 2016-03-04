@@ -9,6 +9,7 @@ var YardDetail = require('./components/yardDetail');
 var hashHistory = require('react-router').hashHistory;
 var App = require('./components/App');
 var userDetail = require('./components/userDetail');
+var profileEdit = require("./components/profileEdit");
 
 var ReactRouter = require('react-router');
 var Router = ReactRouter.Router;
@@ -24,6 +25,7 @@ var routes = (
    <Route path="/yards/new" component={YardForm}></Route>
    <Route path="/yard/:yardId" component={YardDetail}></Route>
    <Route path="/users/:userId" component={userDetail}></Route>
+   <Route path="/edit_profile" component={profileEdit}></Route>
  </Router>
  );
 

@@ -11,58 +11,111 @@ var yardDetail = React.createClass({
   mixins: [History],
 
   _onChange: function(){
-    this.setState({yard: YardStore.find(this.props.params.yardId), user: UserStore.currentUser() });
+    if (this.state.yard){
+      console.log("in the yes of the if");
+      UserStore.fetchCurrentOwner(this.state.yard.user_id);
+      this.setState({yard: YardStore.find(this.props.params.yardId), user: UserStore.currentUser(), owner: UserStore.currentOwner() });
+    } else {
+      console.log("in the no of the if");
+      this.setState({yard: YardStore.find(this.props.params.yardId), user: UserStore.currentUser(), owner: "tom"});
+      ApiUtil.fetchOwnerById(this.state.yard.user_id);
+    }
   },
   getInitialState: function(){
     UserStore.fetchCurrentUser();
-    return {yard: YardStore.find(this.props.params.yardId), user: UserStore.currentUser() };
+    return {yard: YardStore.find(this.props.params.yardId), user: UserStore.currentUser(), owner: "harrison" };
   },
   componentWillReceiveProps: function(newProps){
     ApiUtil.fetchSingleYard(newProps.params.yardId);
   },
   componentDidMount: function(){
-    this.yardListener = YardStore.addListener(this._onChange);
     ApiUtil.fetchSingleYard(this.props.params.yardId);
-    // this.userListener = UserStore.addListener(this._onChange);
+    this.yardListener = YardStore.addListener(this._onChange);
+    this.userListener = UserStore.addListener(this._onChange);
+    ApiUtil.fetchOwnerById(this.state.yard.user_id);
     // ApiUtil.fetchSingleYard(parseInt(newProps.params.yardId));
   },
   componentWillUnmount: function(){
     this.yardListener.remove();
-    // UserStore.userListener.remove();
+    this.userListener.remove();
   },
   navigateHome: function(){
     this.history.push("/");
+  },
+  sendToOwnerShow: function(event){
+    event.preventDefault();
+    this.history.push("/users/" + this.state.yard.user_id);
   },
   render: function(){
     if (!this.state.user && !this.state.yard){
       return (<div>loading....</div>);
     }
-    var photoDivStyle = {
+    var coverPhotoDivStyle = {
       backgroundImage: 'url(' + this.state.yard.yard_photos[0].yard_pic_url + ')'
+    };
+    var userPhotoDivStyle = {
+      backgroundImage: 'url(' + this.state.owner.main_pic_url + ')'
     };
     return(
       <div>
         <NavBar className="col-sm-12"></NavBar>
-        <div className="wide-jumbo" style={photoDivStyle}/>
+        <div className="wide-jumbo" style={coverPhotoDivStyle}/>
         <div className="pull-right col-sm-5 col-xs-10 col-md-5 col-lg-5">
           <BookingReqBox className="" yard={this.state.yard} user={this.state.user}></BookingReqBox>
-          <div className="">
-            <br/>
-            <Map id="map-formatting-yard-show" yard={this.props.params.yardId} ></Map>
-          </div>
         </div>
         <div className="">
           <div className="">
-            <p>The back of the carter: Yard Detail forr {this.state.yard.title}</p>
+            <div className="yard-detail-owner-image-div" style={userPhotoDivStyle} onClick={this.sendToOwnerShow}/>
+            <p>The back of the carter: Yard Detail for {this.state.yard.title}</p>
             <p>Title: {this.state.yard.title}</p>
             <p>Description: {this.state.yard.description}</p>
-            <p>Owner's Name: {this.state.yard.user_id}</p>
+            <p>Owner's Name: {this.state.owner.fname}</p>
             <p>Lat: {this.state.yard.lat}</p>
             <p>Long: {this.state.yard.lng}</p>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+
             <button onClick={this.navigateHome} className="btn btn-success  top-buffer left-buffer">Back to all</button>
           </div>
         </div>
         {this.props.children}
+        <section>
+          <div className="map-formatting-yard-show">
+            <br/>
+            <div className="text-center bugaboo">
+              <Map yard={this.props.params.yardId}></Map>
+            </div>
+          </div>
+        </section>
       </div>
     );
   }

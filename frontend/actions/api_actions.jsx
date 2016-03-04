@@ -31,6 +31,14 @@ var ApiActions = {
   handleErrors: function(data){
     var payload = {actionType: BookingConstants.RENDER_ERROR, errors: data};
     AppDispatcher.dispatch(payload);
+  },
+  receiveOwnerById: function(data){
+    var payload = {actionType: UserConstants.RECEIVE_OWNER_BY_ID, user: data};
+    AppDispatcher.dispatch(payload);
+  },
+  receiveUserById: function(data){
+    var payload = {actionType: UserConstants.RECEIVE_USER_BY_ID, user: data};
+    AppDispatcher.dispatch(payload);
   }
 };
 

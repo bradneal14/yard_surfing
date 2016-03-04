@@ -73,6 +73,24 @@ var ApiUtil = {
         ApiActions.handleErrors(data);
       }
     });
+  },
+  fetchOwnerById: function(id){
+    $.ajax({
+      url: "api/users/" + id,
+      type:"GET",
+      success: function(data){
+        ApiActions.receiveOwnerById(data);
+      }
+    });
+  },
+  fetchUserById: function(id){
+    $.ajax({
+      url: "api/users/" + id,
+      type:"GET",
+      success: function(data){
+        ApiActions.receiveUserById(data);
+      }
+    });
   }
 
 

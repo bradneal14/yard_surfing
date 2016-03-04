@@ -50,7 +50,7 @@ var BookingReqBox = React.createClass({
     return(
       <div className="panel panel-primary display-center panel-no-border">
         <div className="panel-heading">
-          <text className="panel-title" >Want to crash at {this.props.yard.title}?</text>
+          <text className="panel-title">Want to crash at {this.props.yard.title}?</text>
         </div>
         <div className="panel-body">
           <form className="" onSubmit={this.handleSubmit} id="bookingReqForm">

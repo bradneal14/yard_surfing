@@ -55,6 +55,7 @@
 	var hashHistory = __webpack_require__(188).hashHistory;
 	var App = __webpack_require__(257);
 	var userDetail = __webpack_require__(259);
+	var profileEdit = __webpack_require__(261);
 	
 	var ReactRouter = __webpack_require__(188);
 	var Router = ReactRouter.Router;
@@ -71,7 +72,8 @@
 	  ),
 	  React.createElement(Route, { path: '/yards/new', component: YardForm }),
 	  React.createElement(Route, { path: '/yard/:yardId', component: YardDetail }),
-	  React.createElement(Route, { path: '/users/:userId', component: userDetail })
+	  React.createElement(Route, { path: '/users/:userId', component: userDetail }),
+	  React.createElement(Route, { path: '/edit_profile', component: profileEdit })
 	);
 	
 	document.addEventListener('DOMContentLoaded', function () {
@@ -26610,6 +26612,24 @@
 	        ApiActions.handleErrors(data);
 	      }
 	    });
+	  },
+	  fetchOwnerById: function (id) {
+	    $.ajax({
+	      url: "api/users/" + id,
+	      type: "GET",
+	      success: function (data) {
+	        ApiActions.receiveOwnerById(data);
+	      }
+	    });
+	  },
+	  fetchUserById: function (id) {
+	    $.ajax({
+	      url: "api/users/" + id,
+	      type: "GET",
+	      success: function (data) {
+	        ApiActions.receiveUserById(data);
+	      }
+	    });
 	  }
 	
 	  // createYard: function(data){
@@ -26658,6 +26678,14 @@
 	  handleErrors: function (data) {
 	    var payload = { actionType: BookingConstants.RENDER_ERROR, errors: data };
 	    AppDispatcher.dispatch(payload);
+	  },
+	  receiveOwnerById: function (data) {
+	    var payload = { actionType: UserConstants.RECEIVE_OWNER_BY_ID, user: data };
+	    AppDispatcher.dispatch(payload);
+	  },
+	  receiveUserById: function (data) {
+	    var payload = { actionType: UserConstants.RECEIVE_USER_BY_ID, user: data };
+	    AppDispatcher.dispatch(payload);
 	  }
 	};
 	
@@ -26668,7 +26696,9 @@
 /***/ function(module, exports) {
 
 	var UserConstants = {
-	  CURRENT_USER: "CURRENT_USER"
+	  CURRENT_USER: "CURRENT_USER",
+	  RECEIVE_OWNER_BY_ID: "RECEIVE_OWNER_BY_ID",
+	  RECEIVE_USER_BY_ID: "RECEIVE_USER_BY_ID"
 	};
 	
 	module.exports = UserConstants;
@@ -31955,7 +31985,9 @@
 	var UserConstants = __webpack_require__(184);
 	var ApiUtil = __webpack_require__(182);
 	
-	var _user = [];
+	var _user = []; //current user
+	var _owner = [];
+	var _userById = [];
 	
 	var UserStore = new Store(AppDispatcher);
 	
@@ -31965,19 +31997,59 @@
 	      UserStore.receiveCurrentUser(payload.user);
 	      UserStore.__emitChange();
 	      break;
+	    case UserConstants.RECEIVE_OWNER_BY_ID:
+	      console.log("in user store", payload);
+	      UserStore.receiveYardOwner(payload.user);
+	      UserStore.__emitChange();
+	      break;
+	    case UserConstants.RECEIVE_USER_BY_ID:
+	      console.log("we are where we want to be");
+	      UserStore.receiveUserById(payload.user);
+	      UserStore.__emitChange();
+	      break;
 	  }
+	};
+	
+	UserStore.receiveYardOwner = function (user) {
+	  _owner = [user];
+	};
+	
+	UserStore.receiveUserById = function (user) {
+	  _userById = [user];
 	};
 	
 	UserStore.receiveCurrentUser = function (user) {
 	  _user = [user];
 	};
 	
+	UserStore.fetchUserById = function (id) {
+	  if (_userById.length === 0) {
+	    ApiUtil.fetchUserById(id);
+	  }
+	};
+	
 	UserStore.fetchCurrentUser = function () {
 	  if (_user.length === 0) {
 	    ApiUtil.fetchCurrentUser();
 	  }
-	}, UserStore.currentUser = function () {
+	};
+	
+	UserStore.fetchCurrentOwner = function (id) {
+	  if (_owner.length === 0) {
+	    ApiUtil.fetchOwnerById(id);
+	  }
+	};
+	
+	UserStore.currentOwner = function () {
+	  return _owner[0];
+	};
+	
+	UserStore.currentUser = function () {
 	  return _user[0];
+	};
+	
+	UserStore.userById = function () {
+	  return _userById[0];
 	};
 	
 	module.exports = UserStore;
@@ -32550,27 +32622,40 @@
 	  mixins: [History],
 	
 	  _onChange: function () {
-	    this.setState({ yard: YardStore.find(this.props.params.yardId), user: UserStore.currentUser() });
+	    if (this.state.yard) {
+	      console.log("in the yes of the if");
+	      UserStore.fetchCurrentOwner(this.state.yard.user_id);
+	      this.setState({ yard: YardStore.find(this.props.params.yardId), user: UserStore.currentUser(), owner: UserStore.currentOwner() });
+	    } else {
+	      console.log("in the no of the if");
+	      this.setState({ yard: YardStore.find(this.props.params.yardId), user: UserStore.currentUser(), owner: "tom" });
+	      ApiUtil.fetchOwnerById(this.state.yard.user_id);
+	    }
 	  },
 	  getInitialState: function () {
 	    UserStore.fetchCurrentUser();
-	    return { yard: YardStore.find(this.props.params.yardId), user: UserStore.currentUser() };
+	    return { yard: YardStore.find(this.props.params.yardId), user: UserStore.currentUser(), owner: "harrison" };
 	  },
 	  componentWillReceiveProps: function (newProps) {
 	    ApiUtil.fetchSingleYard(newProps.params.yardId);
 	  },
 	  componentDidMount: function () {
-	    this.yardListener = YardStore.addListener(this._onChange);
 	    ApiUtil.fetchSingleYard(this.props.params.yardId);
-	    // this.userListener = UserStore.addListener(this._onChange);
+	    this.yardListener = YardStore.addListener(this._onChange);
+	    this.userListener = UserStore.addListener(this._onChange);
+	    ApiUtil.fetchOwnerById(this.state.yard.user_id);
 	    // ApiUtil.fetchSingleYard(parseInt(newProps.params.yardId));
 	  },
 	  componentWillUnmount: function () {
 	    this.yardListener.remove();
-	    // UserStore.userListener.remove();
+	    this.userListener.remove();
 	  },
 	  navigateHome: function () {
 	    this.history.push("/");
+	  },
+	  sendToOwnerShow: function (event) {
+	    event.preventDefault();
+	    this.history.push("/users/" + this.state.yard.user_id);
 	  },
 	  render: function () {
 	    if (!this.state.user && !this.state.yard) {
@@ -32580,24 +32665,21 @@
 	        'loading....'
 	      );
 	    }
-	    var photoDivStyle = {
+	    var coverPhotoDivStyle = {
 	      backgroundImage: 'url(' + this.state.yard.yard_photos[0].yard_pic_url + ')'
+	    };
+	    var userPhotoDivStyle = {
+	      backgroundImage: 'url(' + this.state.owner.main_pic_url + ')'
 	    };
 	    return React.createElement(
 	      'div',
 	      null,
 	      React.createElement(NavBar, { className: 'col-sm-12' }),
-	      React.createElement('div', { className: 'wide-jumbo', style: photoDivStyle }),
+	      React.createElement('div', { className: 'wide-jumbo', style: coverPhotoDivStyle }),
 	      React.createElement(
 	        'div',
 	        { className: 'pull-right col-sm-5 col-xs-10 col-md-5 col-lg-5' },
-	        React.createElement(BookingReqBox, { className: '', yard: this.state.yard, user: this.state.user }),
-	        React.createElement(
-	          'div',
-	          { className: '' },
-	          React.createElement('br', null),
-	          React.createElement(Map, { id: 'map-formatting-yard-show', yard: this.props.params.yardId })
-	        )
+	        React.createElement(BookingReqBox, { className: '', yard: this.state.yard, user: this.state.user })
 	      ),
 	      React.createElement(
 	        'div',
@@ -32605,10 +32687,11 @@
 	        React.createElement(
 	          'div',
 	          { className: '' },
+	          React.createElement('div', { className: 'yard-detail-owner-image-div', style: userPhotoDivStyle, onClick: this.sendToOwnerShow }),
 	          React.createElement(
 	            'p',
 	            null,
-	            'The back of the carter: Yard Detail forr ',
+	            'The back of the carter: Yard Detail for ',
 	            this.state.yard.title
 	          ),
 	          React.createElement(
@@ -32627,7 +32710,7 @@
 	            'p',
 	            null,
 	            'Owner\'s Name: ',
-	            this.state.yard.user_id
+	            this.state.owner.fname
 	          ),
 	          React.createElement(
 	            'p',
@@ -32641,6 +32724,37 @@
 	            'Long: ',
 	            this.state.yard.lng
 	          ),
+	          React.createElement('br', null),
+	          React.createElement('br', null),
+	          React.createElement('br', null),
+	          React.createElement('br', null),
+	          React.createElement('br', null),
+	          React.createElement('br', null),
+	          React.createElement('br', null),
+	          React.createElement('br', null),
+	          React.createElement('br', null),
+	          React.createElement('br', null),
+	          React.createElement('br', null),
+	          React.createElement('br', null),
+	          React.createElement('br', null),
+	          React.createElement('br', null),
+	          React.createElement('br', null),
+	          React.createElement('br', null),
+	          React.createElement('br', null),
+	          React.createElement('br', null),
+	          React.createElement('br', null),
+	          React.createElement('br', null),
+	          React.createElement('br', null),
+	          React.createElement('br', null),
+	          React.createElement('br', null),
+	          React.createElement('br', null),
+	          React.createElement('br', null),
+	          React.createElement('br', null),
+	          React.createElement('br', null),
+	          React.createElement('br', null),
+	          React.createElement('br', null),
+	          React.createElement('br', null),
+	          React.createElement('br', null),
 	          React.createElement(
 	            'button',
 	            { onClick: this.navigateHome, className: 'btn btn-success  top-buffer left-buffer' },
@@ -32648,7 +32762,21 @@
 	          )
 	        )
 	      ),
-	      this.props.children
+	      this.props.children,
+	      React.createElement(
+	        'section',
+	        null,
+	        React.createElement(
+	          'div',
+	          { className: 'map-formatting-yard-show' },
+	          React.createElement('br', null),
+	          React.createElement(
+	            'div',
+	            { className: 'text-center bugaboo' },
+	            React.createElement(Map, { yard: this.props.params.yardId })
+	          )
+	        )
+	      )
 	    );
 	  }
 	});
@@ -32934,11 +33062,181 @@
 	var UserStore = __webpack_require__(246);
 	var ApiUtil = __webpack_require__(182);
 	var History = __webpack_require__(188).History;
-	var YardListItem = __webpack_require__(260);
-	var YardStore = __webpack_require__(159);
 	
 	var UserDetail = React.createClass({
 	  displayName: "UserDetail",
+	
+	  mixins: [History],
+	
+	  getInitialState: function () {
+	    return { user: UserStore.userById(), currentUser: UserStore.currentUser(), friends: false };
+	  },
+	
+	  doIt: function () {
+	    console.log("STATE", this.state);
+	    ApiUtil.fetchUserById(this.props.params.userId);
+	    ApiUtil.fetchCurrentUser();
+	  },
+	  _onChange: function () {
+	    this.setState({ user: UserStore.userById(), currentUser: UserStore.currentUser() });
+	  },
+	  componentWillMount: function () {
+	    ApiUtil.fetchUserById(this.props.params.userId);
+	    ApiUtil.fetchCurrentUser();
+	  },
+	  componentDidMount: function () {
+	    this.userListener = UserStore.addListener(this._onChange);
+	    ApiUtil.fetchUserById(this.props.params.userId);
+	  },
+	  componentWillUnmount: function () {
+	    console.log("user show unmounting");
+	    this.userListener.remove();
+	  },
+	  componentWillReceiveProps: function (newProps) {
+	    ApiUtil.fetchUserById(this.props.params.userId);
+	  },
+	  handleAddFriend: function () {
+	    var button = React.createElement(
+	      "button",
+	      { className: "btn btn-warning" },
+	      "Friend Requested"
+	    );
+	  },
+	  handleEdit: function () {
+	    this.history.push("/edit_profile");
+	  },
+	  buttonToggle: function () {
+	    this.setState({ friends: true });
+	  },
+	  render: function () {
+	    if (!this.state.user) {
+	      return React.createElement(
+	        "div",
+	        null,
+	        "Loading.."
+	      );
+	    }
+	    var profileImageShowDiv = {
+	      backgroundImage: 'url(' + this.state.user.main_pic_url + ')'
+	    };
+	    if (this.state.user.id === this.state.currentUser.id) {
+	      var editButton = React.createElement(
+	        "button",
+	        { onClick: this.handleEdit, className: "btn btn-success" },
+	        "Edit Profile"
+	      );
+	    }
+	    if (this.state.user.id !== this.state.currentUser.id) {
+	      if (this.state.friends === false) {
+	        var friendButton = React.createElement(
+	          "button",
+	          { className: "btn btn-danger", onClick: this.buttonToggle },
+	          "Add Friend"
+	        );
+	      } else {
+	        var friendButton = React.createElement(
+	          "button",
+	          { className: "btn btn-success" },
+	          "Request Pending"
+	        );
+	      }
+	    }
+	    return React.createElement(
+	      "div",
+	      null,
+	      React.createElement(NavBar, null),
+	      React.createElement(
+	        "div",
+	        null,
+	        "This is a users show page Yay!"
+	      ),
+	      React.createElement(
+	        "p",
+	        null,
+	        " Welcome to the page of ",
+	        this.state.user.fname,
+	        " ",
+	        this.state.user.lname
+	      ),
+	      React.createElement("div", { className: "profile-show-pic", style: profileImageShowDiv }),
+	      React.createElement(
+	        "button",
+	        { onClick: this.doIt, className: "btn btn-danger" },
+	        "Click me to see state"
+	      ),
+	      editButton,
+	      friendButton
+	    );
+	  }
+	});
+	
+	module.exports = UserDetail;
+
+/***/ },
+/* 260 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var History = __webpack_require__(188).History;
+	var UserStore = __webpack_require__(246);
+	var YardStore = __webpack_require__(159);
+	var ApiUtil = __webpack_require__(182);
+	
+	var YardListItem = React.createClass({
+	  displayName: 'YardListItem',
+	
+	  mixins: [History],
+	  showDetail: function () {
+	    // ApiUtil.fetchYards();
+	    this.history.push("yard/" + this.props.yard.id);
+	  },
+	  removeYard: function (event) {
+	    event.preventDefault();
+	    ApiUtil.removeYard(this.props.yard.id);
+	    this.history.push("users/" + this.state.user.id);
+	    //added all this user state stuff in order to redirect back to user show page
+	    //after deleting a yard. there must be an easier way to delete immediately
+	  },
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      { className: 'col-sm-3 row' },
+	      React.createElement(
+	        'li',
+	        { onClick: this.showDetail, className: 'list-group-item' },
+	        React.createElement(
+	          'p',
+	          null,
+	          this.props.yard.title,
+	          ' : ',
+	          this.props.yard.description
+	        )
+	      ),
+	      React.createElement(
+	        'button',
+	        { onClick: this.removeYard, className: 'btn btn-success left-buffer' },
+	        'Delete Yard'
+	      )
+	    );
+	  }
+	});
+	
+	module.exports = YardListItem;
+
+/***/ },
+/* 261 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var NavBar = __webpack_require__(253);
+	var UserStore = __webpack_require__(246);
+	var ApiUtil = __webpack_require__(182);
+	var History = __webpack_require__(188).History;
+	var YardListItem = __webpack_require__(260);
+	var YardStore = __webpack_require__(159);
+	
+	var ProfileEdit = React.createClass({
+	  displayName: "ProfileEdit",
 	
 	  mixins: [History],
 	
@@ -32999,7 +33297,7 @@
 	        " ",
 	        this.state.user.lname
 	      ),
-	      React.createElement("img", { src: this.state.user.main_pic_url }),
+	      React.createElement("img", { src: this.state.user.main_pic_url, className: "profile-show-pic" }),
 	      React.createElement(
 	        "ul",
 	        null,
@@ -33013,58 +33311,7 @@
 	  }
 	});
 	
-	module.exports = UserDetail;
-
-/***/ },
-/* 260 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	var History = __webpack_require__(188).History;
-	var UserStore = __webpack_require__(246);
-	var YardStore = __webpack_require__(159);
-	var ApiUtil = __webpack_require__(182);
-	
-	var YardListItem = React.createClass({
-	  displayName: 'YardListItem',
-	
-	  mixins: [History],
-	  showDetail: function () {
-	    // ApiUtil.fetchYards();
-	    this.history.push("yard/" + this.props.yard.id);
-	  },
-	  removeYard: function (event) {
-	    event.preventDefault();
-	    ApiUtil.removeYard(this.props.yard.id);
-	    this.history.push("users/" + this.state.user.id);
-	    //added all this user state stuff in order to redirect back to user show page
-	    //after deleting a yard. there must be an easier way to delete immediately
-	  },
-	  render: function () {
-	    return React.createElement(
-	      'div',
-	      { className: 'col-sm-3 row' },
-	      React.createElement(
-	        'li',
-	        { onClick: this.showDetail, className: 'list-group-item' },
-	        React.createElement(
-	          'p',
-	          null,
-	          this.props.yard.title,
-	          ' : ',
-	          this.props.yard.description
-	        )
-	      ),
-	      React.createElement(
-	        'button',
-	        { onClick: this.removeYard, className: 'btn btn-success left-buffer' },
-	        'Delete Yard'
-	      )
-	    );
-	  }
-	});
-	
-	module.exports = YardListItem;
+	module.exports = ProfileEdit;
 
 /***/ }
 /******/ ]);
