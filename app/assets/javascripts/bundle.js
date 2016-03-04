@@ -32724,37 +32724,6 @@
 	            'Long: ',
 	            this.state.yard.lng
 	          ),
-	          React.createElement('br', null),
-	          React.createElement('br', null),
-	          React.createElement('br', null),
-	          React.createElement('br', null),
-	          React.createElement('br', null),
-	          React.createElement('br', null),
-	          React.createElement('br', null),
-	          React.createElement('br', null),
-	          React.createElement('br', null),
-	          React.createElement('br', null),
-	          React.createElement('br', null),
-	          React.createElement('br', null),
-	          React.createElement('br', null),
-	          React.createElement('br', null),
-	          React.createElement('br', null),
-	          React.createElement('br', null),
-	          React.createElement('br', null),
-	          React.createElement('br', null),
-	          React.createElement('br', null),
-	          React.createElement('br', null),
-	          React.createElement('br', null),
-	          React.createElement('br', null),
-	          React.createElement('br', null),
-	          React.createElement('br', null),
-	          React.createElement('br', null),
-	          React.createElement('br', null),
-	          React.createElement('br', null),
-	          React.createElement('br', null),
-	          React.createElement('br', null),
-	          React.createElement('br', null),
-	          React.createElement('br', null),
 	          React.createElement(
 	            'button',
 	            { onClick: this.navigateHome, className: 'btn btn-success  top-buffer left-buffer' },
@@ -32764,17 +32733,22 @@
 	      ),
 	      this.props.children,
 	      React.createElement(
-	        'section',
-	        null,
+	        'div',
+	        { id: 'overlay' },
+	        React.createElement(
+	          'h2',
+	          null,
+	          'Location, Location, Location..'
+	        ),
+	        React.createElement(
+	          'p',
+	          null,
+	          'Where will you be staying?'
+	        ),
 	        React.createElement(
 	          'div',
-	          { className: 'map-formatting-yard-show' },
-	          React.createElement('br', null),
-	          React.createElement(
-	            'div',
-	            { className: 'text-center bugaboo' },
-	            React.createElement(Map, { yard: this.props.params.yardId })
-	          )
+	          { className: 'theMap' },
+	          React.createElement(Map, { yard: this.props.params.yardId })
 	        )
 	      )
 	    );

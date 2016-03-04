@@ -72,50 +72,18 @@ var yardDetail = React.createClass({
             <p>Owner's Name: {this.state.owner.fname}</p>
             <p>Lat: {this.state.yard.lat}</p>
             <p>Long: {this.state.yard.lng}</p>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-
             <button onClick={this.navigateHome} className="btn btn-success  top-buffer left-buffer">Back to all</button>
           </div>
         </div>
         {this.props.children}
-        <section>
-          <div className="map-formatting-yard-show">
-            <br/>
-            <div className="text-center bugaboo">
-              <Map yard={this.props.params.yardId}></Map>
-            </div>
+        <div id="overlay">
+          <h2>Location, Location, Location..</h2>
+          <p>Where will you be staying?</p>
+          <div className="theMap">
+            <Map  yard={this.props.params.yardId}></Map>
           </div>
-        </section>
+        </div>
+      
       </div>
     );
   }
