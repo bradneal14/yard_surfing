@@ -5,19 +5,22 @@ var Map = require("./map");
 
 var YardIndexItem = React.createClass({
   mixins: [History],
+  do: function(){
+    console.log("STATE", this.state.owner.fname);
+  },
   showDetail: function(){
-    this.history.push("yard/" + this.props.yard.id);
+    this.history.push("/yard/" + this.props.yard.id);
   },
   render: function(){
-    if(this.props.yard.yard_photos.length !== 0){
-      var photo = <img className="img-thumbnail index-image" src={this.props.yard.yard_photos[0].yard_pic_url}></img>;
-    } else {
-      var photo = "";
-    }
-    return(
-      <li onClick={this.showDetail} id={"yard-" + this.props.yard.id} className="list-group-item col-lg-6 index-image-holder">
-        {photo}
-        <p>{this.props.yard.title} : {this.props.yard.description}</p>
+    var indexItemPhotoDivStyle = {
+      backgroundImage: 'url(' + this.props.yard.yard_photos[0].yard_pic_url + ')'
+    };
+    return (
+      <li className="list-group-item col-sm-6 col-xs-7 col-md-6 col-lg-6 underride" onClick={this.showDetail}>
+        <div className="wrapper">
+          <div className="main testing2" style={indexItemPhotoDivStyle}></div>
+          <text >Hello</text>
+        </div>
       </li>
     );
   }
@@ -25,3 +28,34 @@ var YardIndexItem = React.createClass({
 
 
 module.exports = YardIndexItem;
+
+{/*<div className="col-md-6">
+  <div className="" style={indexItemPhotoDivStyle}>
+  </div>
+  <div className="index-item-text">
+    <text>{this.props.yard.title} : {this.props.yard.description}</text>
+  </div>
+</div>*/}
+
+
+// if(this.props.yard.yard_photos.length !== 0){
+  // var indexItemPhotoDivStyle = {
+  //   backgroundImage: 'url(' + this.props.yard.yard_photos[0].yard_pic_url + ')'
+  // };
+// }
+// if (false){
+//   return <div>Loading..</div>;
+// } else
+// return(
+//   <li className="list-group-item col-sm-6 col-xs-12 col-md-6 col-lg-6 underride">
+    // <div className="wrapper">
+    //   <div className="main testing2" style={indexItemPhotoDivStyle}></div>
+    //   <text >Hello</text>
+    // </div>
+//     <div className="testing">
+//       <Text>{this.props}</Text>
+//     </div>
+//     <button className="btn btn-success" onClick={this.do}>Click for state</button>
+//   </li>
+// );
+// }

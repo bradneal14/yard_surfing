@@ -26728,7 +26728,6 @@
 	var ApiUtil = __webpack_require__(182);
 	var YardIndexItem = __webpack_require__(187);
 	var History = __webpack_require__(188).History;
-	var UserStore = __webpack_require__(246);
 	
 	var YardIndex = React.createClass({
 	  displayName: 'YardIndex',
@@ -26759,24 +26758,24 @@
 	    return React.createElement(
 	      'div',
 	      { className: '' },
+	      React.createElement('br', null),
 	      React.createElement(
 	        'ul',
 	        { className: 'list-group' },
-	        React.createElement('br', null),
 	        this.state.yards.map(function (yard) {
 	          return React.createElement(YardIndexItem, { yard: yard, key: yard.id });
-	        }),
+	        })
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'col-md-1' },
 	        React.createElement(
 	          'div',
-	          { className: 'col-md-3' },
+	          { className: '' },
 	          React.createElement(
-	            'div',
-	            { className: '' },
-	            React.createElement(
-	              'button',
-	              { onClick: this.handleNewYard, className: 'btn btn-success top-buffer' },
-	              'New Yard'
-	            )
+	            'button',
+	            { onClick: this.handleNewYard, className: 'btn btn-success top-buffer' },
+	            'New Yard'
 	          )
 	        )
 	      )
@@ -26799,31 +26798,64 @@
 	  displayName: 'YardIndexItem',
 	
 	  mixins: [History],
+	  do: function () {
+	    console.log("STATE", this.state.owner.fname);
+	  },
 	  showDetail: function () {
-	    this.history.push("yard/" + this.props.yard.id);
+	    this.history.push("/yard/" + this.props.yard.id);
 	  },
 	  render: function () {
-	    if (this.props.yard.yard_photos.length !== 0) {
-	      var photo = React.createElement('img', { className: 'img-thumbnail index-image', src: this.props.yard.yard_photos[0].yard_pic_url });
-	    } else {
-	      var photo = "";
-	    }
+	    var indexItemPhotoDivStyle = {
+	      backgroundImage: 'url(' + this.props.yard.yard_photos[0].yard_pic_url + ')'
+	    };
 	    return React.createElement(
 	      'li',
-	      { onClick: this.showDetail, id: "yard-" + this.props.yard.id, className: 'list-group-item col-lg-6 index-image-holder' },
-	      photo,
+	      { className: 'list-group-item col-sm-6 col-xs-7 col-md-6 col-lg-6 underride', onClick: this.showDetail },
 	      React.createElement(
-	        'p',
-	        null,
-	        this.props.yard.title,
-	        ' : ',
-	        this.props.yard.description
+	        'div',
+	        { className: 'wrapper' },
+	        React.createElement('div', { className: 'main testing2', style: indexItemPhotoDivStyle }),
+	        React.createElement(
+	          'text',
+	          null,
+	          'Hello'
+	        )
 	      )
 	    );
 	  }
 	});
 	
 	module.exports = YardIndexItem;
+	
+	{} /*<div className="col-md-6">
+	    <div className="" style={indexItemPhotoDivStyle}>
+	    </div>
+	    <div className="index-item-text">
+	      <text>{this.props.yard.title} : {this.props.yard.description}</text>
+	    </div>
+	   </div>*/
+
+	// if(this.props.yard.yard_photos.length !== 0){
+	// var indexItemPhotoDivStyle = {
+	//   backgroundImage: 'url(' + this.props.yard.yard_photos[0].yard_pic_url + ')'
+	// };
+	// }
+	// if (false){
+	//   return <div>Loading..</div>;
+	// } else
+	// return(
+	//   <li className="list-group-item col-sm-6 col-xs-12 col-md-6 col-lg-6 underride">
+	// <div className="wrapper">
+	//   <div className="main testing2" style={indexItemPhotoDivStyle}></div>
+	//   <text >Hello</text>
+	// </div>
+	//     <div className="testing">
+	//       <Text>{this.props}</Text>
+	//     </div>
+	//     <button className="btn btn-success" onClick={this.do}>Click for state</button>
+	//   </li>
+	// );
+	// }
 
 /***/ },
 /* 188 */
@@ -31866,7 +31898,7 @@
 	    console.log("map mounted");
 	    this.yardListener = YardStore.addListener(this._onChange);
 	    // UserStore.addListener(this._onChange);
-	    var mapDOMNode = document.getElementById("map_canvas");
+	    var mapDOMNode = this.refs.map;
 	    var mapOptions = {
 	      center: { lat: 37.7758, lng: -122.435 },
 	      zoom: 12,
@@ -32481,13 +32513,13 @@
 	  render: function () {
 	    return React.createElement(
 	      'nav',
-	      { className: 'navbar-default navbar-fixed-top red-bg-fill' },
+	      { className: 'navbar-default navbar-fixed-top' },
 	      React.createElement(
 	        'div',
-	        { className: 'container row' },
+	        { className: 'col-xs-12' },
 	        React.createElement(
 	          'div',
-	          { className: 'nav-header navbar-justified' },
+	          { className: 'navbar-left' },
 	          React.createElement(
 	            'a',
 	            { className: 'navbar-brand', onClick: this.navigateHome },
@@ -32495,42 +32527,46 @@
 	          )
 	        ),
 	        React.createElement(
-	          'ul',
-	          { className: 'nav navbar-nav' },
+	          'div',
+	          { className: 'navbar-right' },
 	          React.createElement(
-	            'li',
-	            null,
+	            'ul',
+	            { className: 'nav navbar-nav' },
 	            React.createElement(
-	              'a',
+	              'li',
 	              null,
-	              'Search'
-	            )
-	          ),
-	          React.createElement(
-	            'li',
-	            null,
+	              React.createElement(
+	                'a',
+	                null,
+	                'Search'
+	              )
+	            ),
 	            React.createElement(
-	              'a',
+	              'li',
 	              null,
-	              'My Properties'
-	            )
-	          ),
-	          React.createElement(
-	            'li',
-	            null,
+	              React.createElement(
+	                'a',
+	                null,
+	                'My Properties'
+	              )
+	            ),
 	            React.createElement(
-	              'a',
-	              { onClick: this.navigateToProfileShow },
-	              'My Profile '
-	            )
-	          ),
-	          React.createElement(
-	            'li',
-	            { className: 'nav navbar-nav navbar-right' },
+	              'li',
+	              null,
+	              React.createElement(
+	                'a',
+	                { onClick: this.navigateToProfileShow },
+	                'My Profile '
+	              )
+	            ),
 	            React.createElement(
-	              'a',
-	              { onClick: this.logoutUser },
-	              'Logout'
+	              'li',
+	              null,
+	              React.createElement(
+	                'a',
+	                { onClick: this.logoutUser },
+	                'Logout'
+	              )
 	            )
 	          )
 	        )
@@ -33281,12 +33317,25 @@
 	      { className: 'container-fluid below-nav' },
 	      React.createElement(
 	        'div',
-	        { className: 'col-md-7' },
-	        React.createElement(YardsIndex, null)
+	        { className: 'col-md-7 col-sm-7 col-xs-7 override' },
+	        React.createElement(
+	          'div',
+	          { className: 'filter-buttons text-center' },
+	          React.createElement(
+	            'h1',
+	            { className: 'override' },
+	            'This is where the filter buttons will be'
+	          )
+	        ),
+	        React.createElement(
+	          'div',
+	          { className: '' },
+	          React.createElement(YardsIndex, null)
+	        )
 	      ),
 	      React.createElement(
 	        'div',
-	        { className: 'col-md-5 hidden-xs search-map canvas-for-search-index', id: 'map-canvas' },
+	        { className: 'col-md-5 col-xs-5 search-map canvas-for-search-index', id: 'map-canvas' },
 	        React.createElement(Map, null)
 	      )
 	    );

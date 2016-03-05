@@ -22,11 +22,17 @@ class Yard < ActiveRecord::Base
 
   has_many :yard_photos
 
+  before_save :ensure_owner_pic
+
   def self.in_bounds(bounds)
     self.where("lat < ?", bounds[:northEast][:lat])
             .where("lat > ?", bounds[:southWest][:lat])
             .where("lng > ?", bounds[:southWest][:lng])
             .where("lng < ?", bounds[:northEast][:lng])
+  end
+
+  def ensure_owner_pic
+    self.owner_pic_url ||= self.user.main_pic_url
   end
 
 

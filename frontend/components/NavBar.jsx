@@ -31,21 +31,22 @@ var NavBar = React.createClass({
   },
   render: function(){
     return (
-      <nav className="navbar-default navbar-fixed-top red-bg-fill">
-        <div className="container row">
+      <nav className="navbar-default navbar-fixed-top">
+        <div className="col-xs-12">
 
-          <div className="nav-header navbar-justified">
+          <div className="navbar-left">
             <a className="navbar-brand" onClick={this.navigateHome}>
               YS
             </a>
           </div>
-
-          <ul className="nav navbar-nav">
-            <li><a>Search</a></li>
-            <li><a>My Properties</a></li>
-            <li><a onClick={this.navigateToProfileShow}>My Profile </a></li>
-            <li className="nav navbar-nav navbar-right"><a onClick={this.logoutUser}>Logout</a></li>
-          </ul>
+          <div className="navbar-right">
+            <ul className="nav navbar-nav">
+              <li><a>Search</a></li>
+              <li><a>My Properties</a></li>
+              <li><a onClick={this.navigateToProfileShow}>My Profile </a></li>
+              <li><a onClick={this.logoutUser}>Logout</a></li>
+            </ul>
+          </div>
         </div>
       </nav>
     );

@@ -1,3 +1,5 @@
+@import "bootstrap";
+
 .top-buffer {
   margin-top: 15px;
 }
@@ -13,6 +15,10 @@
   margin-right: 100px;
   float: right;
   border-radius: 3%;
+}
+
+.custom-loading-image{
+  background-image: asset-data-url("loading_image");
 }
 
 html, body, .container-fluid,#map_canvas {
@@ -43,10 +49,13 @@ html, body, .container-fluid, #map_canvas {
     width: 100%;
 }
 
+
+
 .canvas-for-search-index{
   border-top:50px solid #fff;
   border-bottom:5px solid #fff;
 }
+
 header {
     height:50px;
 }
@@ -164,7 +173,7 @@ footer {
 }
 
 .wide-jumbo {
-  margin-top: -10px;
+  margin-top: 50px;
   // display: block;
   // width:100%;
   height:500px;
@@ -173,13 +182,98 @@ footer {
   // overflow: hidden;
   background-position: center;
 }
-.index-image{
-  max-height: 250px;
-  max-width: 400px;
+
+.filter-buttons{
+  height: 150px;
+  background-color: #a2aa9d;
+}
+.list-item-no-border{
+  border-color: transparent !important;
+  position: relative;
+}
+
+
+.index-item-text{
+  color: red;
+  position: relative;
+}
+
+
+.navbar-collapse.collapse {
+display: block!important;
+}
+
+.navbar-nav>li, .navbar-nav {
+float: left !important;
+}
+
+.navbar-nav.navbar-right:last-child {
+margin-right: -15px !important;
+}
+
+.navbar-right {
+float: right!important;
+}
+
+.testing{
+  background-color: lightblue;
+  min-height: 40px;
+}
+
+.testing2{
+  background-color: lightgreen;
+  min-height: 50px;
+  min-width: 80px;
+  max-height: 300px;
+  max-width: 350px;
+  background-position: center;
+  background-size: cover;
+  border-top-left-radius: 5%;
+  border-top-right-radius: 5%;
+}
+
+.override{
+  margin-top: 0px;
+  padding: 0px;
+}
+
+.wrapper {
+  width: 100%;
+  /* whatever width you want */
+  display: inline-block;
+  position: relative;
+}
+.wrapper:after {
+  padding-top: 56.25%;
+  /* 16:9 ratio */
   display: block;
+  content: '';
+}
+.main {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  /* fill parent */
+  background-color: #b35b4f;
+  /* let's see it! */
+  color: white;
+}
+
+.underride{
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.index-image{
+  height: 300px;
+  width: 400px;
+  background-position: center;
+  background-size: cover;
   margin: 0 auto;
-  border: 0px;
-  border-radius: 15px;
+  border-radius: 3%;
+position: relative;
 }
 
 .yard-detail-owner-image-div{
@@ -238,7 +332,7 @@ footer {
 }
 
 .red-bg-fill{
-  background-color: #B35B4F
+  // background-color: #B35B4F
 }
 
 .black-bg-fill{
@@ -262,6 +356,7 @@ background-color: #030033;
 
 .navbar-default {
 background-color: #B35B4F;
+
 border-color: #030033;
 }
 

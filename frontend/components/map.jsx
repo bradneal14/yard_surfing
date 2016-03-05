@@ -8,7 +8,7 @@ var Map = React.createClass({
     console.log("map mounted");
     this.yardListener = YardStore.addListener(this._onChange);
     // UserStore.addListener(this._onChange);
-     var mapDOMNode = document.getElementById("map_canvas");
+     var mapDOMNode = this.refs.map;
      var mapOptions = {
        center: {lat: 37.7758, lng: -122.435},
        zoom: 12,
