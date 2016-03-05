@@ -32504,7 +32504,7 @@
 	          React.createElement(
 	            'a',
 	            { className: 'pull-left', onClick: this.navigateHome, style: cursorPointer },
-	            React.createElement('img', { src: '/public/white-tent-icon.png', className: 'small-icon' })
+	            React.createElement('img', { src: 'white-tent-icon.png', className: 'small-icon' })
 	          )
 	        ),
 	        React.createElement(
