@@ -9,7 +9,7 @@ var YardIndexItem = React.createClass({
     console.log("props", this.props.yard);
   },
   showDetail: function(){
-    // this.history.push("/yard/" + this.props.yard.id);
+    this.history.push("/yard/" + this.props.yard.id);
   },
   render: function(){
     var indexItemPhotoDivStyle = {

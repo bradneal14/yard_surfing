@@ -49,8 +49,8 @@
 	var YardStore = __webpack_require__(159);
 	var ApiUtil = __webpack_require__(182);
 	var YardIndex = __webpack_require__(186);
-	var SearchIndex = __webpack_require__(262);
-	var YardForm = __webpack_require__(248);
+	var SearchIndex = __webpack_require__(246);
+	var YardForm = __webpack_require__(247);
 	var YardDetail = __webpack_require__(254);
 	var hashHistory = __webpack_require__(188).hashHistory;
 	var App = __webpack_require__(257);
@@ -26789,7 +26789,7 @@
 	    console.log("props", this.props.yard);
 	  },
 	  showDetail: function () {
-	    // this.history.push("/yard/" + this.props.yard.id);
+	    this.history.push("/yard/" + this.props.yard.id);
 	  },
 	  render: function () {
 	    var indexItemPhotoDivStyle = {
@@ -31991,96 +31991,66 @@
 /* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Store = __webpack_require__(160).Store;
-	var AppDispatcher = __webpack_require__(178);
-	var UserConstants = __webpack_require__(184);
-	var ApiUtil = __webpack_require__(182);
+	var React = __webpack_require__(1);
+	var Map = __webpack_require__(245);
+	var YardsIndex = __webpack_require__(186);
+	var YardStore = __webpack_require__(159);
 	
-	var _user = []; //current user
-	var _owner = [];
-	var _userById = [];
+	var SearchIndex = React.createClass({
+	  displayName: 'SearchIndex',
 	
-	var UserStore = new Store(AppDispatcher);
-	
-	UserStore.__onDispatch = function (payload) {
-	  switch (payload.actionType) {
-	    case UserConstants.CURRENT_USER:
-	      UserStore.receiveCurrentUser(payload.user);
-	      UserStore.__emitChange();
-	      break;
-	    case UserConstants.RECEIVE_OWNER_BY_ID:
-	      console.log("in user store", payload);
-	      UserStore.receiveYardOwner(payload.user);
-	      UserStore.__emitChange();
-	      break;
-	    case UserConstants.RECEIVE_USER_BY_ID:
-	      console.log("we are where we want to be");
-	      UserStore.receiveUserById(payload.user);
-	      UserStore.__emitChange();
-	      break;
+	  // getInitialState: function(){
+	  //   return {yards: YardStore.all() }
+	  // },
+	  // componentDidMount: function(){
+	  //   this.yardListener = YardStore.addListener(this._onChange);
+	  // },
+	  // componentWillUnmout: function(){
+	  //   YardStore.yardListener.remove();
+	  // },
+	  // _onChange: function(){
+	  //   this.setState({yards: YardStore.all() })
+	  // },
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      { className: 'container-fluid below-nav' },
+	      React.createElement(
+	        'div',
+	        { className: 'col-md-7 col-sm-7 col-xs-7 override navy-fill' },
+	        React.createElement(
+	          'div',
+	          { className: 'filter-buttons text-center' },
+	          React.createElement(
+	            'h1',
+	            { className: 'override' },
+	            'This is where the filter buttons will be'
+	          )
+	        ),
+	        React.createElement(
+	          'div',
+	          { className: 'navy-fill' },
+	          React.createElement(YardsIndex, null)
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'col-md-5 col-xs-5 search-map canvas-for-search-index', id: 'map-canvas' },
+	        React.createElement(Map, null)
+	      )
+	    );
 	  }
-	};
+	});
 	
-	UserStore.clearOwner = function () {
-	  _owner = [];
-	};
-	
-	UserStore.clearUserById = function () {
-	  _userById = [];
-	};
-	
-	UserStore.receiveYardOwner = function (user) {
-	  _owner = [user];
-	};
-	
-	UserStore.receiveUserById = function (user) {
-	  _userById = [user];
-	};
-	
-	UserStore.receiveCurrentUser = function (user) {
-	  _user = [user];
-	};
-	
-	UserStore.fetchUserById = function (id) {
-	  if (_userById.length === 0) {
-	    ApiUtil.fetchUserById(id);
-	  }
-	};
-	
-	UserStore.fetchCurrentUser = function () {
-	  if (_user.length === 0) {
-	    ApiUtil.fetchCurrentUser();
-	  }
-	};
-	
-	UserStore.fetchCurrentOwner = function (id) {
-	  if (_owner.length === 0) {
-	    ApiUtil.fetchOwnerById(id);
-	  }
-	};
-	
-	UserStore.currentOwner = function () {
-	  return _owner[0];
-	};
-	
-	UserStore.currentUser = function () {
-	  return _user[0];
-	};
-	
-	UserStore.userById = function () {
-	  return _userById[0];
-	};
-	
-	module.exports = UserStore;
+	module.exports = SearchIndex;
 
 /***/ },
-/* 247 */,
-/* 248 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var LinkedStateMixin = __webpack_require__(249);
-	var NavBar = __webpack_require__(253);
+	var LinkedStateMixin = __webpack_require__(248);
+	var NavBar = __webpack_require__(252);
 	var ApiUtil = __webpack_require__(182);
 	
 	var YardForm = React.createClass({
@@ -32252,13 +32222,13 @@
 	module.exports = YardForm;
 
 /***/ },
-/* 249 */
+/* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(250);
+	module.exports = __webpack_require__(249);
 
 /***/ },
-/* 250 */
+/* 249 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -32275,8 +32245,8 @@
 	
 	'use strict';
 	
-	var ReactLink = __webpack_require__(251);
-	var ReactStateSetters = __webpack_require__(252);
+	var ReactLink = __webpack_require__(250);
+	var ReactStateSetters = __webpack_require__(251);
 	
 	/**
 	 * A simple mixin around ReactLink.forState().
@@ -32299,7 +32269,7 @@
 	module.exports = LinkedStateMixin;
 
 /***/ },
-/* 251 */
+/* 250 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -32373,7 +32343,7 @@
 	module.exports = ReactLink;
 
 /***/ },
-/* 252 */
+/* 251 */
 /***/ function(module, exports) {
 
 	/**
@@ -32482,12 +32452,12 @@
 	module.exports = ReactStateSetters;
 
 /***/ },
-/* 253 */
+/* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
 	var History = __webpack_require__(188).History;
-	var UserStore = __webpack_require__(246);
+	var UserStore = __webpack_require__(253);
 	var ApiUtil = __webpack_require__(182);
 	
 	var NavBar = React.createClass({
@@ -32571,16 +32541,102 @@
 	module.exports = NavBar;
 
 /***/ },
+/* 253 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Store = __webpack_require__(160).Store;
+	var AppDispatcher = __webpack_require__(178);
+	var UserConstants = __webpack_require__(184);
+	var ApiUtil = __webpack_require__(182);
+	
+	var _user = []; //current user
+	var _owner = [];
+	var _userById = [];
+	
+	var UserStore = new Store(AppDispatcher);
+	
+	UserStore.__onDispatch = function (payload) {
+	  switch (payload.actionType) {
+	    case UserConstants.CURRENT_USER:
+	      UserStore.receiveCurrentUser(payload.user);
+	      UserStore.__emitChange();
+	      break;
+	    case UserConstants.RECEIVE_OWNER_BY_ID:
+	      console.log("in user store", payload);
+	      UserStore.receiveYardOwner(payload.user);
+	      UserStore.__emitChange();
+	      break;
+	    case UserConstants.RECEIVE_USER_BY_ID:
+	      console.log("we are where we want to be");
+	      UserStore.receiveUserById(payload.user);
+	      UserStore.__emitChange();
+	      break;
+	  }
+	};
+	
+	UserStore.clearOwner = function () {
+	  _owner = [];
+	};
+	
+	UserStore.clearUserById = function () {
+	  _userById = [];
+	};
+	
+	UserStore.receiveYardOwner = function (user) {
+	  _owner = [user];
+	};
+	
+	UserStore.receiveUserById = function (user) {
+	  _userById = [user];
+	};
+	
+	UserStore.receiveCurrentUser = function (user) {
+	  _user = [user];
+	};
+	
+	UserStore.fetchUserById = function (id) {
+	  if (_userById.length === 0) {
+	    ApiUtil.fetchUserById(id);
+	  }
+	};
+	
+	UserStore.fetchCurrentUser = function () {
+	  if (_user.length === 0) {
+	    ApiUtil.fetchCurrentUser();
+	  }
+	};
+	
+	UserStore.fetchCurrentOwner = function (id) {
+	  if (_owner.length === 0) {
+	    ApiUtil.fetchOwnerById(id);
+	  }
+	};
+	
+	UserStore.currentOwner = function () {
+	  return _owner[0];
+	};
+	
+	UserStore.currentUser = function () {
+	  return _user[0];
+	};
+	
+	UserStore.userById = function () {
+	  return _userById[0];
+	};
+	
+	module.exports = UserStore;
+
+/***/ },
 /* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
 	var YardStore = __webpack_require__(159);
 	var ApiUtil = __webpack_require__(182);
-	var NavBar = __webpack_require__(253);
+	var NavBar = __webpack_require__(252);
 	var History = __webpack_require__(188).History;
 	var Map = __webpack_require__(245);
-	var UserStore = __webpack_require__(246);
+	var UserStore = __webpack_require__(253);
 	var BookingReqBox = __webpack_require__(255);
 	
 	var yardDetail = React.createClass({
@@ -32744,7 +32800,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var LinkedStateMixin = __webpack_require__(249);
+	var LinkedStateMixin = __webpack_require__(248);
 	var History = __webpack_require__(188).History;
 	var ApiUtil = __webpack_require__(182);
 	var BookingStore = __webpack_require__(256);
@@ -32972,7 +33028,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var NavBar = __webpack_require__(253);
+	var NavBar = __webpack_require__(252);
 	var Landing = __webpack_require__(258);
 	
 	var App = React.createClass({
@@ -32995,7 +33051,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var NavBar = __webpack_require__(253);
+	var NavBar = __webpack_require__(252);
 	var History = __webpack_require__(188).History;
 	
 	var Landing = React.createClass({
@@ -33027,8 +33083,8 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var NavBar = __webpack_require__(253);
-	var UserStore = __webpack_require__(246);
+	var NavBar = __webpack_require__(252);
+	var UserStore = __webpack_require__(253);
 	var ApiUtil = __webpack_require__(182);
 	var History = __webpack_require__(188).History;
 	
@@ -33146,8 +33202,8 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var NavBar = __webpack_require__(253);
-	var UserStore = __webpack_require__(246);
+	var NavBar = __webpack_require__(252);
+	var UserStore = __webpack_require__(253);
 	var ApiUtil = __webpack_require__(182);
 	var History = __webpack_require__(188).History;
 	var YardListItem = __webpack_require__(261);
@@ -33236,7 +33292,7 @@
 
 	var React = __webpack_require__(1);
 	var History = __webpack_require__(188).History;
-	var UserStore = __webpack_require__(246);
+	var UserStore = __webpack_require__(253);
 	var YardStore = __webpack_require__(159);
 	var ApiUtil = __webpack_require__(182);
 	
@@ -33280,63 +33336,6 @@
 	});
 	
 	module.exports = YardListItem;
-
-/***/ },
-/* 262 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	var Map = __webpack_require__(245);
-	var YardsIndex = __webpack_require__(186);
-	var YardStore = __webpack_require__(159);
-	
-	var SearchIndex = React.createClass({
-	  displayName: 'SearchIndex',
-	
-	  // getInitialState: function(){
-	  //   return {yards: YardStore.all() }
-	  // },
-	  // componentDidMount: function(){
-	  //   this.yardListener = YardStore.addListener(this._onChange);
-	  // },
-	  // componentWillUnmout: function(){
-	  //   YardStore.yardListener.remove();
-	  // },
-	  // _onChange: function(){
-	  //   this.setState({yards: YardStore.all() })
-	  // },
-	  render: function () {
-	    return React.createElement(
-	      'div',
-	      { className: 'container-fluid below-nav' },
-	      React.createElement(
-	        'div',
-	        { className: 'col-md-7 col-sm-7 col-xs-7 override navy-fill' },
-	        React.createElement(
-	          'div',
-	          { className: 'filter-buttons text-center' },
-	          React.createElement(
-	            'h1',
-	            { className: 'override' },
-	            'This is where the filter buttons will be'
-	          )
-	        ),
-	        React.createElement(
-	          'div',
-	          { className: 'navy-fill' },
-	          React.createElement(YardsIndex, null)
-	        )
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'col-md-5 col-xs-5 search-map canvas-for-search-index', id: 'map-canvas' },
-	        React.createElement(Map, null)
-	      )
-	    );
-	  }
-	});
-	
-	module.exports = SearchIndex;
 
 /***/ }
 /******/ ]);
