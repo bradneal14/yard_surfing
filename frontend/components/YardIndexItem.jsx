@@ -9,7 +9,7 @@ var YardIndexItem = React.createClass({
     console.log("props", this.props.yard);
   },
   showDetail: function(){
-    this.history.push("/yard/" + this.props.yard.id);
+    // this.history.push("/yard/" + this.props.yard.id);
   },
   render: function(){
     var indexItemPhotoDivStyle = {
@@ -20,7 +20,7 @@ var YardIndexItem = React.createClass({
     };
     var cursorPointer = {
       cursor: 'pointer',
-      backgroundColor: '#09092e',
+      backgroundColor: '#000066',
       color: 'white'
     };
     return (
