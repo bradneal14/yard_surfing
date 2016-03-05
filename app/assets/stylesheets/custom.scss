@@ -101,16 +101,6 @@ footer {
   border-top-right-radius: 7px;
 }
 
-// .table>tbody>tr>td {
-// border-radius: 3%;
-// }
-
-
-
-
-
-
-
 #overlay {
 	background: rgba(162, 170, 157, .9);
 	color: #fff;
@@ -133,28 +123,6 @@ footer {
 
 #overlay h4 {
 	font: 100 1.8em/1.5em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
-}
-
-
-#next-overlay {
-	background: rgba(200, 100, 0, .9);
-	color: #fff;
-	margin-top: 20px;
-	padding: 20px;
-  margin-left: 0px;
-  padding-left: 0px;
-	position: relative;
-	text-align: center;
-	width: 100%;
-  border-radius: 15px;
-}
-
-#next-overlay h2 {
-	font: 200 4em/1.5em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
-}
-
-#next-overlay p {
-	font: 200 4em/1.5em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 }
 
 
@@ -218,10 +186,13 @@ float: right!important;
 .testing{
   background-color: lightblue;
   min-height: 40px;
+  max-width: 74%;
+  height: 40%;
+  margin-top: -2%
 }
 
 .testing2{
-  background-color: lightgreen;
+  background-image: asset-data-url("loading_image");
   min-height: 50px;
   min-width: 80px;
   max-height: 300px;
@@ -230,6 +201,10 @@ float: right!important;
   background-size: cover;
   border-top-left-radius: 5%;
   border-top-right-radius: 5%;
+}
+
+.testing3{
+  background-image: asset-data-url("loading_image");
 }
 
 .override{
@@ -249,6 +224,8 @@ float: right!important;
   display: block;
   content: '';
 }
+
+
 .main {
   position: absolute;
   top: 0;
@@ -256,7 +233,19 @@ float: right!important;
   right: 0;
   left: 0;
   /* fill parent */
-  background-color: #b35b4f;
+  background-image: asset-data-url("loading_image");
+  /* let's see it! */
+  color: white;
+}
+
+.main2{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  /* fill parent */
+  background-image: asset-data-url("loading_image");
   /* let's see it! */
   color: white;
 }
@@ -271,9 +260,10 @@ float: right!important;
   width: 400px;
   background-position: center;
   background-size: cover;
+  background-image: asset-data-url("loading_image");
   margin: 0 auto;
   border-radius: 3%;
-position: relative;
+  position: relative;
 }
 
 .yard-detail-owner-image-div{
@@ -292,13 +282,30 @@ position: relative;
   border-size: 1px;
 }
 
+.yard-detail-owner-image-div2{
+  height: 40%;
+  width: 24%;
+  overflow: hidden;
+  background-position: center;
+  background-image: cover;
+  border-radius: 60%;
+  // background-size: contain;
+  background-size: cover;
+  margin-top: 44%;
+  margin-left: 70%;
+  border-color: black;
+  border-style: solid;
+  border-size: 1px;
+}
+
 .profile-show-pic{
   height: 220px;
   width: 220px;
   overflow: hidden;
   background-position: center;
-  background-image: cover;
+  background-size: cover;
   border-radius: 110px;
+  background-image: asset-data-url("loading_image");
   // background-size: contain;
   background-size: cover;
 }

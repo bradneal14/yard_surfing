@@ -38,11 +38,6 @@ var YardIndex = React.createClass({
             return <YardIndexItem yard={yard} key={yard.id}/>;
           })}
         </ul>
-        <div className="col-md-1">
-          <div className="">
-            <button onClick={this.handleNewYard} className="btn btn-success top-buffer">New Yard</button>
-          </div>
-        </div>
       </div>
     );
   }

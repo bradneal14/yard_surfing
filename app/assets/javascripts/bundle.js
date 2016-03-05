@@ -26765,19 +26765,6 @@
 	        this.state.yards.map(function (yard) {
 	          return React.createElement(YardIndexItem, { yard: yard, key: yard.id });
 	        })
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'col-md-1' },
-	        React.createElement(
-	          'div',
-	          { className: '' },
-	          React.createElement(
-	            'button',
-	            { onClick: this.handleNewYard, className: 'btn btn-success top-buffer' },
-	            'New Yard'
-	          )
-	        )
 	      )
 	    );
 	  }
@@ -26799,26 +26786,43 @@
 	
 	  mixins: [History],
 	  do: function () {
-	    console.log("STATE", this.state.owner.fname);
+	    console.log("props", this.props.yard);
 	  },
 	  showDetail: function () {
-	    this.history.push("/yard/" + this.props.yard.id);
+	    // this.history.push("/yard/" + this.props.yard.id);
 	  },
 	  render: function () {
 	    var indexItemPhotoDivStyle = {
 	      backgroundImage: 'url(' + this.props.yard.yard_photos[0].yard_pic_url + ')'
 	    };
+	    var ownerPhoto = {
+	      backgroundImage: 'url(' + this.props.yard.owner_pic_url + ')'
+	    };
 	    return React.createElement(
 	      'li',
-	      { className: 'list-group-item col-sm-6 col-xs-7 col-md-6 col-lg-6 underride', onClick: this.showDetail },
+	      { className: 'list-group-item col-sm-6 col-xs-12 col-md-6 col-lg-6 underride', onClick: this.showDetail },
 	      React.createElement(
 	        'div',
 	        { className: 'wrapper' },
 	        React.createElement('div', { className: 'main testing2', style: indexItemPhotoDivStyle }),
 	        React.createElement(
+	          'div',
+	          { className: 'main2 testing3 yard-detail-owner-image-div2', style: ownerPhoto },
+	          ' '
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'testing' },
+	        React.createElement(
 	          'text',
 	          null,
-	          'Hello'
+	          'Here we are'
+	        ),
+	        React.createElement(
+	          'text',
+	          { onClick: this.do },
+	          'Click for props'
 	        )
 	      )
 	    );
@@ -26849,9 +26853,9 @@
 	//   <div className="main testing2" style={indexItemPhotoDivStyle}></div>
 	//   <text >Hello</text>
 	// </div>
-	//     <div className="testing">
-	//       <Text>{this.props}</Text>
-	//     </div>
+	// <div className="testing">
+	//   <Text>{this.props}</Text>
+	// </div>
 	//     <button className="btn btn-success" onClick={this.do}>Click for state</button>
 	//   </li>
 	// );

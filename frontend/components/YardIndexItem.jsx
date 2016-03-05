@@ -6,21 +6,28 @@ var Map = require("./map");
 var YardIndexItem = React.createClass({
   mixins: [History],
   do: function(){
-    console.log("STATE", this.state.owner.fname);
+    console.log("props", this.props.yard);
   },
   showDetail: function(){
-    this.history.push("/yard/" + this.props.yard.id);
+    // this.history.push("/yard/" + this.props.yard.id);
   },
   render: function(){
     var indexItemPhotoDivStyle = {
       backgroundImage: 'url(' + this.props.yard.yard_photos[0].yard_pic_url + ')'
     };
+    var ownerPhoto = {
+      backgroundImage: 'url(' + this.props.yard.owner_pic_url + ')'
+    };
     return (
-      <li className="list-group-item col-sm-6 col-xs-7 col-md-6 col-lg-6 underride" onClick={this.showDetail}>
+      <li className="list-group-item col-sm-6 col-xs-12 col-md-6 col-lg-6 underride" onClick={this.showDetail}>
         <div className="wrapper">
           <div className="main testing2" style={indexItemPhotoDivStyle}></div>
-          <text >Hello</text>
+          <div className="main2 testing3 yard-detail-owner-image-div2" style={ownerPhoto}> </div>
         </div>
+          <div className="testing">
+            <text>Here we are</text>
+            <text onClick={this.do}>Click for props</text>
+          </div>
       </li>
     );
   }
@@ -52,9 +59,9 @@ module.exports = YardIndexItem;
     //   <div className="main testing2" style={indexItemPhotoDivStyle}></div>
     //   <text >Hello</text>
     // </div>
-//     <div className="testing">
-//       <Text>{this.props}</Text>
-//     </div>
+    // <div className="testing">
+    //   <Text>{this.props}</Text>
+    // </div>
 //     <button className="btn btn-success" onClick={this.do}>Click for state</button>
 //   </li>
 // );
