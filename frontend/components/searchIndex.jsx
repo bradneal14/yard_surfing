@@ -19,11 +19,11 @@ var SearchIndex = React.createClass({
   render: function(){
     return (
       <div className="container-fluid below-nav">
-        <div className="col-md-7 col-sm-7 col-xs-7 override">
+        <div className="col-md-7 col-sm-7 col-xs-7 override navy-fill">
           <div className="filter-buttons text-center">
             <h1 className="override">This is where the filter buttons will be</h1>
           </div>
-          <div className="">
+          <div className="navy-fill">
             <YardsIndex></YardsIndex>
           </div>
         </div>

@@ -19,7 +19,9 @@ var YardIndexItem = React.createClass({
       backgroundImage: 'url(' + this.props.yard.owner_pic_url + ')'
     };
     var cursorPointer = {
-      cursor: 'pointer'
+      cursor: 'pointer',
+      backgroundColor: '#09092e',
+      color: 'white'
     };
     return (
       <li style={cursorPointer} className="list-group-item col-sm-6 col-xs-12 col-md-6 col-lg-6 underride list-item-no-border" onClick={this.showDetail}>

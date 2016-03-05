@@ -26757,7 +26757,7 @@
 	  render: function () {
 	    return React.createElement(
 	      'div',
-	      { className: '' },
+	      { className: 'navy-fill' },
 	      React.createElement('br', null),
 	      React.createElement(
 	        'ul',
@@ -26799,7 +26799,9 @@
 	      backgroundImage: 'url(' + this.props.yard.owner_pic_url + ')'
 	    };
 	    var cursorPointer = {
-	      cursor: 'pointer'
+	      cursor: 'pointer',
+	      backgroundColor: '#09092e',
+	      color: 'white'
 	    };
 	    return React.createElement(
 	      'li',
@@ -33311,7 +33313,7 @@
 	      { className: 'container-fluid below-nav' },
 	      React.createElement(
 	        'div',
-	        { className: 'col-md-7 col-sm-7 col-xs-7 override' },
+	        { className: 'col-md-7 col-sm-7 col-xs-7 override navy-fill' },
 	        React.createElement(
 	          'div',
 	          { className: 'filter-buttons text-center' },
@@ -33323,7 +33325,7 @@
 	        ),
 	        React.createElement(
 	          'div',
-	          { className: '' },
+	          { className: 'navy-fill' },
 	          React.createElement(YardsIndex, null)
 	        )
 	      ),
