@@ -38,7 +38,7 @@ var NavBar = React.createClass({
         <div className="col-xs-12">
 
           <div className="navbar-left">
-            <a className="pull-left" onClick={this.navigateHome} style={cursorPointer}><img src="/assets/white-tent-icon.png" className="small-icon"/></a>
+            <a className="pull-left" onClick={this.navigateHome} style={cursorPointer}><img src="/public/white-tent-icon.png" className="small-icon"/></a>
           </div>
           <div className="navbar-right">
             <ul className="nav navbar-nav">
