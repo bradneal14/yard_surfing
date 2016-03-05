@@ -26799,9 +26799,7 @@
 	      backgroundImage: 'url(' + this.props.yard.owner_pic_url + ')'
 	    };
 	    var cursorPointer = {
-	      cursor: 'pointer',
-	      backgroundColor: '#000066',
-	      color: 'white'
+	      cursor: 'pointer'
 	    };
 	    return React.createElement(
 	      'li',

@@ -20,8 +20,6 @@ var YardIndexItem = React.createClass({
     };
     var cursorPointer = {
       cursor: 'pointer',
-      backgroundColor: '#000066',
-      color: 'white'
     };
     return (
       <li style={cursorPointer} className="list-group-item col-sm-6 col-xs-12 col-md-6 col-lg-6 underride list-item-no-border" onClick={this.showDetail}>
