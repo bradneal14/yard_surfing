@@ -30,21 +30,22 @@ var NavBar = React.createClass({
     ApiUtil.logoutUser();
   },
   render: function(){
+    var cursorPointer = {
+      cursor: 'pointer'
+    };
     return (
       <nav className="navbar-default navbar-fixed-top">
         <div className="col-xs-12">
 
           <div className="navbar-left">
-            <a className="navbar-brand" onClick={this.navigateHome}>
+            <a className="navbar-brand" onClick={this.navigateHome} style={cursorPointer}>
               YS
             </a>
           </div>
           <div className="navbar-right">
             <ul className="nav navbar-nav">
-              <li><a>Search</a></li>
-              <li><a>My Properties</a></li>
-              <li><a onClick={this.navigateToProfileShow}>My Profile </a></li>
-              <li><a onClick={this.logoutUser}>Logout</a></li>
+              <li><a style={cursorPointer} onClick={this.navigateToProfileShow}>My Profile </a></li>
+              <li><a style={cursorPointer} onClick={this.logoutUser}>Logout</a></li>
             </ul>
           </div>
         </div>

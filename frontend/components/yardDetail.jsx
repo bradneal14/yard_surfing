@@ -59,7 +59,8 @@ var yardDetail = React.createClass({
     }
     if (this.state.owner.main_pic_url){
       var userPhotoDivStyle = {
-        backgroundImage: 'url(' + this.state.owner.main_pic_url + ')'
+        backgroundImage: 'url(' + this.state.owner.main_pic_url + ')',
+        cursor: 'pointer'
       };
     }
     return(

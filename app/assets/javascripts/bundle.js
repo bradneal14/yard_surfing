@@ -26789,7 +26789,7 @@
 	    console.log("props", this.props.yard);
 	  },
 	  showDetail: function () {
-	    // this.history.push("/yard/" + this.props.yard.id);
+	    this.history.push("/yard/" + this.props.yard.id);
 	  },
 	  render: function () {
 	    var indexItemPhotoDivStyle = {
@@ -26798,9 +26798,12 @@
 	    var ownerPhoto = {
 	      backgroundImage: 'url(' + this.props.yard.owner_pic_url + ')'
 	    };
+	    var cursorPointer = {
+	      cursor: 'pointer'
+	    };
 	    return React.createElement(
 	      'li',
-	      { className: 'list-group-item col-sm-6 col-xs-12 col-md-6 col-lg-6 underride', onClick: this.showDetail },
+	      { style: cursorPointer, className: 'list-group-item col-sm-6 col-xs-12 col-md-6 col-lg-6 underride list-item-no-border', onClick: this.showDetail },
 	      React.createElement(
 	        'div',
 	        { className: 'wrapper' },
@@ -26816,13 +26819,14 @@
 	        { className: 'testing' },
 	        React.createElement(
 	          'text',
-	          null,
-	          'Here we are'
+	          { className: 'index-item-text' },
+	          this.props.yard.title
 	        ),
+	        React.createElement('br', null),
 	        React.createElement(
 	          'text',
-	          { onClick: this.do },
-	          'Click for props'
+	          null,
+	          this.props.yard.description
 	        )
 	      )
 	    );
@@ -32515,6 +32519,9 @@
 	    ApiUtil.logoutUser();
 	  },
 	  render: function () {
+	    var cursorPointer = {
+	      cursor: 'pointer'
+	    };
 	    return React.createElement(
 	      'nav',
 	      { className: 'navbar-default navbar-fixed-top' },
@@ -32526,7 +32533,7 @@
 	          { className: 'navbar-left' },
 	          React.createElement(
 	            'a',
-	            { className: 'navbar-brand', onClick: this.navigateHome },
+	            { className: 'navbar-brand', onClick: this.navigateHome, style: cursorPointer },
 	            'YS'
 	          )
 	        ),
@@ -32541,25 +32548,7 @@
 	              null,
 	              React.createElement(
 	                'a',
-	                null,
-	                'Search'
-	              )
-	            ),
-	            React.createElement(
-	              'li',
-	              null,
-	              React.createElement(
-	                'a',
-	                null,
-	                'My Properties'
-	              )
-	            ),
-	            React.createElement(
-	              'li',
-	              null,
-	              React.createElement(
-	                'a',
-	                { onClick: this.navigateToProfileShow },
+	                { style: cursorPointer, onClick: this.navigateToProfileShow },
 	                'My Profile '
 	              )
 	            ),
@@ -32568,7 +32557,7 @@
 	              null,
 	              React.createElement(
 	                'a',
-	                { onClick: this.logoutUser },
+	                { style: cursorPointer, onClick: this.logoutUser },
 	                'Logout'
 	              )
 	            )
@@ -32652,7 +32641,8 @@
 	    }
 	    if (this.state.owner.main_pic_url) {
 	      var userPhotoDivStyle = {
-	        backgroundImage: 'url(' + this.state.owner.main_pic_url + ')'
+	        backgroundImage: 'url(' + this.state.owner.main_pic_url + ')',
+	        cursor: 'pointer'
 	      };
 	    }
 	    return React.createElement(

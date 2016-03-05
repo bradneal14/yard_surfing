@@ -9,7 +9,7 @@ var YardIndexItem = React.createClass({
     console.log("props", this.props.yard);
   },
   showDetail: function(){
-    // this.history.push("/yard/" + this.props.yard.id);
+    this.history.push("/yard/" + this.props.yard.id);
   },
   render: function(){
     var indexItemPhotoDivStyle = {
@@ -18,15 +18,19 @@ var YardIndexItem = React.createClass({
     var ownerPhoto = {
       backgroundImage: 'url(' + this.props.yard.owner_pic_url + ')'
     };
+    var cursorPointer = {
+      cursor: 'pointer'
+    };
     return (
-      <li className="list-group-item col-sm-6 col-xs-12 col-md-6 col-lg-6 underride" onClick={this.showDetail}>
+      <li style={cursorPointer} className="list-group-item col-sm-6 col-xs-12 col-md-6 col-lg-6 underride list-item-no-border" onClick={this.showDetail}>
         <div className="wrapper">
           <div className="main testing2" style={indexItemPhotoDivStyle}></div>
           <div className="main2 testing3 yard-detail-owner-image-div2" style={ownerPhoto}> </div>
         </div>
           <div className="testing">
-            <text>Here we are</text>
-            <text onClick={this.do}>Click for props</text>
+            <text className="index-item-text">{this.props.yard.title}</text>
+            <br/>
+            <text>{this.props.yard.description}</text>
           </div>
       </li>
     );

@@ -125,6 +125,12 @@ footer {
 	font: 100 1.8em/1.5em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 }
 
+.index-item-text{
+  font: 100 2.0em/1.0em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+  color: black;
+  position: relative;
+}
+
 
 .request-panel-input {
   display: inline;
@@ -157,13 +163,6 @@ footer {
 }
 .list-item-no-border{
   border-color: transparent !important;
-  position: relative;
-}
-
-
-.index-item-text{
-  color: red;
-  position: relative;
 }
 
 
@@ -184,19 +183,19 @@ float: right!important;
 }
 
 .testing{
-  background-color: lightblue;
   min-height: 40px;
   max-width: 74%;
   height: 40%;
-  margin-top: -2%
+  margin-top: -2%;
+  padding-top: 2%
 }
 
 .testing2{
   background-image: asset-data-url("loading_image");
   min-height: 50px;
   min-width: 80px;
-  max-height: 300px;
-  max-width: 350px;
+  max-height: 700px;
+  max-width: 900px;
   background-position: center;
   background-size: cover;
   border-top-left-radius: 5%;
@@ -253,6 +252,7 @@ float: right!important;
 .underride{
   padding-left: 30px;
   padding-right: 30px;
+  padding-top: 3%;
 }
 
 .index-image{
@@ -284,7 +284,7 @@ float: right!important;
 
 .yard-detail-owner-image-div2{
   height: 40%;
-  width: 24%;
+  width: 23%;
   overflow: hidden;
   background-position: center;
   background-image: cover;
@@ -301,6 +301,7 @@ float: right!important;
 .profile-show-pic{
   height: 220px;
   width: 220px;
+  margin: 2%;
   overflow: hidden;
   background-position: center;
   background-size: cover;
