@@ -32503,8 +32503,8 @@
 	          { className: 'navbar-left' },
 	          React.createElement(
 	            'a',
-	            { className: 'navbar-brand', onClick: this.navigateHome, style: cursorPointer },
-	            'YS'
+	            { className: 'pull-left', onClick: this.navigateHome, style: cursorPointer },
+	            React.createElement('img', { src: '/assets/white-tent-icon.png', className: 'small-icon' })
 	          )
 	        ),
 	        React.createElement(
@@ -33062,14 +33062,33 @@
 	    this.history.push("/search");
 	  },
 	  render: function () {
+	    var landingCoverPhoto = {
+	      backgroundImage: 'url(' + 'http://cdn.usefulstuff.io/2015/10/Landing-A-Plane.jpg' + ')'
+	    };
 	    return React.createElement(
 	      'div',
-	      null,
-	      React.createElement('img', { src: 'http://cdn.usefulstuff.io/2015/10/Landing-A-Plane.jpg' }),
+	      { style: landingCoverPhoto, className: 'landing-cover' },
 	      React.createElement(
-	        'button',
-	        { className: 'btn btn-success', onClick: this.navigateToSearch },
-	        'Head to search'
+	        'form',
+	        null,
+	        React.createElement(
+	          'div',
+	          { className: 'form-group col-md-4 col-sm-5 col-xs-12 col-lg-4 center-button' },
+	          React.createElement(
+	            'div',
+	            { className: 'input-group' },
+	            React.createElement('input', { type: 'text', className: 'form-control', placeholder: 'Where would you like to go..' }),
+	            React.createElement(
+	              'span',
+	              { className: 'input-group-btn' },
+	              React.createElement(
+	                'button',
+	                { className: 'btn btn-success', onClick: this.navigateToSearch },
+	                'Head to search'
+	              )
+	            )
+	          )
+	        )
 	      )
 	    );
 	  }

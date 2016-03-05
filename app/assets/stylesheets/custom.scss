@@ -146,6 +146,22 @@ footer {
   margin: auto;
 }
 
+.landing-cover{
+  margin-top: 50px;
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  height: calc(100% - 50px);
+  width: 100%;
+}
+
+.center-button{
+  margin: 0 auto;
+  position: absolute;
+  margin-left: 55%;
+  margin-top: 30%;
+}
+
 .wide-jumbo {
   margin-top: 50px;
   // display: block;
@@ -180,6 +196,11 @@ margin-right: -15px !important;
 
 .navbar-right {
 float: right!important;
+}
+
+.small-icon{
+  height: 40px;
+  margin-top: 7%;
 }
 
 .testing{
@@ -350,6 +371,10 @@ float: right!important;
   background-color: #A2AA9D
 }
 
+.navbar-brand:hover{
+  background-color: white;
+}
+
 
 
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
@@ -358,8 +383,9 @@ color: #2C2C2E;  /*Sets the text hover color on navbar*/
 
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active >
 a:hover, .navbar-default .navbar-nav > .active > a:focus {
-color: #B35B4F; /*BACKGROUND color for active*/
 background-color: #030033;
+color: #6fda39; /*BACKGROUND color for active*/
+font-family: monospace;
 }
 
 .navbar-default {
@@ -384,4 +410,6 @@ background-color: silver; /*Change rollover cell color here*/
 
 .navbar-default .navbar-nav > li > a {
 color: #A2AA9D; /*Change active text color here*/
+color: #6fda39; /*BACKGROUND color for active*/
+font-family: monospace;
 }

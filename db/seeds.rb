@@ -26,7 +26,7 @@ Yard.create!(title: "Ho Chi Minh", description: "Hideout Hostel", lng: 106.69189
 Yard.create!(title: "Phong Nha", description: "Easy Tiger Hostel", lng: 106.310667, lat: 17.610048, user_id: 6)
 Yard.create!(title: "Tempelhof", description: "Berlin Park", lng: 13.391921, lat: 52.472142, user_id: 6)
 
-YardPhoto.create!(yard_id: 1, yard_pic_url: "http://p.rdcpix.com/v03/l7c686e43-m0xd-w640_h480_q80.jpg")
+YardPhoto.create!(yard_id: 1, yard_pic_url: "https://c2.staticflickr.com/6/5110/5618060282_86e8234767_b.jpg")
 YardPhoto.create!(yard_id: 2, yard_pic_url: "https://upload.wikimedia.org/wikipedia/commons/2/2a/Dolores_Park,_San_Francisco_2013-04-13_14-48.jpg")
 YardPhoto.create!(yard_id: 3, yard_pic_url: "https://c2.staticflickr.com/6/5110/5618060282_86e8234767_b.jpg")
 YardPhoto.create!(yard_id: 4, yard_pic_url: "http://www.wired.com/images_blogs/business/2013/03/130314_apacademy_0015-660x440.jpg")

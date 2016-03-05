@@ -31,16 +31,14 @@ var NavBar = React.createClass({
   },
   render: function(){
     var cursorPointer = {
-      cursor: 'pointer'
+      cursor: 'pointer',
     };
     return (
       <nav className="navbar-default navbar-fixed-top">
         <div className="col-xs-12">
 
           <div className="navbar-left">
-            <a className="navbar-brand" onClick={this.navigateHome} style={cursorPointer}>
-              YS
-            </a>
+            <a className="pull-left" onClick={this.navigateHome} style={cursorPointer}><img src="/assets/white-tent-icon.png" className="small-icon"/></a>
           </div>
           <div className="navbar-right">
             <ul className="nav navbar-nav">
