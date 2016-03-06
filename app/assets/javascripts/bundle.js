@@ -32468,7 +32468,7 @@
 	    this.setState({ user: UserStore.currentUser() });
 	  },
 	  getInitialState: function () {
-	    return { user: UserStore.currentUser() };
+	    return { user: UserStore.currentUser(), hover: false };
 	  },
 	  componentDidMount: function () {
 	    this.userListener = UserStore.addListener(this._onChange);
@@ -32488,10 +32488,29 @@
 	  logoutUser: function () {
 	    ApiUtil.logoutUser();
 	  },
+	  mouseOver: function () {
+	    this.setState({ hover: true });
+	  },
+	  mouseOut: function () {
+	    this.setState({ hover: false });
+	  },
 	  render: function () {
 	    var cursorPointer = {
 	      cursor: 'pointer'
 	    };
+	    if (this.state.hover) {
+	      var homeButton = React.createElement(
+	        'a',
+	        { className: 'pull-left', onMouseOver: this.mouseOver, onMouseOut: this.mouseOut, onClick: this.navigateHome, style: cursorPointer },
+	        React.createElement('img', { src: 'blue-tent-icon.png', className: 'small-icon' })
+	      );
+	    } else {
+	      var homeButton = React.createElement(
+	        'a',
+	        { className: 'pull-left', onMouseOver: this.mouseOver, onMouseOut: this.mouseOut, onClick: this.navigateHome, style: cursorPointer },
+	        React.createElement('img', { src: 'white-tent-icon.png', className: 'small-icon' })
+	      );
+	    }
 	    return React.createElement(
 	      'nav',
 	      { className: 'navbar-default navbar-fixed-top' },
@@ -32501,11 +32520,7 @@
 	        React.createElement(
 	          'div',
 	          { className: 'navbar-left' },
-	          React.createElement(
-	            'a',
-	            { className: 'pull-left', onClick: this.navigateHome, style: cursorPointer },
-	            React.createElement('img', { src: 'white-tent-icon.png', className: 'small-icon' })
-	          )
+	          homeButton
 	        ),
 	        React.createElement(
 	          'div',
@@ -32698,7 +32713,8 @@
 	    if (this.state.owner.main_pic_url) {
 	      var userPhotoDivStyle = {
 	        backgroundImage: 'url(' + this.state.owner.main_pic_url + ')',
-	        cursor: 'pointer'
+	        cursor: 'pointer',
+	        position: 'relative'
 	      };
 	    }
 	    return React.createElement(
@@ -32718,75 +32734,129 @@
 	          { className: '' },
 	          React.createElement('div', { className: 'yard-detail-owner-image-div', style: userPhotoDivStyle, onClick: this.sendToOwnerShow }),
 	          React.createElement(
-	            'p',
-	            null,
-	            'The back of the carter: Yard Detail for ',
-	            this.state.yard.title
+	            'div',
+	            { className: 'yard-detail-title' },
+	            React.createElement(
+	              'h2',
+	              { className: 'yard-title-font' },
+	              this.state.yard.title
+	            ),
+	            React.createElement(
+	              'h4',
+	              { className: 'yard-location-font' },
+	              this.state.yard.lng
+	            )
 	          ),
 	          React.createElement(
-	            'p',
-	            null,
-	            'Title: ',
-	            this.state.yard.title
-	          ),
-	          React.createElement(
-	            'p',
-	            null,
-	            'Description: ',
-	            this.state.yard.description
-	          ),
-	          React.createElement(
-	            'p',
-	            null,
-	            'Owner\'s Name: ',
-	            this.state.owner.fname
-	          ),
-	          React.createElement(
-	            'p',
-	            null,
-	            'Lat: ',
-	            this.state.yard.lat
-	          ),
-	          React.createElement(
-	            'p',
-	            null,
-	            'Long: ',
-	            this.state.yard.lng
-	          ),
-	          React.createElement(
-	            'button',
-	            { onClick: this.navigateHome, className: 'btn btn-success  top-buffer left-buffer' },
-	            'Back to all'
+	            'div',
+	            { className: 'yard-detail-info-outer' },
+	            React.createElement(
+	              'div',
+	              { className: 'yard-detail-info-inner' },
+	              React.createElement(
+	                'h3',
+	                { className: 'about-prop-font' },
+	                'About this property'
+	              ),
+	              React.createElement(
+	                'div',
+	                { className: 'inner-inner-detail' },
+	                React.createElement(
+	                  'div',
+	                  null,
+	                  React.createElement(
+	                    'h3',
+	                    { className: 'prop-attr-font' },
+	                    'Owner\'s Name: '
+	                  ),
+	                  React.createElement(
+	                    'p',
+	                    { className: 'prop-info-detail' },
+	                    this.state.owner.fname,
+	                    ' ',
+	                    this.state.owner.lname
+	                  )
+	                ),
+	                React.createElement(
+	                  'div',
+	                  null,
+	                  React.createElement(
+	                    'h3',
+	                    { className: 'prop-attr-font' },
+	                    'Description:'
+	                  ),
+	                  React.createElement(
+	                    'p',
+	                    { className: 'prop-info-detail' },
+	                    this.state.yard.description
+	                  )
+	                ),
+	                React.createElement(
+	                  'div',
+	                  null,
+	                  React.createElement(
+	                    'h3',
+	                    { className: 'prop-attr-font' },
+	                    'Getting there: '
+	                  ),
+	                  React.createElement(
+	                    'p',
+	                    { className: 'prop-info-detail' },
+	                    this.state.yard.transport_info
+	                  )
+	                ),
+	                React.createElement(
+	                  'div',
+	                  null,
+	                  React.createElement(
+	                    'h3',
+	                    { className: 'prop-attr-font' },
+	                    'Amenities: '
+	                  ),
+	                  React.createElement(
+	                    'p',
+	                    { className: 'prop-info-detail' },
+	                    this.state.yard.lng
+	                  )
+	                ),
+	                React.createElement('div', null)
+	              )
+	            ),
+	            React.createElement(
+	              'button',
+	              { onClick: this.navigateHome, className: 'btn btn-success  top-buffer left-buffer' },
+	              'Back to all'
+	            )
 	          )
-	        )
-	      ),
-	      this.props.children,
-	      React.createElement(
-	        'div',
-	        { id: 'overlay' },
-	        React.createElement(
-	          'h2',
-	          null,
-	          'Location, Location, Location..'
 	        ),
+	        this.props.children,
 	        React.createElement(
-	          'h4',
-	          null,
-	          'Where will you be staying?'
+	          'div',
+	          { id: 'overlay' },
+	          React.createElement(
+	            'h2',
+	            null,
+	            'Location, Location, Location..'
+	          ),
+	          React.createElement(
+	            'h4',
+	            null,
+	            'Where will you be staying?'
+	          ),
+	          React.createElement(
+	            'div',
+	            { className: 'map', id: 'yard-detail-map' },
+	            React.createElement(Map, { id: 'yard-detail-map', yard: this.props.params.yardId })
+	          )
 	        ),
 	        React.createElement(
 	          'div',
-	          { className: 'map', id: 'yard-detail-map' },
-	          React.createElement(Map, { id: 'yard-detail-map', yard: this.props.params.yardId })
-	        )
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'breaker' },
-	        React.createElement(
-	          'p',
-	          null,
-	          'Hello'
+	          { className: 'breaker' },
+	          React.createElement(
+	            'p',
+	            null,
+	            'Hello'
+	          )
 	        )
 	      )
 	    );

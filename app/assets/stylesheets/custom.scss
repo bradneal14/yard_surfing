@@ -67,6 +67,32 @@ footer {
   margin: 0 auto;
 }
 
+.yard-detail-info-outer{
+  border-style: dashed;
+  margin-left: 50px;
+  margin-right: 43%;
+  margin-top: 3%;
+  height: 500px;
+  margin-bottom: 80px;
+}
+
+.yard-detail-info-inner{
+  margin-top: 4%;
+  margin-left: 4%
+}
+
+.yard-detail-title{
+  padding-left: 19%;
+  padding-bottom: 2px;
+  padding-top: 20px;
+  background-color: rgba(162,170,157,0.3);
+  margin-top: -70px;
+}
+
+.inner-inner-detail{
+  margin-left: 4%;
+}
+
 #yard-detail-map{
   border-top: 0px !important;
   border-bottom: 0px !important;
@@ -81,6 +107,21 @@ footer {
   top: 0px;
 }
 
+.about-prop-font{
+  font: 100 3em/1.0em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+  background-color: rgba(120,191,178, 0.4);
+  padding-top: 4%;
+  padding-bottom: 2%;
+  padding-left: 2%;
+}
+
+.prop-info-detail{
+  padding-left: 3%;
+}
+
+.prop-attr-font{
+  font: 200 2em/1.2em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
 #search-map-canvas {
     margin-bottom: 0px;
     width: 100%;
@@ -119,6 +160,16 @@ footer {
 
 #overlay h2 {
 	font: 200 4em/1.5em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+
+.yard-title-font{
+  margin-top: -20px;
+  font: 100 4em/1.0em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+
+.yard-location-font{
+  font: 200 1.6em/1.0em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+  margin-left: 50px;
 }
 
 #overlay h4 {
@@ -410,6 +461,43 @@ background-color: silver; /*Change rollover cell color here*/
 
 .navbar-default .navbar-nav > li > a {
 color: #A2AA9D; /*Change active text color here*/
-color: #6fda39; /*BACKGROUND color for active*/
-font-family: monospace;
+color: #78BFB2; /*BACKGROUND color for active*/
+font: 200 1.0em/1.5em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 }
+
+//
+// <div className="col-md-6">
+//   <h2>About this listing</h2>
+//   <div className="row">
+//     <div className="col-xs-12">
+//       <br/>
+//       <p>Atop the centrally located and beautiful Nob Hill, this studio is a welcoming spot for your San Francisco experience. You may stay steps away from Grace Cathedral, Union Square, Chinatown, Polk Gulch and even Fisherman's Wharf.</p>
+//       <br/>
+//     </div>
+//   </div>
+//   <div>
+//   <div className="row">
+//     <div className="col-md-3 text-muted">
+//       <p>The Space</p>
+//     </div>
+//     <div className="col-md-9">
+//       <div className="row">
+//         <div className="col-xs-6">
+//           <p>One</p>
+//         </div>
+//         <div className="col-xs-6">
+//           <p>One</p>
+//         </div>
+//         <div className="col-xs-6">
+//           <p>One</p>
+//         </div>
+//         <div className="col-xs-6">
+//           <p>One</p>
+//         </div>
+//         <div className="col-xs-6">
+//           <p>One</p>
+//         </div>
+//       </div>
+//     </div>
+//   </div>
+// </div>

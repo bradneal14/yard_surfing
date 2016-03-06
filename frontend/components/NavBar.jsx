@@ -9,7 +9,7 @@ var NavBar = React.createClass({
     this.setState({user: UserStore.currentUser() });
   },
   getInitialState: function(){
-    return {user: UserStore.currentUser() };
+    return {user: UserStore.currentUser(), hover: false };
   },
   componentDidMount: function(){
     this.userListener = UserStore.addListener(this._onChange);
@@ -29,16 +29,27 @@ var NavBar = React.createClass({
   logoutUser: function(){
     ApiUtil.logoutUser();
   },
+  mouseOver: function () {
+    this.setState({hover: true});
+  },
+  mouseOut: function () {
+    this.setState({hover: false});
+  },
   render: function(){
     var cursorPointer = {
       cursor: 'pointer',
     };
+    if (this.state.hover){
+      var homeButton = <a className="pull-left" onMouseOver={this.mouseOver} onMouseOut={this.mouseOut} onClick={this.navigateHome} style={cursorPointer}><img src="blue-tent-icon.png" className="small-icon"/></a>;
+    } else {
+      var homeButton = <a className="pull-left" onMouseOver={this.mouseOver} onMouseOut={this.mouseOut} onClick={this.navigateHome} style={cursorPointer}><img src="white-tent-icon.png" className="small-icon"/></a>;
+    }
     return (
       <nav className="navbar-default navbar-fixed-top">
         <div className="col-xs-12">
 
           <div className="navbar-left">
-            <a className="pull-left" onClick={this.navigateHome} style={cursorPointer}><img src="white-tent-icon.png" className="small-icon"/></a>
+            {homeButton}
           </div>
           <div className="navbar-right">
             <ul className="nav navbar-nav">

@@ -60,7 +60,8 @@ var yardDetail = React.createClass({
     if (this.state.owner.main_pic_url){
       var userPhotoDivStyle = {
         backgroundImage: 'url(' + this.state.owner.main_pic_url + ')',
-        cursor: 'pointer'
+        cursor: 'pointer',
+        position: 'relative'
       };
     }
     return(
@@ -71,13 +72,37 @@ var yardDetail = React.createClass({
         </div>
         <div className="">
           <div className="">
-            <div className="yard-detail-owner-image-div" style={userPhotoDivStyle} onClick={this.sendToOwnerShow}/>
-            <p>The back of the carter: Yard Detail for {this.state.yard.title}</p>
-            <p>Title: {this.state.yard.title}</p>
-            <p>Description: {this.state.yard.description}</p>
-            <p>Owner's Name: {this.state.owner.fname}</p>
-            <p>Lat: {this.state.yard.lat}</p>
-            <p>Long: {this.state.yard.lng}</p>
+            <div className="yard-detail-owner-image-div" style={userPhotoDivStyle} onClick={this.sendToOwnerShow}>
+            </div>
+            <div className="yard-detail-title">
+              <h2 className="yard-title-font">{this.state.yard.title}</h2>
+              <h4 className="yard-location-font">{this.state.yard.lng}</h4>
+            </div>
+            <div className="yard-detail-info-outer">
+              <div className="yard-detail-info-inner">
+                <h3 className="about-prop-font">About this property</h3>
+                <div className="inner-inner-detail">
+                  <div>
+                    <h3 className="prop-attr-font" >Owner's Name: </h3>
+                    <p className="prop-info-detail">{this.state.owner.fname} {this.state.owner.lname}</p>
+                  </div>
+                  <div>
+                    <h3 className="prop-attr-font">Description:</h3>
+                    <p className="prop-info-detail">{this.state.yard.description}</p>
+                  </div>
+                  <div>
+                    <h3 className="prop-attr-font">Getting there: </h3>
+                    <p className="prop-info-detail">{this.state.yard.transport_info}</p>
+                  </div>
+                  <div>
+                    <h3 className="prop-attr-font">Amenities: </h3>
+                    <p className="prop-info-detail">{this.state.yard.lng}</p>
+                  </div>
+                  <div>
+
+                </div>
+              </div>
+            </div>
             <button onClick={this.navigateHome} className="btn btn-success  top-buffer left-buffer">Back to all</button>
           </div>
         </div>
@@ -93,6 +118,7 @@ var yardDetail = React.createClass({
           <p>Hello</p>
         </div>
       </div>
+    </div>
     );
   }
 });

@@ -1,1 +1,1 @@
-json.array! @yards, :lng, :lat, :title, :user_id, :location, :description, :id, :yard_photos, :water_status, :fire_status, :owner_pic_url
+json.array! @yards, :lng, :lat, :title, :user_id, :location, :description, :id, :yard_photos, :water_status, :fire_status, :owner_pic_url, :shower_status, :max_guest_num, :toilet_status, :about, :transport_info
