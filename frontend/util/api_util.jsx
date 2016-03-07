@@ -59,6 +59,16 @@ var ApiUtil = {
       }
     });
   },
+  loginUser: function(credentials){
+    $.ajax({
+      url: "session",
+      type: "POST",
+      data: {user: credentials},
+      success: function(data){
+        window.location.href = "/";
+      }
+    });
+  },
   createBooking: function(booking, callback){
     console.log("booking is being created");
     $.ajax({

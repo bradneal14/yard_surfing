@@ -26602,6 +26602,16 @@
 	      }
 	    });
 	  },
+	  loginUser: function (credentials) {
+	    $.ajax({
+	      url: "session",
+	      type: "POST",
+	      data: { user: credentials },
+	      success: function (data) {
+	        window.location.href = "/";
+	      }
+	    });
+	  },
 	  createBooking: function (booking, callback) {
 	    console.log("booking is being created");
 	    $.ajax({
@@ -32465,11 +32475,12 @@
 	var UserStore = __webpack_require__(253);
 	var ApiUtil = __webpack_require__(182);
 	var Modal = __webpack_require__(254).Modal;
+	var LinkedStateMixin = __webpack_require__(248);
 	
 	var NavBar = React.createClass({
 	  displayName: 'NavBar',
 	
-	  mixins: [History],
+	  mixins: [History, LinkedStateMixin],
 	  _onChange: function () {
 	    this.setState({ user: UserStore.currentUser() });
 	  },
@@ -32484,6 +32495,7 @@
 	  },
 	  componentWillUnmount: function () {
 	    this.userListener.remove();
+	    ApiUtil.fetchCurrentUser();
 	  },
 	  navigateHome: function () {
 	    this.history.push("/");
@@ -32500,9 +32512,17 @@
 	  logoutUser: function () {
 	    ApiUtil.logoutUser();
 	  },
-	  loginUser: function (data) {
-	    // ApiUtil.loginUser();
-	    console.log(data);
+	  loginUser: function (event) {
+	    event.preventDefault();
+	    var credentials = Object.assign({}, this.state);
+	    ApiUtil.loginUser(credentials);
+	    setTimeout(function () {
+	      console.log("Hello");
+	    }, 3000);
+	    // console.log();
+	  },
+	  show: function () {
+	    console.log(this.state);
 	  },
 	  mouseOver: function () {
 	    this.setState({ hover: true });
@@ -32623,40 +32643,34 @@
 	                null,
 	                React.createElement(
 	                  'form',
-	                  { className: 'form-group', id: 'signinForm' },
+	                  { className: 'form-group', id: 'signinForm', onSubmit: this.loginUser },
 	                  React.createElement(
 	                    'label',
 	                    { className: 'form-inline signin-modal-ele-font' },
 	                    'Email: '
 	                  ),
-	                  React.createElement('input', { className: 'form-control' }),
+	                  React.createElement('input', { className: 'form-control', valueLink: this.linkState('email') }),
 	                  React.createElement('br', null),
 	                  React.createElement(
 	                    'label',
 	                    { className: 'form-inline signin-modal-ele-font' },
 	                    'Password: '
 	                  ),
-	                  React.createElement('input', { className: 'form-control' })
-	                )
-	              ),
-	              React.createElement(
-	                Modal.Footer,
-	                null,
-	                React.createElement(
-	                  'div',
-	                  { className: 'text-center' },
+	                  React.createElement('input', { className: 'form-control', type: 'password', valueLink: this.linkState('password') }),
+	                  React.createElement('br', null),
 	                  React.createElement(
 	                    'button',
-	                    { className: 'btn red-btn', type: 'submit', onClick: this.close },
+	                    { className: 'btn red-btn text-center', type: 'submit' },
 	                    'Sign In'
 	                  ),
 	                  React.createElement(
 	                    'button',
-	                    { className: 'btn blue-btn', type: 'submit', onClick: this.close },
+	                    { className: 'btn blue-btn left-buffer text-center', onClick: this.show },
 	                    'Sign In As Guest'
 	                  )
 	                )
-	              )
+	              ),
+	              React.createElement(Modal.Footer, null)
 	            )
 	          )
 	        )

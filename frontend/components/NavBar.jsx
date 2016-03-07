@@ -3,9 +3,10 @@ var History = require('react-router').History;
 var UserStore = require('../stores/currentUser');
 var ApiUtil = require('../util/api_util');
 var Modal = require('react-bootstrap').Modal;
+var LinkedStateMixin = require('react-addons-linked-state-mixin');
 
 var NavBar = React.createClass({
-  mixins: [History],
+  mixins: [History, LinkedStateMixin],
   _onChange: function(){
     this.setState({user: UserStore.currentUser() });
   },
@@ -20,6 +21,7 @@ var NavBar = React.createClass({
   },
   componentWillUnmount: function(){
     this.userListener.remove();
+    ApiUtil.fetchCurrentUser();
   },
   navigateHome: function(){
     this.history.push("/");
@@ -36,9 +38,15 @@ var NavBar = React.createClass({
   logoutUser: function(){
     ApiUtil.logoutUser();
   },
-  loginUser: function(data){
-    // ApiUtil.loginUser();
-    console.log(data);
+  loginUser: function(event){
+    event.preventDefault();
+    var credentials = Object.assign({}, this.state);
+    ApiUtil.loginUser(credentials);
+    setTimeout(function(){ console.log("Hello"); }, 3000);
+    // console.log();
+  },
+  show: function(){
+    console.log(this.state);
   },
   mouseOver: function () {
     this.setState({hover: true});
@@ -88,19 +96,18 @@ var NavBar = React.createClass({
              <Modal.Title className="signin-modal-title-font"><img src="blue-tent-icon-red.png" className="small-icon-modal"/>Sign In</Modal.Title>
            </Modal.Header>
            <Modal.Body>
-             <form className="form-group" id="signinForm">
+             <form className="form-group" id="signinForm" onSubmit={this.loginUser}>
                <label className="form-inline signin-modal-ele-font">Email: </label>
-               <input className="form-control"/>
+               <input className="form-control" valueLink={this.linkState('email')}/>
                <br/>
                <label className="form-inline signin-modal-ele-font">Password: </label>
-               <input className="form-control"/>
+               <input className="form-control" type="password" valueLink={this.linkState('password')}/>
+               <br/>
+               <button className="btn red-btn text-center" type="submit">Sign In</button>
+               <button className="btn blue-btn left-buffer text-center" onClick={this.show}>Sign In As Guest</button>
              </form>
            </Modal.Body>
            <Modal.Footer>
-              <div className="text-center">
-                <button className="btn red-btn" type="submit" onClick={this.close}>Sign In</button>
-                <button className="btn blue-btn" type="submit" onClick={this.close}>Sign In As Guest</button>
-              </div>
            </Modal.Footer>
          </Modal>
           </ul>

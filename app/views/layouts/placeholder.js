@@ -1,4 +1,3 @@
-class="tan-bg-fill">
 
 <% if signed_in? %>
   <%= current_user.email %>

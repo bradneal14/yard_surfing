@@ -4,6 +4,7 @@ class SessionsController < ApplicationController
   end
 
   def create
+
     @user = User.find_by_credentials(*session_params.values)
     if @user
       login!(@user)
@@ -16,7 +17,7 @@ class SessionsController < ApplicationController
 
   def destroy
     logout!
-    render json: ["Successfully logged out!"] 
+    render json: ["Successfully logged out!"]
   end
 
   private
