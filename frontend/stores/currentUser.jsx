@@ -26,9 +26,16 @@ UserStore.__onDispatch = function(payload){
       UserStore.receiveUserById(payload.user);
       UserStore.__emitChange();
       break;
+    case UserConstants.RECEIVE_EDITED_USER:
+      UserStore.receiveEditedUser(payload.user);
+      UserStore.__emitChange();
+      break;
   }
 };
 
+UserStore.receiveEditedUser = function(user){
+  _user = [user];
+};
 
 UserStore.clearOwner = function(){
   _owner = [];

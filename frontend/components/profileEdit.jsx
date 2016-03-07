@@ -5,9 +5,10 @@ var ApiUtil = require("../util/api_util");
 var History = require("react-router").History;
 var YardListItem = require('./yardListItem');
 var YardStore = require('../stores/yard');
+var LinkedStateMixin = require('react-addons-linked-state-mixin');
 
 var ProfileEdit = React.createClass({
-  mixins: [History],
+  mixins: [LinkedStateMixin, History],
 
   _onChange: function(){
     var currentUser = UserStore.currentUser();
@@ -38,6 +39,12 @@ var ProfileEdit = React.createClass({
     this.userListener.remove();
     this.yardListener.remove();
   },
+  updateInfo: function(event){
+    event.preventDefault();
+    var information = Object.assign({}, this.state);
+    ApiUtil.updateUserInfo(information);
+    this.history.push("users/" + this.state.user.id);
+  },
   newYard: function(){
     this.history.push("/yards/new");
   },
@@ -51,9 +58,35 @@ var ProfileEdit = React.createClass({
         <br/>
         <br/>
         <div className="profile-show-pic" style={profileImageShowDiv} />
-        <h3 className="user-properties-font">Your Properties: </h3>
+        <div className="col-md-5">
+          <form onSubmit={this.updateInfo}>
+            <label>First Name</label>
+            <input type="text" valueLink={this.linkState('fname')} className="form-control" placeholder={this.state.user.fname}/>
+            <br/>
+            <label>Last Name</label>
+            <input type="text" valueLink={this.linkState('lanme')} className="form-control" placeholder={this.state.user.lname}/>
+            <br/>
+            <label>Email</label>
+            <input type="email" valueLink={this.linkState('title')} className="form-control" placeholder={this.state.user.email}/>
+            <br/>
+            <label>About me</label>
+            <textarea valueLink={this.linkState('description')} className="form-control" placeholder={this.state.user.description}/>
+            <br/>
+            <label>Birthday</label>
+            <input type="date" valueLink={this.linkState('birthday')} className="form-control" placeholder={this.state.user.birthday}/>
+            <br/>
+            <label>Gender</label>
+            <input type="text" valueLink={this.linkState('gender')} className="form-control" placeholder={this.state.user.gender}/>
+            <br/>
+            <label>Photo URL</label>
+            <input type="text" valueLink={this.linkState('main_pic_url')} className="form-control" placeholder={this.state.user.main_pic_url}/>
+            <br/>
+            <button className="btn blue-btn" type="submit">Update Info</button>
+          </form>
+        </div>
+        <h3 className="user-properties-font pro-edit-drop">Your Properties: </h3>
         <button className="btn btn-success new-yard-btn" onClick={this.newYard}>Add New Yard</button>
-        <div className="list-group image-group-contain-div">
+        <div className="list-group image-group-contain-div pro-edit-drop">
           <ul><br></br>{this.state.yards.map(function(yard){
             return <YardListItem className="" yard={yard} key={yard.id} photo={yard.yard_photos[0].yard_pic_url}></YardListItem>;
             })}

@@ -32,9 +32,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    @user = User.find_by(session_token: session[:session_token])
+    @user.update!(user_params)
+  end
+
   private
   def user_params
-    params.require(:user).permit(:email, :password, :fname, :lname)
+    params.require(:user).permit(:email, :password, :fname, :lname, :birthday, :gender, :description)
   end
 
 end

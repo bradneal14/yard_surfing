@@ -87,7 +87,6 @@ var NavBar = React.createClass({
         </div>
         <div className="navbar-right">
           <ul className="nav navbar-nav">
-            <li><a style={cursorPointer} onClick={this.showInfo}>Info</a></li>
             <li><a style={cursorPointer} onClick={this.navigateToProfileShow}>My Profile </a></li>
             <li><a style={cursorPointer} onClick={this.logoutUser}>Logout</a></li>
           </ul>

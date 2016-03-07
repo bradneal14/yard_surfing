@@ -64,6 +64,19 @@ var yardDetail = React.createClass({
         position: 'relative'
       };
     }
+    var amenities = [];
+    if (this.state.yard.fire_status){
+      amenities.push("fire");
+    }
+    if (this.state.yard.water_status){
+      amenities.push("water");
+    }
+    if (this.state.yard.shower_status){
+      amenities.push("shower");
+    }
+    if (this.state.yard.toilet_status){
+      amenities.push("toilet");
+    }
     return(
       <div>
         <div className="wide-jumbo" style={coverPhotoDivStyle}/>
@@ -96,7 +109,7 @@ var yardDetail = React.createClass({
                   </div>
                   <div>
                     <h3 className="prop-attr-font">Amenities: </h3>
-                    <p className="prop-info-detail">{this.state.yard.lng}</p>
+                    <p className="prop-info-detail">{amenities}</p>
                   </div>
                   <div>
 
@@ -113,9 +126,6 @@ var yardDetail = React.createClass({
           <div className="map" id="yard-detail-map">
             <Map id="yard-detail-map"  yard={this.props.params.yardId}></Map>
           </div>
-        </div>
-        <div className="breaker">
-          <p>Hello</p>
         </div>
       </div>
     </div>

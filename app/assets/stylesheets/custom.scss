@@ -10,6 +10,9 @@
   margin-left: 40%;
 }
 
+.pro-edit-drop{
+  margin-top: 50%;
+}
 
 .left-buffer {
   margin-left: 15px;
@@ -125,6 +128,7 @@ footer {
   margin-top: -70px;
 }
 
+
 .inner-inner-detail{
   margin-left: 4%;
 }
@@ -146,6 +150,14 @@ footer {
 .about-prop-font{
   font: 100 3em/1.0em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
   background-color: rgba(120,191,178, 0.4);
+  padding-top: 4%;
+  padding-bottom: 2%;
+  padding-left: 2%;
+}
+
+.about-user-font{
+  font: 100 3em/1.0em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+  background-color: rgba(179,91,79, 0.4);
   padding-top: 4%;
   padding-bottom: 2%;
   padding-left: 2%;
@@ -278,7 +290,7 @@ footer {
 
 .profile-show-strip{
   height: 107px;
-  background-color: rgba(0,0,0,.25);
+  background-color: rgba(120,191,178,.5);
   margin-top: -80px;
   width:100%;
 }

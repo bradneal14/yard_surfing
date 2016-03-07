@@ -32,6 +32,16 @@ var ApiUtil = {
       }
     });
   },
+  updateUserInfo: function(information){
+    $.ajax({
+      url: "/users/:id",
+      type: "PATCH",
+      data: {user: information},
+      success: function(data){
+        ApiActions.receiveEditedUser(data);
+      }
+    });
+  },
   removeYard: function(id){
     $.ajax({
       url: 'api/yards/' + id,

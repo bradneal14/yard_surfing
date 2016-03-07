@@ -39,6 +39,10 @@ var ApiActions = {
   receiveUserById: function(data){
     var payload = {actionType: UserConstants.RECEIVE_USER_BY_ID, user: data};
     AppDispatcher.dispatch(payload);
+  },
+  receiveEditedUser: function(data){
+    var payload = {actionType: UserConstants.RECEIVE_EDITED_USER, user: data};
+    AppDispatcher.dispatch(payload);
   }
 };
 

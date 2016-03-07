@@ -26575,6 +26575,16 @@
 	      }
 	    });
 	  },
+	  updateUserInfo: function (information) {
+	    $.ajax({
+	      url: "/users/:id",
+	      type: "PATCH",
+	      data: { user: information },
+	      success: function (data) {
+	        ApiActions.receiveEditedUser(data);
+	      }
+	    });
+	  },
 	  removeYard: function (id) {
 	    $.ajax({
 	      url: 'api/yards/' + id,
@@ -26700,6 +26710,10 @@
 	  },
 	  receiveUserById: function (data) {
 	    var payload = { actionType: UserConstants.RECEIVE_USER_BY_ID, user: data };
+	    AppDispatcher.dispatch(payload);
+	  },
+	  receiveEditedUser: function (data) {
+	    var payload = { actionType: UserConstants.RECEIVE_EDITED_USER, user: data };
 	    AppDispatcher.dispatch(payload);
 	  }
 	};
@@ -32584,15 +32598,6 @@
 	              null,
 	              React.createElement(
 	                'a',
-	                { style: cursorPointer, onClick: this.showInfo },
-	                'Info'
-	              )
-	            ),
-	            React.createElement(
-	              'li',
-	              null,
-	              React.createElement(
-	                'a',
 	                { style: cursorPointer, onClick: this.navigateToProfileShow },
 	                'My Profile '
 	              )
@@ -32726,7 +32731,15 @@
 	      UserStore.receiveUserById(payload.user);
 	      UserStore.__emitChange();
 	      break;
+	    case UserConstants.RECEIVE_EDITED_USER:
+	      UserStore.receiveEditedUser(payload.user);
+	      UserStore.__emitChange();
+	      break;
 	  }
+	};
+	
+	UserStore.receiveEditedUser = function (user) {
+	  _user = [user];
 	};
 	
 	UserStore.clearOwner = function () {
@@ -49935,6 +49948,19 @@
 	        position: 'relative'
 	      };
 	    }
+	    var amenities = [];
+	    if (this.state.yard.fire_status) {
+	      amenities.push("fire");
+	    }
+	    if (this.state.yard.water_status) {
+	      amenities.push("water");
+	    }
+	    if (this.state.yard.shower_status) {
+	      amenities.push("shower");
+	    }
+	    if (this.state.yard.toilet_status) {
+	      amenities.push("toilet");
+	    }
 	    return React.createElement(
 	      'div',
 	      null,
@@ -50034,7 +50060,7 @@
 	                  React.createElement(
 	                    'p',
 	                    { className: 'prop-info-detail' },
-	                    this.state.yard.lng
+	                    amenities
 	                  )
 	                ),
 	                React.createElement('div', null)
@@ -50065,15 +50091,6 @@
 	            'div',
 	            { className: 'map', id: 'yard-detail-map' },
 	            React.createElement(Map, { id: 'yard-detail-map', yard: this.props.params.yardId })
-	          )
-	        ),
-	        React.createElement(
-	          'div',
-	          { className: 'breaker' },
-	          React.createElement(
-	            'p',
-	            null,
-	            'Hello'
 	          )
 	        )
 	      )
@@ -50509,7 +50526,7 @@
 	          { className: "yard-detail-info-inner" },
 	          React.createElement(
 	            "h3",
-	            { className: "about-prop-font" },
+	            { className: "about-user-font" },
 	            "About this User"
 	          ),
 	          React.createElement(
@@ -50566,11 +50583,12 @@
 	var History = __webpack_require__(188).History;
 	var YardListItem = __webpack_require__(505);
 	var YardStore = __webpack_require__(159);
+	var LinkedStateMixin = __webpack_require__(248);
 	
 	var ProfileEdit = React.createClass({
 	  displayName: "ProfileEdit",
 	
-	  mixins: [History],
+	  mixins: [LinkedStateMixin, History],
 	
 	  _onChange: function () {
 	    var currentUser = UserStore.currentUser();
@@ -50601,6 +50619,12 @@
 	    this.userListener.remove();
 	    this.yardListener.remove();
 	  },
+	  updateInfo: function (event) {
+	    event.preventDefault();
+	    var information = Object.assign({}, this.state);
+	    ApiUtil.updateUserInfo(information);
+	    this.history.push("users/" + this.state.user.id);
+	  },
 	  newYard: function () {
 	    this.history.push("/yards/new");
 	  },
@@ -50616,8 +50640,70 @@
 	      React.createElement("br", null),
 	      React.createElement("div", { className: "profile-show-pic", style: profileImageShowDiv }),
 	      React.createElement(
+	        "div",
+	        { className: "col-md-5" },
+	        React.createElement(
+	          "form",
+	          { onSubmit: this.updateInfo },
+	          React.createElement(
+	            "label",
+	            null,
+	            "First Name"
+	          ),
+	          React.createElement("input", { type: "text", valueLink: this.linkState('fname'), className: "form-control", placeholder: this.state.user.fname }),
+	          React.createElement("br", null),
+	          React.createElement(
+	            "label",
+	            null,
+	            "Last Name"
+	          ),
+	          React.createElement("input", { type: "text", valueLink: this.linkState('lanme'), className: "form-control", placeholder: this.state.user.lname }),
+	          React.createElement("br", null),
+	          React.createElement(
+	            "label",
+	            null,
+	            "Email"
+	          ),
+	          React.createElement("input", { type: "email", valueLink: this.linkState('title'), className: "form-control", placeholder: this.state.user.email }),
+	          React.createElement("br", null),
+	          React.createElement(
+	            "label",
+	            null,
+	            "About me"
+	          ),
+	          React.createElement("textarea", { valueLink: this.linkState('description'), className: "form-control", placeholder: this.state.user.description }),
+	          React.createElement("br", null),
+	          React.createElement(
+	            "label",
+	            null,
+	            "Birthday"
+	          ),
+	          React.createElement("input", { type: "date", valueLink: this.linkState('birthday'), className: "form-control", placeholder: this.state.user.birthday }),
+	          React.createElement("br", null),
+	          React.createElement(
+	            "label",
+	            null,
+	            "Gender"
+	          ),
+	          React.createElement("input", { type: "text", valueLink: this.linkState('gender'), className: "form-control", placeholder: this.state.user.gender }),
+	          React.createElement("br", null),
+	          React.createElement(
+	            "label",
+	            null,
+	            "Photo URL"
+	          ),
+	          React.createElement("input", { type: "text", valueLink: this.linkState('main_pic_url'), className: "form-control", placeholder: this.state.user.main_pic_url }),
+	          React.createElement("br", null),
+	          React.createElement(
+	            "button",
+	            { className: "btn blue-btn", type: "submit" },
+	            "Update Info"
+	          )
+	        )
+	      ),
+	      React.createElement(
 	        "h3",
-	        { className: "user-properties-font" },
+	        { className: "user-properties-font pro-edit-drop" },
 	        "Your Properties: "
 	      ),
 	      React.createElement(
@@ -50627,7 +50713,7 @@
 	      ),
 	      React.createElement(
 	        "div",
-	        { className: "list-group image-group-contain-div" },
+	        { className: "list-group image-group-contain-div pro-edit-drop" },
 	        React.createElement(
 	          "ul",
 	          null,

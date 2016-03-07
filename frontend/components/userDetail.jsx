@@ -75,7 +75,7 @@ var UserDetail = React.createClass({
           </div>
           <div className="yard-detail-info-outer">
             <div className="yard-detail-info-inner">
-              <h3 className="about-prop-font">About this User</h3>
+              <h3 className="about-user-font">About this User</h3>
               <div className="inner-inner-detail">
                 <div>
                   <h3 className="prop-attr-font">About {this.state.user.fname}:</h3>
