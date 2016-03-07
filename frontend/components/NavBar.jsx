@@ -11,13 +11,20 @@ var NavBar = React.createClass({
     this.setState({user: UserStore.currentUser() });
   },
   getInitialState: function(){
-    return {user: UserStore.currentUser(), hover: false , showModal: false};
+    console.log("initial state");
+    var succ = localStorage.getItem("success") || false;
+    return {user: UserStore.currentUser(), hover: false , showModal: false, success: succ};
   },
   componentDidMount: function(){
     this.userListener = UserStore.addListener(this._onChange);
+    console.log("component mounted");
     ApiUtil.fetchCurrentUser();
     // this.yardListener = YardStore.addListener(this._onChange);
     // ApiUtil.fetchYards();
+  },
+  componentWillReceiveProps: function(newProps){
+    ApiUtil.fetchCurrentUser();
+    this.setState({success: true});
   },
   componentWillUnmount: function(){
     this.userListener.remove();
@@ -36,17 +43,22 @@ var NavBar = React.createClass({
     this.history.push("users/" + this.state.user.id);
   },
   logoutUser: function(){
+    localStorage.removeItem("success");
     ApiUtil.logoutUser();
   },
   loginUser: function(event){
     event.preventDefault();
     var credentials = Object.assign({}, this.state);
-    ApiUtil.loginUser(credentials);
-    setTimeout(function(){ console.log("Hello"); }, 3000);
+    ApiUtil.loginUser(credentials, this.setSuccess);
     // console.log();
   },
   show: function(){
-    console.log(this.state);
+    console.log(localStorage);
+  },
+  setSuccess: function(){
+    console.log("success set");
+    localStorage.setItem("success", true);
+    this.setState({success: true});
   },
   mouseOver: function () {
     this.setState({hover: true});
@@ -55,7 +67,8 @@ var NavBar = React.createClass({
     this.setState({hover: false});
   },
   showInfo: function(){
-    console.log(UserStore.currentUser());
+    console.log("LOCAL STORAGE", localStorage);
+    console.log("STATE", this.state);
   },
   render: function(){
     var cursorPointer = {
@@ -115,12 +128,7 @@ var NavBar = React.createClass({
       </div>
     </nav>;
 
-    if (UserStore.currentUser()){
-      var NavigationBar = loggedInNav;
-    } else {
-      var NavigationBar = loggedOutNav;
-    }
-    return (NavigationBar);
+    return (loggedInNav);
   }
 });
 

@@ -14,7 +14,3 @@
  *= require_self
  *= require bootstrap
  */
-
-.center {
-  background-color: orange;
-}

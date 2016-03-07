@@ -4,6 +4,12 @@
   margin-top: 15px;
 }
 
+.auth-panel{
+  margin-top: 20%;
+  position: absolute;
+  margin-left: 40%;
+}
+
 .left-buffer {
   margin-left: 15px;
 }
@@ -217,7 +223,6 @@ footer {
   font: 100 2.3em/1.0em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 }
 
-
 .request-panel-input {
   display: inline;
   width: 80%;
@@ -267,6 +272,9 @@ footer {
   border-color: transparent !important;
 }
 
+.title-auth{
+position: absolute;
+}
 
 .navbar-collapse.collapse {
 display: block!important;
@@ -278,6 +286,15 @@ float: left !important;
 
 .navbar-nav.navbar-right:last-child {
 margin-right: -15px !important;
+}
+
+.theme-bg{
+  min-height: 100%;
+  min-width: 1024px;
+  width: 100%;
+  height: auto;
+  position: fixed;
+  top: 0;
 }
 
 .navbar-right {

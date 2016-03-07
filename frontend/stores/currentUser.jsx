@@ -38,6 +38,10 @@ UserStore.clearUserById = function(){
   _userById = [];
 };
 
+UserStore.clearUser = function(){
+  _user = [];
+};
+
 UserStore.receiveYardOwner = function(user){
   _owner = [user];
 };

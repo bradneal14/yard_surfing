@@ -1,21 +1,39 @@
-<h1>Sign In</h1>
+<div class="">
+  <nav class="navbar-default navbar-fixed-top">
+    <div class="col-xs-12">
+      <div class="navbar-left nav-img">
+        <%=image_tag("blue-tent-icon.png", class:"small-icon" )%>
+      </div>
+      <div class="navbar-right">
+        <ul class="nav navbar-nav">
+          <li><a href="../users/new">New User</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-<form action="<%= session_url %>" method="post" class='center'>
-  <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+  <div>
+    <%=image_tag("theme.jpeg", class:"theme-bg")%>
+    <h1 class="title-auth">Sign In</h1>
 
-  <label>
-    Email
-    <input type="text" name="user[email]" value="">
-  </label>
+    <form action="<%= session_url %>" method="post" class='auth-panel'>
+      <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
 
-  <br>
+      <label>
+        Email
+        <input type="text" name="user[email]" value="">
+      </label>
 
-  <label>
-    Password
-    <input type="password" name="user[password]" value="">
-  </label>
-  <br>
-  <br>
-  <input type="submit" value="Sign In">
+      <br>
 
-</form>
+      <label>
+        Password
+        <input type="password" name="user[password]" value="" >
+      </label>
+      <br>
+      <br>
+      <button class="btn blue-btn" type="submit">Sign In</button>
+
+    </form>
+  </div>
+</div>

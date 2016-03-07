@@ -23,9 +23,9 @@ class ApplicationController < ActionController::Base
     !!current_user
   end
 
-  # def ensure_login
-  #   redirect_to new_session_url unless signed_in?
-  # end
+  def ensure_login
+    redirect_to new_session_url unless signed_in?
+  end
 
 
 end

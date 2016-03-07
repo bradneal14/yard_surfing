@@ -59,13 +59,14 @@ var ApiUtil = {
       }
     });
   },
-  loginUser: function(credentials){
+  loginUser: function(credentials, callback){
     $.ajax({
       url: "session",
       type: "POST",
       data: {user: credentials},
       success: function(data){
-        window.location.href = "/";
+        console.log("we here");
+        callback();
       }
     });
   },

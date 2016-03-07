@@ -22,7 +22,7 @@
 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCp2wCq4a-qVXbHAIV3fsy6NZcnapHyqw" type="text/javascript"></script>
 
-  <!-- <% if signed_in? %>
+<% if signed_in? %>
   <%= current_user.email %>
 </br>
 <%= link_to "Sign Out", session_url, method: :delete %>
@@ -41,7 +41,7 @@
   <%= flash[:errors].uniq.join("<br>").html_safe if flash[:errors] %>
   <% end %>
 </div>
-<br> -->
+<br>
 
 </head>
 <body
