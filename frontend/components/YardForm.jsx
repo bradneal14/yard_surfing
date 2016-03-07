@@ -57,20 +57,23 @@ var YardForm = React.createClass({
                 </select>
                 <br/>
               </div>
-              <div className="col-sm-6">
-                <label><span className="glyphicon glyphicon-tint"></span> Water:</label>
+              <div className="col-sm-4">
+                <label>Add an Image URL to Your Listing: </label>
+                <input type="text" valueLink={this.linkState('yard_pic_url')} className="form-control"/>
+                <br/>
+                <label>Guests Will Have Access to Drinking Water:</label>
                 <input type="checkbox" valueLink={this.linkState('water_status')} className=""/>
                 <br/>
-                <label><span className="glyphicon glyphicon-fire"></span> Fire: </label>
-                <input type="checkbox" valueLink={this.linkState('fire_status')} className=""/>
-                <br/>
-                <label>Toilet:</label>
+                <label>Guests Will Have Access to a Toilet:</label>
                 <input type="checkbox" valueLink={this.linkState('toilet_status')} className=""/>
                 <br/>
-                <label>Shower:</label>
+                <label>Guests Will Have Access to a Shower:</label>
                 <input type="checkbox" valueLink={this.linkState('shower_status')} className=""/>
                 <br/>
-                <div className="text-center col-xs-12">
+                <label>Guests are Allowed to Make Fire: </label>
+                <input type="checkbox" valueLink={this.linkState('fire_status')} className=""/>
+                <br/>
+                <div className="text-center col-sm-4">
                   <input className="btn btn-success" type="submit" value="Create Yard"/>
                   <button className="btn btn-danger left-buffer" onClick={this.handleCancel}>Cancel</button>
                 </div>

@@ -42,17 +42,27 @@ var ProfileEdit = React.createClass({
     this.userListener.remove();
     this.yardListener.remove();
   },
+  newYard: function(){
+    this.history.push("/yards/new");
+  },
   render: function(){
+    var profileImageShowDiv = {
+      backgroundImage: 'url(' + this.state.user.main_pic_url + ')'
+    };
     return (
       <div>
         <div>This is a users show page Yay!</div>
         <p> Welcome to your page, {this.state.user.fname}</p>
         <p>Your name is {this.state.user.fname} {this.state.user.lname}</p>
-        <img src={this.state.user.main_pic_url} className="profile-show-pic"></img>
-        <ul>Your yards are : <br></br>{this.state.yards.map(function(yard){
-          return <YardListItem yard={yard} key={yard.id}></YardListItem>;
-          })}
+        <div className="profile-show-pic" style={profileImageShowDiv} />
+        <h3 className="user-properties-font">Your Properties: </h3>
+        <button className="btn btn-success new-yard-btn" onClick={this.newYard}>Add New Yard</button>
+        <div className="list-group image-group-contain-div">
+          <ul><br></br>{this.state.yards.map(function(yard){
+            return <YardListItem className="" yard={yard} key={yard.id} photo={yard.yard_photos[0].yard_pic_url}></YardListItem>;
+            })}
           </ul>
+        </div>
 
       </div>
     );

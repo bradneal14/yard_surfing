@@ -1,11 +1,16 @@
 var React = require('react');
 var NavBar = require('./NavBar');
 var History = require('react-router').History;
+var UserStore = require('../stores/currentUser');
 
 var Landing = React.createClass({
   mixins: [History],
   navigateToSearch: function(){
-    this.history.push("/search");
+    if (UserStore.currentUser()){
+      this.history.push("/search");
+    } else {
+      console.log("you cant search unless you sign in");
+    }
   },
   render: function(){
     var landingCoverPhoto = {

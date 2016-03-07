@@ -15,17 +15,15 @@ var YardListItem = React.createClass({
     event.preventDefault();
     ApiUtil.removeYard(this.props.yard.id);
     this.history.push("users/" + this.state.user.id);
-    //added all this user state stuff in order to redirect back to user show page
-    //after deleting a yard. there must be an easier way to delete immediately
   },
   render: function(){
     return(
-      <div className="col-sm-3 row">
+      <div className="col-sm-3 image-contain-div">
         <li onClick={this.showDetail} className="list-group-item">
-          <p>{this.props.yard.title} : {this.props.yard.description}
-          </p>
+          <p>{this.props.yard.title}</p>
+          <img src={this.props.photo} className="profile-edit-yard-pic"/>
         </li>
-        <button onClick={this.removeYard} className="btn btn-success left-buffer">Delete Yard</button>
+        <button onClick={this.removeYard} className="btn btn-danger left-buffer">Delete Yard</button>
       </div>
     );
   }

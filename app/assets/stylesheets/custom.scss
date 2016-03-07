@@ -21,6 +21,24 @@
   background-image: asset-data-url("loading_image");
 }
 
+.image-group-contain-div{
+  border-style: dashed;
+  padding: 20px;
+  margin: 20px;
+  position: absolute;
+  border-radius: 30px;
+}
+
+.image-contain-div{
+  position: relative;
+  width: 370px;
+  margin-bottom: 30px;
+}
+
+.profile-edit-yard-pic{
+  height: 200px;
+}
+
 html, body, .container-fluid,#map_canvas {
     height:100%;
 }
@@ -29,6 +47,10 @@ html, body, .container-fluid,#map_canvas {
   width: 100%;
   position: absolute;
   top:0;
+}
+
+.new-yard-btn{
+  margin-left: 2%;
 }
 
 .below-nav {
@@ -167,6 +189,11 @@ footer {
   font: 100 4em/1.0em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 }
 
+.user-properties-font{
+  margin-left: 2%;
+  font: 100 3em/1.0em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+
 .yard-location-font{
   font: 200 1.6em/1.0em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
   margin-left: 50px;
@@ -180,6 +207,14 @@ footer {
   font: 100 2.0em/1.0em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
   color: black;
   position: relative;
+}
+
+.signin-modal-ele-font{
+  font: 200 1.5em/1.0em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+
+.signin-modal-title-font{
+  font: 100 2.3em/1.0em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 }
 
 
@@ -252,6 +287,21 @@ float: right!important;
 .small-icon{
   height: 40px;
   margin-top: 7%;
+}
+
+.red-btn{
+  background-color: #b35b4f;
+  color: white;
+}
+
+.blue-btn{
+  background-color: rgba(120, 191, 178, 0.95);
+  color: white;
+}
+
+.small-icon-modal{
+  height:40px;
+  margin-top: -10px;
 }
 
 .testing{

@@ -80,4 +80,5 @@ UserStore.userById = function(){
   return _userById[0];
 };
 
+window.UserStore = UserStore;
 module.exports = UserStore;
