@@ -50412,12 +50412,6 @@
 	  getInitialState: function () {
 	    return { user: UserStore.userById(), currentUser: UserStore.currentUser(), friends: false };
 	  },
-	
-	  doIt: function () {
-	    console.log("STATE", this.state);
-	    ApiUtil.fetchUserById(this.props.params.userId);
-	    ApiUtil.fetchCurrentUser();
-	  },
 	  _onChange: function () {
 	    this.setState({ user: UserStore.userById(), currentUser: UserStore.currentUser() });
 	  },
@@ -50487,12 +50481,7 @@
 	      "div",
 	      null,
 	      React.createElement(
-	        "div",
-	        null,
-	        "This is a users show page Yay!"
-	      ),
-	      React.createElement(
-	        "p",
+	        "h3",
 	        null,
 	        " Welcome to the page of ",
 	        this.state.user.fname,
@@ -50500,11 +50489,6 @@
 	        this.state.user.lname
 	      ),
 	      React.createElement("div", { className: "profile-show-pic", style: profileImageShowDiv }),
-	      React.createElement(
-	        "button",
-	        { onClick: this.doIt, className: "btn btn-danger" },
-	        "Click me to see state"
-	      ),
 	      editButton,
 	      friendButton
 	    );

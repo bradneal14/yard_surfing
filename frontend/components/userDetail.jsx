@@ -13,12 +13,6 @@ var UserDetail = React.createClass({
       {user: UserStore.userById(), currentUser: UserStore.currentUser(), friends: false}
     );
   },
-
-  doIt: function(){
-    console.log("STATE", this.state);
-    ApiUtil.fetchUserById(this.props.params.userId);
-    ApiUtil.fetchCurrentUser();
-  },
   _onChange: function(){
     this.setState({user: UserStore.userById(), currentUser: UserStore.currentUser() });
   },
@@ -68,10 +62,8 @@ var UserDetail = React.createClass({
     }
     return (
       <div>
-        <div>This is a users show page Yay!</div>
-        <p> Welcome to the page of {this.state.user.fname} {this.state.user.lname}</p>
+        <h3> Welcome to the page of {this.state.user.fname} {this.state.user.lname}</h3>
         <div className="profile-show-pic" style={profileImageShowDiv} />
-        <button onClick={this.doIt} className="btn btn-danger">Click me to see state</button>
         {editButton}
         {friendButton}
       </div>
