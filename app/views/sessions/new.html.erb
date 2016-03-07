@@ -13,10 +13,10 @@
   </nav>
 </div>
   <div>
-    <%=image_tag("../theme.jpeg", class:"theme-bg")%>
+
     <h1 class="title-auth">Sign In</h1>
 
-    <form action="<%= session_url %>" method="post" class='auth-panel'>
+    <form action="<%= session_url %>" method="post" class='auth-panel form-over'>
       <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
       <label>
         Email
@@ -32,10 +32,10 @@
       <button class="btn blue-btn" type="submit">Sign In</button>
     </form>
   </div>
-  <div>
+  <div class="secret-field">
     <form action="<%= session_url %>" method="post" class="auth-panel">
-      <label>Email <input type="text" name="user[email]" value="admin" type="hidden" class="hidden-field"></label><br>
-      <label>Password <input type="password" name="user[password]" value="password" type="hidden" class="hidden-field"></label><br><br>
+      <label><input type="text" name="user[email]" value="admin" type="hidden" class="hidden-field"></label><br>
+      <label><input type="password" name="user[password]" value="password" type="hidden" class="hidden-field"></label><br><br><br><br><br><br><br><br>
       <button class="btn blue-btn left-buffer guest-login-button">Sign In as Guest</button>
     </form>
   </div>
