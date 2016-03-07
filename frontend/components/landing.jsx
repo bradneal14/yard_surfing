@@ -18,16 +18,18 @@ var Landing = React.createClass({
     };
     return(
       <div style={landingCoverPhoto} className="landing-cover">
-        <form>
-          <div className="form-group col-md-4 col-sm-5 col-xs-12 col-lg-4 center-button">
-            <div className="input-group">
-              <input type="text" className="form-control" placeholder="Where would you like to go.."/>
+        <div className="search-bar-strip">
+          <form>
+            <div className="form-group col-md-4 col-sm-5 col-xs-6 col-lg-4 center-button">
+              <div className="input-group">
+                <input type="text" className="form-control" placeholder="Where would you like to go.."/>
                 <span className="input-group-btn">
                   <button className="btn btn-success" onClick={this.navigateToSearch}>Head to search</button>
                 </span>
+              </div>
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     );
   }

@@ -50362,22 +50362,26 @@
 	      'div',
 	      { style: landingCoverPhoto, className: 'landing-cover' },
 	      React.createElement(
-	        'form',
-	        null,
+	        'div',
+	        { className: 'search-bar-strip' },
 	        React.createElement(
-	          'div',
-	          { className: 'form-group col-md-4 col-sm-5 col-xs-12 col-lg-4 center-button' },
+	          'form',
+	          null,
 	          React.createElement(
 	            'div',
-	            { className: 'input-group' },
-	            React.createElement('input', { type: 'text', className: 'form-control', placeholder: 'Where would you like to go..' }),
+	            { className: 'form-group col-md-4 col-sm-5 col-xs-6 col-lg-4 center-button' },
 	            React.createElement(
-	              'span',
-	              { className: 'input-group-btn' },
+	              'div',
+	              { className: 'input-group' },
+	              React.createElement('input', { type: 'text', className: 'form-control', placeholder: 'Where would you like to go..' }),
 	              React.createElement(
-	                'button',
-	                { className: 'btn btn-success', onClick: this.navigateToSearch },
-	                'Head to search'
+	                'span',
+	                { className: 'input-group-btn' },
+	                React.createElement(
+	                  'button',
+	                  { className: 'btn btn-success', onClick: this.navigateToSearch },
+	                  'Head to search'
+	                )
 	              )
 	            )
 	          )

@@ -10,6 +10,7 @@
   margin-left: 40%;
 }
 
+
 .left-buffer {
   margin-left: 15px;
 }
@@ -255,9 +256,17 @@ footer {
 
 .center-button{
   margin: 0 auto;
-  position: absolute;
-  margin-left: 55%;
+  position: fixed;
+  margin-left: 35%;
+  margin-top: 37px;
+}
+
+.search-bar-strip{
+  height: 107px;
+  background-color: rgba(0,0,0,.5);
   margin-top: 30%;
+  position: relative;
+
 }
 
 .wide-jumbo {
