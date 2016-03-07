@@ -241,6 +241,10 @@ footer {
   margin-left: 10px;
 }
 
+.big-left-buffer{
+  margin-left: 70px;
+}
+
 .yard-show-page-map{
   margin: auto;
 }
@@ -266,7 +270,17 @@ footer {
   background-color: rgba(0,0,0,.5);
   margin-top: 30%;
   position: relative;
+}
 
+.pro-details-form{
+  margin-left: 200px;
+}
+
+.profile-show-strip{
+  height: 107px;
+  background-color: rgba(0,0,0,.25);
+  margin-top: -80px;
+  width:100%;
 }
 
 .wide-jumbo {
@@ -459,10 +473,11 @@ float: right!important;
   overflow: hidden;
   background-position: center;
   background-size: cover;
-  border-radius: 110px;
   background-image: asset-data-url("loading_image");
   // background-size: contain;
   background-size: cover;
+  position: relative;;
+  z-index: 1;
 }
 
 

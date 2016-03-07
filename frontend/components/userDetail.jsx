@@ -51,7 +51,7 @@ var UserDetail = React.createClass({
       backgroundImage: 'url(' + this.state.user.main_pic_url + ')'
     };
     if (this.state.user.id === this.state.currentUser.id){
-      var editButton = <button onClick={this.handleEdit} className="btn btn-success">Edit Profile</button>;
+      var editButton = <button onClick={this.handleEdit} className="btn blue-btn big-left-buffer">Edit Profile</button>;
     }
     if (this.state.user.id !== this.state.currentUser.id ){
       if (this.state.friends === false){
@@ -62,10 +62,35 @@ var UserDetail = React.createClass({
     }
     return (
       <div>
-        <h3> Welcome to the page of {this.state.user.fname} {this.state.user.lname}</h3>
-        <div className="profile-show-pic" style={profileImageShowDiv} />
-        {editButton}
-        {friendButton}
+        <br/>
+        <br/>
+        <br/>
+        <div className="profile-show-pic" style={profileImageShowDiv}/>
+          <div className="profile-show-strip">
+            <div className="pro-details-form">
+              <h3 className="big-left-buffer">{this.state.user.fname} {this.state.user.lname}</h3>
+              {editButton}
+              {friendButton}
+            </div>
+          </div>
+          <div className="yard-detail-info-outer">
+            <div className="yard-detail-info-inner">
+              <h3 className="about-prop-font">About this User</h3>
+              <div className="inner-inner-detail">
+                <div>
+                  <h3 className="prop-attr-font">About {this.state.user.fname}:</h3>
+                  <p className="prop-info-detail">{this.state.user.description}</p>
+                </div>
+                <div>
+                  <h3 className="prop-attr-font">Birthday: </h3>
+                  <p className="prop-info-detail">{this.state.user.birthday}</p>
+                </div>
+                <div>
+
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

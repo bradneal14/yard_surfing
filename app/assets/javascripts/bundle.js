@@ -50458,7 +50458,7 @@
 	    if (this.state.user.id === this.state.currentUser.id) {
 	      var editButton = React.createElement(
 	        "button",
-	        { onClick: this.handleEdit, className: "btn btn-success" },
+	        { onClick: this.handleEdit, className: "btn blue-btn big-left-buffer" },
 	        "Edit Profile"
 	      );
 	    }
@@ -50480,17 +50480,75 @@
 	    return React.createElement(
 	      "div",
 	      null,
-	      React.createElement(
-	        "h3",
-	        null,
-	        " Welcome to the page of ",
-	        this.state.user.fname,
-	        " ",
-	        this.state.user.lname
-	      ),
+	      React.createElement("br", null),
+	      React.createElement("br", null),
+	      React.createElement("br", null),
 	      React.createElement("div", { className: "profile-show-pic", style: profileImageShowDiv }),
-	      editButton,
-	      friendButton
+	      React.createElement(
+	        "div",
+	        { className: "profile-show-strip" },
+	        React.createElement(
+	          "div",
+	          { className: "pro-details-form" },
+	          React.createElement(
+	            "h3",
+	            { className: "big-left-buffer" },
+	            this.state.user.fname,
+	            " ",
+	            this.state.user.lname
+	          ),
+	          editButton,
+	          friendButton
+	        )
+	      ),
+	      React.createElement(
+	        "div",
+	        { className: "yard-detail-info-outer" },
+	        React.createElement(
+	          "div",
+	          { className: "yard-detail-info-inner" },
+	          React.createElement(
+	            "h3",
+	            { className: "about-prop-font" },
+	            "About this User"
+	          ),
+	          React.createElement(
+	            "div",
+	            { className: "inner-inner-detail" },
+	            React.createElement(
+	              "div",
+	              null,
+	              React.createElement(
+	                "h3",
+	                { className: "prop-attr-font" },
+	                "About ",
+	                this.state.user.fname,
+	                ":"
+	              ),
+	              React.createElement(
+	                "p",
+	                { className: "prop-info-detail" },
+	                this.state.user.description
+	              )
+	            ),
+	            React.createElement(
+	              "div",
+	              null,
+	              React.createElement(
+	                "h3",
+	                { className: "prop-attr-font" },
+	                "Birthday: "
+	              ),
+	              React.createElement(
+	                "p",
+	                { className: "prop-info-detail" },
+	                this.state.user.birthday
+	              )
+	            ),
+	            React.createElement("div", null)
+	          )
+	        )
+	      )
 	    );
 	  }
 	});
@@ -50517,12 +50575,9 @@
 	  _onChange: function () {
 	    var currentUser = UserStore.currentUser();
 	    this.fetchAfterDelete();
-	    console.log("one");
-	    console.log("on change userdetail", currentUser);
 	    this.setState({ yards: currentUser.yards, user: currentUser });
 	  },
 	  _onDelete: function () {
-	    console.log("user detail on delete");
 	    this.setState({ yards: YardStore.findById(this.state.user.id) });
 	  },
 	  fetchAfterDelete: function () {
@@ -50530,7 +50585,6 @@
 	    ApiUtil.fetchYards(bounds);
 	  },
 	  getInitialState: function () {
-	    console.log("initial state userdetail");
 	    ApiUtil.fetchCurrentUser();
 	    return { user: {}, yards: [] };
 	  },
@@ -50557,25 +50611,9 @@
 	    return React.createElement(
 	      "div",
 	      null,
-	      React.createElement(
-	        "div",
-	        null,
-	        "This is a users show page Yay!"
-	      ),
-	      React.createElement(
-	        "p",
-	        null,
-	        " Welcome to your page, ",
-	        this.state.user.fname
-	      ),
-	      React.createElement(
-	        "p",
-	        null,
-	        "Your name is ",
-	        this.state.user.fname,
-	        " ",
-	        this.state.user.lname
-	      ),
+	      React.createElement("br", null),
+	      React.createElement("br", null),
+	      React.createElement("br", null),
 	      React.createElement("div", { className: "profile-show-pic", style: profileImageShowDiv }),
 	      React.createElement(
 	        "h3",
