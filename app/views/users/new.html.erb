@@ -13,8 +13,8 @@
   </nav>
 
   <div>
-    <%=image_tag("../theme.jpeg", class:"theme-bg")%>
-    <h1 class="title-auth">Sign Up</h1>
+    <%=image_tag('theme.jpg', class:'theme-bg') unless Rails.env.production?%>
+    <%=image_tag('../theme.jpg', class:'theme-bg') if Rails.env.production?%>
 
     <form action="<%= session_url %>" method="post" class='auth-panel'>
       <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
