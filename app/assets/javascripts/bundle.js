@@ -50625,6 +50625,9 @@
 	    ApiUtil.updateUserInfo(information);
 	    this.history.push("users/" + this.state.user.id);
 	  },
+	  state: function () {
+	    console.log("STATE", this.state);
+	  },
 	  newYard: function () {
 	    this.history.push("/yards/new");
 	  },
@@ -50719,7 +50722,8 @@
 	          null,
 	          React.createElement("br", null),
 	          this.state.yards.map(function (yard) {
-	            React.createElement(YardListItem, { className: "", yard: yard, key: yard.id, photo: yard.yard_photos[0].yard_pic_url });
+	            console.log(yard);
+	            return React.createElement(YardListItem, { className: "", yard: yard, key: yard.id, photo: yard.yard_photos[0].yard_pic_url });
 	          })
 	        )
 	      )
@@ -50727,6 +50731,7 @@
 	  }
 	});
 	
+	window.ProfileEdit = ProfileEdit;
 	module.exports = ProfileEdit;
 
 /***/ },
