@@ -50722,8 +50722,9 @@
 	          null,
 	          React.createElement("br", null),
 	          this.state.yards.map(function (yard) {
-	            console.log(yard);
-	            return React.createElement(YardListItem, { className: "", yard: yard, key: yard.id, photo: yard.yard_photos[0].yard_pic_url });
+	            if (yard.yard_photos) {
+	              return React.createElement(YardListItem, { className: "", yard: yard, key: yard.id, photo: yard.yard_photos[0].yard_pic_url });
+	            }
 	          })
 	        )
 	      )
