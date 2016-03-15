@@ -40,10 +40,11 @@ var ProfileEdit = React.createClass({
     this.yardListener.remove();
   },
   updateInfo: function(event){
+    console.log("STATE",this.state);
     event.preventDefault();
     var information = Object.assign({}, this.state);
     ApiUtil.updateUserInfo(information);
-    this.history.push("users/" + this.state.user.id);
+    // this.history.push("users/" + this.state.user.id);
   },
   state: function(){
     console.log("STATE", this.state);
@@ -91,9 +92,7 @@ var ProfileEdit = React.createClass({
         <button className="btn btn-success new-yard-btn" onClick={this.newYard}>Add New Yard</button>
         <div className="list-group image-group-contain-div pro-edit-drop">
           <ul><br></br>{this.state.yards.map(function(yard){
-            if (yard){
-              return <YardListItem className="" yard={yard} key={yard.id} photo={yard.yard_photos[0].yard_pic_url}></YardListItem>;
-            }
+             return <YardListItem className="" yard={yard} key={yard.id} photo={yard.yard_photos[0].yard_pic_url}></YardListItem>;
             })}
           </ul>
         </div>

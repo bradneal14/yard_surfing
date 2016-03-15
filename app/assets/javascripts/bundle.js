@@ -50620,10 +50620,11 @@
 	    this.yardListener.remove();
 	  },
 	  updateInfo: function (event) {
+	    console.log("STATE", this.state);
 	    event.preventDefault();
 	    var information = Object.assign({}, this.state);
 	    ApiUtil.updateUserInfo(information);
-	    this.history.push("users/" + this.state.user.id);
+	    // this.history.push("users/" + this.state.user.id);
 	  },
 	  state: function () {
 	    console.log("STATE", this.state);
@@ -50722,9 +50723,7 @@
 	          null,
 	          React.createElement("br", null),
 	          this.state.yards.map(function (yard) {
-	            if (yard) {
-	              return React.createElement(YardListItem, { className: "", yard: yard, key: yard.id, photo: yard.yard_photos[0].yard_pic_url });
-	            }
+	            return React.createElement(YardListItem, { className: "", yard: yard, key: yard.id, photo: yard.yard_photos[0].yard_pic_url });
 	          })
 	        )
 	      )
