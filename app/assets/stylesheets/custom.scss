@@ -10,6 +10,12 @@
   margin-left: 40%;
 }
 
+.signin-page-static{
+  position: absolute;
+  margin-left: 40%;
+  margin-top: 17%;
+}
+
 .pro-edit-drop{
   margin-top: 50%;
 }
@@ -83,7 +89,8 @@ html, body, .container-fluid, #map_canvas {
 
 .guest-login-button{
   margin-left: 90px;
-  margin-top: -1px;
+  margin-top: 88px;
+  position: absolute;
 }
 
 .hidden-field{
@@ -621,3 +628,36 @@ font: 200 1.0em/1.5em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 //     </div>
 //   </div>
 // </div>
+
+// <form action="<%= session_url %>" method="post" class='auth-panel'>
+//   <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+//   <label>
+//     Email
+//     <input type="email" name="user[email]" value="">
+//   </label>
+//   <br>
+//   <label>
+//     Password
+//     <input type="password" name="user[password]" value="">
+//   </label>
+//   <br>
+//   <br>
+//   <button class="btn blue-btn" type="submit">Sign Up</button>
+// </form>
+//
+//
+// <form action="<%= session_url %>" method="post" class='auth-panel form-over'>
+//   <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+//   <label>
+//     Email
+//     <input type="text" name="user[email]" value="">
+//   </label>
+//   <br>
+//   <label>
+//     Password
+//     <input type="password" name="user[password]" value="" >
+//   </label>
+//   <br>
+//   <br>
+//   <button class="btn blue-btn" type="submit">Sign In</button>
+// </form>

@@ -16,26 +16,19 @@
     <%=image_tag('../theme.jpg', class:'theme-bg') if Rails.env.production?%>
     <%=image_tag('theme.jpg', class:'theme-bg') unless Rails.env.production?%>
 
-    <form action="<%= session_url %>" method="post" class='auth-panel form-over'>
+    <form class="form-group signin-page-static" id="signinForm" action="<%= session_url %>" method="post">
       <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
-      <label>
-        Email
-        <input type="text" name="user[email]" value="">
-      </label>
-      <br>
-      <label>
-        Password
-        <input type="password" name="user[password]" value="" >
-      </label>
-      <br>
-      <br>
-      <button class="btn blue-btn" type="submit">Sign In</button>
+      <label class="form-inline signin-modal-ele-font" >Email: </label>
+      <input class="form-control col-md-6 col-xs-6 col-sm-6 col-lg-6" name="user[email]"/>
+      <br/>
+      <label class="form-inline signin-modal-ele-font">Password: </label>
+      <input class="form-control" type="password" name="user[password]"/>
+      <br/>
+      <button class="btn red-btn text-center" type="submit">Sign In</button>
     </form>
-  </div>
-  <div class="secret-field">
-    <form action="<%= session_url %>" method="post" class="auth-panel hidden-form">
-      <label><input type="text" name="user[email]" value="admin" type="hidden" class="hidden-field"></label><br>
-      <label><input type="password" name="user[password]" value="password" type="hidden" class="hidden-field"></label><br><br><br><br><br><br><br><br>
-      <button class="btn blue-btn left-buffer guest-login-button">Sign In as Guest</button>
+    <form action="<%= session_url %>" method="post" class="signin-page-static">
+      <input type="text" name="user[email]" value="admin" type="hidden" class="hidden-field"><br>
+      <input type="password" name="user[password]" value="password" type="hidden" class="hidden-field"><br>
+      <button class="btn blue-btn guest-login-button">Sign In as Guest</button>
     </form>
   </div>

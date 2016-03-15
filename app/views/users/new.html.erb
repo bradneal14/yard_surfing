@@ -16,21 +16,15 @@
     <%=image_tag('../theme.jpg', class:'theme-bg') if Rails.env.production?%>
     <%=image_tag('theme.jpg', class:'theme-bg') unless Rails.env.production?%>
 
-    <form action="<%= session_url %>" method="post" class='auth-panel'>
+    <form class="form-group signin-page-static" id="signinForm" action="<%= users_url %>" method="post">
       <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
-      <label>
-        Email
-        <input type="email" name="user[email]" value="">
-      </label>
-      <br>
-      <label>
-        Password
-        <input type="password" name="user[password]" value="">
-      </label>
-      <br>
-      <br>
-      <button class="btn blue-btn" type="submit">Sign Up</button>
-
+      <label class="form-inline signin-modal-ele-font" >Email: </label>
+      <input class="form-control" name="user[email]"/>
+      <br/>
+      <label class="form-inline signin-modal-ele-font">Password: </label>
+      <input class="form-control" type="password" name="user[password]"/>
+      <br/>
+      <button class="btn blue-btn text-center" type="submit">Sign Up</button>
     </form>
   </div>
 </div>
