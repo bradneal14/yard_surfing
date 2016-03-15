@@ -4,6 +4,10 @@
   margin-top: 15px;
 }
 
+.z-out{
+  z-index: 1;
+}
+
 .auth-panel{
   margin-top: 20%;
   position: absolute;
@@ -13,7 +17,7 @@
 .signin-page-static{
   position: absolute;
   margin-left: 40%;
-  margin-top: 17%;
+  margin-top: 14%;
 }
 
 .pro-edit-drop{
@@ -89,7 +93,7 @@ html, body, .container-fluid, #map_canvas {
 
 .guest-login-button{
   margin-left: 90px;
-  margin-top: 88px;
+  margin-top: 104px;
   position: absolute;
 }
 
@@ -144,6 +148,18 @@ footer {
 #yard-detail-map{
   border-top: 0px !important;
   border-bottom: 0px !important;
+}
+
+.login-errors{
+  z-index: 1;
+  position: absolute;;
+  padding-top: 11%;
+  padding-left: 40%;
+  color: rgb(179,91,79);
+  font: 100 2em/1.0em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+  height: 142px;
+  min-height: 142px;
+  max-height: 142px;
 }
 
 .search-map {

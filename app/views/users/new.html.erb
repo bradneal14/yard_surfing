@@ -18,10 +18,10 @@
 
     <form class="form-group signin-page-static" id="signinForm" action="<%= users_url %>" method="post">
       <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
-      <label class="form-inline signin-modal-ele-font" >Email: </label>
-      <input class="form-control" name="user[email]"/>
-      <br/>
-      <label class="form-inline signin-modal-ele-font">Password: </label>
+      <label class="form-inline signin-modal-ele-font">Email: </label>
+      <input class="form-control col-md-6 col-xs-6 col-sm-6 col-lg-6" type="email" name="user[email]"/>
+      <br></br>
+      <label class="top-buffer form-inline signin-modal-ele-font">Password: </label>
       <input class="form-control" type="password" name="user[password]"/>
       <br/>
       <button class="btn blue-btn text-center" type="submit">Sign Up</button>
