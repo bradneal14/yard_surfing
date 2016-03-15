@@ -31922,12 +31922,20 @@
 	var React = __webpack_require__(1);
 	var YardStore = __webpack_require__(159);
 	var ApiUtil = __webpack_require__(182);
+	var History = __webpack_require__(188).History;
 	
 	var _markers = [];
+	
 	var Map = React.createClass({
 	  displayName: 'Map',
 	
+	  mixins: [History],
 	  componentDidMount: function () {
+	    window.infoWindow = new google.maps.InfoWindow();
+	    google.maps.InfoWindow.prototype.isOpen = function () {
+	      var windowMap = window.infoWindow.getMap();
+	      return windowMap !== null && typeof windowMap !== "undefined";
+	    };
 	    console.log("map mounted");
 	    this.yardListener = YardStore.addListener(this._onChange);
 	    // UserStore.addListener(this._onChange);
@@ -31972,6 +31980,7 @@
 	    this.yardListener.remove();
 	  },
 	  placeMarks: function () {
+	    var that = this;
 	    // _markers.forEach(function(marker){
 	    //   console.log("placing mark")
 	    //   marker.setMap(null);
@@ -31981,7 +31990,7 @@
 	    var latLngAry = [];
 	
 	    YardStore.all().forEach(function (el) {
-	      latLngAry.push({ lng: el.lng, lat: el.lat });
+	      latLngAry.push({ lng: el.lng, lat: el.lat, title: el.title, photo: el.yard_photos[0].yard_pic_url, location: el.location, yardId: el.id });
 	    });
 	
 	    latLngAry.forEach(function (coords) {
@@ -31989,7 +31998,22 @@
 	        position: coords
 	      });
 	
+	      var title = coords.title;
+	      var yardId = coords.yardId;
+	      var location = coords.location;
+	      var picture = coords.photo;
+	      var contentString = '<div id="contentWindow">' + '<div id="siteNotice">' + '</div>' + '<div id="bodyContent">' + '<img class="index-map-thumb" src=' + picture + '></img>' + '<div>' + '<h2 id="firstHeading" class="index-map-thumb-title firstHeading">' + title + '</h2>' + '<h2 id="firstHeading" class="index-map-thumb-location firstHeading">' + location + '</h2>' + '</div>' + '</div>' + '</div>';
+	
 	      marker.setMap(this.map);
+	      marker.addListener("click", function () {
+	        window.infoWindow.setOptions({
+	          content: contentString
+	        });
+	        window.infoWindow.open(this.map, marker);
+	        google.maps.event.addDomListener(document.getElementById("contentWindow"), "click", function () {
+	          that.history.push("/yard/" + yardId);
+	        });
+	      });
 	      // marker.setAnimation(google.maps.Animation.DROP);
 	      marker.setIcon({ url: "/black_marker_icon.png" });
 	
@@ -32003,6 +32027,10 @@
 	      //   infoWindow.open(this.map, marker);
 	      // });
 	      _markers.push(marker);
+	
+	      google.maps.event.addListener(this.map, "click", function (event) {
+	        window.infoWindow.close();
+	      });
 	    }.bind(this));
 	  },
 	  render: function () {
@@ -50620,11 +50648,10 @@
 	    this.yardListener.remove();
 	  },
 	  updateInfo: function (event) {
-	    console.log("STATE", this.state);
 	    event.preventDefault();
 	    var information = Object.assign({}, this.state);
 	    ApiUtil.updateUserInfo(information);
-	    // this.history.push("users/" + this.state.user.id);
+	    this.history.push("users/" + this.state.user.id);
 	  },
 	  state: function () {
 	    console.log("STATE", this.state);

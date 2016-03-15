@@ -40,11 +40,10 @@ var ProfileEdit = React.createClass({
     this.yardListener.remove();
   },
   updateInfo: function(event){
-    console.log("STATE",this.state);
     event.preventDefault();
     var information = Object.assign({}, this.state);
     ApiUtil.updateUserInfo(information);
-    // this.history.push("users/" + this.state.user.id);
+    this.history.push("users/" + this.state.user.id);
   },
   state: function(){
     console.log("STATE", this.state);

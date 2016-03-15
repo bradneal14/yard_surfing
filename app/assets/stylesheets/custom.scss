@@ -8,6 +8,26 @@
   z-index: 1;
 }
 
+.index-map-thumb{
+  height: 150px;
+}
+
+.index-map-thumb-title{
+    font: 100 2em/1.0em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+    margin-top: 4px;
+    display: inline-block;
+}
+
+.index-map-thumb-location{
+  font: 200 1em/1.0em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+#contentWindow:hover{
+  cursor: pointer;
+}
+
 .auth-panel{
   margin-top: 20%;
   position: absolute;
