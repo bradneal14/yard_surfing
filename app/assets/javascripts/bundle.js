@@ -50719,7 +50719,7 @@
 	          null,
 	          React.createElement("br", null),
 	          this.state.yards.map(function (yard) {
-	            return React.createElement(YardListItem, { className: "", yard: yard, key: yard.id, photo: yard.yard_photos[0].yard_pic_url });
+	            React.createElement(YardListItem, { className: "", yard: yard, key: yard.id, photo: yard.yard_photos[0].yard_pic_url });
 	          })
 	        )
 	      )

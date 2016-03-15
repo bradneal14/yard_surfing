@@ -13,8 +13,8 @@
   </nav>
 </div>
   <div>
-    <%=image_tag('../theme.jpg', class:'theme-bg') if Rails.env.production?%>
-    <%=image_tag('theme.jpg', class:'theme-bg') unless Rails.env.production?%>
+    <%=image_tag('../theme.jpeg', class:'theme-bg') if Rails.env.production?%>
+    <%=image_tag('theme.jpeg', class:'theme-bg') unless Rails.env.production?%>
 
     <form class="form-group signin-page-static" id="signinForm" action="<%= session_url %>" method="post">
       <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
