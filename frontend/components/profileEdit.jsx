@@ -91,7 +91,7 @@ var ProfileEdit = React.createClass({
         <button className="btn btn-success new-yard-btn" onClick={this.newYard}>Add New Yard</button>
         <div className="list-group image-group-contain-div pro-edit-drop">
           <ul><br></br>{this.state.yards.map(function(yard){
-            if (yard.yard_photos){
+            if (yard.yard_photos[0].yard_pic_url){
               return <YardListItem className="" yard={yard} key={yard.id} photo={yard.yard_photos[0].yard_pic_url}></YardListItem>;
             }
             })}
