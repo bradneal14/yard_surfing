@@ -50401,11 +50401,16 @@
 	  },
 	  render: function () {
 	    var landingCoverPhoto = {
-	      backgroundImage: 'url(' + 'http://cdn.usefulstuff.io/2015/10/Landing-A-Plane.jpg' + ')'
+	      backgroundImage: "url('beach-camping.jpg')"
 	    };
 	    return React.createElement(
 	      'div',
 	      { style: landingCoverPhoto, className: 'landing-cover' },
+	      React.createElement(
+	        'h1',
+	        { className: 'landing-text' },
+	        'Welcome.'
+	      ),
 	      React.createElement(
 	        'div',
 	        { className: 'search-bar-strip' },
@@ -50424,7 +50429,7 @@
 	                { className: 'input-group-btn' },
 	                React.createElement(
 	                  'button',
-	                  { className: 'btn btn-success', onClick: this.navigateToSearch },
+	                  { className: 'btn red-btn', onClick: this.navigateToSearch },
 	                  'Head to search'
 	                )
 	              )

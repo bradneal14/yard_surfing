@@ -14,17 +14,18 @@ var Landing = React.createClass({
   },
   render: function(){
     var landingCoverPhoto = {
-      backgroundImage: 'url(' + 'http://cdn.usefulstuff.io/2015/10/Landing-A-Plane.jpg' + ')'
+      backgroundImage: "url('beach-camping.jpg')"
     };
     return(
       <div style={landingCoverPhoto} className="landing-cover">
+        <h1 className="landing-text">Welcome.</h1>
         <div className="search-bar-strip">
           <form>
             <div className="form-group col-md-4 col-sm-5 col-xs-6 col-lg-4 center-button">
               <div className="input-group">
                 <input type="text" className="form-control" placeholder="Where would you like to go.."/>
                 <span className="input-group-btn">
-                  <button className="btn btn-success" onClick={this.navigateToSearch}>Head to search</button>
+                  <button className="btn red-btn" onClick={this.navigateToSearch}>Head to search</button>
                 </span>
               </div>
             </div>

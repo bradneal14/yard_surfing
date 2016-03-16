@@ -312,10 +312,20 @@ footer {
   position: absolute;
   height: calc(100% - 50px);
   width: 100%;
+
 }
 
 .secret-field{
   margin-top: -119px;
+}
+
+.landing-text{
+  font-size: 36px;
+  color: rgba(255,255,255,1);
+  margin-left: 36%;
+  margin-top: 15%;
+  position: absolute;
+  font: 400 2.4em/1.0em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 }
 
 .center-button{
@@ -327,8 +337,8 @@ footer {
 
 .search-bar-strip{
   height: 107px;
-  background-color: rgba(0,0,0,.5);
-  margin-top: 30%;
+  background-color: rgba(162,170,157,.5);
+  margin-top: 28%;
   position: relative;
 }
 
@@ -397,7 +407,7 @@ float: right!important;
 }
 
 .red-btn{
-  background-color: #b35b4f;
+  background-color: rgba(179, 91, 79, 1);
   color: white;
 }
 
@@ -603,7 +613,7 @@ font-family: monospace;
 }
 
 .navbar-default {
-background-color: #b35b4f;
+background-color: rgba(179, 91, 79, 1);
 
 border-color: #030033;
 }
