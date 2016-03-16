@@ -602,7 +602,7 @@ float: right!important;
 
 
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
-color: #2C2C2E;  /*Sets the text hover color on navbar*/
+color: rgba(120,191,178, 1);  /*Sets the text hover color on navbar*/
 }
 
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active >
@@ -634,7 +634,7 @@ background-color: silver; /*Change rollover cell color here*/
 
 .navbar-default .navbar-nav > li > a {
 color: #A2AA9D; /*Change active text color here*/
-color: #78BFB2; /*BACKGROUND color for active*/
+color: white; /*BACKGROUND color for active*/
 font: 200 1.0em/1.5em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 }
 

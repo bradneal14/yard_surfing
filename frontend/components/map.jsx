@@ -45,7 +45,6 @@ var Map = React.createClass({
          southWest: {lat: southWest.lat(), lng: southWest.lng()}
        };
        ApiUtil.fetchYards(bounds);
-
      });
 
   },
