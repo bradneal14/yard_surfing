@@ -26851,7 +26851,7 @@
 	        React.createElement(
 	          'text',
 	          null,
-	          this.props.yard.description
+	          this.props.yard.location
 	        )
 	      )
 	    );

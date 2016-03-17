@@ -30,7 +30,7 @@ var YardIndexItem = React.createClass({
           <div className="testing">
             <text className="index-item-text">{this.props.yard.title}</text>
             <br/>
-            <text>{this.props.yard.description}</text>
+            <text>{this.props.yard.location}</text>
           </div>
       </li>
     );
