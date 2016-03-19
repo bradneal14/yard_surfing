@@ -5,7 +5,7 @@ var YardStore = require('../stores/yard');
 
 var SearchIndex = React.createClass({
   // getInitialState: function(){
-  //   return {yards: YardStore.all() }
+  //   return {yards: YardStore.all() };
   // },
   // componentDidMount: function(){
   //   this.yardListener = YardStore.addListener(this._onChange);
@@ -14,15 +14,13 @@ var SearchIndex = React.createClass({
   //   YardStore.yardListener.remove();
   // },
   // _onChange: function(){
-  //   this.setState({yards: YardStore.all() })
+  //   this.setState({yards: YardStore.all() });
   // },
   render: function(){
     return (
       <div className="container-fluid below-nav">
         <div className="col-md-7 col-sm-7 col-xs-7 override navy-fill">
-          <div className="filter-buttons text-center">
-            <h1 className="override">This is where the filter buttons will be</h1>
-          </div>
+
           <div className="navy-fill">
             <YardsIndex></YardsIndex>
           </div>

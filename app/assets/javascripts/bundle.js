@@ -32053,7 +32053,7 @@
 	  displayName: 'SearchIndex',
 	
 	  // getInitialState: function(){
-	  //   return {yards: YardStore.all() }
+	  //   return {yards: YardStore.all() };
 	  // },
 	  // componentDidMount: function(){
 	  //   this.yardListener = YardStore.addListener(this._onChange);
@@ -32062,7 +32062,7 @@
 	  //   YardStore.yardListener.remove();
 	  // },
 	  // _onChange: function(){
-	  //   this.setState({yards: YardStore.all() })
+	  //   this.setState({yards: YardStore.all() });
 	  // },
 	  render: function () {
 	    return React.createElement(
@@ -32071,15 +32071,6 @@
 	      React.createElement(
 	        'div',
 	        { className: 'col-md-7 col-sm-7 col-xs-7 override navy-fill' },
-	        React.createElement(
-	          'div',
-	          { className: 'filter-buttons text-center' },
-	          React.createElement(
-	            'h1',
-	            { className: 'override' },
-	            'This is where the filter buttons will be'
-	          )
-	        ),
 	        React.createElement(
 	          'div',
 	          { className: 'navy-fill' },
