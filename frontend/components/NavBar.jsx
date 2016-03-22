@@ -146,7 +146,7 @@ var NavBar = React.createClass({
             <MenuItem style={cursorPointer} onClick={this.navigateHome}>About</MenuItem>
             <MenuItem style={cursorPointer} onClick={this.navigateToProfileShow}>My Profile</MenuItem>
             <MenuItem style={cursorPointer} onClick={this.navigateToSearch}>View Listings</MenuItem>
-            <MenuItem style={cursorPointer} onClick={this.logoutUser}>Logout</MenuItem>
+            <MenuItem style={cursorPointer} onClick={this.logoutUser}>Sign out</MenuItem>
           </DropdownButton>
         </div>
       </div>

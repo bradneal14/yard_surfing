@@ -32786,7 +32786,7 @@
 	            React.createElement(
 	              MenuItem,
 	              { style: cursorPointer, onClick: this.logoutUser },
-	              'Logout'
+	              'Sign out'
 	            )
 	          )
 	        )
