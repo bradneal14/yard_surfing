@@ -315,13 +315,40 @@ footer {
 
 }
 
+.warning-text{
+  padding-top: 6px;
+}
+//
+.warning-text.change-color{
+  transition: all 1s ease-in-out;
+  color: rgba(179, 91, 79, .75);
+}
+
+
 .navbar-adjust{
   height: 50px;
   background-color: rgba(179, 91, 79, 1);
 }
 
-.tall-btn{
-  height: 20px;
+.navy-fill{
+  height: 0px;
+}
+
+.index-margin{
+  transition: all 1s ease-in-out;
+  margin-top: -20px !important;
+}
+
+.warning{
+  position: relative;
+  height: 30px;
+  background-color: rgba(120,191,178, .7);
+}
+
+.warning.end{
+  transition: all 1s ease-in-out;
+  background-color: rgba(255, 0, 0, 0.0);
+  margin-top: -25px;
 }
 
 .burger-adjust{

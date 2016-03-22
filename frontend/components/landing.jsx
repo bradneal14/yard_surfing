@@ -16,7 +16,7 @@ var Landing = React.createClass({
     return(
       <div style={landingCoverPhoto} className="landing-cover">
         <h1 className="landing-text">Welcome.</h1>
-        <h3 className="landing-sub-text">Stay Free. Stay Local.</h3>
+        <h3 className="landing-sub-text">Your stay is free. Always.</h3>
         <div className="search-bar-strip">
           <form>
             <div className="form-group col-md-4 col-sm-5 col-xs-6 col-lg-4 center-button">
