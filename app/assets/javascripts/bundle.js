@@ -32038,6 +32038,10 @@
 	  }
 	});
 	
+	Map.receiveSearch = function (loc) {
+	  var location = loc;
+	};
+	
 	module.exports = Map;
 
 /***/ },
@@ -32508,7 +32512,10 @@
 	var History = __webpack_require__(188).History;
 	var UserStore = __webpack_require__(253);
 	var ApiUtil = __webpack_require__(182);
+	var DropdownButton = __webpack_require__(254).DropdownButton;
+	var MenuItem = __webpack_require__(254).MenuItem;
 	var Modal = __webpack_require__(254).Modal;
+	var Glyphicon = __webpack_require__(254).Glyphicon;
 	var LinkedStateMixin = __webpack_require__(248);
 	
 	var NavBar = React.createClass({
@@ -32550,6 +32557,9 @@
 	  navigateToProfileShow: function () {
 	    this.history.push("users/" + this.state.user.id);
 	  },
+	  navigateToSearch: function () {
+	    this.history.push("/search");
+	  },
 	  logoutUser: function () {
 	    localStorage.removeItem("success");
 	    ApiUtil.logoutUser();
@@ -32586,13 +32596,13 @@
 	      var homeButton = React.createElement(
 	        'a',
 	        { className: 'pull-left', onMouseOver: this.mouseOver, onMouseOut: this.mouseOut, onClick: this.navigateHome, style: cursorPointer },
-	        React.createElement('img', { src: 'blue-tent-icon.png', className: 'small-icon' })
+	        React.createElement('img', { src: 'logo_with_text_good.png', className: 'small-icon' })
 	      );
 	    } else {
 	      var homeButton = React.createElement(
 	        'a',
 	        { className: 'pull-left', onMouseOver: this.mouseOver, onMouseOut: this.mouseOut, onClick: this.navigateHome, style: cursorPointer },
-	        React.createElement('img', { src: 'white-tent-icon.png', className: 'small-icon' })
+	        React.createElement('img', { src: 'white_logo_w_text.png', className: 'small-icon' })
 	      );
 	    }
 	    var loggedInNav = React.createElement(
@@ -32608,7 +32618,7 @@
 	        ),
 	        React.createElement(
 	          'div',
-	          { className: 'navbar-right' },
+	          { className: 'navbar-right', id: 'collapsemenu' },
 	          React.createElement(
 	            'ul',
 	            { className: 'nav navbar-nav' },
@@ -32649,6 +32659,7 @@
 	        React.createElement(
 	          'div',
 	          { className: 'navbar-right' },
+	          React.createElement('span', { className: 'glyphicon glyphicon-print' }),
 	          React.createElement(
 	            'ul',
 	            { className: 'nav navbar-nav' },
@@ -32713,7 +32724,54 @@
 	      )
 	    );
 	
-	    return loggedInNav;
+	    var experiment = React.createElement(
+	      'nav',
+	      { className: 'navbar-default navbar-fixed-top' },
+	      React.createElement(
+	        'div',
+	        { className: 'col-xs-12 navbar-adjust' },
+	        React.createElement(
+	          'div',
+	          { className: 'navbar-left' },
+	          homeButton
+	        ),
+	        React.createElement(
+	          'div',
+	          { className: 'navbar-right nav navbar dropdown icon-format' },
+	          React.createElement(
+	            DropdownButton,
+	            { className: 'glyph-format', noCaret: true, title: React.createElement('img', { className: 'burger-adjust', src: 'https://cdn3.iconfinder.com/data/icons/iconano-web-stuff/512/001-Menu-512.png' }) },
+	            React.createElement(
+	              MenuItem,
+	              { style: cursorPointer, onClick: this.navigateHome },
+	              'Home'
+	            ),
+	            React.createElement(
+	              MenuItem,
+	              { style: cursorPointer, onClick: this.navigateHome },
+	              'About'
+	            ),
+	            React.createElement(
+	              MenuItem,
+	              { style: cursorPointer, onClick: this.navigateToProfileShow },
+	              'My Profile'
+	            ),
+	            React.createElement(
+	              MenuItem,
+	              { style: cursorPointer, onClick: this.navigateToSearch },
+	              'View Listings'
+	            ),
+	            React.createElement(
+	              MenuItem,
+	              { style: cursorPointer, onClick: this.logoutUser },
+	              'Logout'
+	            )
+	          )
+	        )
+	      )
+	    );
+	
+	    return experiment;
 	  }
 	});
 	
@@ -50378,17 +50436,14 @@
 	var NavBar = __webpack_require__(252);
 	var History = __webpack_require__(188).History;
 	var UserStore = __webpack_require__(253);
+	var Map = __webpack_require__(245);
 	
 	var Landing = React.createClass({
 	  displayName: 'Landing',
 	
 	  mixins: [History],
 	  navigateToSearch: function () {
-	    if (UserStore.currentUser()) {
-	      this.history.push("/search");
-	    } else {
-	      console.log("you cant search unless you sign in");
-	    }
+	    this.history.push("/search");
 	  },
 	  render: function () {
 	    var landingCoverPhoto = {
@@ -50401,6 +50456,11 @@
 	        'h1',
 	        { className: 'landing-text' },
 	        'Welcome.'
+	      ),
+	      React.createElement(
+	        'h3',
+	        { className: 'landing-sub-text' },
+	        'Stay Free. Stay Local.'
 	      ),
 	      React.createElement(
 	        'div',
@@ -50507,13 +50567,13 @@
 	      if (this.state.friends === false) {
 	        var friendButton = React.createElement(
 	          "button",
-	          { className: "btn btn-danger", onClick: this.buttonToggle },
+	          { className: "btn btn-danger big-left-buffer", onClick: this.buttonToggle },
 	          "Add Friend"
 	        );
 	      } else {
 	        var friendButton = React.createElement(
 	          "button",
-	          { className: "btn btn-success" },
+	          { className: "btn btn-success big-left-buffer" },
 	          "Request Pending"
 	        );
 	      }

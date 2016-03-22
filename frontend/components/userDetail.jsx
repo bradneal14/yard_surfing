@@ -55,9 +55,9 @@ var UserDetail = React.createClass({
     }
     if (this.state.user.id !== this.state.currentUser.id ){
       if (this.state.friends === false){
-        var friendButton = <button className="btn btn-danger" onClick={this.buttonToggle}>Add Friend</button>;
+        var friendButton = <button className="btn btn-danger big-left-buffer" onClick={this.buttonToggle}>Add Friend</button>;
       } else {
-        var friendButton = <button className="btn btn-success">Request Pending</button>;
+        var friendButton = <button className="btn btn-success big-left-buffer">Request Pending</button>;
       }
     }
     return (

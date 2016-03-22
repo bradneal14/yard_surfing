@@ -315,6 +315,26 @@ footer {
 
 }
 
+.navbar-adjust{
+  height: 50px;
+  background-color: rgba(179, 91, 79, 1);
+}
+
+.tall-btn{
+  height: 20px;
+}
+
+.burger-adjust{
+  height: 16px;
+}
+
+.glyph-format{
+  background-color: rgba(179, 91, 79, 1) !important;
+  border: none !important;
+  color: white !important;
+  margin-top: 10px;
+  margin-right: 10px;
+}
 .secret-field{
   margin-top: -119px;
 }
@@ -322,12 +342,20 @@ footer {
 .landing-text{
   font-size: 36px;
   color: rgba(255,255,255,1);
-  margin-left: 36%;
-  margin-top: 15%;
+  margin-left: 35.5%;
+  margin-top: 13%;
   position: absolute;
-  font: 400 2.4em/1.0em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+  font: 400 4.4em/1.0em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 }
 
+.landing-sub-text{
+  font-size: 19px;
+  color: rgba(255,255,255,1);
+  margin-left: 36%;
+  margin-top: 18%;
+  position: absolute;
+  font: 200 1.4em/1.0em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
 .center-button{
   margin: 0 auto;
   position: fixed;
@@ -403,7 +431,7 @@ float: right!important;
 
 .small-icon{
   height: 40px;
-  margin-top: 7%;
+  margin-top: 5%;
 }
 
 .red-btn{

@@ -5,7 +5,6 @@ var History = require('react-router').History;
 
 var _markers = [];
 
-
 var Map = React.createClass({
   mixins: [History],
   componentDidMount: function(){
@@ -134,5 +133,10 @@ var Map = React.createClass({
     );
   }
 });
+
+Map.receiveSearch = function(loc){
+  var location = loc;
+};
+
 
 module.exports = Map;

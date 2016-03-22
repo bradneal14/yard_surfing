@@ -2,7 +2,10 @@ var React = require('react');
 var History = require('react-router').History;
 var UserStore = require('../stores/currentUser');
 var ApiUtil = require('../util/api_util');
+var DropdownButton = require('react-bootstrap').DropdownButton;
+var MenuItem = require('react-bootstrap').MenuItem;
 var Modal = require('react-bootstrap').Modal;
+var Glyphicon = require("react-bootstrap").Glyphicon;
 var LinkedStateMixin = require('react-addons-linked-state-mixin');
 
 var NavBar = React.createClass({
@@ -42,6 +45,9 @@ var NavBar = React.createClass({
   navigateToProfileShow: function(){
     this.history.push("users/" + this.state.user.id);
   },
+  navigateToSearch: function(){
+    this.history.push("/search");
+  },
   logoutUser: function(){
     localStorage.removeItem("success");
     ApiUtil.logoutUser();
@@ -75,9 +81,9 @@ var NavBar = React.createClass({
       cursor: 'pointer',
     };
     if (this.state.hover){
-      var homeButton = <a className="pull-left" onMouseOver={this.mouseOver} onMouseOut={this.mouseOut} onClick={this.navigateHome} style={cursorPointer}><img src="blue-tent-icon.png" className="small-icon"/></a>;
+      var homeButton = <a className="pull-left" onMouseOver={this.mouseOver} onMouseOut={this.mouseOut} onClick={this.navigateHome} style={cursorPointer}><img src="logo_with_text_good.png" className="small-icon"/></a>;
     } else {
-      var homeButton = <a className="pull-left" onMouseOver={this.mouseOver} onMouseOut={this.mouseOut} onClick={this.navigateHome} style={cursorPointer}><img src="white-tent-icon.png" className="small-icon"/></a>;
+      var homeButton = <a className="pull-left" onMouseOver={this.mouseOver} onMouseOut={this.mouseOut} onClick={this.navigateHome} style={cursorPointer}><img src="white_logo_w_text.png" className="small-icon"/></a>;
     }
     var loggedInNav = <nav className="navbar-default navbar-fixed-top">
       <div className="col-xs-12">
@@ -85,7 +91,7 @@ var NavBar = React.createClass({
         <div className="navbar-left">
           {homeButton}
         </div>
-        <div className="navbar-right">
+        <div className="navbar-right" id="collapsemenu">
           <ul className="nav navbar-nav">
             <li><a style={cursorPointer} onClick={this.navigateToProfileShow}>My Profile </a></li>
             <li><a style={cursorPointer} onClick={this.logoutUser}>Logout</a></li>
@@ -101,6 +107,7 @@ var NavBar = React.createClass({
           {homeButton}
         </div>
         <div className="navbar-right">
+          <span className="glyphicon glyphicon-print"/>
           <ul className="nav navbar-nav">
             <li><a style={cursorPointer} onClick={this.open}>Login</a></li>
               <Modal show={this.state.showModal} onHide={this.close} bsSize="small">
@@ -127,7 +134,25 @@ var NavBar = React.createClass({
       </div>
     </nav>;
 
-    return (loggedInNav);
+    var experiment = <nav className="navbar-default navbar-fixed-top">
+      <div className="col-xs-12 navbar-adjust">
+
+        <div className="navbar-left">
+          {homeButton}
+        </div>
+        <div className="navbar-right nav navbar dropdown icon-format">
+          <DropdownButton  className="glyph-format" noCaret title={<img className="burger-adjust" src="https://cdn3.iconfinder.com/data/icons/iconano-web-stuff/512/001-Menu-512.png"/>}>
+            <MenuItem style={cursorPointer} onClick={this.navigateHome}>Home</MenuItem>
+            <MenuItem style={cursorPointer} onClick={this.navigateHome}>About</MenuItem>
+            <MenuItem style={cursorPointer} onClick={this.navigateToProfileShow}>My Profile</MenuItem>
+            <MenuItem style={cursorPointer} onClick={this.navigateToSearch}>View Listings</MenuItem>
+            <MenuItem style={cursorPointer} onClick={this.logoutUser}>Logout</MenuItem>
+          </DropdownButton>
+        </div>
+      </div>
+    </nav>;
+
+    return (experiment);
   }
 });
 

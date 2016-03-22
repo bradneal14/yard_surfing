@@ -2,7 +2,7 @@
   <nav class="navbar-default navbar-fixed-top">
     <div class="col-xs-12">
       <div class="navbar-left nav-img">
-        <%=image_tag("blue-tent-icon.png", class:"small-icon" )%>
+        <%=image_tag("logo_with_text_good.png", class:"small-icon" )%>
       </div>
       <div class="navbar-right">
         <ul class="nav navbar-nav">
@@ -15,6 +15,8 @@
   <div>
     <%=image_tag('../theme.jpeg', class:'theme-bg') if Rails.env.production?%>
     <%=image_tag('theme.jpeg', class:'theme-bg') unless Rails.env.production?%>
+
+    <h2>YardSurfing connects travellers with host's who don't mind a tent in their yard</h2>
 
     <form class="form-group signin-page-static" id="signinForm" action="<%= session_url %>" method="post">
       <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
