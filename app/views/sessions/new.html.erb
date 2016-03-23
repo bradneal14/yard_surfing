@@ -1,11 +1,11 @@
 <div class="">
   <nav class="navbar-default navbar-fixed-top">
     <div class="col-xs-12">
-      <div class="navbar-left nav-img">
+      <div class="navbar-left nav-img navbar-home-pic-format">
         <%=image_tag("logo_with_text_good.png", class:"small-icon" )%>
       </div>
       <div class="navbar-right">
-        <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav new-user-link">
           <li><a href="../users/new">New User</a></li>
         </ul>
       </div>
@@ -22,17 +22,13 @@
         <div class="inner-signin">
           <form class="form-group signin-page-static-show" id="signinForm" action="<%= session_url %>" method="post">
             <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
-            <label class="form-inline signin-modal-ele-font" >Email: </label>
-            <input class="form-control col-md-6 col-xs-6 col-sm-6 col-lg-6 z-out" name="user[email]"/>
-            <br/>
-            <label class="form-inline signin-modal-ele-font top-buffer">Password: </label>
-            <input class="form-control" type="password" name="user[password]"/>
-            <br/>
-            <button class="my-button red-btn text-center" type="submit">Sign In</button>
+            <input class=" input-label-signup-user form-control my-form-signup col-md-6 col-xs-6 col-sm-6 col-lg-6 z-out" name="user[email]" placeHolder="Email"/>
+            <input class="input-label-signup-pass my-form-signup form-control" type="password" name="user[password]" placeHolder="Password"/>
+            <button class="my-button red-btn text-center signin-button" type="submit">Sign In</button>
           </form>
           <form action="<%= session_url %>" method="post" class="signin-page-static-hide">
-            <input type="text" name="user[email]" value="admin" type="hidden" class="hidden-field"><br>
-            <input type="password" name="user[password]" value="password" type="hidden" class="hidden-field"><br>
+            <input type="text" name="user[email]" value="admin" type="hidden" class="hidden-field-user"><br>
+            <input type="password" name="user[password]" value="password" type="hidden" class="hidden-field-pass"><br>
             <button class="my-guest-button blue-btn guest-login-button">Sign In as Guest</button>
           </form>
         </div>

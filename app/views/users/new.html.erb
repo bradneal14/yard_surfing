@@ -15,16 +15,21 @@
   <div>
     <%=image_tag('../theme_text.jpg', class:'theme-bg') if Rails.env.production?%>
     <%=image_tag('theme_text.jpg', class:'theme-bg') unless Rails.env.production?%>
+    <div class="blocker-top"></div>
+    <div class="blocker-side"></div>
+    <div class="signup-div">
+      <div class="middle-signin">
+        <div class="inner-signin">
+          <form class="form-group signin-page-static signup" id="signinForm" action="<%= users_url %>" method="post">
+            <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+            <input class="my-form-signup  input-label-signup-user" placeHolder="Email" type="email" name="user[email]"/>
+            <input class="my-form-signup input-label-signup-pass" type="password" name="user[password]" placeHolder="Password"/>
+            <br/>
+            <button class="my-button blue-btn text-center signup-button" type="submit">Sign Up</button>
+          </form>
+        </div>
+      </div>
+    </div>
 
-    <form class="form-group signin-page-static" id="signinForm" action="<%= users_url %>" method="post">
-      <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
-      <label class="form-inline signin-modal-ele-font">Email: </label>
-      <input class="form-control col-md-6 col-xs-6 col-sm-6 col-lg-6" type="email" name="user[email]"/>
-      <br></br>
-      <label class="top-buffer form-inline signin-modal-ele-font">Password: </label>
-      <input class="form-control" type="password" name="user[password]"/>
-      <br/>
-      <button class="btn blue-btn text-center" type="submit">Sign Up</button>
-    </form>
   </div>
 </div>

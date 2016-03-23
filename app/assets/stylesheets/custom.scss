@@ -30,52 +30,55 @@
 
 .my-button{
   display: inline-block;
-      padding: 3% 10%;
-      margin-bottom: 0;
-      font-size: 100%;
-      font-weight: normal;
-      line-height: 1.42857143;
-      text-align: center;
-      white-space: nowrap;
-      vertical-align: middle;
-      -ms-touch-action: manipulation;
-      touch-action: manipulation;
-      cursor: pointer;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-      background-image: none;
-      border: 1px solid transparent;
-      border-radius: 4px;
-      margin-right: 10px;
+    padding: 2% 10%;
+    margin-bottom: 0;
+    margin-top: 17px;
+    font-size: 100%;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    margin-right: 10px;
 }
 
 .my-guest-button{
   display: inline-block;
-      padding: 3% 0%;
-      margin-left: 10px;
-      margin-bottom: 0;
-      font-size: 100%;
-      font-weight: normal;
-      line-height: 1.42857143;
-      text-align: center;
-      white-space: nowrap;
-      vertical-align: middle;
-      -ms-touch-action: manipulation;
-      touch-action: manipulation;
-      cursor: pointer;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-      background-image: none;
-      border: 1px solid transparent;
-      border-radius: 4px;
-      /* position: relative; */
-      float: right;
-      width: 52%;
-      min-width: 120px;
+padding: 0% 0%;
+margin-top: 28px;
+margin-right: 5px;
+margin-bottom: 0;
+font-size: 100%;
+font-weight: normal;
+line-height: 1.42857143;
+text-align: center;
+white-space: nowrap;
+vertical-align: middle;
+-ms-touch-action: manipulation;
+touch-action: manipulation;
+cursor: pointer;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+background-image: none;
+border: 1px solid transparent;
+border-radius: 4px;
+/* position: relative; */
+float: right;
+width: 52%;
+min-width: 98px;
+height: 36px;
 }
 
 .auth-panel{
@@ -86,7 +89,7 @@
 
 .blocker-side{
   min-height: 300px;
-  min-width: 400px;
+  min-width: 395px;
   position: static;
   margin: 0px;
   height: 100%;
@@ -108,28 +111,114 @@ z-index: 1;
 }
 
 
+.new-user-link{
+  height: 30px;
+}
+
 .signin-page-static-show{
   position: fixed;
-  float: right;
-  width: 21%;
-  min-width: 217px;
+float: right;
+width: 21%;
+min-width: 217px;
+z-index: 1;
 }
 
 .inner-signin{
   min-height: 200px;
-  min-width: 200px;
-  position: static;
-  margin: 0 auto;
-  width: calc(50% - 101px);
+min-width: 200px;
+position: static;
+margin: 0 auto;
+width: calc(40% - 102px);
 }
 
+
+.input-label-signup-user{
+margin-bottom: 20px;
+}
+
+.input-label-signup-pass{
+  margin-top: 50px;
+}
+
+.signup-font-adjust-size{
+  font-size: 127%;
+  position: relative;
+}
+
+.my-form{
+  display: block;
+      width: 21%;
+      min-width: 200px;
+      min-height: 28px;
+      position: fixed;
+      height: 5%;
+      padding: 6px 12px;
+      font-size: 14px;
+      line-height: 1.42857143;
+      color: #555;
+      background-color: #fff;
+      background-image: none;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+      -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+      -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+      transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.my-form-signup{
+  display: block;
+      width: 21%;
+      min-width: 211px;
+      min-height: 28px;
+      position: fixed;
+      height: 42px;
+      padding: 6px 12px;
+      font-size: 14px;
+      line-height: 1.42857143;
+      color: #555;
+      background-color: #fff;
+      background-image: none;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+      -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+      -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+      transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
 .middle-signin{
-  width: calc(83% - 367px);
+  width: calc(74% - 250px);
   background-color: red;
   height: 300px;
   margin-left: 0px;
   position: static;
   float: left;
+}
+
+.signup{
+  position: fixed;
+  width: 20%;
+  min-width: 200px;
+}
+
+.signup-button{
+  margin-left: 20%;
+  margin-top: 88px;
+  width: 60%;
+  position: relative;
+  min-height: 36px;
+  height: 24px;
+}
+
+.signin-button{
+  margin-left: 0%;
+  margin-top: 105px;
+  width: 38%;
+  position: relative;
+  min-height: 36px;
+  height: 24px;
 }
 
 .signin-div{
@@ -138,8 +227,18 @@ z-index: 1;
   float: left;
   height: 200px;
   width: calc(100% - 400px);
-
+  padding-top: calc(25.5% - 275px);
 }
+
+.signup-div{
+  position: static;
+  display: block;
+  float: left;
+  height: 200px;
+  width: calc(100% - 400px);
+  padding-top: calc(26.5% - 271px);
+}
+
 //CHECK OUT THIS MARGIN LEFT
 
 .signin-page-static-hide{
@@ -147,7 +246,7 @@ z-index: 1;
   float: right;
   width: 21%;
   min-width: 217px;
-  padding-top: 103px;
+  padding-top: 25px;
 }
 
 .pro-edit-drop{
@@ -227,8 +326,14 @@ html, body, .container-fluid, #map_canvas {
 //   position: absolute;
 // }
 
-.hidden-field{
+.hidden-field-pass{
   visibility: hidden;
+}
+
+.hidden-field-user{
+  visibility: hidden;
+  top: -40px;
+  position: relative;
 }
 
 
@@ -284,9 +389,9 @@ footer {
   z-index: 1;
   position: absolute;;
   padding-top: 11%;
-  padding-left: 40%;
-  color: rgb(179,91,79);
-  font: 100 2em/1.0em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+  padding-left:37%;
+  color: rgb(44,44,46);
+  font: 200 2em/1.0em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
   height: 142px;
   min-height: 142px;
   max-height: 142px;
@@ -562,13 +667,17 @@ margin-right: -15px !important;
   top: 0;
 }
 
+.navbar-home-pic-format{
+  display: inline;
+}
+
 .navbar-right {
 float: right!important;
 }
 
 .small-icon{
   height: 40px;
-  margin-top: 5%;
+  margin-top: 11px;
 }
 
 .red-btn{
