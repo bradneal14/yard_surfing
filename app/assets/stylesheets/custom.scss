@@ -28,16 +28,126 @@
   cursor: pointer;
 }
 
+.my-button{
+  display: inline-block;
+      padding: 3% 10%;
+      margin-bottom: 0;
+      font-size: 100%;
+      font-weight: normal;
+      line-height: 1.42857143;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: middle;
+      -ms-touch-action: manipulation;
+      touch-action: manipulation;
+      cursor: pointer;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      background-image: none;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      margin-right: 10px;
+}
+
+.my-guest-button{
+  display: inline-block;
+      padding: 3% 0%;
+      margin-left: 10px;
+      margin-bottom: 0;
+      font-size: 100%;
+      font-weight: normal;
+      line-height: 1.42857143;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: middle;
+      -ms-touch-action: manipulation;
+      touch-action: manipulation;
+      cursor: pointer;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      background-image: none;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      /* position: relative; */
+      float: right;
+      width: 52%;
+      min-width: 120px;
+}
+
 .auth-panel{
   margin-top: 20%;
   position: absolute;
   margin-left: 40%;
 }
 
-.signin-page-static{
-  position: absolute;
-  margin-left: 40%;
-  margin-top: 14%;
+.blocker-side{
+  min-height: 300px;
+  min-width: 400px;
+  position: static;
+  margin: 0px;
+  height: 100%;
+  max-width: 400px;
+  float: left;
+  z-index: 1;
+  clear: both;
+}
+
+.blocker-top{
+  width: 100%;
+min-height: 190px;
+position: static;
+display: block;
+float: right;
+clear: both;
+margin: 0px;
+z-index: 1;
+}
+
+
+.signin-page-static-show{
+  position: fixed;
+  float: right;
+  width: 21%;
+  min-width: 217px;
+}
+
+.inner-signin{
+  min-height: 200px;
+  min-width: 200px;
+  position: static;
+  margin: 0 auto;
+  width: calc(50% - 101px);
+}
+
+.middle-signin{
+  width: calc(83% - 367px);
+  background-color: red;
+  height: 300px;
+  margin-left: 0px;
+  position: static;
+  float: left;
+}
+
+.signin-div{
+  position: static;
+  display: block;
+  float: left;
+  height: 200px;
+  width: calc(100% - 400px);
+
+}
+//CHECK OUT THIS MARGIN LEFT
+
+.signin-page-static-hide{
+  position: fixed;
+  float: right;
+  width: 21%;
+  min-width: 217px;
+  padding-top: 103px;
 }
 
 .pro-edit-drop{
@@ -111,11 +221,11 @@ html, body, .container-fluid, #map_canvas {
     width: 100%;
 }
 
-.guest-login-button{
-  margin-left: 90px;
-  margin-top: 104px;
-  position: absolute;
-}
+// .guest-login-button{
+//   margin-left: 90px;
+//   margin-top: 104px;
+//   position: absolute;
+// }
 
 .hidden-field{
   visibility: hidden;

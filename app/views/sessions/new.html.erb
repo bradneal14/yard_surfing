@@ -15,20 +15,27 @@
   <div>
     <%=image_tag('../theme_text.jpg', class:'theme-bg') if Rails.env.production?%>
     <%=image_tag('theme_text.jpg', class:'theme-bg') unless Rails.env.production?%>
-
-    <form class="form-group signin-page-static" id="signinForm" action="<%= session_url %>" method="post">
-      <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
-      <label class="form-inline signin-modal-ele-font" >Email: </label>
-      <input class="form-control col-md-6 col-xs-6 col-sm-6 col-lg-6 z-out" name="user[email]"/>
-      <br/>
-      <label class="form-inline signin-modal-ele-font top-buffer">Password: </label>
-      <input class="form-control" type="password" name="user[password]"/>
-      <br/>
-      <button class="btn red-btn text-center" type="submit">Sign In</button>
-    </form>
-    <form action="<%= session_url %>" method="post" class="signin-page-static">
-      <input type="text" name="user[email]" value="admin" type="hidden" class="hidden-field"><br>
-      <input type="password" name="user[password]" value="password" type="hidden" class="hidden-field"><br>
-      <button class="btn blue-btn guest-login-button">Sign In as Guest</button>
-    </form>
+    <div class="blocker-top"></div>
+    <div class="blocker-side"></div>
+    <div class="signin-div">
+      <div class="middle-signin">
+        <div class="inner-signin">
+          <form class="form-group signin-page-static-show" id="signinForm" action="<%= session_url %>" method="post">
+            <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+            <label class="form-inline signin-modal-ele-font" >Email: </label>
+            <input class="form-control col-md-6 col-xs-6 col-sm-6 col-lg-6 z-out" name="user[email]"/>
+            <br/>
+            <label class="form-inline signin-modal-ele-font top-buffer">Password: </label>
+            <input class="form-control" type="password" name="user[password]"/>
+            <br/>
+            <button class="my-button red-btn text-center" type="submit">Sign In</button>
+          </form>
+          <form action="<%= session_url %>" method="post" class="signin-page-static-hide">
+            <input type="text" name="user[email]" value="admin" type="hidden" class="hidden-field"><br>
+            <input type="password" name="user[password]" value="password" type="hidden" class="hidden-field"><br>
+            <button class="my-guest-button blue-btn guest-login-button">Sign In as Guest</button>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
