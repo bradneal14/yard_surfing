@@ -12,11 +12,9 @@ var yardDetail = React.createClass({
 
   _onChange: function(){
     if (this.state.yard){
-      console.log("in the yes of the if");
       UserStore.fetchCurrentOwner(this.state.yard.user_id);
-      this.setState({yard: YardStore.find(this.props.params.yardId), user: UserStore.currentUser(), owner: UserStore.currentOwner() });
+      this.setState({yard: YardStore.find(this.props.params.yardId), user: UserStore.currentUser(), owner: UserStore.currentOwner(), samples: YardStore.getSamples(this.props.params.yardId) });
     } else {
-      console.log("in the no of the if");
       this.setState({yard: YardStore.find(this.props.params.yardId), user: UserStore.currentUser(), owner: "tom"});
       ApiUtil.fetchOwnerById(this.state.yard.user_id);
     }
@@ -36,13 +34,16 @@ var yardDetail = React.createClass({
     ApiUtil.fetchOwnerById(this.state.yard.user_id);
     // ApiUtil.fetchSingleYard(parseInt(newProps.params.yardId));
   },
+  showState: function(){
+    console.log(this.state);
+  },
   componentWillUnmount: function(){
     this.yardListener.remove();
     this.userListener.remove();
     UserStore.clearOwner();
   },
-  navigateHome: function(){
-    this.history.push("/");
+  navigateToSearch: function(){
+    this.history.push("/search");
   },
   sendToOwnerShow: function(event){
     event.preventDefault();
@@ -89,7 +90,7 @@ var yardDetail = React.createClass({
             </div>
             <div className="yard-detail-title">
               <h2 className="yard-title-font">{this.state.yard.title}</h2>
-              <h4 className="yard-location-font">{this.state.yard.lng}</h4>
+              <h4 className="yard-location-font">{this.state.yard.location}</h4>
             </div>
             <div className="yard-detail-info-outer">
               <div className="yard-detail-info-inner">
@@ -97,34 +98,37 @@ var yardDetail = React.createClass({
                 <div className="inner-inner-detail">
                   <div>
                     <h3 className="prop-attr-font" >Owner's Name: </h3>
-                    <p className="prop-info-detail">{this.state.owner.fname} {this.state.owner.lname}</p>
+                    <p onClick={this.sendToOwnerShow} className="owners-name prop-info-detail">{this.state.owner.fname} {this.state.owner.lname}</p>
                   </div>
                   <div>
                     <h3 className="prop-attr-font">Description:</h3>
-                    <p className="prop-info-detail">{this.state.yard.description}</p>
+                    <p className="contain-text-user-detail prop-info-detail">{this.state.yard.description}</p>
                   </div>
                   <div>
                     <h3 className="prop-attr-font">Getting there: </h3>
-                    <p className="prop-info-detail">{this.state.yard.transport_info}</p>
-                  </div>
-                  <div>
-                    <h3 className="prop-attr-font">Amenities: </h3>
-                    <p className="prop-info-detail">{amenities}</p>
+                    <p className="contain-text-user-detail prop-info-detail">{this.state.yard.transport_info}</p>
                   </div>
                   <div>
 
                 </div>
               </div>
             </div>
-            <button onClick={this.navigateHome} className="btn btn-success  top-buffer left-buffer">Back to all</button>
+            <button onClick={this.navigateToSearch} className="back-to-search my-button-signin red-btn top-buffer left-buffer">Back to Search Results</button>
           </div>
         </div>
         {this.props.children}
-        <div id="overlay">
-          <h2>Location, Location, Location..</h2>
-          <h4>Where will you be staying?</h4>
+        <div id="overlay2">
+          <h2 className="prop-attr-font">Where will you be staying?</h2>
           <div className="map" id="yard-detail-map">
             <Map id="yard-detail-map"  yard={this.props.params.yardId}></Map>
+          </div>
+        </div>
+        <div className="yard-show-footer">
+          <div className="blocker-top">
+          </div>
+          <div className="text-center">
+            <p className="prop-attr-font">Site by Brad Neal</p>
+            <h4><a href="https://www.github.com/bradneal14">Hire me</a></h4>
           </div>
         </div>
       </div>

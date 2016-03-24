@@ -43,9 +43,9 @@ var BookingReqBox = React.createClass({
   },
   render: function(){
     if (this.state.success && this.state.num_guests != "Select.."){
-      var button = <input type="submit" className="btn btn-success request-form-submit" value="Your Request Has Been Sent"/>;
+      var button = <input type="submit" className="btn blue-btn request-form-submit" value="Your Request Has Been Sent"/>;
     } else {
-      var button = <input type="submit" className="btn btn-danger request-form-submit" value="Make Request" onClick={this.buttonToggle}/>;
+      var button = <input type="submit" className="btn red-btn request-form-submit" value="Make Request" onClick={this.buttonToggle}/>;
     }
     return(
       <div className="panel panel-primary display-center panel-no-border">

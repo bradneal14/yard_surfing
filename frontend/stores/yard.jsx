@@ -70,4 +70,21 @@ YardStore.resetYards = function(yards){
   });
 };
 
+Array.prototype.sample = function() {
+  return this[~~(Math.random() * this.length)];
+};
+
+YardStore.getSamples = function(id){
+  var samples = [];
+  var all = YardStore.all();
+  console.log("ALL", all);
+  while (samples.length < 4){
+    var property = all.sample();
+    if (property.yardId !== id){
+      samples += property;
+    }
+  }
+  return samples;
+};
+
 module.exports = YardStore;

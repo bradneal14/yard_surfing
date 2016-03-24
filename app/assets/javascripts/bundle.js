@@ -19761,6 +19761,23 @@
 	  });
 	};
 	
+	Array.prototype.sample = function () {
+	  return this[~ ~(Math.random() * this.length)];
+	};
+	
+	YardStore.getSamples = function (id) {
+	  var samples = [];
+	  var all = YardStore.all();
+	  console.log("ALL", all);
+	  while (samples.length < 4) {
+	    var property = all.sample();
+	    if (property.yardId !== id) {
+	      samples += property;
+	    }
+	  }
+	  return samples;
+	};
+	
 	module.exports = YardStore;
 
 /***/ },
@@ -32054,16 +32071,15 @@
 	var $ = __webpack_require__(247);
 	
 	var transitionWarning = function () {
-	  console.log("HELLO THERE");
 	  window.setTimeout(function () {
 	    $("#warning").addClass("end");
-	  }, 3000);
+	  }, 4000);
 	  window.setTimeout(function () {
 	    $("#warning").addClass("change-color");
-	  }, 900);
+	  }, 1200);
 	  window.setTimeout(function () {
 	    $("#search-index").addClass("index-margin");
-	  }, 3000);
+	  }, 4000);
 	
 	  // window.setTimeout(function(){$("#warning-text").addClass("end");}, 1000);
 	  // window.setTimeout(function(){$("#warning").addClass("warning1");}, 2000);
@@ -32095,7 +32111,7 @@
 	        React.createElement(
 	          'div',
 	          { id: 'warning', className: 'warning-text hidden-warning warning col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center' },
-	          '*All Searches Redirect to San Francisco*'
+	          '*All Searches Redirect to San Francisco. Zoom out map for International*'
 	        ),
 	        React.createElement(
 	          'div',
@@ -59839,11 +59855,9 @@
 	
 	  _onChange: function () {
 	    if (this.state.yard) {
-	      console.log("in the yes of the if");
 	      UserStore.fetchCurrentOwner(this.state.yard.user_id);
-	      this.setState({ yard: YardStore.find(this.props.params.yardId), user: UserStore.currentUser(), owner: UserStore.currentOwner() });
+	      this.setState({ yard: YardStore.find(this.props.params.yardId), user: UserStore.currentUser(), owner: UserStore.currentOwner(), samples: YardStore.getSamples(this.props.params.yardId) });
 	    } else {
-	      console.log("in the no of the if");
 	      this.setState({ yard: YardStore.find(this.props.params.yardId), user: UserStore.currentUser(), owner: "tom" });
 	      ApiUtil.fetchOwnerById(this.state.yard.user_id);
 	    }
@@ -59863,13 +59877,16 @@
 	    ApiUtil.fetchOwnerById(this.state.yard.user_id);
 	    // ApiUtil.fetchSingleYard(parseInt(newProps.params.yardId));
 	  },
+	  showState: function () {
+	    console.log(this.state);
+	  },
 	  componentWillUnmount: function () {
 	    this.yardListener.remove();
 	    this.userListener.remove();
 	    UserStore.clearOwner();
 	  },
-	  navigateHome: function () {
-	    this.history.push("/");
+	  navigateToSearch: function () {
+	    this.history.push("/search");
 	  },
 	  sendToOwnerShow: function (event) {
 	    event.preventDefault();
@@ -59935,7 +59952,7 @@
 	            React.createElement(
 	              'h4',
 	              { className: 'yard-location-font' },
-	              this.state.yard.lng
+	              this.state.yard.location
 	            )
 	          ),
 	          React.createElement(
@@ -59962,7 +59979,7 @@
 	                  ),
 	                  React.createElement(
 	                    'p',
-	                    { className: 'prop-info-detail' },
+	                    { onClick: this.sendToOwnerShow, className: 'owners-name prop-info-detail' },
 	                    this.state.owner.fname,
 	                    ' ',
 	                    this.state.owner.lname
@@ -59978,7 +59995,7 @@
 	                  ),
 	                  React.createElement(
 	                    'p',
-	                    { className: 'prop-info-detail' },
+	                    { className: 'contain-text-user-detail prop-info-detail' },
 	                    this.state.yard.description
 	                  )
 	                ),
@@ -59992,22 +60009,8 @@
 	                  ),
 	                  React.createElement(
 	                    'p',
-	                    { className: 'prop-info-detail' },
+	                    { className: 'contain-text-user-detail prop-info-detail' },
 	                    this.state.yard.transport_info
-	                  )
-	                ),
-	                React.createElement(
-	                  'div',
-	                  null,
-	                  React.createElement(
-	                    'h3',
-	                    { className: 'prop-attr-font' },
-	                    'Amenities: '
-	                  ),
-	                  React.createElement(
-	                    'p',
-	                    { className: 'prop-info-detail' },
-	                    amenities
 	                  )
 	                ),
 	                React.createElement('div', null)
@@ -60015,29 +60018,47 @@
 	            ),
 	            React.createElement(
 	              'button',
-	              { onClick: this.navigateHome, className: 'btn btn-success  top-buffer left-buffer' },
-	              'Back to all'
+	              { onClick: this.navigateToSearch, className: 'back-to-search my-button-signin red-btn top-buffer left-buffer' },
+	              'Back to Search Results'
 	            )
 	          )
 	        ),
 	        this.props.children,
 	        React.createElement(
 	          'div',
-	          { id: 'overlay' },
+	          { id: 'overlay2' },
 	          React.createElement(
 	            'h2',
-	            null,
-	            'Location, Location, Location..'
-	          ),
-	          React.createElement(
-	            'h4',
-	            null,
+	            { className: 'prop-attr-font' },
 	            'Where will you be staying?'
 	          ),
 	          React.createElement(
 	            'div',
 	            { className: 'map', id: 'yard-detail-map' },
 	            React.createElement(Map, { id: 'yard-detail-map', yard: this.props.params.yardId })
+	          )
+	        ),
+	        React.createElement(
+	          'div',
+	          { className: 'yard-show-footer' },
+	          React.createElement('div', { className: 'blocker-top' }),
+	          React.createElement(
+	            'div',
+	            { className: 'text-center' },
+	            React.createElement(
+	              'p',
+	              { className: 'prop-attr-font' },
+	              'Site by Brad Neal'
+	            ),
+	            React.createElement(
+	              'h4',
+	              null,
+	              React.createElement(
+	                'a',
+	                { href: 'https://www.github.com/bradneal14' },
+	                'Hire me'
+	              )
+	            )
 	          )
 	        )
 	      )
@@ -60097,9 +60118,9 @@
 	  },
 	  render: function () {
 	    if (this.state.success && this.state.num_guests != "Select..") {
-	      var button = React.createElement("input", { type: "submit", className: "btn btn-success request-form-submit", value: "Your Request Has Been Sent" });
+	      var button = React.createElement("input", { type: "submit", className: "btn blue-btn request-form-submit", value: "Your Request Has Been Sent" });
 	    } else {
-	      var button = React.createElement("input", { type: "submit", className: "btn btn-danger request-form-submit", value: "Make Request", onClick: this.buttonToggle });
+	      var button = React.createElement("input", { type: "submit", className: "btn red-btn request-form-submit", value: "Make Request", onClick: this.buttonToggle });
 	    }
 	    return React.createElement(
 	      "div",
@@ -60488,7 +60509,7 @@
 	            { className: "inner-inner-detail" },
 	            React.createElement(
 	              "div",
-	              null,
+	              { className: "" },
 	              React.createElement(
 	                "h3",
 	                { className: "prop-attr-font" },
@@ -60498,7 +60519,7 @@
 	              ),
 	              React.createElement(
 	                "p",
-	                { className: "prop-info-detail" },
+	                { className: "contain-text-user-detail prop-info-detail" },
 	                this.state.user.description
 	              )
 	            ),

@@ -6,10 +6,9 @@ var $ = require('jquery');
 
 
 var transitionWarning =  function(){
-  console.log("HELLO THERE");
-  window.setTimeout(function(){$("#warning").addClass("end");}, 3000);
-  window.setTimeout(function(){$("#warning").addClass("change-color");}, 900);
-  window.setTimeout(function(){$("#search-index").addClass("index-margin");}, 3000);
+  window.setTimeout(function(){$("#warning").addClass("end");}, 4000);
+  window.setTimeout(function(){$("#warning").addClass("change-color");}, 1200);
+  window.setTimeout(function(){$("#search-index").addClass("index-margin");}, 4000);
 
   // window.setTimeout(function(){$("#warning-text").addClass("end");}, 1000);
   // window.setTimeout(function(){$("#warning").addClass("warning1");}, 2000);
@@ -34,7 +33,7 @@ var SearchIndex = React.createClass({
       <div className="container-fluid below-nav">
         <div id="search-index" className="col-md-7 col-sm-7 col-xs-7 override">
           <div id="warning" className="warning-text hidden-warning warning col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-          *All Searches Redirect to San Francisco*
+          *All Searches Redirect to San Francisco. Zoom out map for International*
           </div>
           <div className="nada">
             <YardsIndex></YardsIndex>
