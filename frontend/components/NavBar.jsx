@@ -143,7 +143,6 @@ var NavBar = React.createClass({
         <div className="navbar-right nav navbar dropdown icon-format">
           <DropdownButton  className="glyph-format" noCaret title={<img className="burger-adjust" src="https://cdn3.iconfinder.com/data/icons/iconano-web-stuff/512/001-Menu-512.png"/>}>
             <MenuItem style={cursorPointer} onClick={this.navigateHome}>Home</MenuItem>
-            <MenuItem style={cursorPointer} onClick={this.navigateHome}>About</MenuItem>
             <MenuItem style={cursorPointer} onClick={this.navigateToProfileShow}>My Profile</MenuItem>
             <MenuItem style={cursorPointer} onClick={this.navigateToSearch}>View Listings</MenuItem>
             <MenuItem style={cursorPointer} onClick={this.logoutUser}>Sign out</MenuItem>

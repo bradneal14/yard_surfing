@@ -42634,11 +42634,6 @@
 	            ),
 	            React.createElement(
 	              MenuItem,
-	              { style: cursorPointer, onClick: this.navigateHome },
-	              'About'
-	            ),
-	            React.createElement(
-	              MenuItem,
 	              { style: cursorPointer, onClick: this.navigateToProfileShow },
 	              'My Profile'
 	            ),
