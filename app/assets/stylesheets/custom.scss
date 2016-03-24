@@ -28,7 +28,7 @@
   cursor: pointer;
 }
 
-.my-button{
+.my-button-signup{
   display: inline-block;
     padding: 2% 10%;
     margin-bottom: 0;
@@ -52,11 +52,33 @@
     margin-right: 10px;
 }
 
+.my-button-signin{
+  display: inline-block;
+    margin-bottom: 0;
+    margin-top: 17px;
+    font-size: 100%;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
 .my-guest-button{
   display: inline-block;
 padding: 0% 0%;
-margin-top: 28px;
-margin-right: 5px;
+margin-top: 34px;
+margin-right: 0px;
 margin-bottom: 0;
 font-size: 100%;
 font-weight: normal;
@@ -101,7 +123,7 @@ height: 36px;
 
 .blocker-top{
   width: 100%;
-min-height: 190px;
+min-height: 170px;
 position: static;
 display: block;
 float: right;
@@ -170,7 +192,7 @@ margin-bottom: 20px;
 .my-form-signup{
   display: block;
       width: 21%;
-      min-width: 211px;
+      min-width: 217px;
       min-height: 28px;
       position: fixed;
       height: 42px;
@@ -190,7 +212,6 @@ margin-bottom: 20px;
 }
 .middle-signin{
   width: calc(74% - 250px);
-  background-color: red;
   height: 300px;
   margin-left: 0px;
   position: static;
@@ -226,8 +247,15 @@ margin-bottom: 20px;
   display: block;
   float: left;
   height: 200px;
-  width: calc(100% - 400px);
+  width: calc(100% - 396px);
   padding-top: calc(25.5% - 275px);
+}
+
+.tricky-button{
+  position: fixed;
+  width: 21%;
+  min-width: 217px;
+  height: 0px;
 }
 
 .signup-div{
@@ -243,10 +271,11 @@ margin-bottom: 20px;
 
 .signin-page-static-hide{
   position: fixed;
-  float: right;
-  width: 21%;
-  min-width: 217px;
-  padding-top: 25px;
+float: left;
+width: 0px;
+min-width: 13px;
+padding-top: 25px;
+z-index: 1;
 }
 
 .pro-edit-drop{
@@ -328,12 +357,16 @@ html, body, .container-fluid, #map_canvas {
 
 .hidden-field-pass{
   visibility: hidden;
+  height: 0px;
+  width: 0px;
 }
 
 .hidden-field-user{
   visibility: hidden;
   top: -40px;
   position: relative;
+  height: 0px;
+  width: 0px;
 }
 
 
