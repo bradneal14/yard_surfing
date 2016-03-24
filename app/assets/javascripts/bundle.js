@@ -60390,6 +60390,7 @@
 	var UserStore = __webpack_require__(254);
 	var ApiUtil = __webpack_require__(182);
 	var History = __webpack_require__(188).History;
+	var YardListItem = __webpack_require__(506);
 	
 	var UserDetail = React.createClass({
 	  displayName: "UserDetail",
@@ -60397,10 +60398,15 @@
 	  mixins: [History],
 	
 	  getInitialState: function () {
-	    return { user: UserStore.userById(), currentUser: UserStore.currentUser(), friends: false };
+	    var currentU = UserStore.currentUser();
+	    return { user: UserStore.userById(), currentUser: currentU, friends: false, yards: false };
 	  },
 	  _onChange: function () {
-	    this.setState({ user: UserStore.userById(), currentUser: UserStore.currentUser() });
+	    var currentU = UserStore.currentUser();
+	    this.setState({ user: UserStore.userById(), currentUser: currentU, yards: currentU.yards });
+	  },
+	  showState: function () {
+	    console.log(this.state);
 	  },
 	  componentWillMount: function () {
 	    ApiUtil.fetchUserById(this.props.params.userId);
@@ -60453,7 +60459,7 @@
 	      if (this.state.friends === false) {
 	        var friendButton = React.createElement(
 	          "button",
-	          { className: "btn btn-danger big-left-buffer", onClick: this.buttonToggle },
+	          { className: "btn red-btn big-left-buffer", onClick: this.buttonToggle },
 	          "Add Friend"
 	        );
 	      } else {
@@ -60535,6 +60541,11 @@
 	            React.createElement("div", null)
 	          )
 	        )
+	      ),
+	      React.createElement(
+	        "button",
+	        { onClick: this.showState },
+	        "CLick me"
 	      )
 	    );
 	  }

@@ -3,18 +3,24 @@ var NavBar = require("./NavBar");
 var UserStore = require("../stores/currentUser");
 var ApiUtil = require("../util/api_util");
 var History = require("react-router").History;
+var YardListItem = require('./yardListItem');
 
 
 var UserDetail = React.createClass({
   mixins: [History],
 
   getInitialState: function(){
+    var currentU = UserStore.currentUser();
     return(
-      {user: UserStore.userById(), currentUser: UserStore.currentUser(), friends: false}
+      {user: UserStore.userById(), currentUser: currentU, friends: false, yards: false}
     );
   },
   _onChange: function(){
-    this.setState({user: UserStore.userById(), currentUser: UserStore.currentUser() });
+    var currentU = UserStore.currentUser();
+    this.setState({user: UserStore.userById(), currentUser: currentU, yards: currentU.yards });
+  },
+  showState: function(){
+    console.log(this.state);
   },
   componentWillMount: function(){
     ApiUtil.fetchUserById(this.props.params.userId);
@@ -55,7 +61,7 @@ var UserDetail = React.createClass({
     }
     if (this.state.user.id !== this.state.currentUser.id ){
       if (this.state.friends === false){
-        var friendButton = <button className="btn btn-danger big-left-buffer" onClick={this.buttonToggle}>Add Friend</button>;
+        var friendButton = <button className="btn red-btn big-left-buffer" onClick={this.buttonToggle}>Add Friend</button>;
       } else {
         var friendButton = <button className="btn btn-success big-left-buffer">Request Pending</button>;
       }
@@ -86,11 +92,11 @@ var UserDetail = React.createClass({
                   <p className="prop-info-detail">{this.state.user.birthday}</p>
                 </div>
                 <div>
-
               </div>
             </div>
           </div>
         </div>
+        <button onClick={this.showState}>CLick me</button>
       </div>
     );
   }
