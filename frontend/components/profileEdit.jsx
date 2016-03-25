@@ -46,7 +46,7 @@ var ProfileEdit = React.createClass({
     this.history.push("users/" + this.state.user.id);
   },
   state: function(){
-    console.log("STATE", this.state);
+    console.log("STE", this.state);
   },
   newYard: function(){
     this.history.push("/yards/new");
