@@ -75,7 +75,7 @@ var ApiUtil = {
       type: "POST",
       data: {user: credentials},
       success: function(data){
-        console.log("we here");
+        console.log("we are here");
         callback();
       }
     });
