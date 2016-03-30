@@ -1,6 +1,6 @@
 # YardSurfing
 
-[Live Demo][www.yardsurfing.herokuapp.com]
+[Live Demo](www.yardsurfing.herokuapp.com)
 
 [heroku]: http://www.herokuapp.com
 
