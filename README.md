@@ -21,7 +21,8 @@ YardSurfing allows users to:
 + Edit their profiles, including pictures.
 + View properties on the map.
 
-### Signin
+
+#### Signin
 
 
 <!-- This is a Markdown checklist. Use it to keep track of your
