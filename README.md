@@ -1,20 +1,22 @@
-# FresherNote
+# YardSurfing
 
-[Heroku link][heroku] **NB:** This should be a link to your production site
+[Live Demo][www.yardsurfing.herokuapp.com]
 
 [heroku]: http://www.herokuapp.com
 
-## Minimum Viable Product
+## About
 
 <!-- FresherNote is a web application inspired by Evernote built using Ruby on Rails
 and React.js. FresherNote allows users to: -->
 
-YardSurfing is a web application inspired by CouchSurfing built using Ruby on
-Rails and React.js. YardSurfing allows users to:
-- [ ] Signin/Signout users
-- [ ] Users should be able to add yards
-- [ ] Users should be able to book yards
-- [ ] Users should be able to leave feedback (reviews)
+YardSurfing is a web application inspired by CouchSurfing/AirBnb built using Ruby on Rails and React.js.
+\nYardSurfing allows users to:
+- [ ] Signin/Signout with password encryption.
+- [ ] Search and browse the world for properties.
+- [ ] Make requests to stay at a yard for a given time period.
+- [ ] Add/remove yards from the database.
+- [ ] Edit their profiles, including pictures.
+- [ ] View properties on the map.
 
 
 <!-- This is a Markdown checklist. Use it to keep track of your
