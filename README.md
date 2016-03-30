@@ -8,6 +8,7 @@
 
 
 YardSurfing is a web application inspired by CouchSurfing/AirBnb built using Ruby on Rails and React.js.
+
 YardSurfing allows users to:
 - [ ] Signin/Signout with password encryption.
 - [ ] Search and browse the world for properties.
