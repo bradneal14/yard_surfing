@@ -9,6 +9,10 @@
 
 YardSurfing is a web application inspired by CouchSurfing/AirBnb built using Ruby on Rails and React.js.
 
+Similar to AirBnb or CouchSurfing, YardSurfing allows users to post their properties. Users may then search through all of the listings and find somewhere they would be interested in staying. Users can then send a request with specific dates to the owner of a property in which they are interested. Theoretically, YardSurfing would allow for the expansion of camp-able terrain available to those who enjoy spending time outdoors. It also provides a way to explore, vet and reserve said properties. YardSurfing was not built with the intention of becoming popular, commercially or otherwise, but instead was built to be a sample of it's developer's capabilities.
+
+## Features
+
 YardSurfing allows users to:
 + Signin/Signout with password encryption.
 + Search and browse the world for properties.
@@ -16,6 +20,8 @@ YardSurfing allows users to:
 + Add/remove yards from the database.
 + Edit their profiles, including pictures.
 + View properties on the map.
+
+### Signin
 
 
 <!-- This is a Markdown checklist. Use it to keep track of your
