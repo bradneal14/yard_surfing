@@ -6,11 +6,9 @@
 
 ## About
 
-<!-- FresherNote is a web application inspired by Evernote built using Ruby on Rails
-and React.js. FresherNote allows users to: -->
 
 YardSurfing is a web application inspired by CouchSurfing/AirBnb built using Ruby on Rails and React.js.
-\nYardSurfing allows users to:
+YardSurfing allows users to:
 - [ ] Signin/Signout with password encryption.
 - [ ] Search and browse the world for properties.
 - [ ] Make requests to stay at a yard for a given time period.
