@@ -23,7 +23,7 @@ YardSurfing allows users to:
 
 
 #### Signin
-![Alt text](http://i.imgur.com/5CfVdO6.jpg)
+![Alt text](http://i.imgur.com/nUDeyg6.png)
 
 
 <!-- This is a Markdown checklist. Use it to keep track of your
