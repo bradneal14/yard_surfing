@@ -53,4 +53,4 @@ This is the page on which a user may edit his or her profile. The information fi
 + Ruby/Rails
 
 
-YardSuring was built using Ruby/Rails for the database (backend) and using React.js/Flux (frontend). YardSurfing makes use of the Google Maps API for it's map aspect, with a few customizations for the thumbnail links and black map markers. The site's styling uses bootstrap for some fundamental sizing and placement with the majority of the CSS being custom. Npm packages include react-router, linked-state and babel to support jsx.
+YardSuring was built using Ruby/Rails for the database (backend) and using React.js/Flux (frontend). YardSurfing makes use of the Google Maps API for it's map aspect, with a few customizations for the thumbnail links and black map markers. The site's styling uses bootstrap for some fundamental sizing and placement with the majority of the CSS being custom. Npm packages include react-router, linked-state and babel to support jsx. I am the only developer for this site.
