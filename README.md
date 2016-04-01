@@ -23,6 +23,7 @@ YardSurfing allows users to:
 
 
 #### Signin
+![Alt text](http://i.imgur.com/5CfVdO6.jpg "Optional title")
 [RoomieUp homepage][http://i.imgur.com/5CfVdO6.jpg]
 
 
