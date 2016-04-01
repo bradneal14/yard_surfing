@@ -31,11 +31,11 @@ The Signin page uses BCrypt to encrypt and salt passwords before they are saved 
 The Home page is just really a place for people to get welcomed to the site and use the search feature to find potential listings.
 
 ### Search
-![Alt text](http://i.imgur.com/9uNUe4a.jpg)
+![Alt text](http://i.imgur.com/DmmFjKB.jpg)
 The Search index is kind of the central hub of the site. The page allows users to explore properties through links on the left and generates those links in conjunction with the bounds of the map on the right. For example, if you zoom on the map such that only one property's map marker is in view, that listing would also be the only property listed on the left side. The map markers are clickable, expanding to show a thumbnail image, which is also clickable as a link to that property's page.
 
 ### Viewing a listing
-![Alt Text](http://i.imgur.com/DmmFjKB.jpg)
+![Alt Text](http://i.imgur.com/Qy4WhpP.jpg)
 Viewing a listing fairly straightforward. You have the property's information listed below the cover image. The photo of the property's owner is clickable, as is the owner's name in the information section below, with both links directing to the host's profile page. On the right you have the booking request box. Users can enter dates and the number of guests in their party. This request is intended for the owner who, in practice, would be able to accept or deny it.
 
 
