@@ -23,7 +23,7 @@ YardSurfing allows users to:
 
 
 #### Signin
-[RoomieUp homepage: http://www.roomieup.com][http://i.imgur.com/5CfVdO6.jpg]
+[RoomieUp homepage][http://i.imgur.com/5CfVdO6.jpg]
 
 
 <!-- This is a Markdown checklist. Use it to keep track of your
