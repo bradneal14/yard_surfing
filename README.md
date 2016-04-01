@@ -25,6 +25,9 @@ YardSurfing allows users to:
 #### Signin
 ![Alt text](http://i.imgur.com/nUDeyg6.png)
 
+### Home
+![Alt text](http://i.imgur.com/9uNUe4a.jpg)
+
 
 <!-- This is a Markdown checklist. Use it to keep track of your
 progress. Put an x between the brackets for a checkmark: [x] -->
