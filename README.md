@@ -2,7 +2,6 @@
 
 [Live Demo](www.yardsurfing.herokuapp.com)
 
-[heroku]: http://www.herokuapp.com
 
 ## About
 
