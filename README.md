@@ -21,7 +21,7 @@ YardSurfing allows users to:
 + View properties on the map itself.
 
 
-#### Sign In
+### Sign In
 ![Alt text](http://i.imgur.com/nUDeyg6.png)
 The Sign In page uses BCrypt to encrypt and salt passwords before they are saved to the database. It allows existing users to signin and allows new users to signup quickly and easily. It also features a guest login for demonstration purposes.
 
