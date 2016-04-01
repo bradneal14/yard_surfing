@@ -24,10 +24,10 @@ YardSurfing allows users to:
 
 #### Signin
 ![Alt text](http://i.imgur.com/nUDeyg6.png)
-The Signin page uses BCrypt to encrypt and salt passwords before they are saved to the database. It allows existing users to signin and allows new users to signup quickly and easily. It also features a guest login for demonstration purposes. 
+The Signin page uses BCrypt to encrypt and salt passwords before they are saved to the database. It allows existing users to signin and allows new users to signup quickly and easily. It also features a guest login for demonstration purposes.
 
 ### Home
-![Alt text](http://i.imgur.com/9uNUe4a.jpg)
+![Alt text](http://i.imgur.com/oTbmW5W.jpg)
 
 
 <!-- This is a Markdown checklist. Use it to keep track of your
