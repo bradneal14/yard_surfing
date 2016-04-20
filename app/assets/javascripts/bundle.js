@@ -55,7 +55,7 @@
 	var hashHistory = __webpack_require__(188).hashHistory;
 	var App = __webpack_require__(502);
 	var userDetail = __webpack_require__(504);
-	var profileEdit = __webpack_require__(505);
+	var profileEdit = __webpack_require__(506);
 	var Landing = __webpack_require__(503);
 	
 	var ReactRouter = __webpack_require__(188);
@@ -26635,7 +26635,7 @@
 	      type: "POST",
 	      data: { user: credentials },
 	      success: function (data) {
-	        console.log("we here");
+	        console.log("we are here");
 	        callback();
 	      }
 	    });
@@ -31956,6 +31956,8 @@
 	    this.yardListener = YardStore.addListener(this._onChange);
 	    // UserStore.addListener(this._onChange);
 	    var mapDOMNode = this.refs.map;
+	    this.address = window.searchQuery;
+	
 	    var mapOptions = {
 	      center: { lat: 37.7758, lng: -122.435 },
 	      zoom: 12,
@@ -31973,6 +31975,14 @@
 	    }
 	
 	    this.map = new google.maps.Map(mapDOMNode, mapOptions);
+	    this.geocoder = new google.maps.Geocoder();
+	
+	    this.geocoder.geocode({ 'address': this.address }, function (results, status) {
+	      console.log("in geocoder");
+	      if (status == google.maps.GeocoderStatus.OK) {
+	        this.map.setCenter(results[0].geometry.location);
+	      }
+	    });
 	
 	    this.map.addListener('idle', function () {
 	      var latLngBounds = this.getBounds();
@@ -31984,6 +31994,9 @@
 	      };
 	      ApiUtil.fetchYards(bounds);
 	    });
+	  },
+	  printState: function () {
+	    console.log(this.ftry);
 	  },
 	
 	  _onChange: function () {
@@ -42403,6 +42416,7 @@
 	var Modal = __webpack_require__(255).Modal;
 	var Glyphicon = __webpack_require__(255).Glyphicon;
 	var LinkedStateMixin = __webpack_require__(249);
+	var SearchBar = __webpack_require__(507);
 	
 	var NavBar = React.createClass({
 	  displayName: 'NavBar',
@@ -42502,6 +42516,7 @@
 	          { className: 'navbar-left' },
 	          homeButton
 	        ),
+	        React.createElement(SearchBar, null),
 	        React.createElement(
 	          'div',
 	          { className: 'navbar-right', id: 'collapsemenu' },
@@ -42618,9 +42633,10 @@
 	        { className: 'col-xs-12 navbar-adjust' },
 	        React.createElement(
 	          'div',
-	          { className: 'navbar-left' },
+	          { className: 'navbar-left up-bump' },
 	          homeButton
 	        ),
+	        React.createElement(SearchBar, null),
 	        React.createElement(
 	          'div',
 	          { className: 'navbar-right nav navbar dropdown icon-format' },
@@ -60390,7 +60406,7 @@
 	var UserStore = __webpack_require__(254);
 	var ApiUtil = __webpack_require__(182);
 	var History = __webpack_require__(188).History;
-	var YardListItem = __webpack_require__(506);
+	var YardListItem = __webpack_require__(505);
 	
 	var UserDetail = React.createClass({
 	  displayName: "UserDetail",
@@ -60558,11 +60574,59 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
+	var History = __webpack_require__(188).History;
+	var UserStore = __webpack_require__(254);
+	var YardStore = __webpack_require__(159);
+	var ApiUtil = __webpack_require__(182);
+	
+	var YardListItem = React.createClass({
+	  displayName: 'YardListItem',
+	
+	  mixins: [History],
+	  showDetail: function () {
+	    // ApiUtil.fetchYards();
+	    this.history.push("yard/" + this.props.yard.id);
+	  },
+	  removeYard: function (event) {
+	    event.preventDefault();
+	    ApiUtil.removeYard(this.props.yard.id);
+	    this.history.push("users/" + this.state.user.id);
+	  },
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      { className: 'col-sm-3 image-contain-div' },
+	      React.createElement(
+	        'li',
+	        { onClick: this.showDetail, className: 'list-group-item' },
+	        React.createElement(
+	          'p',
+	          null,
+	          this.props.yard.title
+	        ),
+	        React.createElement('img', { src: this.props.photo, className: 'profile-edit-yard-pic' })
+	      ),
+	      React.createElement(
+	        'button',
+	        { onClick: this.removeYard, className: 'btn btn-danger left-buffer' },
+	        'Delete Yard'
+	      )
+	    );
+	  }
+	});
+	
+	module.exports = YardListItem;
+
+/***/ },
+/* 506 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
 	var NavBar = __webpack_require__(253);
 	var UserStore = __webpack_require__(254);
 	var ApiUtil = __webpack_require__(182);
 	var History = __webpack_require__(188).History;
-	var YardListItem = __webpack_require__(506);
+	var YardListItem = __webpack_require__(505);
 	var YardStore = __webpack_require__(159);
 	var LinkedStateMixin = __webpack_require__(249);
 	
@@ -60607,7 +60671,7 @@
 	    this.history.push("users/" + this.state.user.id);
 	  },
 	  state: function () {
-	    console.log("STE", this.state);
+	    console.log("E", this.state);
 	  },
 	  newYard: function () {
 	    this.history.push("/yards/new");
@@ -60715,52 +60779,59 @@
 	module.exports = ProfileEdit;
 
 /***/ },
-/* 506 */
+/* 507 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
+	var LinkedStateMixin = __webpack_require__(249);
 	var History = __webpack_require__(188).History;
-	var UserStore = __webpack_require__(254);
-	var YardStore = __webpack_require__(159);
-	var ApiUtil = __webpack_require__(182);
 	
-	var YardListItem = React.createClass({
-	  displayName: 'YardListItem',
+	var SearchBar = React.createClass({
+	  displayName: 'SearchBar',
 	
-	  mixins: [History],
-	  showDetail: function () {
-	    // ApiUtil.fetchYards();
-	    this.history.push("yard/" + this.props.yard.id);
+	  mixins: [LinkedStateMixin, History],
+	  getInitialState: function () {
+	    return { query: "", greeting: "Where would you like to go.." };
 	  },
-	  removeYard: function (event) {
+	  printInput: function (event) {
 	    event.preventDefault();
-	    ApiUtil.removeYard(this.props.yard.id);
-	    this.history.push("users/" + this.state.user.id);
+	    this.history.push("search/");
+	    console.log(this.state.query);
+	    window.searchQuery = this.state.query;
 	  },
 	  render: function () {
 	    return React.createElement(
 	      'div',
-	      { className: 'col-sm-3 image-contain-div' },
+	      { className: '' },
 	      React.createElement(
-	        'li',
-	        { onClick: this.showDetail, className: 'list-group-item' },
+	        'form',
+	        { onSubmit: this.printInput },
 	        React.createElement(
-	          'p',
-	          null,
-	          this.props.yard.title
-	        ),
-	        React.createElement('img', { src: this.props.photo, className: 'profile-edit-yard-pic' })
-	      ),
-	      React.createElement(
-	        'button',
-	        { onClick: this.removeYard, className: 'btn btn-danger left-buffer' },
-	        'Delete Yard'
+	          'div',
+	          { className: 'form-group col-md-4 col-sm-5 col-xs-6 col-lg-4 top-search-button' },
+	          React.createElement(
+	            'div',
+	            { className: 'input-group' },
+	            React.createElement('input', { type: 'text', className: 'form-control my-search-input-top',
+	              valueLink: this.linkState('query'),
+	              placeholder: this.state.greeting }),
+	            React.createElement(
+	              'span',
+	              { className: 'input-group-btn my-btn-adjust' },
+	              React.createElement(
+	                'button',
+	                { className: 'nav-search-btn btn red-btn', type: 'submit' },
+	                React.createElement('img', { className: 'nav-search-img', src: 'https://meraki.cisco.com/blog/wp-content/themes/shire/images/search-icon.png' })
+	              )
+	            )
+	          )
+	        )
 	      )
 	    );
 	  }
 	});
 	
-	module.exports = YardListItem;
+	module.exports = SearchBar;
 
 /***/ }
 /******/ ]);

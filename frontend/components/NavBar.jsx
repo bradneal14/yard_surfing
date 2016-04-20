@@ -7,6 +7,7 @@ var MenuItem = require('react-bootstrap').MenuItem;
 var Modal = require('react-bootstrap').Modal;
 var Glyphicon = require("react-bootstrap").Glyphicon;
 var LinkedStateMixin = require('react-addons-linked-state-mixin');
+var SearchBar = require('./searchbar');
 
 var NavBar = React.createClass({
   mixins: [History, LinkedStateMixin],
@@ -91,6 +92,7 @@ var NavBar = React.createClass({
         <div className="navbar-left">
           {homeButton}
         </div>
+        <SearchBar></SearchBar>
         <div className="navbar-right" id="collapsemenu">
           <ul className="nav navbar-nav">
             <li><a style={cursorPointer} onClick={this.navigateToProfileShow}>My Profile </a></li>
@@ -137,9 +139,10 @@ var NavBar = React.createClass({
     var experiment = <nav className="navbar-default navbar-fixed-top">
       <div className="col-xs-12 navbar-adjust">
 
-        <div className="navbar-left">
+        <div className="navbar-left up-bump">
           {homeButton}
         </div>
+        <SearchBar></SearchBar>
         <div className="navbar-right nav navbar dropdown icon-format">
           <DropdownButton  className="glyph-format" noCaret title={<img className="burger-adjust" src="https://cdn3.iconfinder.com/data/icons/iconano-web-stuff/512/001-Menu-512.png"/>}>
             <MenuItem style={cursorPointer} onClick={this.navigateHome}>Home</MenuItem>

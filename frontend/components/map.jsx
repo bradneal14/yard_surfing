@@ -17,6 +17,8 @@ var Map = React.createClass({
     this.yardListener = YardStore.addListener(this._onChange);
     // UserStore.addListener(this._onChange);
      var mapDOMNode = this.refs.map;
+     this.address = window.searchQuery;
+
      var mapOptions = {
        center: {lat: 37.7758, lng: -122.435},
        zoom: 12,
@@ -34,6 +36,14 @@ var Map = React.createClass({
      }
 
      this.map = new google.maps.Map(mapDOMNode, mapOptions);
+     this.geocoder = new google.maps.Geocoder();
+
+     this.geocoder.geocode( { 'address': this.address}, function(results, status) {
+       console.log("in geocoder");
+      if (status == google.maps.GeocoderStatus.OK) {
+        this.map.setCenter(results[0].geometry.location);
+      }
+    });
 
      this.map.addListener('idle', function(){
        var latLngBounds = this.getBounds();
@@ -46,6 +56,9 @@ var Map = React.createClass({
        ApiUtil.fetchYards(bounds);
      });
 
+  },
+  printState: function(){
+    console.log(this.ftry);
   },
 
   _onChange: function(){
@@ -128,8 +141,8 @@ var Map = React.createClass({
   },
   render: function(){
     return (
-      <div className="map search-map" ref="map" id="map_canvas">
-      </div>
+        <div className="map search-map" ref="map" id="map_canvas">
+        </div>
     );
   }
 });

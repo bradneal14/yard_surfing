@@ -12,7 +12,7 @@ Similar to AirBnb or CouchSurfing, YardSurfing allows users to post their proper
 
 ## Features
 
-YardSurfing allows users to:
+YardSurfing allows Users to:
 + Signin/Signout with password encryption.
 + Search the world for properties.
 + Make requests to stay at a yard for a given time period.

@@ -8,6 +8,50 @@
   max-width: 90%;
 }
 
+.up-bump{
+  margin-top: -3px;
+}
+
+.nav-search-btn::focus{
+  height: 28px;
+  outline: none;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.nav-search-img{
+  height: 20px;
+margin-top: -7px;
+outline: none;
+}
+
+.my-btn-adjust::focus{
+  min-width: 47px;
+  outline: none;
+}
+
+.search-bar{
+  position: absolute;
+  margin-left: 44%;
+  margin-top: 16px;
+}
+
+.my-search-input-top{
+  height: 27px;
+  font-size: 12px;
+  border-top-right-radius: 5px !important;
+border-bottom-right-radius: 5px !important;
+}
+
+.top-search-button{
+  margin: 0 auto;
+  position: fixed;
+  margin-left: 30%;
+  margin-top: 12px;
+}
+
 .z-out{
   z-index: 1;
 }
